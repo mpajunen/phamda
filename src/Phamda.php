@@ -25,6 +25,13 @@ class Phamda
         return $func(...func_get_args());
     }
 
+    public static function propEq($name, $value = null, $object = null)
+    {
+        $func = self::curry3([__CLASS__, '_propEq']);
+
+        return $func(...func_get_args());
+    }
+
     public static function reduce(callable $function, $initial = null, array $list = null)
     {
         $func = self::curry3([__CLASS__, '_reduce']);
@@ -85,6 +92,13 @@ class Phamda
     protected static function _map(callable $function, array $list)
     {
         return array_map($function, $list);
+    }
+
+    protected static function _propEq($name, $value, $object)
+    {
+        return is_object($object)
+            ? $object->$name === $value
+            : $object[$name] === $value;
     }
 
     protected static function _reduce(callable $function, $initial, array $list)

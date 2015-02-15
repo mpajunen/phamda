@@ -84,6 +84,33 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getPropEqData
+     *
+     * @param string       $name
+     * @param mixed        $value
+     * @param array|object $object
+     * @param bool         $expected
+     */
+    public function testPropEq($name, $value, $object, $expected)
+    {
+        $this->assertEquals($expected, Phamda::propEq($name, $value, $object), 'PropEq checks values.');
+
+        $curried = Phamda::propEq($name, $value);
+
+        $this->assertEquals($expected, $curried($object), 'PropEq is automatically curried.');
+    }
+
+    public function getPropEqData()
+    {
+        return [
+            ['foo', 'bar', ['foo' => 'bar'], true],
+            ['foo', 'baz', ['foo' => 'bar'], false],
+            ['foo', 'bar', (object) ['foo' => 'bar'], true],
+            ['foo', 'baz', (object) ['foo' => 'bar'], false],
+        ];
+    }
+
+    /**
      * @dataProvider getReduceData
      *
      * @param callable $func
