@@ -32,6 +32,13 @@ class Phamda
         return $func(...func_get_args());
     }
 
+    public static function sort(callable $comparator, array $list = null)
+    {
+        $func = self::curry2([__CLASS__, '_sort']);
+
+        return $func(...func_get_args());
+    }
+
     private static function curry2(callable $original)
     {
         return function ($a = null, $b = null) use ($original) {
@@ -83,5 +90,14 @@ class Phamda
     protected static function _reduce(callable $function, $initial, array $list)
     {
         return array_reduce($list, $function, $initial);
+    }
+
+    protected static function _sort(callable $comparator, array $list)
+    {
+        $newList = $list;
+
+        usort($list, $comparator);
+
+        return $newList;
     }
 }

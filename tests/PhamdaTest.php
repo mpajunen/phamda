@@ -112,4 +112,29 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
             [$concat, ['a', 'b', 'c', 'd'], 'x', 'xabcd']
         ];
     }
+
+    /**
+     * @dataProvider getSortData
+     *
+     * @param callable $comparator
+     * @param array    $list
+     * @param array    $expected
+     */
+    public function testSort(callable $comparator, array $list, array $expected)
+    {
+        $this->assertEquals($expected, Phamda::sort($comparator, $list), 'Sort sorts array values.');
+
+        $curried = Phamda::sort($comparator);
+
+        $this->assertEquals($expected, $curried($list));
+    }
+
+    public function getSortData()
+    {
+        $sub = function ($a, $b) { return $a - $b; };
+
+        return [
+            [$sub, [2, 4, 1, 3], [2 => 1, 0 => 2, 3 => 3, 1 => 4]],
+        ];
+    }
 }
