@@ -33,6 +33,40 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getEqData
+     *
+     * @param mixed $a
+     * @param mixed $b
+     * @param bool  $expected
+     */
+    public function testEq($a, $b, $expected)
+    {
+        $this->assertEquals($expected, Phamda::eq($a, $b), 'Eq compares value equality / identity.');
+
+        $curried = Phamda::eq($a);
+
+        $this->assertEquals($expected, $curried($b));
+    }
+
+    public function getEqData()
+    {
+        $x = (object) [];
+        $y = (object) [];
+
+        return [
+            ['a', 'a', true],
+            ['a', 'b', false],
+            [null, null, true],
+            [true, false, false],
+            [null, false, false],
+            [0, false, false],
+            ['a', 'b', false],
+            [$x, $x, true],
+            [$y, $x, false],
+        ];
+    }
+
+    /**
      * @dataProvider getFilterData
      *
      * @param callable $func

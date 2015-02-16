@@ -11,6 +11,13 @@ class Phamda
         };
     }
 
+    public static function eq($a, $b = null)
+    {
+        $func = self::curry2(function ($a, $b) { return $a === $b; });
+
+        return $func(...func_get_args());
+    }
+
     public static function filter(callable $function, array $list = null)
     {
         $func = self::curry2([__CLASS__, '_filter']);
