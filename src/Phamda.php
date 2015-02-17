@@ -4,121 +4,100 @@ namespace Phamda;
 
 class Phamda
 {
-    public static function compose(callable $a, callable $b)
-    {
-        return function () use ($a, $b) {
-            return call_user_func($a, call_user_func($b, ...func_get_args()));
-        };
-    }
+    use CoreFunctionsTrait;
 
+    /**
+     * @param mixed $a
+     * @param mixed $b
+     *
+     * @return callable|bool
+     */
     public static function eq($a, $b = null)
     {
-        $func = self::curry2(function ($a, $b) { return $a === $b; });
+        $func = static::curry2(function ($a, $b) {
+            return $a === $b;
+        });
 
         return $func(...func_get_args());
     }
 
+    /**
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|array
+     */
     public static function filter(callable $function, array $list = null)
     {
-        $func = self::curry2([__CLASS__, '_filter']);
+        $func = static::curry2(function (callable $function, array $list) {
+            return array_filter($list, $function);
+        });
 
         return $func(...func_get_args());
     }
 
+    /**
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|array
+     */
     public static function map(callable $function, array $list = null)
     {
-        $func = self::curry2([__CLASS__, '_map']);
+        $func = static::curry2(function (callable $function, array $list) {
+            return array_map($function, $list);
+        });
 
         return $func(...func_get_args());
     }
 
+    /**
+     * @param string       $name
+     * @param mixed        $value
+     * @param array|object $object
+     *
+     * @return callable|bool
+     */
     public static function propEq($name, $value = null, $object = null)
     {
-        $func = self::curry3([__CLASS__, '_propEq']);
+        $func = static::curry3(function ($name, $value, $object) {
+            return is_object($object) ? $object->{$name} === $value : $object[$name] === $value;
+        });
 
         return $func(...func_get_args());
     }
 
+    /**
+     * @param callable $function
+     * @param mixed    $initial
+     * @param array    $list
+     *
+     * @return callable|mixed
+     */
     public static function reduce(callable $function, $initial = null, array $list = null)
     {
-        $func = self::curry3([__CLASS__, '_reduce']);
+        $func = static::curry3(function (callable $function, $initial, array $list) {
+            return array_reduce($list, $function, $initial);
+        });
 
         return $func(...func_get_args());
     }
 
+    /**
+     * @param callable $comparator
+     * @param array    $list
+     *
+     * @return callable|array
+     */
     public static function sort(callable $comparator, array $list = null)
     {
-        $func = self::curry2([__CLASS__, '_sort']);
+        $func = static::curry2(function (callable $comparator, array $list) {
+            $newList = $list;
+            usort($list, $comparator);
+
+            return $newList;
+        });
 
         return $func(...func_get_args());
-    }
-
-    private static function curry2(callable $original)
-    {
-        return function ($a = null, $b = null) use ($original) {
-            switch (func_num_args()) {
-                case 0:
-                    throw new \LogicException('Function called with 0 arguments.');
-                case 1:
-                    return function ($b) use ($original, $a) {
-                        return $original($a, $b);
-                    };
-                    break;
-                default:
-                    return $original($a, $b);
-            }
-        };
-    }
-
-    private static function curry3(callable $original)
-    {
-        return function ($a = null, $b = null, $c = null) use ($original) {
-            switch (func_num_args()) {
-                case 0:
-                    throw new \LogicException('Function called with 0 arguments.');
-                case 1:
-                    return self::curry2(function ($b, $c) use ($original, $a) {
-                        return $original($a, $b, $c);
-                    });
-                case 2:
-                    return function ($c) use ($original, $a, $b) {
-                        return $original($a, $b, $c);
-                    };
-                    break;
-                default:
-                    return $original($a, $b, $c);
-            }
-        };
-    }
-
-    protected static function _filter(callable $function, array $list)
-    {
-        return array_filter($list, $function);
-    }
-
-    protected static function _map(callable $function, array $list)
-    {
-        return array_map($function, $list);
-    }
-
-    protected static function _propEq($name, $value, $object)
-    {
-        return is_object($object)
-            ? $object->$name === $value
-            : $object[$name] === $value;
-    }
-
-    protected static function _reduce(callable $function, $initial, array $list)
-    {
-        return array_reduce($list, $function, $initial);
-    }
-
-    protected static function _sort(callable $comparator, array $list)
-    {
-        $newList = $list;
-
-        usort($list, $comparator);
-
-        return $newList;
     }
 }
