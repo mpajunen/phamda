@@ -130,4 +130,24 @@ trait BasicProvidersTrait
             [$sub, [2, 4, 1, 3], [2 => 1, 0 => 2, 3 => 3, 1 => 4]],
         ];
     }
+
+    public function getZipData()
+    {
+        return [
+            [[1, 2, 3], [4, 5, 6], [[1, 4], [2, 5], [3, 6]]],
+            [['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4], ['a' => [1, 3]]],
+            [[1, 2, 3], [], []]
+        ];
+    }
+
+    public function getZipWithData()
+    {
+        $sum = function ($x, $y) { return $x + $y; };
+
+        return [
+            [$sum, [1, 'a' => 2, 3], [4, 'a' => 5, 6], [5, 'a' => 7, 9]],
+            [$sum, [1, 2, 3], [5, 6], [6, 8]],
+            [$sum, [1, 2, 3], [], []],
+        ];
+    }
 }

@@ -199,4 +199,45 @@ class Phamda
 
         return $func(...func_get_args());
     }
+
+    /**
+     * @param array $a
+     * @param array $b
+     *
+     * @return callable|array
+     */
+    public static function zip(array $a, array $b = null)
+    {
+        $func = static::curry2(function (array $a, array $b) {
+            $zipped = [];
+            foreach (array_intersect_key($a, $b) as $key => $value) {
+                $zipped[$key] = [$value, $b[$key]];
+            }
+
+            return $zipped;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $function
+     * @param array    $a
+     * @param array    $b
+     *
+     * @return callable|array
+     */
+    public static function zipWith(callable $function, array $a = null, array $b = null)
+    {
+        $func = static::curry3(function (callable $function, array $a, array $b) {
+            $zipped = [];
+            foreach (array_intersect_key($a, $b) as $key => $value) {
+                $zipped[$key] = $function($value, $b[$key]);
+            }
+
+            return $zipped;
+        });
+
+        return $func(...func_get_args());
+    }
 }

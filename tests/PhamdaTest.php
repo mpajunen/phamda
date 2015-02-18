@@ -121,4 +121,26 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
         $curried1 = Phamda::sort($comparator);
         $this->assertEquals($expected, $curried1($list));
     }
+
+    /**
+     * @dataProvider getZipData
+     */
+    public function testZip(array $a, array $b, $expected)
+    {
+        $this->assertEquals($expected, Phamda::zip($a, $b));
+        $curried1 = Phamda::zip($a);
+        $this->assertEquals($expected, $curried1($b));
+    }
+
+    /**
+     * @dataProvider getZipWithData
+     */
+    public function testZipWith(callable $function, array $a, array $b, $expected)
+    {
+        $this->assertEquals($expected, Phamda::zipWith($function, $a, $b));
+        $curried1 = Phamda::zipWith($function);
+        $this->assertEquals($expected, $curried1($a, $b));
+        $curried2 = Phamda::zipWith($function, $a);
+        $this->assertEquals($expected, $curried2($b));
+    }
 }
