@@ -9,6 +9,26 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     use BasicProvidersTrait;
 
     /**
+     * @dataProvider getAllData
+     */
+    public function testAll(callable $function, array $list, $expected)
+    {
+        $this->assertEquals($expected, Phamda::all($function, $list));
+        $curried1 = Phamda::all($function);
+        $this->assertEquals($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getAnyData
+     */
+    public function testAny(callable $function, array $list, $expected)
+    {
+        $this->assertEquals($expected, Phamda::any($function, $list));
+        $curried1 = Phamda::any($function);
+        $this->assertEquals($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getEqData
      */
     public function testEq($a, $b, $expected)
@@ -36,6 +56,16 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, Phamda::map($function, $list));
         $curried1 = Phamda::map($function);
         $this->assertEquals($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getPropData
+     */
+    public function testProp($name, $object, $expected)
+    {
+        $this->assertEquals($expected, Phamda::prop($name, $object));
+        $curried1 = Phamda::prop($name);
+        $this->assertEquals($expected, $curried1($object));
     }
 
     /**

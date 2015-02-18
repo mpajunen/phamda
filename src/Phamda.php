@@ -7,6 +7,48 @@ class Phamda
     use CoreFunctionsTrait;
 
     /**
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|bool
+     */
+    public static function all(callable $function, array $list = null)
+    {
+        $func = static::curry2(function (callable $function, array $list) {
+            foreach ($list as $value) {
+                if (! $function($value)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|bool
+     */
+    public static function any(callable $function, array $list = null)
+    {
+        $func = static::curry2(function (callable $function, array $list) {
+            foreach ($list as $value) {
+                if ($function($value)) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $a
      * @param mixed $b
      *
@@ -46,6 +88,21 @@ class Phamda
     {
         $func = static::curry2(function (callable $function, array $list) {
             return array_map($function, $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param string       $name
+     * @param array|object $object
+     *
+     * @return callable|mixed
+     */
+    public static function prop($name, $object = null)
+    {
+        $func = static::curry2(function ($name, $object) {
+            return is_object($object) ? $object->{$name} : $object[$name];
         });
 
         return $func(...func_get_args());

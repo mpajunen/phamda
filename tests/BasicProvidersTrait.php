@@ -4,6 +4,28 @@ namespace Phamda\Tests;
 
 trait BasicProvidersTrait
 {
+    public function getAllData()
+    {
+        $isPositive = function($x) { return $x > 0; };
+
+        return [
+            [$isPositive, [1, 2, 0, -5], false],
+            [$isPositive, [-3, -7, -1, -5], false],
+            [$isPositive, [1, 2, 1, 11], true],
+        ];
+    }
+
+    public function getAnyData()
+    {
+        $isPositive = function($x) { return $x > 0; };
+
+        return [
+            [$isPositive, [1, 2, 0, -5], true],
+            [$isPositive, [-3, -7, -1, -5], false],
+            [$isPositive, [1, 2, 1, 11], true],
+        ];
+    }
+
     public function getEqData()
     {
         $x = (object) [];
@@ -38,6 +60,18 @@ trait BasicProvidersTrait
         return [
             [$square, [1, 2, 3, 4], [1, 4, 9, 16]],
             [$square, [], []],
+        ];
+    }
+
+    public function getPropData()
+    {
+        $foo = ['bar' => 'fuz', 'baz' => null];
+
+        return [
+            ['bar', $foo, 'fuz'],
+            ['baz', $foo, null],
+            ['bar', (object) $foo, 'fuz'],
+            ['baz', (object) $foo, null],
         ];
     }
 
