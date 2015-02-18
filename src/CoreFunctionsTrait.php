@@ -10,6 +10,23 @@ trait CoreFunctionsTrait
      *
      * @return callable
      */
+    public static function and_(callable $a, callable $b = null)
+    {
+        $func = static::curry2(function (callable $a, callable $b) {
+            return function (...$arguments) use ($a, $b) {
+                return call_user_func($a, ...$arguments) && call_user_func($b, ...$arguments);
+            };
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $a
+     * @param callable $b
+     *
+     * @return callable
+     */
     public static function compose(callable $a, callable $b)
     {
         return function (...$arguments) use ($a, $b) {
@@ -27,6 +44,23 @@ trait CoreFunctionsTrait
         return function (...$arguments) use ($function) {
             return ! $function(...$arguments);
         };
+    }
+
+    /**
+     * @param callable $a
+     * @param callable $b
+     *
+     * @return callable
+     */
+    public static function or_(callable $a, callable $b = null)
+    {
+        $func = static::curry2(function (callable $a, callable $b) {
+            return function (...$arguments) use ($a, $b) {
+                return call_user_func($a, ...$arguments) || call_user_func($b, ...$arguments);
+            };
+        });
+
+        return $func(...func_get_args());
     }
 
     protected static function curry2(callable $original)
