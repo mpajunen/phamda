@@ -31,4 +31,28 @@ class CoreFunctionsTest extends \PHPUnit_Framework_TestCase
             [$square, $sum, 64, 3, 5],
         ];
     }
+
+    /**
+     * @dataProvider getNotData
+     *
+     * @param callable $a
+     * @param bool     $expected
+     * @param mixed    ...$params
+     */
+    public function testNot(callable $a, $expected, ...$params)
+    {
+        $notA = Phamda::not($a);
+
+        $this->assertEquals($expected, $notA(...$params));
+    }
+
+    public function getNotData()
+    {
+        $equal = function($a, $b) { return $a == $b; };
+
+        return [
+            [$equal, false, 1, 1],
+            [$equal, true, 1, 2],
+        ];
+    }
 }

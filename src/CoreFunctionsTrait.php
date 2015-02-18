@@ -17,6 +17,18 @@ trait CoreFunctionsTrait
         };
     }
 
+    /**
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function not(callable $function)
+    {
+        return function (...$arguments) use ($function) {
+            return ! $function(...$arguments);
+        };
+    }
+
     protected static function curry2(callable $original)
     {
         return function ($a = null, $b = null) use ($original) {
