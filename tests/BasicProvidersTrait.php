@@ -63,6 +63,30 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getPickData()
+    {
+        $item = ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'];
+
+        return [
+            [['bar', 'fib'], $item, ['bar' => 'bzz']],
+            [['fob', 'fib'], $item, []],
+            [['bar', 'foo'], $item, ['bar' => 'bzz', 'foo' => null]],
+            [[], $item, []],
+        ];
+    }
+
+    public function getPickAllData()
+    {
+        $item = ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'];
+
+        return [
+            [['bar', 'fib'], $item, ['bar' => 'bzz', 'fib' => null]],
+            [['fob', 'fib'], $item, ['fob' => null, 'fib' => null]],
+            [['bar', 'foo'], $item, ['bar' => 'bzz', 'foo' => null]],
+            [[], $item, []],
+        ];
+    }
+
     public function getPropData()
     {
         $foo = ['bar' => 'fuz', 'baz' => null];

@@ -59,6 +59,26 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getPickData
+     */
+    public function testPick(array $names, array $item, $expected)
+    {
+        $this->assertEquals($expected, Phamda::pick($names, $item));
+        $curried1 = Phamda::pick($names);
+        $this->assertEquals($expected, $curried1($item));
+    }
+
+    /**
+     * @dataProvider getPickAllData
+     */
+    public function testPickAll(array $names, array $item, $expected)
+    {
+        $this->assertEquals($expected, Phamda::pickAll($names, $item));
+        $curried1 = Phamda::pickAll($names);
+        $this->assertEquals($expected, $curried1($item));
+    }
+
+    /**
      * @dataProvider getPropData
      */
     public function testProp($name, $object, $expected)

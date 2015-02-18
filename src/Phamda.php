@@ -94,6 +94,48 @@ class Phamda
     }
 
     /**
+     * @param array $names
+     * @param array $item
+     *
+     * @return callable|array
+     */
+    public static function pick(array $names, array $item = null)
+    {
+        $func = static::curry2(function (array $names, array $item) {
+            $new = [];
+            foreach ($names as $name) {
+                if (array_key_exists($name, $item)) {
+                    $new[$name] = $item[$name];
+                }
+            }
+
+            return $new;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param array $names
+     * @param array $item
+     *
+     * @return callable|array
+     */
+    public static function pickAll(array $names, array $item = null)
+    {
+        $func = static::curry2(function (array $names, array $item) {
+            $new = [];
+            foreach ($names as $name) {
+                $new[$name] = isset($item[$name]) ? $item[$name] : null;
+            }
+
+            return $new;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param string       $name
      * @param array|object $object
      *
