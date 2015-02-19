@@ -49,6 +49,14 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getIdentityData
+     */
+    public function testIdentity($a, $expected)
+    {
+        $this->assertEquals($expected, Phamda::identity($a));
+    }
+
+    /**
      * @dataProvider getMapData
      */
     public function testMap(callable $function, array $list, $expected)

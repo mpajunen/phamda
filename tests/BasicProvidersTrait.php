@@ -53,6 +53,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getIdentityData()
+    {
+        $a = (object) ['foo' => 'bar'];
+
+        return [
+            [1, 1],
+            [null, null],
+            ['abc', 'abc'],
+            [$a, $a],
+        ];
+    }
+
     public function getMapData()
     {
         $square = function ($x) { return $x ** 2; };

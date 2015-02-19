@@ -79,6 +79,16 @@ class Phamda
     }
 
     /**
+     * @param mixed $a
+     *
+     * @return mixed
+     */
+    public static function identity($a)
+    {
+        return $a;
+    }
+
+    /**
      * @param callable $function
      * @param array    $list
      *
