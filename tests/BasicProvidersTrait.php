@@ -139,7 +139,7 @@ trait BasicProvidersTrait
         $sub = function ($a, $b) { return $a - $b; };
 
         return [
-            [$sub, [2, 4, 1, 3], [2 => 1, 0 => 2, 3 => 3, 1 => 4]],
+            [$sub, [2, 4, 1, 3], [1, 2, 3, 4]],
         ];
     }
 

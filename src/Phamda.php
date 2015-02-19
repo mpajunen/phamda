@@ -201,10 +201,9 @@ class Phamda
     public static function sort(callable $comparator, array $list = null)
     {
         $func = static::curry2(function (callable $comparator, array $list) {
-            $newList = $list;
             usort($list, $comparator);
 
-            return $newList;
+            return $list;
         });
 
         return $func(...func_get_args());
