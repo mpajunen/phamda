@@ -28,6 +28,18 @@ class Phamda
     }
 
     /**
+     * @param mixed $value
+     *
+     * @return callable
+     */
+    public static function always($value)
+    {
+        return function () use ($value) {
+            return $value;
+        };
+    }
+
+    /**
      * @param callable $function
      * @param array    $list
      *

@@ -19,6 +19,15 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getAlwaysData
+     */
+    public function testAlways($value, $expected)
+    {
+        $wrapped = Phamda::always($value);
+        $this->assertSame($expected, $wrapped());
+    }
+
+    /**
      * @dataProvider getAnyData
      */
     public function testAny(callable $function, array $list, $expected)

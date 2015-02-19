@@ -15,6 +15,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getAlwaysData()
+    {
+        $a = (object) ['foo' => 'bar'];
+
+        return [
+            [1, 1],
+            [null, null],
+            ['abc', 'abc'],
+            [$a, $a],
+        ];
+    }
+
     public function getAnyData()
     {
         $isPositive = function($x) { return $x > 0; };
