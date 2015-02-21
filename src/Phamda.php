@@ -12,7 +12,7 @@ class Phamda
      *
      * @return callable|bool
      */
-    public static function all(callable $function, array $list = null)
+    public static function all(callable $function = null, array $list = null)
     {
         $func = static::curry2(function (callable $function, array $list) {
             foreach ($list as $value) {
@@ -45,7 +45,7 @@ class Phamda
      *
      * @return callable
      */
-    public static function and_(callable $a, callable $b = null)
+    public static function and_(callable $a = null, callable $b = null)
     {
         $func = static::curry2(function (callable $a, callable $b) {
             return function (... $arguments) use ($a, $b) {
@@ -62,7 +62,7 @@ class Phamda
      *
      * @return callable|bool
      */
-    public static function any(callable $function, array $list = null)
+    public static function any(callable $function = null, array $list = null)
     {
         $func = static::curry2(function (callable $function, array $list) {
             foreach ($list as $value) {
@@ -92,11 +92,15 @@ class Phamda
      *
      * @return callable
      */
-    public static function curry(callable $function)
+    public static function curry(callable $function = null)
     {
-        $reflection = static::createReflection($function);
+        $func = static::curry1(function (callable $function) {
+            $reflection = static::createReflection($function);
 
-        return Phamda::curryN($reflection->getNumberOfParameters(), $function);
+            return Phamda::curryN($reflection->getNumberOfParameters(), $function);
+        });
+
+        return $func(...func_get_args());
     }
 
     /**
@@ -105,7 +109,7 @@ class Phamda
      *
      * @return callable
      */
-    public static function curryN($count, callable $function = null)
+    public static function curryN($count = null, callable $function = null)
     {
         $func = static::curry2(function ($count, callable $function) {
             return function (... $arguments) use ($function, $count) {
@@ -131,7 +135,7 @@ class Phamda
      *
      * @return callable|bool
      */
-    public static function eq($a, $b = null)
+    public static function eq($a = null, $b = null)
     {
         $func = static::curry2(function ($a, $b) {
             return $a === $b;
@@ -146,7 +150,7 @@ class Phamda
      *
      * @return callable|array
      */
-    public static function filter(callable $function, array $list = null)
+    public static function filter(callable $function = null, array $list = null)
     {
         $func = static::curry2(function (callable $function, array $list) {
             return array_filter($list, $function);
@@ -158,11 +162,15 @@ class Phamda
     /**
      * @param mixed $a
      *
-     * @return mixed
+     * @return callable|mixed
      */
-    public static function identity($a)
+    public static function identity($a = null)
     {
-        return $a;
+        $func = static::curry1(function ($a) {
+            return $a;
+        });
+
+        return $func(...func_get_args());
     }
 
     /**
@@ -171,7 +179,7 @@ class Phamda
      *
      * @return callable|array
      */
-    public static function map(callable $function, array $list = null)
+    public static function map(callable $function = null, array $list = null)
     {
         $func = static::curry2(function (callable $function, array $list) {
             return array_map($function, $list);
@@ -185,11 +193,15 @@ class Phamda
      *
      * @return callable
      */
-    public static function not(callable $function)
+    public static function not(callable $function = null)
     {
-        return function (... $arguments) use ($function) {
-            return ! $function(...$arguments);
-        };
+        $func = static::curry1(function (callable $function) {
+            return function (... $arguments) use ($function) {
+                return ! $function(...$arguments);
+            };
+        });
+
+        return $func(...func_get_args());
     }
 
     /**
@@ -198,7 +210,7 @@ class Phamda
      *
      * @return callable
      */
-    public static function or_(callable $a, callable $b = null)
+    public static function or_(callable $a = null, callable $b = null)
     {
         $func = static::curry2(function (callable $a, callable $b) {
             return function (... $arguments) use ($a, $b) {
@@ -215,7 +227,7 @@ class Phamda
      *
      * @return callable|array
      */
-    public static function pick(array $names, array $item = null)
+    public static function pick(array $names = null, array $item = null)
     {
         $func = static::curry2(function (array $names, array $item) {
             $new = [];
@@ -237,7 +249,7 @@ class Phamda
      *
      * @return callable|array
      */
-    public static function pickAll(array $names, array $item = null)
+    public static function pickAll(array $names = null, array $item = null)
     {
         $func = static::curry2(function (array $names, array $item) {
             $new = [];
@@ -278,7 +290,7 @@ class Phamda
      *
      * @return callable|mixed
      */
-    public static function prop($name, $object = null)
+    public static function prop($name = null, $object = null)
     {
         $func = static::curry2(function ($name, $object) {
             return is_object($object) ? $object->{$name} : $object[$name];
@@ -294,7 +306,7 @@ class Phamda
      *
      * @return callable|bool
      */
-    public static function propEq($name, $value = null, $object = null)
+    public static function propEq($name = null, $value = null, $object = null)
     {
         $func = static::curry3(function ($name, $value, $object) {
             return is_object($object) ? $object->{$name} === $value : $object[$name] === $value;
@@ -310,7 +322,7 @@ class Phamda
      *
      * @return callable|mixed
      */
-    public static function reduce(callable $function, $initial = null, array $list = null)
+    public static function reduce(callable $function = null, $initial = null, array $list = null)
     {
         $func = static::curry3(function (callable $function, $initial, array $list) {
             return array_reduce($list, $function, $initial);
@@ -325,7 +337,7 @@ class Phamda
      *
      * @return callable|array
      */
-    public static function sort(callable $comparator, array $list = null)
+    public static function sort(callable $comparator = null, array $list = null)
     {
         $func = static::curry2(function (callable $comparator, array $list) {
             usort($list, $comparator);
@@ -342,7 +354,7 @@ class Phamda
      *
      * @return callable|array
      */
-    public static function zip(array $a, array $b = null)
+    public static function zip(array $a = null, array $b = null)
     {
         $func = static::curry2(function (array $a, array $b) {
             $zipped = [];
@@ -363,7 +375,7 @@ class Phamda
      *
      * @return callable|array
      */
-    public static function zipWith(callable $function, array $a = null, array $b = null)
+    public static function zipWith(callable $function = null, array $a = null, array $b = null)
     {
         $func = static::curry3(function (callable $function, array $a, array $b) {
             $zipped = [];

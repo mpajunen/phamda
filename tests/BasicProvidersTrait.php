@@ -2,6 +2,8 @@
 
 namespace Phamda\Tests;
 
+use Phamda\Phamda;
+
 trait BasicProvidersTrait
 {
     public function getAllData()
@@ -74,8 +76,8 @@ trait BasicProvidersTrait
         return [
             [1234, $sum, 1000, 200, 30, 4],
             [1234, $sum, 1000, 200, 30, 4, 5],
-            [true, ['\Phamda\Phamda', 'eq'], 5, 5],
-            [false, ['\Phamda\Phamda', 'eq'], 5, 7],
+            [true, Phamda::eq(), 5, 5],
+            [false, Phamda::eq(), 5, 7],
         ];
     }
 
@@ -86,8 +88,8 @@ trait BasicProvidersTrait
         return [
             [1234, 4, $sum, 1000, 200, 30, 4],
             [1234, 4, $sum, 1000, 200, 30, 4, 5],
-            [true, 2, '\Phamda\Phamda::eq', 5, 5],
-            [false, 2, '\Phamda\Phamda::eq', 5, 7],
+            [true, 2, Phamda::eq(), 5, 5],
+            [false, 2, Phamda::eq(), 5, 7],
         ];
     }
 

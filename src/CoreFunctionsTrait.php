@@ -16,12 +16,24 @@ trait CoreFunctionsTrait
         }
     }
 
+    protected static function curry1(callable $original)
+    {
+        return function ($a = null) use ($original) {
+            switch (func_num_args()) {
+                case 0:
+                    return $original;
+                default:
+                    return $original($a);
+            }
+        };
+    }
+
     protected static function curry2(callable $original)
     {
         return function ($a = null, $b = null) use ($original) {
             switch (func_num_args()) {
                 case 0:
-                    throw new \LogicException('Function called with 0 arguments.');
+                    return $original;
                 case 1:
                     return function ($b) use ($original, $a) {
                         return $original($a, $b);
@@ -38,7 +50,7 @@ trait CoreFunctionsTrait
         return function ($a = null, $b = null, $c = null) use ($original) {
             switch (func_num_args()) {
                 case 0:
-                    throw new \LogicException('Function called with 0 arguments.');
+                    return $original;
                 case 1:
                     return self::curry2(function ($b, $c) use ($original, $a) {
                         return $original($a, $b, $c);

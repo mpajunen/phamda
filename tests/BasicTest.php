@@ -14,6 +14,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testAll($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::all($function, $list));
+        $curried0 = Phamda::all();
+        $this->assertSame($expected, $curried0($function, $list));
         $curried1 = Phamda::all($function);
         $this->assertSame($expected, $curried1($list));
     }
@@ -34,9 +36,12 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     {
         $main0 = Phamda::and_($a, $b);
         $this->assertSame($expected, $main0(...$arguments));
-        $curried1 = Phamda::and_($a);
-        $main1    = $curried1($b);
+        $curried0 = Phamda::and_();
+        $main1    = $curried0($a, $b);
         $this->assertSame($expected, $main1(...$arguments));
+        $curried1 = Phamda::and_($a);
+        $main2    = $curried1($b);
+        $this->assertSame($expected, $main2(...$arguments));
     }
 
     /**
@@ -45,6 +50,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testAny($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::any($function, $list));
+        $curried0 = Phamda::any();
+        $this->assertSame($expected, $curried0($function, $list));
         $curried1 = Phamda::any($function);
         $this->assertSame($expected, $curried1($list));
     }
@@ -65,6 +72,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     {
         $main0 = Phamda::curry($function);
         $this->assertSame($expected, $main0(...$arguments));
+        $curried0 = Phamda::curry();
+        $main1    = $curried0($function);
+        $this->assertSame($expected, $main1(...$arguments));
     }
 
     /**
@@ -74,9 +84,12 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     {
         $main0 = Phamda::curryN($count, $function);
         $this->assertSame($expected, $main0(...$arguments));
-        $curried1 = Phamda::curryN($count);
-        $main1    = $curried1($function);
+        $curried0 = Phamda::curryN();
+        $main1    = $curried0($count, $function);
         $this->assertSame($expected, $main1(...$arguments));
+        $curried1 = Phamda::curryN($count);
+        $main2    = $curried1($function);
+        $this->assertSame($expected, $main2(...$arguments));
     }
 
     /**
@@ -85,6 +98,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testEq($expected, $a, $b)
     {
         $this->assertSame($expected, Phamda::eq($a, $b));
+        $curried0 = Phamda::eq();
+        $this->assertSame($expected, $curried0($a, $b));
         $curried1 = Phamda::eq($a);
         $this->assertSame($expected, $curried1($b));
     }
@@ -95,6 +110,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testFilter($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::filter($function, $list));
+        $curried0 = Phamda::filter();
+        $this->assertSame($expected, $curried0($function, $list));
         $curried1 = Phamda::filter($function);
         $this->assertSame($expected, $curried1($list));
     }
@@ -105,6 +122,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testIdentity($expected, $a)
     {
         $this->assertSame($expected, Phamda::identity($a));
+        $curried0 = Phamda::identity();
+        $this->assertSame($expected, $curried0($a));
     }
 
     /**
@@ -113,6 +132,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testMap($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::map($function, $list));
+        $curried0 = Phamda::map();
+        $this->assertSame($expected, $curried0($function, $list));
         $curried1 = Phamda::map($function);
         $this->assertSame($expected, $curried1($list));
     }
@@ -120,10 +141,13 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getNotData
      */
-    public function testNot($expected, $function, ... $arguments)
+    public function testNot($expected, callable $function, ... $arguments)
     {
-        $wrapped = Phamda::not($function);
-        $this->assertSame($expected, $wrapped(...$arguments));
+        $main0 = Phamda::not($function);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried0 = Phamda::not();
+        $main1    = $curried0($function);
+        $this->assertSame($expected, $main1(...$arguments));
     }
 
     /**
@@ -133,9 +157,12 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     {
         $main0 = Phamda::or_($a, $b);
         $this->assertSame($expected, $main0(...$arguments));
-        $curried1 = Phamda::or_($a);
-        $main1    = $curried1($b);
+        $curried0 = Phamda::or_();
+        $main1    = $curried0($a, $b);
         $this->assertSame($expected, $main1(...$arguments));
+        $curried1 = Phamda::or_($a);
+        $main2    = $curried1($b);
+        $this->assertSame($expected, $main2(...$arguments));
     }
 
     /**
@@ -144,6 +171,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testPick($expected, array $names, array $item)
     {
         $this->assertSame($expected, Phamda::pick($names, $item));
+        $curried0 = Phamda::pick();
+        $this->assertSame($expected, $curried0($names, $item));
         $curried1 = Phamda::pick($names);
         $this->assertSame($expected, $curried1($item));
     }
@@ -154,6 +183,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testPickAll($expected, array $names, array $item)
     {
         $this->assertSame($expected, Phamda::pickAll($names, $item));
+        $curried0 = Phamda::pickAll();
+        $this->assertSame($expected, $curried0($names, $item));
         $curried1 = Phamda::pickAll($names);
         $this->assertSame($expected, $curried1($item));
     }
@@ -173,6 +204,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testProp($expected, $name, $object)
     {
         $this->assertSame($expected, Phamda::prop($name, $object));
+        $curried0 = Phamda::prop();
+        $this->assertSame($expected, $curried0($name, $object));
         $curried1 = Phamda::prop($name);
         $this->assertSame($expected, $curried1($object));
     }
@@ -183,6 +216,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testPropEq($expected, $name, $value, $object)
     {
         $this->assertSame($expected, Phamda::propEq($name, $value, $object));
+        $curried0 = Phamda::propEq();
+        $this->assertSame($expected, $curried0($name, $value, $object));
         $curried1 = Phamda::propEq($name);
         $this->assertSame($expected, $curried1($value, $object));
         $curried2 = Phamda::propEq($name, $value);
@@ -195,6 +230,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testReduce($expected, callable $function, $initial, array $list)
     {
         $this->assertSame($expected, Phamda::reduce($function, $initial, $list));
+        $curried0 = Phamda::reduce();
+        $this->assertSame($expected, $curried0($function, $initial, $list));
         $curried1 = Phamda::reduce($function);
         $this->assertSame($expected, $curried1($initial, $list));
         $curried2 = Phamda::reduce($function, $initial);
@@ -207,6 +244,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testSort($expected, callable $comparator, array $list)
     {
         $this->assertSame($expected, Phamda::sort($comparator, $list));
+        $curried0 = Phamda::sort();
+        $this->assertSame($expected, $curried0($comparator, $list));
         $curried1 = Phamda::sort($comparator);
         $this->assertSame($expected, $curried1($list));
     }
@@ -217,6 +256,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testZip($expected, array $a, array $b)
     {
         $this->assertSame($expected, Phamda::zip($a, $b));
+        $curried0 = Phamda::zip();
+        $this->assertSame($expected, $curried0($a, $b));
         $curried1 = Phamda::zip($a);
         $this->assertSame($expected, $curried1($b));
     }
@@ -227,6 +268,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testZipWith($expected, callable $function, array $a, array $b)
     {
         $this->assertSame($expected, Phamda::zipWith($function, $a, $b));
+        $curried0 = Phamda::zipWith();
+        $this->assertSame($expected, $curried0($function, $a, $b));
         $curried1 = Phamda::zipWith($function);
         $this->assertSame($expected, $curried1($a, $b));
         $curried2 = Phamda::zipWith($function, $a);
