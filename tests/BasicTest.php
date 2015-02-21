@@ -105,6 +105,15 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFData
+     */
+    public function testF($expected)
+    {
+        $main0 = Phamda::F();
+        $this->assertSame($expected, $main0());
+    }
+
+    /**
      * @dataProvider getFilterData
      */
     public function testFilter($expected, callable $function, array $list)
@@ -248,6 +257,15 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($comparator, $list));
         $curried1 = Phamda::sort($comparator);
         $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getTData
+     */
+    public function testT($expected)
+    {
+        $main0 = Phamda::T();
+        $this->assertSame($expected, $main0());
     }
 
     /**

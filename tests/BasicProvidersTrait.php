@@ -111,6 +111,13 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFData()
+    {
+        return [
+            [false],
+        ];
+    }
+
     public function getFilterData()
     {
         $isEven = function ($x) { return $x % 2 === 0; };
@@ -246,6 +253,13 @@ trait BasicProvidersTrait
 
         return [
             [[1, 2, 3, 4], $sub, [2, 4, 1, 3]],
+        ];
+    }
+
+    public function getTData()
+    {
+        return [
+            [true],
         ];
     }
 

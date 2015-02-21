@@ -145,6 +145,16 @@ class Phamda
     }
 
     /**
+     * @return callable
+     */
+    public static function F()
+    {
+        return function () {
+            return false;
+        };
+    }
+
+    /**
      * @param callable $function
      * @param array    $list
      *
@@ -346,6 +356,16 @@ class Phamda
         });
 
         return $func(...func_get_args());
+    }
+
+    /**
+     * @return callable
+     */
+    public static function T()
+    {
+        return function () {
+            return true;
+        };
     }
 
     /**
