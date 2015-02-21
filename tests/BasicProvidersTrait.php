@@ -15,6 +15,23 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getAndData()
+    {
+        $true  = function () { return true; };
+        $false = function () { return false; };
+        $equal = function($a, $b) { return $a == $b; };
+
+        return [
+            [$true, $true, true],
+            [$true, $false, false],
+            [$false, $true, false],
+            [$false, $false, false],
+            [$equal, $true, true, 2, 2],
+            [$equal, $true, false, 2, 1],
+            [$equal, $equal, false, 2, 1],
+        ];
+    }
+
     public function getAlwaysData()
     {
         $a = (object) ['foo' => 'bar'];
@@ -84,6 +101,23 @@ trait BasicProvidersTrait
         return [
             [$square, [1, 2, 3, 4], [1, 4, 9, 16]],
             [$square, [], []],
+        ];
+    }
+
+    public function getOrData()
+    {
+        $true  = function () { return true; };
+        $false = function () { return false; };
+        $equal = function($a, $b) { return $a == $b; };
+
+        return [
+            [$true, $true, true],
+            [$true, $false, true],
+            [$false, $true, true],
+            [$false, $false, false],
+            [$equal, $true, true, 2, 2],
+            [$equal, $true, true, 2, 1],
+            [$equal, $equal, false, 2, 1],
         ];
     }
 

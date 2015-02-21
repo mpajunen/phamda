@@ -28,6 +28,18 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getAndData
+     */
+    public function testAnd(callable $a, callable $b, $expected, ... $arguments)
+    {
+        $main0 = Phamda::and_($a, $b);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried1 = Phamda::and_($a);
+        $main1 = $curried1($b);
+        $this->assertSame($expected, $main1(...$arguments));
+    }
+
+    /**
      * @dataProvider getAnyData
      */
     public function testAny(callable $function, array $list, $expected)
@@ -73,6 +85,18 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, Phamda::map($function, $list));
         $curried1 = Phamda::map($function);
         $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getOrData
+     */
+    public function testOr(callable $a, callable $b, $expected, ... $arguments)
+    {
+        $main0 = Phamda::or_($a, $b);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried1 = Phamda::or_($a);
+        $main1 = $curried1($b);
+        $this->assertSame($expected, $main1(...$arguments));
     }
 
     /**
