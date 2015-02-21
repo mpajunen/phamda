@@ -50,6 +50,15 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getComposeData
+     */
+    public function testCompose($expected, $a, $b, ... $arguments)
+    {
+        $wrapped = Phamda::compose($a, $b);
+        $this->assertSame($expected, $wrapped(...$arguments));
+    }
+
+    /**
      * @dataProvider getEqData
      */
     public function testEq($expected, $a, $b)
@@ -85,6 +94,15 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, Phamda::map($function, $list));
         $curried1 = Phamda::map($function);
         $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getNotData
+     */
+    public function testNot($expected, $function, ... $arguments)
+    {
+        $wrapped = Phamda::not($function);
+        $this->assertSame($expected, $wrapped(...$arguments));
     }
 
     /**

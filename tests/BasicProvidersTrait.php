@@ -54,6 +54,16 @@ trait BasicProvidersTrait
             [true, $isPositive, [1, 2, 1, 11]],
         ];
     }
+    public function getComposeData()
+    {
+        $square = function ($x) { return $x ** 2; };
+        $sum    = function ($x, $y) { return $x + $y; };
+
+        return [
+            [256, $square, $square, 4],
+            [64, $square, $sum, 3, 5],
+        ];
+    }
 
     public function getEqData()
     {
@@ -101,6 +111,16 @@ trait BasicProvidersTrait
         return [
             [[1, 4, 9, 16], $square, [1, 2, 3, 4]],
             [[], $square, []],
+        ];
+    }
+
+    public function getNotData()
+    {
+        $equal = function($a, $b) { return $a == $b; };
+
+        return [
+            [false, $equal, 1, 1],
+            [true, $equal, 1, 2],
         ];
     }
 

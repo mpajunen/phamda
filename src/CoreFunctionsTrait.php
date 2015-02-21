@@ -4,31 +4,6 @@ namespace Phamda;
 
 trait CoreFunctionsTrait
 {
-    /**
-     * @param callable $a
-     * @param callable $b
-     *
-     * @return callable
-     */
-    public static function compose(callable $a, callable $b)
-    {
-        return function (... $arguments) use ($a, $b) {
-            return call_user_func($a, call_user_func($b, ...$arguments));
-        };
-    }
-
-    /**
-     * @param callable $function
-     *
-     * @return callable
-     */
-    public static function not(callable $function)
-    {
-        return function (... $arguments) use ($function) {
-            return ! $function(...$arguments);
-        };
-    }
-
     protected static function curry2(callable $original)
     {
         return function ($a = null, $b = null) use ($original) {
