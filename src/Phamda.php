@@ -78,15 +78,23 @@ class Phamda
     }
 
     /**
-     * @param callable $a
-     * @param callable $b
+     * @param callable ...$functions
      *
      * @return callable
      */
-    public static function compose(callable $a, callable $b)
+    public static function compose(callable ... $functions)
     {
-        return function (... $arguments) use ($a, $b) {
-            return call_user_func($a, call_user_func($b, ...$arguments));
+        if (count($functions) < 2) {
+            throw new \LogicException(sprintf('Compose requires at least two argument functions.'));
+        }
+
+        return function (... $arguments) use ($functions) {
+            $result = null;
+            foreach (array_reverse($functions) as $function) {
+                $result = call_user_func_array($function, $result ? [$result] : $arguments);
+            }
+
+            return $result;
         };
     }
 

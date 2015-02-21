@@ -35,7 +35,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
         $main0 = Phamda::and_($a, $b);
         $this->assertSame($expected, $main0(...$arguments));
         $curried1 = Phamda::and_($a);
-        $main1 = $curried1($b);
+        $main1    = $curried1($b);
         $this->assertSame($expected, $main1(...$arguments));
     }
 
@@ -52,10 +52,10 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getComposeData
      */
-    public function testCompose($expected, $a, $b, ... $arguments)
+    public function testCompose($expected, array $functions, ... $arguments)
     {
-        $wrapped = Phamda::compose($a, $b);
-        $this->assertSame($expected, $wrapped(...$arguments));
+        $main0 = Phamda::compose(...$functions);
+        $this->assertSame($expected, $main0(...$arguments));
     }
 
     /**
@@ -113,7 +113,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
         $main0 = Phamda::or_($a, $b);
         $this->assertSame($expected, $main0(...$arguments));
         $curried1 = Phamda::or_($a);
-        $main1 = $curried1($b);
+        $main1    = $curried1($b);
         $this->assertSame($expected, $main1(...$arguments));
     }
 

@@ -54,14 +54,16 @@ trait BasicProvidersTrait
             [true, $isPositive, [1, 2, 1, 11]],
         ];
     }
+
     public function getComposeData()
     {
         $square = function ($x) { return $x ** 2; };
         $sum    = function ($x, $y) { return $x + $y; };
 
         return [
-            [256, $square, $square, 4],
-            [64, $square, $sum, 3, 5],
+            [256, [$square, $square], 4],
+            [64, [$square, $sum], 3, 5],
+            [2401, [$square, $square, $sum], 5, 2],
         ];
     }
 
