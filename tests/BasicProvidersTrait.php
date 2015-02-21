@@ -67,6 +67,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getCurryNData()
+    {
+        $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
+
+        return [
+            [1234, 4, $sum, 1000, 200, 30, 4],
+            [1234, 4, $sum, 1000, 200, 30, 4, 5],
+            [true, 2, '\Phamda\Phamda::eq', 5, 5],
+            [false, 2, '\Phamda\Phamda::eq', 5, 7],
+        ];
+    }
+
     public function getEqData()
     {
         $x = (object) [];

@@ -88,6 +88,32 @@ class Phamda
     }
 
     /**
+     * @param int      $count
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function curryN($count, callable $function = null)
+    {
+        $func = static::curry2(function ($count, callable $function) {
+            return function (... $arguments) use ($function, $count) {
+                $remainingCount = $count - count($arguments);
+                if ($remainingCount <= 0) {
+                    return call_user_func($function, ...$arguments);
+                } else {
+                    $existingArguments = $arguments;
+
+                    return Phamda::curryN($remainingCount, function (... $arguments) use ($function, $existingArguments) {
+                        return call_user_func($function, ...array_merge($existingArguments, $arguments));
+                    });
+                }
+            };
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $a
      * @param mixed $b
      *

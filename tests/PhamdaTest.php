@@ -59,6 +59,18 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getCurryNData
+     */
+    public function testCurryN($expected, $count, $function, ... $arguments)
+    {
+        $main0 = Phamda::curryN($count, $function);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried1 = Phamda::curryN($count);
+        $main1    = $curried1($function);
+        $this->assertSame($expected, $main1(...$arguments));
+    }
+
+    /**
      * @dataProvider getEqData
      */
     public function testEq($expected, $a, $b)
