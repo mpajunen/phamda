@@ -88,6 +88,18 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function curry(callable $function)
+    {
+        $reflection = static::createReflection($function);
+
+        return Phamda::curryN($reflection->getNumberOfParameters(), $function);
+    }
+
+    /**
      * @param int      $count
      * @param callable $function
      *

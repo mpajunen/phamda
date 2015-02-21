@@ -59,6 +59,15 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getCurryData
+     */
+    public function testCurry($expected, callable $function, ... $arguments)
+    {
+        $main0 = Phamda::curry($function);
+        $this->assertSame($expected, $main0(...$arguments));
+    }
+
+    /**
      * @dataProvider getCurryNData
      */
     public function testCurryN($expected, $count, callable $function, ... $arguments)
