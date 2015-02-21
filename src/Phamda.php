@@ -84,18 +84,7 @@ class Phamda
      */
     public static function compose(callable ... $functions)
     {
-        if (count($functions) < 2) {
-            throw new \LogicException(sprintf('Compose requires at least two argument functions.'));
-        }
-
-        return function (... $arguments) use ($functions) {
-            $result = null;
-            foreach (array_reverse($functions) as $function) {
-                $result = call_user_func_array($function, $result ? [$result] : $arguments);
-            }
-
-            return $result;
-        };
+        return Phamda::pipe(...array_reverse($functions));
     }
 
     /**
