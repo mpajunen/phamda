@@ -11,7 +11,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAllData
      */
-    public function testAll(callable $function, array $list, $expected)
+    public function testAll($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::all($function, $list));
         $curried1 = Phamda::all($function);
@@ -21,7 +21,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAlwaysData
      */
-    public function testAlways($value, $expected)
+    public function testAlways($expected, $value)
     {
         $wrapped = Phamda::always($value);
         $this->assertSame($expected, $wrapped());
@@ -30,7 +30,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAndData
      */
-    public function testAnd(callable $a, callable $b, $expected, ... $arguments)
+    public function testAnd($expected, callable $a, callable $b, ... $arguments)
     {
         $main0 = Phamda::and_($a, $b);
         $this->assertSame($expected, $main0(...$arguments));
@@ -42,7 +42,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAnyData
      */
-    public function testAny(callable $function, array $list, $expected)
+    public function testAny($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::any($function, $list));
         $curried1 = Phamda::any($function);
@@ -52,7 +52,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getEqData
      */
-    public function testEq($a, $b, $expected)
+    public function testEq($expected, $a, $b)
     {
         $this->assertSame($expected, Phamda::eq($a, $b));
         $curried1 = Phamda::eq($a);
@@ -62,7 +62,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFilterData
      */
-    public function testFilter(callable $function, array $list, $expected)
+    public function testFilter($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::filter($function, $list));
         $curried1 = Phamda::filter($function);
@@ -72,7 +72,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getIdentityData
      */
-    public function testIdentity($a, $expected)
+    public function testIdentity($expected, $a)
     {
         $this->assertSame($expected, Phamda::identity($a));
     }
@@ -80,7 +80,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMapData
      */
-    public function testMap(callable $function, array $list, $expected)
+    public function testMap($expected, callable $function, array $list)
     {
         $this->assertSame($expected, Phamda::map($function, $list));
         $curried1 = Phamda::map($function);
@@ -90,7 +90,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getOrData
      */
-    public function testOr(callable $a, callable $b, $expected, ... $arguments)
+    public function testOr($expected, callable $a, callable $b, ... $arguments)
     {
         $main0 = Phamda::or_($a, $b);
         $this->assertSame($expected, $main0(...$arguments));
@@ -102,7 +102,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPickData
      */
-    public function testPick(array $names, array $item, $expected)
+    public function testPick($expected, array $names, array $item)
     {
         $this->assertSame($expected, Phamda::pick($names, $item));
         $curried1 = Phamda::pick($names);
@@ -112,7 +112,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPickAllData
      */
-    public function testPickAll(array $names, array $item, $expected)
+    public function testPickAll($expected, array $names, array $item)
     {
         $this->assertSame($expected, Phamda::pickAll($names, $item));
         $curried1 = Phamda::pickAll($names);
@@ -122,7 +122,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPropData
      */
-    public function testProp($name, $object, $expected)
+    public function testProp($expected, $name, $object)
     {
         $this->assertSame($expected, Phamda::prop($name, $object));
         $curried1 = Phamda::prop($name);
@@ -132,7 +132,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPropEqData
      */
-    public function testPropEq($name, $value, $object, $expected)
+    public function testPropEq($expected, $name, $value, $object)
     {
         $this->assertSame($expected, Phamda::propEq($name, $value, $object));
         $curried1 = Phamda::propEq($name);
@@ -144,7 +144,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getReduceData
      */
-    public function testReduce(callable $function, $initial, array $list, $expected)
+    public function testReduce($expected, callable $function, $initial, array $list)
     {
         $this->assertSame($expected, Phamda::reduce($function, $initial, $list));
         $curried1 = Phamda::reduce($function);
@@ -156,7 +156,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getSortData
      */
-    public function testSort(callable $comparator, array $list, $expected)
+    public function testSort($expected, callable $comparator, array $list)
     {
         $this->assertSame($expected, Phamda::sort($comparator, $list));
         $curried1 = Phamda::sort($comparator);
@@ -166,7 +166,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getZipData
      */
-    public function testZip(array $a, array $b, $expected)
+    public function testZip($expected, array $a, array $b)
     {
         $this->assertSame($expected, Phamda::zip($a, $b));
         $curried1 = Phamda::zip($a);
@@ -176,7 +176,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getZipWithData
      */
-    public function testZipWith(callable $function, array $a, array $b, $expected)
+    public function testZipWith($expected, callable $function, array $a, array $b)
     {
         $this->assertSame($expected, Phamda::zipWith($function, $a, $b));
         $curried1 = Phamda::zipWith($function);
