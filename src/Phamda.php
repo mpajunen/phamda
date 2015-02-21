@@ -225,6 +225,27 @@ class Phamda
     }
 
     /**
+     * @param callable ...$functions
+     *
+     * @return callable
+     */
+    public static function pipe(callable ... $functions)
+    {
+        if (count($functions) < 2) {
+            throw new \LogicException('Pipe requires at least two argument functions.');
+        }
+
+        return function (... $arguments) use ($functions) {
+            $result = null;
+            foreach ($functions as $function) {
+                $result = call_user_func_array($function, $result ? [$result] : $arguments);
+            }
+
+            return $result;
+        };
+    }
+
+    /**
      * @param string       $name
      * @param array|object $object
      *

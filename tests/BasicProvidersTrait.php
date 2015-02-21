@@ -167,6 +167,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getPipeData()
+    {
+        $sum    = function ($x, $y) { return $x + $y; };
+        $square = function ($x) { return $x ** 2; };
+        $triple = function ($x) { return 3 * $x; };
+
+        return [
+            [300, [$sum, $square, $triple], 2, 8],
+            [675, [$triple, $square, $triple], 5],
+        ];
+    }
+
     public function getPropData()
     {
         $foo = ['bar' => 'fuz', 'baz' => null];

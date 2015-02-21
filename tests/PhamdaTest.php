@@ -138,6 +138,15 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getPipeData
+     */
+    public function testPipe($expected, array $functions, ... $arguments)
+    {
+        $main0 = Phamda::pipe(...$functions);
+        $this->assertSame($expected, $main0(...$arguments));
+    }
+
+    /**
      * @dataProvider getPropData
      */
     public function testProp($expected, $name, $object)
