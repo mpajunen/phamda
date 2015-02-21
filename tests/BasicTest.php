@@ -4,7 +4,7 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda;
 
-class PhamdaTest extends \PHPUnit_Framework_TestCase
+class BasicTest extends \PHPUnit_Framework_TestCase
 {
     use BasicProvidersTrait;
 
@@ -61,7 +61,7 @@ class PhamdaTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getCurryNData
      */
-    public function testCurryN($expected, $count, $function, ... $arguments)
+    public function testCurryN($expected, $count, callable $function, ... $arguments)
     {
         $main0 = Phamda::curryN($count, $function);
         $this->assertSame($expected, $main0(...$arguments));
