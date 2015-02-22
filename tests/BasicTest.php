@@ -9,6 +9,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     use BasicProvidersTrait;
 
     /**
+     * @dataProvider getAddData
+     */
+    public function testAdd($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::add($a, $b));
+        $curried0 = Phamda::add();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::add($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
      * @dataProvider getAllData
      */
     public function testAll($expected, callable $function, array $list)
@@ -93,6 +105,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getDivideData
+     */
+    public function testDivide($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::divide($a, $b));
+        $curried0 = Phamda::divide();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::divide($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
      * @dataProvider getEqData
      */
     public function testEq($expected, $a, $b)
@@ -145,6 +169,40 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($function, $list));
         $curried1 = Phamda::map($function);
         $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getModuloData
+     */
+    public function testModulo($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::modulo($a, $b));
+        $curried0 = Phamda::modulo();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::modulo($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
+     * @dataProvider getMultiplyData
+     */
+    public function testMultiply($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::multiply($a, $b));
+        $curried0 = Phamda::multiply();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::multiply($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
+     * @dataProvider getNegateData
+     */
+    public function testNegate($expected, $a)
+    {
+        $this->assertSame($expected, Phamda::negate($a));
+        $curried0 = Phamda::negate();
+        $this->assertSame($expected, $curried0($a));
     }
 
     /**
@@ -220,6 +278,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getProductData
+     */
+    public function testProduct($expected, array $values)
+    {
+        $this->assertSame($expected, Phamda::product($values));
+        $curried0 = Phamda::product();
+        $this->assertSame($expected, $curried0($values));
+    }
+
+    /**
      * @dataProvider getPropData
      */
     public function testProp($expected, $name, $object)
@@ -269,6 +337,28 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($comparator, $list));
         $curried1 = Phamda::sort($comparator);
         $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getSubtractData
+     */
+    public function testSubtract($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::subtract($a, $b));
+        $curried0 = Phamda::subtract();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::subtract($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
+     * @dataProvider getSumData
+     */
+    public function testSum($expected, array $values)
+    {
+        $this->assertSame($expected, Phamda::sum($values));
+        $curried0 = Phamda::sum();
+        $this->assertSame($expected, $curried0($values));
     }
 
     /**

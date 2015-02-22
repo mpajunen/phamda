@@ -6,6 +6,14 @@ use Phamda\Phamda;
 
 trait BasicProvidersTrait
 {
+    public function getAddData()
+    {
+        return [
+            [42, 15, 27],
+            [28, 36, -8],
+        ];
+    }
+
     public function getAllData()
     {
         $isPositive = function($x) { return $x > 0; };
@@ -93,6 +101,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getDivideData()
+    {
+        return [
+            [5, 55, 11],
+            [-6, 48, -8],
+        ];
+    }
+
     public function getEqData()
     {
         $x = (object) [];
@@ -146,6 +162,32 @@ trait BasicProvidersTrait
         return [
             [[1, 4, 9, 16], $square, [1, 2, 3, 4]],
             [[], $square, []],
+        ];
+    }
+
+    public function getModuloData()
+    {
+        return [
+            [3, 15, 6],
+            [0, 22, 11],
+            [-5, -23, 6],
+        ];
+    }
+
+    public function getMultiplyData()
+    {
+        return [
+            [405, 15, 27],
+            [-288, 36, -8],
+        ];
+    }
+
+    public function getNegateData()
+    {
+        return [
+            [-15, 15],
+            [0.7, -0.7],
+            [0, 0],
         ];
     }
 
@@ -225,6 +267,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getProductData()
+    {
+        return [
+            [-264, [11, -8, 3]],
+            [720, [1, 2, 3, 4, 5, 6]],
+        ];
+    }
+
     public function getPropData()
     {
         $foo = ['bar' => 'fuz', 'baz' => null];
@@ -266,6 +316,22 @@ trait BasicProvidersTrait
 
         return [
             [[1, 2, 3, 4], $sub, [2, 4, 1, 3]],
+        ];
+    }
+
+    public function getSubtractData()
+    {
+        return [
+            [-12, 15, 27],
+            [44, 36, -8],
+        ];
+    }
+
+    public function getSumData()
+    {
+        return [
+            [21, [1, 2, 3, 4, 5, 6]],
+            [16, [11, 0, 2, -4, 7]],
         ];
     }
 

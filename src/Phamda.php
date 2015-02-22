@@ -7,6 +7,21 @@ class Phamda
     use CoreFunctionsTrait;
 
     /**
+     * @param int|float $a
+     * @param int|float $b
+     *
+     * @return callable|int|float
+     */
+    public static function add($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a + $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param callable $function
      * @param array    $list
      *
@@ -130,6 +145,21 @@ class Phamda
     }
 
     /**
+     * @param int|float $a
+     * @param int|float $b
+     *
+     * @return callable|int|float
+     */
+    public static function divide($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a / $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $a
      * @param mixed $b
      *
@@ -193,6 +223,50 @@ class Phamda
     {
         $func = static::curry2(function (callable $function, array $list) {
             return array_map($function, $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param int $a
+     * @param int $b
+     *
+     * @return callable|int
+     */
+    public static function modulo($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a % $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param int|float $a
+     * @param int|float $b
+     *
+     * @return callable|int|float
+     */
+    public static function multiply($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a * $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param int|float $a
+     *
+     * @return callable|int|float
+     */
+    public static function negate($a = null)
+    {
+        $func = static::curry1(function ($a) {
+            return Phamda::multiply($a, -1);
         });
 
         return $func(...func_get_args());
@@ -310,6 +384,20 @@ class Phamda
     }
 
     /**
+     * @param int[]|float[] $values
+     *
+     * @return callable|int|float
+     */
+    public static function product(array $values = null)
+    {
+        $func = static::curry1(function (array $values) {
+            return Phamda::reduce(Phamda::multiply(), 1, $values);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param string       $name
      * @param array|object $object
      *
@@ -368,6 +456,35 @@ class Phamda
             usort($list, $comparator);
 
             return $list;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param int|float $a
+     * @param int|float $b
+     *
+     * @return callable|int|float
+     */
+    public static function subtract($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a - $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param int[]|float[] $values
+     *
+     * @return callable|int|float
+     */
+    public static function sum(array $values = null)
+    {
+        $func = static::curry1(function (array $values) {
+            return Phamda::reduce(Phamda::add(), 0, $values);
         });
 
         return $func(...func_get_args());
