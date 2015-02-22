@@ -319,6 +319,21 @@ class Phamda
     }
 
     /**
+     * @param callable $getValue
+     * @param array    $list
+     *
+     * @return callable|mixed
+     */
+    public static function maxBy(callable $getValue = null, array $list = null)
+    {
+        $func = static::curry2(function (callable $getValue, array $list) {
+            return static::getCompareByResult(Phamda::gt(), $getValue, $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param array $list
      *
      * @return callable|mixed
@@ -327,6 +342,21 @@ class Phamda
     {
         $func = static::curry1(function (array $list) {
             return static::getCompareResult(Phamda::lt(), $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $getValue
+     * @param array    $list
+     *
+     * @return callable|mixed
+     */
+    public static function minBy(callable $getValue = null, array $list = null)
+    {
+        $func = static::curry2(function (callable $getValue, array $list) {
+            return static::getCompareByResult(Phamda::lt(), $getValue, $list);
         });
 
         return $func(...func_get_args());

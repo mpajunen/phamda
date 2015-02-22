@@ -242,6 +242,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getMaxByData
+     */
+    public function testMaxBy($expected, callable $getValue, array $list)
+    {
+        $this->assertSame($expected, Phamda::maxBy($getValue, $list));
+        $curried0 = Phamda::maxBy();
+        $this->assertSame($expected, $curried0($getValue, $list));
+        $curried1 = Phamda::maxBy($getValue);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getMinData
      */
     public function testMin($expected, array $list)
@@ -249,6 +261,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, Phamda::min($list));
         $curried0 = Phamda::min();
         $this->assertSame($expected, $curried0($list));
+    }
+
+    /**
+     * @dataProvider getMinByData
+     */
+    public function testMinBy($expected, callable $getValue, array $list)
+    {
+        $this->assertSame($expected, Phamda::minBy($getValue, $list));
+        $curried0 = Phamda::minBy();
+        $this->assertSame($expected, $curried0($getValue, $list));
+        $curried1 = Phamda::minBy($getValue);
+        $this->assertSame($expected, $curried1($list));
     }
 
     /**

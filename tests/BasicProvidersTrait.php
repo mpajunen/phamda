@@ -218,11 +218,39 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getMaxByData()
+    {
+        $getFoo = function ($item) { return $item->foo; };
+
+        $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
+        $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
+        $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
+
+        return [
+            [$b, $getFoo, [$a, $b, $c]],
+            [$a, $getFoo, [$a, $c]],
+        ];
+    }
+
     public function getMinData()
     {
         return [
             [-3, [6, 15, 8, 9, -2, -3]],
             ['bar', ['bar', 'foo', 'baz']],
+        ];
+    }
+
+    public function getMinByData()
+    {
+        $getBar = function ($item) { return $item->bar; };
+
+        $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
+        $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
+        $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
+
+        return [
+            [$a, $getBar, [$a, $b, $c]],
+            [$c, $getBar, [$b, $c]],
         ];
     }
 

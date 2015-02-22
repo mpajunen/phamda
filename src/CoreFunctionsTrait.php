@@ -10,10 +10,27 @@ trait CoreFunctionsTrait
             return new \ReflectionFunction($a);
         } elseif (is_array($a)) {
             list($class, $name) = $a;
+
             return new \ReflectionMethod($class, $name);
         } else {
             throw new \LogicException('Invalid callable.');
         }
+    }
+
+    protected static function getCompareByResult(callable $comparator, callable $getValue, array $list)
+    {
+        $comparison = null;
+        $result     = null;
+
+        foreach ($list as $item) {
+            $value = $getValue($item);
+            if ($comparison === null || $comparator($value, $comparison)) {
+                $comparison = $value;
+                $result     = $item;
+            }
+        }
+
+        return $result;
     }
 
     protected static function getCompareResult(callable $comparator, array $list)
