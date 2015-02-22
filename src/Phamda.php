@@ -305,6 +305,34 @@ class Phamda
     }
 
     /**
+     * @param array $list
+     *
+     * @return callable|mixed
+     */
+    public static function max(array $list = null)
+    {
+        $func = static::curry1(function (array $list) {
+            return static::getCompareResult(Phamda::gt(), $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param array $list
+     *
+     * @return callable|mixed
+     */
+    public static function min(array $list = null)
+    {
+        $func = static::curry1(function (array $list) {
+            return static::getCompareResult(Phamda::lt(), $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param int $a
      * @param int $b
      *

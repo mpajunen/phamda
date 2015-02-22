@@ -210,6 +210,22 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getMaxData()
+    {
+        return [
+            [15, [6, 15, 8, 9, -2, -3]],
+            ['foo', ['bar', 'foo', 'baz']],
+        ];
+    }
+
+    public function getMinData()
+    {
+        return [
+            [-3, [6, 15, 8, 9, -2, -3]],
+            ['bar', ['bar', 'foo', 'baz']],
+        ];
+    }
+
     public function getModuloData()
     {
         return [

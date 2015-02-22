@@ -16,6 +16,18 @@ trait CoreFunctionsTrait
         }
     }
 
+    protected static function getCompareResult(callable $comparator, array $list)
+    {
+        $result = null;
+        foreach ($list as $value) {
+            if ($result === null || $comparator($value, $result)) {
+                $result = $value;
+            }
+        }
+
+        return $result;
+    }
+
     protected static function curry1(callable $original)
     {
         return function ($a = null) use ($original) {

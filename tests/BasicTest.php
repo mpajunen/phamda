@@ -232,6 +232,26 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getMaxData
+     */
+    public function testMax($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::max($list));
+        $curried0 = Phamda::max();
+        $this->assertSame($expected, $curried0($list));
+    }
+
+    /**
+     * @dataProvider getMinData
+     */
+    public function testMin($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::min($list));
+        $curried0 = Phamda::min();
+        $this->assertSame($expected, $curried0($list));
+    }
+
+    /**
      * @dataProvider getModuloData
      */
     public function testModulo($expected, $a, $b)
