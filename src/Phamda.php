@@ -82,7 +82,7 @@ class Phamda
      *
      * @return callable
      */
-    public static function compose(callable ... $functions)
+    public static function compose(... $functions)
     {
         return Phamda::pipe(...array_reverse($functions));
     }
@@ -278,7 +278,7 @@ class Phamda
      *
      * @return callable
      */
-    public static function pipe(callable ... $functions)
+    public static function pipe(... $functions)
     {
         if (count($functions) < 2) {
             throw new \LogicException('Pipe requires at least two argument functions.');
