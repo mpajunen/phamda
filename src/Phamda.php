@@ -93,6 +93,22 @@ class Phamda
     }
 
     /**
+     * @param callable $predicate
+     *
+     * @return callable
+     */
+    public static function comparator(callable $predicate = null)
+    {
+        $func = static::curry1(function (callable $predicate) {
+            return function ($a, $b) use ($predicate) {
+                return $predicate($a, $b) ? -1 : ($predicate($b, $a) ? 1 : 0);
+            };
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param callable ...$functions
      *
      * @return callable

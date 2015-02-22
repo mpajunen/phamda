@@ -65,6 +65,15 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getComparatorData()
+    {
+        return [
+            [-1, Phamda::lt(), 1, 2],
+            [0, Phamda::lt(), 1, 1],
+            [1, Phamda::lt(), 2, 1],
+        ];
+    }
+
     public function getComposeData()
     {
         $square = function ($x) { return $x ** 2; };

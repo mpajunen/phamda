@@ -69,6 +69,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getComparatorData
+     */
+    public function testComparator($expected, callable $predicate, $a, $b)
+    {
+        $main0 = Phamda::comparator($predicate);
+        $this->assertSame($expected, $main0($a, $b));
+        $curried0 = Phamda::comparator();
+        $main1    = $curried0($predicate);
+        $this->assertSame($expected, $main1($a, $b));
+    }
+
+    /**
      * @dataProvider getComposeData
      */
     public function testCompose($expected, array $functions, ... $arguments)
