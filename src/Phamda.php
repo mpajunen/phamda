@@ -295,6 +295,21 @@ class Phamda
     }
 
     /**
+     * @param string $name
+     * @param array  $list
+     *
+     * @return callable|mixed
+     */
+    public static function pluck($name = null, array $list = null)
+    {
+        $func = static::curry2(function ($name, array $list) {
+            return Phamda::map(Phamda::prop($name), $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param string       $name
      * @param array|object $object
      *

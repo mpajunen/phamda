@@ -212,6 +212,19 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getPluckData()
+    {
+        $items = [
+            ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'],
+            ['foo' => 'fii', 'baz' => 'pob'],
+        ];
+
+        return [
+            [[null, 'fii'], 'foo', $items],
+            [['bob', 'pob'], 'baz', $items],
+        ];
+    }
+
     public function getPropData()
     {
         $foo = ['bar' => 'fuz', 'baz' => null];

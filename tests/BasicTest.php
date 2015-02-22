@@ -208,6 +208,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getPluckData
+     */
+    public function testPluck($expected, $name, array $list)
+    {
+        $this->assertSame($expected, Phamda::pluck($name, $list));
+        $curried0 = Phamda::pluck();
+        $this->assertSame($expected, $curried0($name, $list));
+        $curried1 = Phamda::pluck($name);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getPropData
      */
     public function testProp($expected, $name, $object)
