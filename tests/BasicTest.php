@@ -150,6 +150,30 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getGtData
+     */
+    public function testGt($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::gt($a, $b));
+        $curried0 = Phamda::gt();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::gt($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
+     * @dataProvider getGteData
+     */
+    public function testGte($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::gte($a, $b));
+        $curried0 = Phamda::gte();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::gte($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
      * @dataProvider getIdentityData
      */
     public function testIdentity($expected, $a)
@@ -157,6 +181,30 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, Phamda::identity($a));
         $curried0 = Phamda::identity();
         $this->assertSame($expected, $curried0($a));
+    }
+
+    /**
+     * @dataProvider getLtData
+     */
+    public function testLt($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::lt($a, $b));
+        $curried0 = Phamda::lt();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::lt($a);
+        $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
+     * @dataProvider getLteData
+     */
+    public function testLte($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::lte($a, $b));
+        $curried0 = Phamda::lte();
+        $this->assertSame($expected, $curried0($a, $b));
+        $curried1 = Phamda::lte($a);
+        $this->assertSame($expected, $curried1($b));
     }
 
     /**

@@ -201,6 +201,36 @@ class Phamda
 
     /**
      * @param mixed $a
+     * @param mixed $b
+     *
+     * @return callable|bool
+     */
+    public static function gt($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a > $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param mixed $a
+     * @param mixed $b
+     *
+     * @return callable|bool
+     */
+    public static function gte($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a >= $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param mixed $a
      *
      * @return callable|mixed
      */
@@ -208,6 +238,36 @@ class Phamda
     {
         $func = static::curry1(function ($a) {
             return $a;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param mixed $a
+     * @param mixed $b
+     *
+     * @return callable|bool
+     */
+    public static function lt($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a < $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param mixed $a
+     * @param mixed $b
+     *
+     * @return callable|bool
+     */
+    public static function lte($a = null, $b = null)
+    {
+        $func = static::curry2(function ($a, $b) {
+            return $a <= $b;
         });
 
         return $func(...func_get_args());

@@ -143,6 +143,24 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getGtData()
+    {
+        return [
+            [false, 1, 2],
+            [false, 1, 1],
+            [true, 2, 1],
+        ];
+    }
+
+    public function getGteData()
+    {
+        return [
+            [false, 1, 2],
+            [true, 1, 1],
+            [true, 2, 1],
+        ];
+    }
+
     public function getIdentityData()
     {
         $a = (object) ['foo' => 'bar'];
@@ -152,6 +170,24 @@ trait BasicProvidersTrait
             [null, null],
             ['abc', 'abc'],
             [$a, $a],
+        ];
+    }
+
+    public function getLtData()
+    {
+        return [
+            [true, 1, 2],
+            [false, 1, 1],
+            [false, 2, 1],
+        ];
+    }
+
+    public function getLteData()
+    {
+        return [
+            [true, 1, 2],
+            [true, 1, 1],
+            [false, 2, 1],
         ];
     }
 
