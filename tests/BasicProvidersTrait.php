@@ -127,7 +127,7 @@ trait BasicProvidersTrait
         ];
     }
 
-    public function getFData()
+    public function getFalseData()
     {
         return [
             [false],
@@ -335,7 +335,7 @@ trait BasicProvidersTrait
         ];
     }
 
-    public function getTData()
+    public function getTrueData()
     {
         return [
             [true],

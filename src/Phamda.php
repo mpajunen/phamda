@@ -177,7 +177,7 @@ class Phamda
     /**
      * @return callable
      */
-    public static function F()
+    public static function false()
     {
         return function () {
             return false;
@@ -493,7 +493,7 @@ class Phamda
     /**
      * @return callable
      */
-    public static function T()
+    public static function true()
     {
         return function () {
             return true;

@@ -129,11 +129,11 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getFData
+     * @dataProvider getFalseData
      */
-    public function testF($expected)
+    public function testFalse($expected)
     {
-        $main0 = Phamda::F();
+        $main0 = Phamda::false();
         $this->assertSame($expected, $main0());
     }
 
@@ -362,11 +362,11 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getTData
+     * @dataProvider getTrueData
      */
-    public function testT($expected)
+    public function testTrue($expected)
     {
-        $main0 = Phamda::T();
+        $main0 = Phamda::true();
         $this->assertSame($expected, $main0());
     }
 
