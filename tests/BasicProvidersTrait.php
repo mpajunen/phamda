@@ -459,6 +459,15 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getReverseData()
+    {
+        return [
+            [[1, 2, 3], [3, 2, 1]],
+            [[5, 16, 4, 22], [22, 4, 16, 5]],
+            [[], []],
+        ];
+    }
+
     public function getSliceData()
     {
         $list = [1, 2, 3, 4, 5, 6, 7, 8, 9];

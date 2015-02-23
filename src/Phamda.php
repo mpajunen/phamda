@@ -653,6 +653,20 @@ class Phamda
     }
 
     /**
+     * @param array $list
+     *
+     * @return callable|array
+     */
+    public static function reverse(array $list = null)
+    {
+        $func = static::curry1(function (array $list) {
+            return array_reverse($list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param int   $start
      * @param int   $end
      * @param array $list

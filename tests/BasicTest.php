@@ -488,6 +488,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getReverseData
+     */
+    public function testReverse($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::reverse($list));
+        $curried0 = Phamda::reverse();
+        $this->assertSame($expected, $curried0($list));
+    }
+
+    /**
      * @dataProvider getSliceData
      */
     public function testSlice($expected, $start, $end, array $list)
