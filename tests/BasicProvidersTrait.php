@@ -166,6 +166,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFlipData()
+    {
+        $subMany = function ($a, $b, $c = 0, $d = 0, $e = 0) {
+            return $a - $b - $c - $d - $e;
+        };
+
+        return [
+            [-22, $subMany, 42, 20],
+            [-36, $subMany, 42, 20, 6, 8],
+        ];
+    }
+
     public function getGtData()
     {
         return [

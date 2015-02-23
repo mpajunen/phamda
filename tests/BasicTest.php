@@ -172,6 +172,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFlipData
+     */
+    public function testFlip($expected, callable $function, $a, $b, ... $arguments)
+    {
+        $main0 = Phamda::flip($function);
+        $this->assertSame($expected, $main0($a, $b, ...$arguments));
+        $curried0 = Phamda::flip();
+        $main1    = $curried0($function);
+        $this->assertSame($expected, $main1($a, $b, ...$arguments));
+    }
+
+    /**
      * @dataProvider getGtData
      */
     public function testGt($expected, $a, $b)

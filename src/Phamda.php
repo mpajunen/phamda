@@ -230,6 +230,22 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function flip(callable $function = null)
+    {
+        $func = static::curry1(function (callable $function) {
+            return function ($a, $b, ... $arguments) use ($function) {
+                return $function($b, $a, ...$arguments);
+            };
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $a
      * @param mixed $b
      *
