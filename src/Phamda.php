@@ -93,6 +93,20 @@ class Phamda
     }
 
     /**
+     * @param object $object
+     *
+     * @return callable|mixed
+     */
+    public static function clone_($object = null)
+    {
+        $func = static::curry1(function ($object) {
+            return clone $object;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param callable $predicate
      *
      * @return callable
