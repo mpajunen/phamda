@@ -436,6 +436,21 @@ class Phamda
 
     /**
      * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|bool
+     */
+    public static function none(callable $function = null, array $list = null)
+    {
+        $func = static::curry2(function (callable $function, array $list) {
+            return ! Phamda::any($function, $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $function
      *
      * @return callable
      */

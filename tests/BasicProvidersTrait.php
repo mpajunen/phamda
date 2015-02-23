@@ -304,6 +304,17 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getNoneData()
+    {
+        $isPositive = function($x) { return $x > 0; };
+
+        return [
+            [false, $isPositive, [1, 2, 0, -5]],
+            [true, $isPositive, [-3, -7, -1, -5]],
+            [false, $isPositive, [1, 2, 1, 11]],
+        ];
+    }
+
     public function getNotData()
     {
         $equal = function($a, $b) { return $a == $b; };

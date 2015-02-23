@@ -330,6 +330,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getNoneData
+     */
+    public function testNone($expected, callable $function, array $list)
+    {
+        $this->assertSame($expected, Phamda::none($function, $list));
+        $curried0 = Phamda::none();
+        $this->assertSame($expected, $curried0($function, $list));
+        $curried1 = Phamda::none($function);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getNotData
      */
     public function testNot($expected, callable $function, ... $arguments)
