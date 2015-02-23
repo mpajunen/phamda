@@ -145,9 +145,11 @@ trait BasicProvidersTrait
 
     public function getFilterData()
     {
+        $gt2    = function ($x) { return $x > 2; };
         $isEven = function ($x) { return $x % 2 === 0; };
 
         return [
+            [[2 => 3, 3 => 4], $gt2, [1, 2, 3, 4]],
             [[1 => 2, 3 => 4], $isEven, [1, 2, 3, 4]],
         ];
     }
@@ -431,6 +433,17 @@ trait BasicProvidersTrait
             [20, $sum, 10, [1, 2, 3, 4]],
             [5, $sum, 5, []],
             ['xabcd', $concat, 'x', ['a', 'b', 'c', 'd']]
+        ];
+    }
+
+    public function getRejectData()
+    {
+        $gt2    = function ($x) { return $x > 2; };
+        $isEven = function ($x) { return $x % 2 === 0; };
+
+        return [
+            [[0 => 1, 1 => 2], $gt2, [1, 2, 3, 4]],
+            [[0 => 1, 2 => 3], $isEven, [1, 2, 3, 4]],
         ];
     }
 

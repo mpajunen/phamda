@@ -622,6 +622,21 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|array
+     */
+    public static function reject(callable $function = null, array $list = null)
+    {
+        $func = static::curry2(function (callable $function, array $list) {
+            return Phamda::filter(Phamda::not($function), $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param callable $comparator
      * @param array    $list
      *

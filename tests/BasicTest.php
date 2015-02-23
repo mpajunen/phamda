@@ -464,6 +464,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getRejectData
+     */
+    public function testReject($expected, callable $function, array $list)
+    {
+        $this->assertSame($expected, Phamda::reject($function, $list));
+        $curried0 = Phamda::reject();
+        $this->assertSame($expected, $curried0($function, $list));
+        $curried1 = Phamda::reject($function);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getSortData
      */
     public function testSort($expected, callable $comparator, array $list)
