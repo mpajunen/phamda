@@ -216,6 +216,20 @@ class Phamda
     }
 
     /**
+     * @param array $list
+     *
+     * @return callable|mixed
+     */
+    public static function first(array $list = null)
+    {
+        $func = static::curry1(function (array $list) {
+            return reset($list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $a
      * @param mixed $b
      *
@@ -254,6 +268,20 @@ class Phamda
     {
         $func = static::curry1(function ($a) {
             return $a;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param array $list
+     *
+     * @return callable|mixed
+     */
+    public static function last(array $list = null)
+    {
+        $func = static::curry1(function (array $list) {
+            return end($list);
         });
 
         return $func(...func_get_args());

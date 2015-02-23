@@ -162,6 +162,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFirstData
+     */
+    public function testFirst($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::first($list));
+        $curried0 = Phamda::first();
+        $this->assertSame($expected, $curried0($list));
+    }
+
+    /**
      * @dataProvider getGtData
      */
     public function testGt($expected, $a, $b)
@@ -193,6 +203,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, Phamda::identity($a));
         $curried0 = Phamda::identity();
         $this->assertSame($expected, $curried0($a));
+    }
+
+    /**
+     * @dataProvider getLastData
+     */
+    public function testLast($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::last($list));
+        $curried0 = Phamda::last();
+        $this->assertSame($expected, $curried0($list));
     }
 
     /**

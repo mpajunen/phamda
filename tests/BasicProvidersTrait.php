@@ -152,6 +152,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFirstData()
+    {
+        $a = (object) [];
+        $b = (object) [];
+        $c = (object) [];
+
+        return [
+            [5, [5, 8, 9, 13]],
+            [$a, [$a, $b, $c]],
+        ];
+    }
+
     public function getGtData()
     {
         return [
@@ -179,6 +191,18 @@ trait BasicProvidersTrait
             [null, null],
             ['abc', 'abc'],
             [$a, $a],
+        ];
+    }
+
+    public function getLastData()
+    {
+        $a = (object) [];
+        $b = (object) [];
+        $c = (object) [];
+
+        return [
+            [13, [5, 8, 9, 13]],
+            [$c, [$a, $b, $c]],
         ];
     }
 
