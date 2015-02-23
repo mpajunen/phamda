@@ -447,6 +447,17 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getSliceData()
+    {
+        $list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        return [
+            [[3, 4, 5, 6], 2, 6, $list],
+            [[1, 2, 3], 0, 3, $list],
+            [[8, 9], 7, 11, $list],
+        ];
+    }
+
     public function getSortData()
     {
         $sub = function ($a, $b) { return $a - $b; };

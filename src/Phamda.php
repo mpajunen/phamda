@@ -637,6 +637,22 @@ class Phamda
     }
 
     /**
+     * @param int   $start
+     * @param int   $end
+     * @param array $list
+     *
+     * @return callable|array
+     */
+    public static function slice($start = null, $end = null, array $list = null)
+    {
+        $func = static::curry3(function ($start, $end, array $list) {
+            return array_slice($list, $start, $end - $start);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param callable $comparator
      * @param array    $list
      *

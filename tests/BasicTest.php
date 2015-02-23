@@ -476,6 +476,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getSliceData
+     */
+    public function testSlice($expected, $start, $end, array $list)
+    {
+        $this->assertSame($expected, Phamda::slice($start, $end, $list));
+        $curried0 = Phamda::slice();
+        $this->assertSame($expected, $curried0($start, $end, $list));
+        $curried1 = Phamda::slice($start);
+        $this->assertSame($expected, $curried1($end, $list));
+        $curried2 = Phamda::slice($start, $end);
+        $this->assertSame($expected, $curried2($list));
+    }
+
+    /**
      * @dataProvider getSortData
      */
     public function testSort($expected, callable $comparator, array $list)
