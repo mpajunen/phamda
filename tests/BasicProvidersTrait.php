@@ -196,6 +196,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getIndexOfData()
+    {
+        $a = (object) [];
+        $b = (object) [];
+        $c = (object) [];
+
+        return [
+            [3, 16, [1, 6, 44, 16, 52]],
+            ['a', $a, ['a' => $a, 'b' => $b, 'c' => $c]],
+        ];
+    }
+
     public function getIdentityData()
     {
         $a = (object) ['foo' => 'bar'];

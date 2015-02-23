@@ -218,6 +218,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getIndexOfData
+     */
+    public function testIndexOf($expected, $value, array $list)
+    {
+        $this->assertSame($expected, Phamda::indexOf($value, $list));
+        $curried0 = Phamda::indexOf();
+        $this->assertSame($expected, $curried0($value, $list));
+        $curried1 = Phamda::indexOf($value);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getLastData
      */
     public function testLast($expected, array $list)

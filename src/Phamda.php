@@ -290,6 +290,27 @@ class Phamda
     }
 
     /**
+     * @param mixed $value
+     * @param array $list
+     *
+     * @return callable|int|string|false
+     */
+    public static function indexOf($value = null, array $list = null)
+    {
+        $func = static::curry2(function ($value, array $list) {
+            foreach ($list as $key => $current) {
+                if ($value === $current) {
+                    return $key;
+                }
+            }
+
+            return false;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param array $list
      *
      * @return callable|mixed
