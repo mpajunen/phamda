@@ -220,6 +220,23 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getIsEmptyData()
+    {
+        return [
+            [false, [1, 2, 3]],
+            [false, [0]],
+            [true, []],
+        ];
+    }
+
+    public function getIsInstanceData()
+    {
+        return [
+            [true, 'Phamda\\Tests\\Test1', new Test1()],
+            [false, 'Phamda\\Tests\\Test2', new Test1()],
+        ];
+    }
+
     public function getLastData()
     {
         $a = (object) [];

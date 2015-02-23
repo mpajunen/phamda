@@ -230,6 +230,28 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getIsEmptyData
+     */
+    public function testIsEmpty($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::isEmpty($list));
+        $curried0 = Phamda::isEmpty();
+        $this->assertSame($expected, $curried0($list));
+    }
+
+    /**
+     * @dataProvider getIsInstanceData
+     */
+    public function testIsInstance($expected, $class, $object)
+    {
+        $this->assertSame($expected, Phamda::isInstance($class, $object));
+        $curried0 = Phamda::isInstance();
+        $this->assertSame($expected, $curried0($class, $object));
+        $curried1 = Phamda::isInstance($class);
+        $this->assertSame($expected, $curried1($object));
+    }
+
+    /**
      * @dataProvider getLastData
      */
     public function testLast($expected, array $list)

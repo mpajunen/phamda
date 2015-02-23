@@ -313,6 +313,35 @@ class Phamda
     /**
      * @param array $list
      *
+     * @return callable|bool
+     */
+    public static function isEmpty(array $list = null)
+    {
+        $func = static::curry1(function (array $list) {
+            return empty($list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param string $class
+     * @param object $object
+     *
+     * @return callable|bool
+     */
+    public static function isInstance($class = null, $object = null)
+    {
+        $func = static::curry2(function ($class, $object) {
+            return $object instanceof $class;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param array $list
+     *
      * @return callable|mixed
      */
     public static function last(array $list = null)
