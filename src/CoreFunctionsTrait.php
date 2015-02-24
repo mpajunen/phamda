@@ -4,17 +4,19 @@ namespace Phamda;
 
 trait CoreFunctionsTrait
 {
-    protected static function createReflection(callable $a)
+    protected static function getArity(callable $a)
     {
         if (is_string($a) || $a instanceof \Closure) {
-            return new \ReflectionFunction($a);
+            $function = new \ReflectionFunction($a);
         } elseif (is_array($a)) {
             list($class, $name) = $a;
 
-            return new \ReflectionMethod($class, $name);
+            $function = new \ReflectionMethod($class, $name);
         } else {
             throw new \LogicException('Invalid callable.');
         }
+
+        return $function->getNumberOfRequiredParameters();
     }
 
     protected static function getCompareByResult(callable $comparator, callable $getValue, array $list)

@@ -140,9 +140,7 @@ class Phamda
     public static function curry(callable $function = null)
     {
         $func = static::curry1(function (callable $function) {
-            $reflection = static::createReflection($function);
-
-            return Phamda::curryN($reflection->getNumberOfParameters(), $function);
+            return Phamda::curryN(static::getArity($function), $function);
         });
 
         return $func(...func_get_args());
