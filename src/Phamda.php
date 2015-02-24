@@ -223,7 +223,14 @@ class Phamda
     public static function filter(callable $function = null, array $list = null)
     {
         $func = static::curry2(function (callable $function, array $list) {
-            return array_filter($list, $function);
+            $result = [];
+            foreach ($list as $key => $value) {
+                if ($function($value, $key, $list)) {
+                    $result[$key] = $value;
+                }
+            }
+
+            return $result;
         });
 
         return $func(...func_get_args());
@@ -424,7 +431,12 @@ class Phamda
     public static function map(callable $function = null, array $list = null)
     {
         $func = static::curry2(function (callable $function, array $list) {
-            return array_map($function, $list);
+            $result = [];
+            foreach ($list as $key => $value) {
+                $result[$key] = $function($value, $key, $list);
+            }
+
+            return $result;
         });
 
         return $func(...func_get_args());
@@ -713,7 +725,11 @@ class Phamda
     public static function reduce(callable $function = null, $initial = null, array $list = null)
     {
         $func = static::curry3(function (callable $function, $initial, array $list) {
-            return array_reduce($list, $function, $initial);
+            foreach ($list as $key => $value) {
+                $initial = $function($initial, $value, $key, $list);
+            }
+
+            return $initial;
         });
 
         return $func(...func_get_args());

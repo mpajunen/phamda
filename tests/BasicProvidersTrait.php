@@ -145,12 +145,16 @@ trait BasicProvidersTrait
 
     public function getFilterData()
     {
-        $gt2    = function ($x) { return $x > 2; };
-        $isEven = function ($x) { return $x % 2 === 0; };
+        $gt2               = function ($x) { return $x > 2; };
+        $isEven            = function ($x) { return $x % 2 === 0; };
+        $isSmallerThanNext = function ($value, $key, array $list) {
+            return isset($list[$key + 1]) ? $value < $list[$key + 1] : false;
+        };
 
         return [
             [[2 => 3, 3 => 4], $gt2, [1, 2, 3, 4]],
             [[1 => 2, 3 => 4], $isEven, [1, 2, 3, 4]],
+            [[0 => 3, 2 => 2, 3 => 19], $isSmallerThanNext, [3, 6, 2, 19, 44, 5]],
         ];
     }
 
@@ -280,11 +284,15 @@ trait BasicProvidersTrait
 
     public function getMapData()
     {
-        $square = function ($x) { return $x ** 2; };
+        $lengthKeyMultiply = function ($value, $key, array $list) {
+            return $value * $key * count($list);
+        };
+        $square            = function ($x) { return $x ** 2; };
 
         return [
             [[1, 4, 9, 16], $square, [1, 2, 3, 4]],
             [[], $square, []],
+            [[0, 8, 24, 48], $lengthKeyMultiply, [1, 2, 3, 4]],
         ];
     }
 
@@ -477,14 +485,18 @@ trait BasicProvidersTrait
 
     public function getReduceData()
     {
-        $concat = function ($x, $y) { return $x . $y; };
-        $sum    = function ($x, $y) { return $x + $y; };
+        $concat         = function ($x, $y) { return $x . $y; };
+        $keyValueConcat = function ($accumulator, $value, $key, array $list) {
+            return $accumulator . $value . ($key !== $value ? $list[$value] : '');
+        };
+        $sum            = function ($x, $y) { return $x + $y; };
 
         return [
             [10, $sum, 0, [1, 2, 3, 4]],
             [20, $sum, 10, [1, 2, 3, 4]],
             [5, $sum, 5, []],
-            ['xabcd', $concat, 'x', ['a', 'b', 'c', 'd']]
+            ['xabcd', $concat, 'x', ['a', 'b', 'c', 'd']],
+            ['efcdbdaac', $keyValueConcat, 'ef', ['a' => 'c', 'b' => 'b', 'c' => 'd', 'd' => 'a']],
         ];
     }
 
