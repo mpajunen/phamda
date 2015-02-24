@@ -404,6 +404,26 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getPartialData()
+    {
+        $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
+
+        return [
+            [42, $sum, [], 23, 18, 29, -28],
+            [42, $sum, [29, -28], 23, 18, 15],
+        ];
+    }
+
+    public function getPartialNData()
+    {
+        $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
+
+        return [
+            [42, 4, $sum, [], 23, 18, 29, -28],
+            [42, 4, $sum, [29, -28], 23, 18, 15],
+        ];
+    }
+
     public function getPickData()
     {
         $item = ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'];

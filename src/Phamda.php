@@ -591,6 +591,34 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     * @param mixed    ...$initialArguments
+     *
+     * @return callable
+     */
+    public static function partial(callable $function, ... $initialArguments)
+    {
+        return Phamda::partialN(static::getArity($function), $function, ...$initialArguments);
+    }
+
+    /**
+     * @param int      $arity
+     * @param callable $function
+     * @param mixed    ...$initialArguments
+     *
+     * @return callable
+     */
+    public static function partialN($arity, callable $function, ... $initialArguments)
+    {
+        $partial        = function (... $arguments) use ($function, $initialArguments) {
+            return $function(...array_merge($initialArguments, $arguments));
+        };
+        $remainingCount = $arity - count($initialArguments);
+
+        return $remainingCount ? Phamda::curryN($remainingCount, $partial) : $partial;
+    }
+
+    /**
      * @param array $names
      * @param array $item
      *
