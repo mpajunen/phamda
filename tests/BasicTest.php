@@ -230,6 +230,15 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getInvokerData
+     */
+    public function testInvoker($expected, $arity, $method, array $initialArguments, ... $arguments)
+    {
+        $main0 = Phamda::invoker($arity, $method, ...$initialArguments);
+        $this->assertSame($expected, $main0(...$arguments));
+    }
+
+    /**
      * @dataProvider getIsEmptyData
      */
     public function testIsEmpty($expected, array $list)

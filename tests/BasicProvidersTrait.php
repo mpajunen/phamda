@@ -220,6 +220,17 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getInvokerData()
+    {
+        $calculator = new Calculator();
+
+        return [
+            [42, 2, 'addTwo', [], 15, 27, $calculator],
+            [42, 2, 'addTwo', [15, 27], $calculator],
+            [65, 4, 'addMany', [15, 27], 1, 5, 8, 9, $calculator],
+        ];
+    }
+
     public function getIsEmptyData()
     {
         return [

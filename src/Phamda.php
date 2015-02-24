@@ -325,6 +325,24 @@ class Phamda
     }
 
     /**
+     * @param int    $arity
+     * @param string $method
+     * @param mixed  ...$initialArguments
+     *
+     * @return callable
+     */
+    public static function invoker($arity, $method, ... $initialArguments)
+    {
+        $remainingCount = $arity - count($initialArguments) + 1;
+
+        return Phamda::curryN($remainingCount, function (... $arguments) use ($method, $initialArguments) {
+            $object = array_pop($arguments);
+
+            return $object->{$method}(...array_merge($initialArguments, $arguments));
+        });
+    }
+
+    /**
      * @param array $list
      *
      * @return callable|bool
