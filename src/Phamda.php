@@ -133,6 +133,37 @@ class Phamda
     }
 
     /**
+     * @param string $class
+     *
+     * @return callable|object
+     */
+    public static function construct($class = null)
+    {
+        $func = static::curry1(function ($class) {
+            return Phamda::constructN(static::getConstructorArity($class), $class);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param int    $arity
+     * @param string $class
+     *
+     * @return callable|object
+     */
+    public static function constructN($arity = null, $class = null)
+    {
+        $func = static::curry2(function ($arity, $class) {
+            return Phamda::curryN($arity, function (... $arguments) use ($class) {
+                return new $class(...$arguments);
+            });
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param callable $function
      *
      * @return callable

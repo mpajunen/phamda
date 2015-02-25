@@ -19,6 +19,13 @@ trait CoreFunctionsTrait
         return $function->getNumberOfRequiredParameters();
     }
 
+    protected static function getConstructorArity($class)
+    {
+        return (new \ReflectionClass($class))
+            ->getConstructor()
+            ->getNumberOfRequiredParameters();
+    }
+
     protected static function getCompareByResult(callable $comparator, callable $getValue, array $list)
     {
         $comparison = null;

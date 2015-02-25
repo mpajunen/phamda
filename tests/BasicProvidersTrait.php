@@ -86,6 +86,22 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getConstructData()
+    {
+        return [
+            ['abc', '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c'],
+            ['abc', '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
+        ];
+    }
+
+    public function getConstructNData()
+    {
+        return [
+            ['abc', 3, '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c'],
+            ['abc', 3, '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
+        ];
+    }
+
     public function getCurryData()
     {
         $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
