@@ -615,7 +615,7 @@ class Phamda
         };
         $remainingCount = $arity - count($initialArguments);
 
-        return $remainingCount ? Phamda::curryN($remainingCount, $partial) : $partial;
+        return $remainingCount > 0 ? Phamda::curryN($remainingCount, $partial) : $partial;
     }
 
     /**
