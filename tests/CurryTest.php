@@ -6,7 +6,7 @@ use Phamda\Phamda;
 
 class CurryTest extends \PHPUnit_Framework_TestCase
 {
-    use BasicProvidersTrait;
+    use BasicProvidersTrait, CurryTestTrait;
 
     /**
      * @dataProvider getCurryData
@@ -15,15 +15,8 @@ class CurryTest extends \PHPUnit_Framework_TestCase
     {
         $curried = Phamda::curry($function);
 
-        $index = 0;
-        while (true) {
-            $index++;
-            $new = $curried(...array_slice($arguments, 0, $index));
-            if (! is_callable($new)) {
-                break;
-            }
-
-            $this->assertSame($expected, $new(...array_slice($arguments, $index)));
+        foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {
+            $this->assertSame($expected, $result);
         }
     }
 
@@ -34,9 +27,8 @@ class CurryTest extends \PHPUnit_Framework_TestCase
     {
         $curried = Phamda::curryN($count, $function);
 
-        foreach (range(1, $count - 1) as $index) {
-            $new = $curried(...array_slice($arguments, 0, $index));
-            $this->assertSame($expected, $new(...array_slice($arguments, $index)));
+        foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {
+            $this->assertSame($expected, $result);
         }
     }
 }
