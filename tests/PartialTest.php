@@ -6,7 +6,44 @@ use Phamda\Phamda;
 
 class PartialTest extends \PHPUnit_Framework_TestCase
 {
-    use BasicProvidersTrait;
+    use BasicProvidersTrait, CurryTestTrait;
+
+    /**
+     * @dataProvider getCurryData
+     */
+    public function testCurry($expected, callable $function, ... $arguments)
+    {
+        $this->assertSame($expected, Phamda::curry($function, ...$arguments));
+
+        $curried = Phamda::curry($function);
+
+        foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {
+            $this->assertSame($expected, $result);
+        }
+    }
+
+    /**
+     * @dataProvider getCurryNData
+     */
+    public function testCurryN($expected, $count, callable $function, ... $arguments)
+    {
+        $this->assertSame($expected, Phamda::curryN($count, $function, ...$arguments));
+
+        $curried = Phamda::curryN($count, $function);
+
+        foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {
+            $this->assertSame($expected, $result);
+        }
+    }
+
+    /**
+     * @dataProvider getInvokerData
+     */
+    public function testInvoker($expected, $arity, $method, array $initialArguments, ... $arguments)
+    {
+        $main0 = Phamda::invoker($arity, $method, ...$initialArguments);
+        $this->assertSame($expected, $main0(...$arguments));
+    }
 
     /**
      * @dataProvider getPartialData
@@ -14,9 +51,10 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     public function testPartial($expected, callable $function, array $initialArguments, ... $arguments)
     {
         $partial = Phamda::partial($function, ...$initialArguments);
-        $this->assertSame($expected, $partial(...$arguments));
 
-        $this->curryTestFunction($expected, $partial, $arguments);
+        foreach ($this->getCurriedResults($partial, ...$arguments) as $result) {
+            $this->assertSame($expected, $result);
+        }
     }
 
     /**
@@ -25,24 +63,9 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     public function testPartialN($expected, $arity, callable $function, array $initialArguments, ... $arguments)
     {
         $partial = Phamda::partialN($arity, $function, ...$initialArguments);
-        $this->assertSame($expected, $partial(...$arguments));
 
-        $this->curryTestFunction($expected, $partial, $arguments);
-    }
-
-    private function curryTestFunction($expected, callable $function, array $arguments)
-    {
-        $index = 0;
-        while (true) {
-            $index++;
-            $curried = $function(...array_slice($arguments, 0, $index));
-
-            if (is_callable($curried)) {
-                $this->assertSame($expected, $curried(...array_slice($arguments, $index)));
-            } else {
-                $this->assertSame($expected, $curried);
-                break;
-            }
+        foreach ($this->getCurriedResults($partial, ...$arguments) as $result) {
+            $this->assertSame($expected, $result);
         }
     }
 }
