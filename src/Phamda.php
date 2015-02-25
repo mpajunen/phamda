@@ -165,13 +165,14 @@ class Phamda
 
     /**
      * @param callable $function
+     * @param mixed    ...$initialArguments
      *
      * @return callable
      */
-    public static function curry(callable $function = null)
+    public static function curry(callable $function = null, ... $initialArguments)
     {
-        $func = static::curry1(function (callable $function) {
-            return Phamda::curryN(static::getArity($function), $function);
+        $func = static::curry1(function (callable $function, ... $initialArguments) {
+            return Phamda::curryN(static::getArity($function), $function, ...$initialArguments);
         });
 
         return $func(...func_get_args());
@@ -180,24 +181,22 @@ class Phamda
     /**
      * @param int      $count
      * @param callable $function
+     * @param mixed    ...$initialArguments
      *
      * @return callable
      */
-    public static function curryN($count = null, callable $function = null)
+    public static function curryN($count = null, callable $function = null, ... $initialArguments)
     {
-        $func = static::curry2(function ($count, callable $function) {
-            return function (... $arguments) use ($function, $count) {
-                $remainingCount = $count - count($arguments);
-                if ($remainingCount <= 0) {
-                    return $function(...$arguments);
-                } else {
-                    $existingArguments = $arguments;
+        $func = static::curry2(function ($count, callable $function, ... $initialArguments) {
+            return $count - count($initialArguments) <= 0
+                ? $function(...$initialArguments)
+                : function (... $arguments) use ($count, $function, $initialArguments) {
+                    $currentArguments = array_merge($initialArguments, $arguments);
 
-                    return Phamda::curryN($remainingCount, function (... $arguments) use ($function, $existingArguments) {
-                        return $function(...array_merge($existingArguments, $arguments));
-                    });
-                }
-            };
+                    return Phamda::curryN($count, function (... $arguments) use ($function) {
+                        return $function(...$arguments);
+                    }, ...$currentArguments);
+                };
         });
 
         return $func(...func_get_args());

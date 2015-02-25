@@ -13,6 +13,8 @@ class CurryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurry($expected, callable $function, ... $arguments)
     {
+        $this->assertSame($expected, Phamda::curry($function, ...$arguments));
+
         $curried = Phamda::curry($function);
 
         foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {
@@ -25,6 +27,8 @@ class CurryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurryN($expected, $count, callable $function, ... $arguments)
     {
+        $this->assertSame($expected, Phamda::curryN($count, $function, ...$arguments));
+
         $curried = Phamda::curryN($count, $function);
 
         foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {

@@ -56,50 +56,50 @@ trait CoreFunctionsTrait
 
     protected static function curry1(callable $original)
     {
-        return function ($a = null) use ($original) {
+        return function ($a = null, ...$arguments) use ($original) {
             switch (func_num_args()) {
                 case 0:
                     return $original;
                 default:
-                    return $original($a);
+                    return $original($a, ...$arguments);
             }
         };
     }
 
     protected static function curry2(callable $original)
     {
-        return function ($a = null, $b = null) use ($original) {
+        return function ($a = null, $b = null, ...$arguments) use ($original) {
             switch (func_num_args()) {
                 case 0:
                     return $original;
                 case 1:
-                    return function ($b) use ($original, $a) {
-                        return $original($a, $b);
+                    return function ($b, ...$arguments) use ($original, $a) {
+                        return $original($a, $b, ...$arguments);
                     };
                     break;
                 default:
-                    return $original($a, $b);
+                    return $original($a, $b, ...$arguments);
             }
         };
     }
 
     protected static function curry3(callable $original)
     {
-        return function ($a = null, $b = null, $c = null) use ($original) {
+        return function ($a = null, $b = null, $c = null, ...$arguments) use ($original) {
             switch (func_num_args()) {
                 case 0:
                     return $original;
                 case 1:
-                    return self::curry2(function ($b, $c) use ($original, $a) {
-                        return $original($a, $b, $c);
+                    return self::curry2(function ($b, $c, ...$arguments) use ($original, $a) {
+                        return $original($a, $b, $c, ...$arguments);
                     });
                 case 2:
-                    return function ($c) use ($original, $a, $b) {
-                        return $original($a, $b, $c);
+                    return function ($c, ...$arguments) use ($original, $a, $b) {
+                        return $original($a, $b, $c, ...$arguments);
                     };
                     break;
                 default:
-                    return $original($a, $b, $c);
+                    return $original($a, $b, $c, ...$arguments);
             }
         };
     }

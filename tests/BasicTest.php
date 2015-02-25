@@ -92,28 +92,27 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getCurryData
      */
-    public function testCurry($expected, callable $function, ... $arguments)
+    public function testCurry($expected, callable $function, ... $initialArguments)
     {
-        $main0 = Phamda::curry($function);
-        $this->assertSame($expected, $main0(...$arguments));
+        $this->assertSame($expected, Phamda::curry($function, ...$initialArguments));
         $curried0 = Phamda::curry();
-        $main1    = $curried0($function);
-        $this->assertSame($expected, $main1(...$arguments));
+        $this->assertSame($expected, $curried0($function, ...$initialArguments));
+        $curried1 = Phamda::curry($function);
+        $this->assertSame($expected, $curried1(...$initialArguments));
     }
 
     /**
      * @dataProvider getCurryNData
      */
-    public function testCurryN($expected, $count, callable $function, ... $arguments)
+    public function testCurryN($expected, $count, callable $function, ... $initialArguments)
     {
-        $main0 = Phamda::curryN($count, $function);
-        $this->assertSame($expected, $main0(...$arguments));
+        $this->assertSame($expected, Phamda::curryN($count, $function, ...$initialArguments));
         $curried0 = Phamda::curryN();
-        $main1    = $curried0($count, $function);
-        $this->assertSame($expected, $main1(...$arguments));
+        $this->assertSame($expected, $curried0($count, $function, ...$initialArguments));
         $curried1 = Phamda::curryN($count);
-        $main2    = $curried1($function);
-        $this->assertSame($expected, $main2(...$arguments));
+        $this->assertSame($expected, $curried1($function, ...$initialArguments));
+        $curried2 = Phamda::curryN($count, $function);
+        $this->assertSame($expected, $curried2(...$initialArguments));
     }
 
     /**
