@@ -846,6 +846,22 @@ class Phamda
 
     /**
      * @param callable $function
+     * @param mixed    $initial
+     * @param array    $list
+     *
+     * @return callable|mixed
+     */
+    public static function reduceRight(callable $function = null, $initial = null, array $list = null)
+    {
+        $func = static::curry3(function (callable $function, $initial, array $list) {
+            return Phamda::reduce($function, $initial, array_reverse($list));
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $function
      * @param array    $list
      *
      * @return callable|array

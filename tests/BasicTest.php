@@ -545,6 +545,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getReduceRightData
+     */
+    public function testReduceRight($expected, callable $function, $initial, array $list)
+    {
+        $this->assertSame($expected, Phamda::reduceRight($function, $initial, $list));
+        $curried0 = Phamda::reduceRight();
+        $this->assertSame($expected, $curried0($function, $initial, $list));
+        $curried1 = Phamda::reduceRight($function);
+        $this->assertSame($expected, $curried1($initial, $list));
+        $curried2 = Phamda::reduceRight($function, $initial);
+        $this->assertSame($expected, $curried2($list));
+    }
+
+    /**
      * @dataProvider getRejectData
      */
     public function testReject($expected, callable $function, array $list)

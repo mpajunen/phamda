@@ -574,6 +574,23 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getReduceRightData()
+    {
+        $concat         = function ($x, $y) { return $x . $y; };
+        $keyValueConcat = function ($accumulator, $value, $key, array $list) {
+            return $accumulator . $value . ($key !== $value ? $list[$value] : '');
+        };
+        $sum            = function ($x, $y) { return $x + $y; };
+
+        return [
+            [10, $sum, 0, [1, 2, 3, 4]],
+            [20, $sum, 10, [1, 2, 3, 4]],
+            [5, $sum, 5, []],
+            ['xdcba', $concat, 'x', ['a', 'b', 'c', 'd']],
+            ['efacdabcd', $keyValueConcat, 'ef', ['a' => 'c', 'b' => 'b', 'c' => 'd', 'd' => 'a']],
+        ];
+    }
+
     public function getRejectData()
     {
         $gt2    = function ($x) { return $x > 2; };
