@@ -295,6 +295,25 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|array[]
+     */
+    public static function groupBy(callable $function = null, array $list = null)
+    {
+        $func = static::curry2(function (callable $function, array $list) {
+            return Phamda::reduce(function (array $lists, $value) use ($function) {
+                $lists[$function($value)][] = $value;
+
+                return $lists;
+            }, [], $list);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $a
      * @param mixed $b
      *
@@ -646,6 +665,25 @@ class Phamda
         $remainingCount = $arity - count($initialArguments);
 
         return $remainingCount > 0 ? Phamda::curryN($remainingCount, $partial) : $partial;
+    }
+
+    /**
+     * @param callable $predicate
+     * @param array    $list
+     *
+     * @return callable|array[]
+     */
+    public static function partition(callable $predicate = null, array $list = null)
+    {
+        $func = static::curry2(function (callable $predicate, array $list) {
+            return Phamda::reduce(function (array $lists, $value) use ($predicate) {
+                $lists[$predicate($value) ? 0 : 1][] = $value;
+
+                return $lists;
+            }, [[], []], $list);
+        });
+
+        return $func(...func_get_args());
     }
 
     /**

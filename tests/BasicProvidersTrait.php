@@ -198,6 +198,19 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getGroupByData()
+    {
+        $firstChar = function ($string) { return $string[0]; };
+
+        return [
+            [
+                ['a' => ['abc', 'aba', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa'], 'd' => ['dfe']],
+                $firstChar,
+                ['abc', 'aba', 'cbc', 'cab', 'baa', 'ayb', 'dfe']
+            ],
+        ];
+    }
+
     public function getGtData()
     {
         return [
@@ -439,6 +452,16 @@ trait BasicProvidersTrait
             [42, 4, $sum, [], 23, 18, 29, -28],
             [42, 4, $sum, [29, -28], 23, 18, 15],
             [42, 4, $sum, [29, -28, 23, 18, 15]],
+        ];
+    }
+
+    public function getPartitionData()
+    {
+        $largerThanFive = function ($x) { return $x > 5; };
+
+        return [
+            [[[16, 7, 88], [4, -3, 2]], $largerThanFive, [4, 16, 7, -3, 2, 88]],
+            [[[4, -3, 2], [16, 7, 88]], Phamda::not($largerThanFive), [4, 16, 7, -3, 2, 88]],
         ];
     }
 

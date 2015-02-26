@@ -183,6 +183,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getGroupByData
+     */
+    public function testGroupBy($expected, callable $function, array $list)
+    {
+        $this->assertSame($expected, Phamda::groupBy($function, $list));
+        $curried0 = Phamda::groupBy();
+        $this->assertSame($expected, $curried0($function, $list));
+        $curried1 = Phamda::groupBy($function);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getGtData
      */
     public function testGt($expected, $a, $b)
@@ -411,6 +423,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $curried1 = Phamda::or_($a);
         $main2    = $curried1($b);
         $this->assertSame($expected, $main2(...$arguments));
+    }
+
+    /**
+     * @dataProvider getPartitionData
+     */
+    public function testPartition($expected, callable $predicate, array $list)
+    {
+        $this->assertSame($expected, Phamda::partition($predicate, $list));
+        $curried0 = Phamda::partition();
+        $this->assertSame($expected, $curried0($predicate, $list));
+        $curried1 = Phamda::partition($predicate);
+        $this->assertSame($expected, $curried1($list));
     }
 
     /**
