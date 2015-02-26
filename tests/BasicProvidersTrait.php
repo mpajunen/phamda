@@ -102,6 +102,19 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getContainsData()
+    {
+        $a = (object) [];
+        $b = (object) [];
+
+        return [
+            [true, 'a', ['a', 'b', 'c', 'e']],
+            [false, 'd', ['a', 'b', 'c', 'e']],
+            [true, $a, [$a, $b, $b]],
+            [false, $a, [$b, 'a']],
+        ];
+    }
+
     public function getCurryData()
     {
         $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };

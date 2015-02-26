@@ -164,6 +164,21 @@ class Phamda
     }
 
     /**
+     * @param mixed $value
+     * @param array $list
+     *
+     * @return callable|bool
+     */
+    public static function contains($value = null, array $list = null)
+    {
+        $func = static::curry2(function ($value, array $list) {
+            return in_array($value, $list, true);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param callable $function
      * @param mixed    ...$initialArguments
      *

@@ -90,6 +90,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getContainsData
+     */
+    public function testContains($expected, $value, array $list)
+    {
+        $this->assertSame($expected, Phamda::contains($value, $list));
+        $curried0 = Phamda::contains();
+        $this->assertSame($expected, $curried0($value, $list));
+        $curried1 = Phamda::contains($value);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getCurryData
      */
     public function testCurry($expected, callable $function, ... $initialArguments)
