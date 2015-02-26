@@ -946,6 +946,27 @@ class Phamda
     }
 
     /**
+     * @param array        $specification
+     * @param array|object $object
+     *
+     * @return callable|mixed
+     */
+    public static function where(array $specification = null, $object = null)
+    {
+        $func = static::curry2(function (array $specification, $object) {
+            foreach ($specification as $name => $part) {
+                if (! static::testSpecificationPart($name, $part, $object)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param array $a
      * @param array $b
      *

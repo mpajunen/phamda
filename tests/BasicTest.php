@@ -624,6 +624,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getWhereData
+     */
+    public function testWhere($expected, array $specification, $object)
+    {
+        $this->assertSame($expected, Phamda::where($specification, $object));
+        $curried0 = Phamda::where();
+        $this->assertSame($expected, $curried0($specification, $object));
+        $curried1 = Phamda::where($specification);
+        $this->assertSame($expected, $curried1($object));
+    }
+
+    /**
      * @dataProvider getZipData
      */
     public function testZip($expected, array $a, array $b)

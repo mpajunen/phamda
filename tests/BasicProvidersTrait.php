@@ -637,6 +637,20 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getWhereData()
+    {
+        $isLargest = function ($value, $object) { return $value === max($object); };
+        $x         = ['a' => 15, 'b' => 42, 'c' => 88, 'd' => -10];
+        $y         = ['a' => 15, 'b' => 16, 'c' => -20, 'd' => 77];
+
+        return [
+            [false, ['a' => 15, 'b' => 16], $x],
+            [true, ['a' => 15, 'b' => 16], (object) $y],
+            [true, ['d' => $isLargest], $y],
+            [false, ['b' => $isLargest], $x],
+        ];
+    }
+
     public function getZipData()
     {
         return [
