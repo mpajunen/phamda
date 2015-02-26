@@ -241,6 +241,24 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getIfElseData
+     */
+    public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, ... $arguments)
+    {
+        $main0 = Phamda::ifElse($condition, $onTrue, $onFalse);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried0 = Phamda::ifElse();
+        $main1    = $curried0($condition, $onTrue, $onFalse);
+        $this->assertSame($expected, $main1(...$arguments));
+        $curried1 = Phamda::ifElse($condition);
+        $main2    = $curried1($onTrue, $onFalse);
+        $this->assertSame($expected, $main2(...$arguments));
+        $curried2 = Phamda::ifElse($condition, $onTrue);
+        $main3    = $curried2($onFalse);
+        $this->assertSame($expected, $main3(...$arguments));
+    }
+
+    /**
      * @dataProvider getIndexOfData
      */
     public function testIndexOf($expected, $value, array $list)

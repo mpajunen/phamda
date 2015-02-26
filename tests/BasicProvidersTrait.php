@@ -242,6 +242,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getIfElseData()
+    {
+        return [
+            [42, Phamda::lt(0), Phamda::add(27), Phamda::add(3), 15],
+            [0, Phamda::lt(0), Phamda::add(27), Phamda::add(3), -3],
+        ];
+    }
+
     public function getIndexOfData()
     {
         $a = (object) [];

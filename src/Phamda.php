@@ -373,6 +373,24 @@ class Phamda
     }
 
     /**
+     * @param callable $condition
+     * @param callable $onTrue
+     * @param callable $onFalse
+     *
+     * @return callable|mixed
+     */
+    public static function ifElse(callable $condition = null, callable $onTrue = null, callable $onFalse = null)
+    {
+        $func = static::curry3(function (callable $condition, callable $onTrue, callable $onFalse) {
+            return function (... $arguments) use ($condition, $onTrue, $onFalse) {
+                return $condition(...$arguments) ? $onTrue(...$arguments) : $onFalse(...$arguments);
+            };
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $value
      * @param array $list
      *
