@@ -18,7 +18,7 @@ $isPositive = function ($x) { return $x > 0; };
 $result     = Phamda::filter($isPositive, $list); // [5, 7, 19, 2]
 
 $double = function ($x) { return $x * 2; };
-$result = Phamda::map($isPositive, $list); // [10, 14, -6, 38, 0, 4]
+$result = Phamda::map($double, $list); // [10, 14, -6, 38, 0, 4]
 ```
 
 The main feature of the library is that nearly all of the functions use automatic partial application or
