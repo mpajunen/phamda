@@ -148,6 +148,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getDecData()
+    {
+        return [
+            [42, 43],
+            [-15, -14],
+        ];
+    }
+
     public function getDefaultToData()
     {
         return [
@@ -266,6 +274,14 @@ trait BasicProvidersTrait
         return [
             [42, Phamda::lt(0), Phamda::add(27), Phamda::add(3), 15],
             [0, Phamda::lt(0), Phamda::add(27), Phamda::add(3), -3],
+        ];
+    }
+
+    public function getIncData()
+    {
+        return [
+            [42, 41],
+            [-15, -16],
         ];
     }
 

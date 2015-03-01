@@ -227,6 +227,20 @@ class Phamda
     }
 
     /**
+     * @param int|float $number
+     *
+     * @return callable|int|float
+     */
+    public static function dec($number = null)
+    {
+        $func = static::curry1(function ($number) {
+            return Phamda::add(-1, $number);
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param mixed $default
      * @param mixed $value
      *
@@ -409,6 +423,20 @@ class Phamda
             return function (... $arguments) use ($condition, $onTrue, $onFalse) {
                 return $condition(...$arguments) ? $onTrue(...$arguments) : $onFalse(...$arguments);
             };
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param int|float $number
+     *
+     * @return callable|int|float
+     */
+    public static function inc($number = null)
+    {
+        $func = static::curry1(function ($number) {
+            return Phamda::add(1, $number);
         });
 
         return $func(...func_get_args());

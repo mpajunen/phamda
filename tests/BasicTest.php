@@ -137,6 +137,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getDecData
+     */
+    public function testDec($expected, $number)
+    {
+        $this->assertSame($expected, Phamda::dec($number));
+        $curried0 = Phamda::dec();
+        $this->assertSame($expected, $curried0($number));
+    }
+
+    /**
      * @dataProvider getDefaultToData
      */
     public function testDefaultTo($expected, $default, $value)
@@ -277,6 +287,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $curried2 = Phamda::ifElse($condition, $onTrue);
         $main3    = $curried2($onFalse);
         $this->assertSame($expected, $main3(...$arguments));
+    }
+
+    /**
+     * @dataProvider getIncData
+     */
+    public function testInc($expected, $number)
+    {
+        $this->assertSame($expected, Phamda::inc($number));
+        $curried0 = Phamda::inc();
+        $this->assertSame($expected, $curried0($number));
     }
 
     /**
