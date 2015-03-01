@@ -148,6 +148,16 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getDefaultToData()
+    {
+        return [
+            [15, 22, 15],
+            [false, 15, false],
+            [null, null, null],
+            [42, 42, null],
+        ];
+    }
+
     public function getDivideData()
     {
         return [

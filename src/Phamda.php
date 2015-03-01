@@ -227,6 +227,21 @@ class Phamda
     }
 
     /**
+     * @param mixed $default
+     * @param mixed $value
+     *
+     * @return callable|mixed
+     */
+    public static function defaultTo($default = null, $value = null)
+    {
+        $func = static::curry2(function ($default, $value) {
+            return $value !== null ? $value : $default;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param int|float $a
      * @param int|float $b
      *

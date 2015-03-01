@@ -137,6 +137,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getDefaultToData
+     */
+    public function testDefaultTo($expected, $default, $value)
+    {
+        $this->assertSame($expected, Phamda::defaultTo($default, $value));
+        $curried0 = Phamda::defaultTo();
+        $this->assertSame($expected, $curried0($default, $value));
+        $curried1 = Phamda::defaultTo($default);
+        $this->assertSame($expected, $curried1($value));
+    }
+
+    /**
      * @dataProvider getDivideData
      */
     public function testDivide($expected, $a, $b)
