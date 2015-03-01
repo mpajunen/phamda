@@ -634,6 +634,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getSortByData
+     */
+    public function testSortBy($expected, callable $function, array $list)
+    {
+        $this->assertSame($expected, Phamda::sortBy($function, $list));
+        $curried0 = Phamda::sortBy();
+        $this->assertSame($expected, $curried0($function, $list));
+        $curried1 = Phamda::sortBy($function);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getSubtractData
      */
     public function testSubtract($expected, $a, $b)

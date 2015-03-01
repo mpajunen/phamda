@@ -648,6 +648,19 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getSortByData()
+    {
+        $getFoo = function ($a) { return $a['foo']; };
+
+        return [
+            [
+                [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]],
+                $getFoo,
+                [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]]
+            ],
+        ];
+    }
+
     public function getSubtractData()
     {
         return [

@@ -950,6 +950,29 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|array
+     */
+    public static function sortBy(callable $function = null, array $list = null)
+    {
+        $func = static::curry2(function (callable $function, array $list) {
+            $comparator = function ($a, $b) use ($function) {
+                $aKey = $function($a);
+                $bKey = $function($b);
+
+                return $aKey < $bKey ? -1 : ($aKey > $bKey ? 1 : 0);
+            };
+            usort($list, $comparator);
+
+            return $list;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
      * @param int|float $a
      * @param int|float $b
      *
