@@ -64,23 +64,6 @@ class Phamda
     }
 
     /**
-     * @param callable $a
-     * @param callable $b
-     *
-     * @return callable
-     */
-    public static function and_(callable $a = null, callable $b = null)
-    {
-        $func = static::curry2(function (callable $a, callable $b) {
-            return function (... $arguments) use ($a, $b) {
-                return $a(...$arguments) && $b(...$arguments);
-            };
-        });
-
-        return $func(...func_get_args());
-    }
-
-    /**
      * @param callable $function
      * @param array    $list
      *
@@ -96,6 +79,23 @@ class Phamda
             }
 
             return false;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $a
+     * @param callable $b
+     *
+     * @return callable
+     */
+    public static function both(callable $a = null, callable $b = null)
+    {
+        $func = static::curry2(function (callable $a, callable $b) {
+            return function (... $arguments) use ($a, $b) {
+                return $a(...$arguments) && $b(...$arguments);
+            };
         });
 
         return $func(...func_get_args());
@@ -265,6 +265,23 @@ class Phamda
     {
         $func = static::curry2(function ($a, $b) {
             return $a / $b;
+        });
+
+        return $func(...func_get_args());
+    }
+
+    /**
+     * @param callable $a
+     * @param callable $b
+     *
+     * @return callable
+     */
+    public static function either(callable $a = null, callable $b = null)
+    {
+        $func = static::curry2(function (callable $a, callable $b) {
+            return function (... $arguments) use ($a, $b) {
+                return $a(...$arguments) || $b(...$arguments);
+            };
         });
 
         return $func(...func_get_args());
@@ -701,23 +718,6 @@ class Phamda
         $func = static::curry1(function (callable $function) {
             return function (... $arguments) use ($function) {
                 return ! $function(...$arguments);
-            };
-        });
-
-        return $func(...func_get_args());
-    }
-
-    /**
-     * @param callable $a
-     * @param callable $b
-     *
-     * @return callable
-     */
-    public static function or_(callable $a = null, callable $b = null)
-    {
-        $func = static::curry2(function (callable $a, callable $b) {
-            return function (... $arguments) use ($a, $b) {
-                return $a(...$arguments) || $b(...$arguments);
             };
         });
 

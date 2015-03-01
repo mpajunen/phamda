@@ -51,21 +51,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getAndData
-     */
-    public function testAnd($expected, callable $a, callable $b, ... $arguments)
-    {
-        $main0 = Phamda::and_($a, $b);
-        $this->assertSame($expected, $main0(...$arguments));
-        $curried0 = Phamda::and_();
-        $main1    = $curried0($a, $b);
-        $this->assertSame($expected, $main1(...$arguments));
-        $curried1 = Phamda::and_($a);
-        $main2    = $curried1($b);
-        $this->assertSame($expected, $main2(...$arguments));
-    }
-
-    /**
      * @dataProvider getAnyData
      */
     public function testAny($expected, callable $function, array $list)
@@ -75,6 +60,21 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($function, $list));
         $curried1 = Phamda::any($function);
         $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getBothData
+     */
+    public function testBoth($expected, callable $a, callable $b, ... $arguments)
+    {
+        $main0 = Phamda::both($a, $b);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried0 = Phamda::both();
+        $main1    = $curried0($a, $b);
+        $this->assertSame($expected, $main1(...$arguments));
+        $curried1 = Phamda::both($a);
+        $main2    = $curried1($b);
+        $this->assertSame($expected, $main2(...$arguments));
     }
 
     /**
@@ -168,6 +168,21 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($a, $b));
         $curried1 = Phamda::divide($a);
         $this->assertSame($expected, $curried1($b));
+    }
+
+    /**
+     * @dataProvider getEitherData
+     */
+    public function testEither($expected, callable $a, callable $b, ... $arguments)
+    {
+        $main0 = Phamda::either($a, $b);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried0 = Phamda::either();
+        $main1    = $curried0($a, $b);
+        $this->assertSame($expected, $main1(...$arguments));
+        $curried1 = Phamda::either($a);
+        $main2    = $curried1($b);
+        $this->assertSame($expected, $main2(...$arguments));
     }
 
     /**
@@ -479,21 +494,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $curried0 = Phamda::not();
         $main1    = $curried0($function);
         $this->assertSame($expected, $main1(...$arguments));
-    }
-
-    /**
-     * @dataProvider getOrData
-     */
-    public function testOr($expected, callable $a, callable $b, ... $arguments)
-    {
-        $main0 = Phamda::or_($a, $b);
-        $this->assertSame($expected, $main0(...$arguments));
-        $curried0 = Phamda::or_();
-        $main1    = $curried0($a, $b);
-        $this->assertSame($expected, $main1(...$arguments));
-        $curried1 = Phamda::or_($a);
-        $main2    = $curried1($b);
-        $this->assertSame($expected, $main2(...$arguments));
     }
 
     /**
