@@ -77,12 +77,8 @@ $process = Phamda::pipe(
             }
         )
     ),
-    Phamda::sort( // Sort the products...
-        Phamda::comparator(
-            function ($a, $b) {
-                return $a['number'] < $b['number']; // ... by the product number.
-            }
-        )
+    Phamda::sortBy( // Sort the products by...
+        Phamda::prop('number') // ... comparing product numbers.
     )
 );
 

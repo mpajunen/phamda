@@ -83,12 +83,8 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
                     }
                 )
             ),
-            Phamda::sort(
-                Phamda::comparator(
-                    function ($a, $b) {
-                        return $a['number'] < $b['number'];
-                    }
-                )
+            Phamda::sortBy(
+                Phamda::prop('number')
             )
         );
 
