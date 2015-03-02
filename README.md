@@ -1,8 +1,8 @@
 Phamda
 ======
 
-Phamda is a set of functional programming tools for PHP 5.6+, heavily inspired by the Javascript library
-[Ramda](http://ramdajs.com/).
+Phamda is a set of functional programming tools for, heavily inspired by the Javascript library
+[Ramda](http://ramdajs.com/). PHP 5.6+ or HHVM is required.
 
 Examples
 ========
@@ -22,8 +22,8 @@ $result = Phamda::map($double, $list); // [10, 14, -6, 38, 0, 4]
 ```
 
 The main feature of the library is that nearly all of the functions use automatic partial application or
-currying. This means that you can call the `filter` function with only the predicate callback. The
-result is a new function:
+currying. This means that you can call the `filter` function with only the predicate callback, resulting in
+a new function:
 
 ```php
 $getPositives = Phamda::filter($isPositive);
@@ -33,9 +33,10 @@ $result       = $getPositives($list); // [5, 7, 19, 2]
 The final result is the same as using two parameters directly. Of course this new function could now be
 used to filter other lists as well.
 
-Another feature of Phamda is that the functions can easily be used to create new functions. For example
-the `compose` function takes multiple functions as parameters and returns a new function. Calling this
-new function applies the original functions in succession:
+Another major feature of Phamda is that the functions can easily be used to create new functions and there
+are tools specifically aimed at function composition. For example the `compose` function takes multiple
+functions as parameters and returns a new function. Calling this new function applies the parameter
+functions in succession:
 
 ```php
 $addFive          = function ($x) { return $x + 5; };
@@ -45,8 +46,8 @@ $result           = $addFiveAndDouble(16); // 42
 ```
 
 In the next example these concepts are applied to processing a list of badly formatted product data.
-Here the `pipe` function is used. It's the similar to `compose` but the parameter functions are applied
-in reverse order:
+The `pipe` function is used here. It's similar to `compose` but the parameter functions are applied in
+reverse order:
 
 ```php
 $products = [
