@@ -164,7 +164,7 @@ class Phamda
     public static function constructN($arity = null, $class = null)
     {
         $func = static::curry2(function ($arity, $class) {
-            return Phamda::curryN($arity, function (... $arguments) use ($class) {
+            return static::_curryN($arity, function (... $arguments) use ($class) {
                 return new $class(...$arguments);
             });
         });
@@ -196,31 +196,23 @@ class Phamda
     public static function curry(callable $function = null, ... $initialArguments)
     {
         $func = static::curry1(function (callable $function, ... $initialArguments) {
-            return Phamda::curryN(static::getArity($function), $function, ...$initialArguments);
+            return static::_curryN(static::getArity($function), $function, ...$initialArguments);
         });
 
         return $func(...func_get_args());
     }
 
     /**
-     * @param int      $count
+     * @param int      $length
      * @param callable $function
      * @param mixed    ...$initialArguments
      *
      * @return callable
      */
-    public static function curryN($count = null, callable $function = null, ... $initialArguments)
+    public static function curryN($length = null, callable $function = null, ... $initialArguments)
     {
-        $func = static::curry2(function ($count, callable $function, ... $initialArguments) {
-            return $count - count($initialArguments) <= 0
-                ? $function(...$initialArguments)
-                : function (... $arguments) use ($count, $function, $initialArguments) {
-                    $currentArguments = array_merge($initialArguments, $arguments);
-
-                    return Phamda::curryN($count, function (... $arguments) use ($function) {
-                        return $function(...$arguments);
-                    }, ...$currentArguments);
-                };
+        $func = static::curry2(function ($length, callable $function, ... $initialArguments) {
+            return static::_curryN($length, $function, ...$initialArguments);
         });
 
         return $func(...func_get_args());
@@ -491,7 +483,7 @@ class Phamda
     {
         $remainingCount = $arity - count($initialArguments) + 1;
 
-        return Phamda::curryN($remainingCount, function (... $arguments) use ($method, $initialArguments) {
+        return static::_curryN($remainingCount, function (... $arguments) use ($method, $initialArguments) {
             $object = array_pop($arguments);
 
             return $object->{$method}(...array_merge($initialArguments, $arguments));
@@ -749,7 +741,7 @@ class Phamda
         };
         $remainingCount = $arity - count($initialArguments);
 
-        return $remainingCount > 0 ? Phamda::curryN($remainingCount, $partial) : $partial;
+        return $remainingCount > 0 ? static::_curryN($remainingCount, $partial) : $partial;
     }
 
     /**

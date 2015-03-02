@@ -63,6 +63,17 @@ trait CoreFunctionsTrait
         return $result;
     }
 
+    protected static function _curryN($length, callable $function, ...$initialArguments)
+    {
+        return $length - count($initialArguments) <= 0
+            ? $function(...$initialArguments)
+            : function (... $arguments) use ($length, $function, $initialArguments) {
+                return static::_curryN($length, function (... $arguments) use ($function) {
+                    return $function(...$arguments);
+                }, ...$initialArguments, ...$arguments);
+            };
+    }
+
     protected static function curry1(callable $original)
     {
         return function ($a = null, ...$arguments) use ($original) {

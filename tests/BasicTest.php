@@ -125,14 +125,14 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getCurryNData
      */
-    public function testCurryN($expected, $count, callable $function, ... $initialArguments)
+    public function testCurryN($expected, $length, callable $function, ... $initialArguments)
     {
-        $this->assertSame($expected, Phamda::curryN($count, $function, ...$initialArguments));
+        $this->assertSame($expected, Phamda::curryN($length, $function, ...$initialArguments));
         $curried0 = Phamda::curryN();
-        $this->assertSame($expected, $curried0($count, $function, ...$initialArguments));
-        $curried1 = Phamda::curryN($count);
+        $this->assertSame($expected, $curried0($length, $function, ...$initialArguments));
+        $curried1 = Phamda::curryN($length);
         $this->assertSame($expected, $curried1($function, ...$initialArguments));
-        $curried2 = Phamda::curryN($count, $function);
+        $curried2 = Phamda::curryN($length, $function);
         $this->assertSame($expected, $curried2(...$initialArguments));
     }
 
