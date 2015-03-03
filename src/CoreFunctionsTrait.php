@@ -70,7 +70,7 @@ trait CoreFunctionsTrait
             : function (... $arguments) use ($length, $function, $initialArguments) {
                 return static::_curryN($length, function (... $arguments) use ($function) {
                     return $function(...$arguments);
-                }, ...$initialArguments, ...$arguments);
+                }, ...array_merge($initialArguments, $arguments));
             };
     }
 

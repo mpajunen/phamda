@@ -486,7 +486,7 @@ class Phamda
         return static::_curryN($remainingCount, function (... $arguments) use ($method, $initialArguments) {
             $object = array_pop($arguments);
 
-            return $object->{$method}(...$initialArguments, ...$arguments);
+            return $object->{$method}(...array_merge($initialArguments, $arguments));
         });
     }
 
@@ -737,7 +737,7 @@ class Phamda
     public static function partialN($arity, callable $function, ... $initialArguments)
     {
         $partial        = function (... $arguments) use ($function, $initialArguments) {
-            return $function(...$initialArguments, ...$arguments);
+            return $function(...array_merge($initialArguments, $arguments));
         };
         $remainingCount = $arity - count($initialArguments);
 
