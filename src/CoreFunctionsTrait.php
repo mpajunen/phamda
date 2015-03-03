@@ -74,64 +74,46 @@ trait CoreFunctionsTrait
             };
     }
 
-    protected static function curry1(callable $original)
+    protected static function curry1(callable $original, array $initialArguments)
     {
-        return function ($a = null, ...$initialArguments) use ($original) {
-            switch (func_num_args()) {
-                case 0:
-                    return $original;
-                default:
-                    return $original($a, ...$initialArguments);
-            }
-        };
+        return count($initialArguments) === 0 ? $original : $original(...$initialArguments);
     }
 
-    protected static function curry2(callable $original)
+    protected static function curry2(callable $original, array $initialArguments)
     {
-        return function ($a = null, $b = null, ...$initialArguments) use ($original) {
-            switch (func_num_args()) {
-                case 0:
-                    return function ($a, $b = null, ...$arguments) use ($original) {
-                        $curried = self::curry2($original);
-
-                        return $curried(...func_get_args());
-                    };
-                case 1:
-                    return function ($b, ...$arguments) use ($original, $a) {
-                        return $original($a, ...func_get_args());
-                    };
-                    break;
-                default:
-                    return $original($a, $b, ...$initialArguments);
-            }
-        };
+        switch (count($initialArguments)) {
+            case 0:
+                return function (...$arguments) use ($original) {
+                    return self::curry2($original, $arguments);
+                };
+            case 1:
+                return function (...$arguments) use ($original, $initialArguments) {
+                    return $original(...array_merge($initialArguments, $arguments));
+                };
+            default:
+                return $original(...$initialArguments);
+        }
     }
 
-    protected static function curry3(callable $original)
+    protected static function curry3(callable $original, array $initialArguments)
     {
-        return function ($a = null, $b = null, $c = null, ...$initialArguments) use ($original) {
-            switch (func_num_args()) {
-                case 0:
-                    return function ($a, $b = null, $c = null, ...$arguments) use ($original) {
-                        $curried = self::curry3($original);
-
-                        return $curried(...func_get_args());
-                    };
-                case 1:
-                    return self::curry2(function ($b, $c = null, ...$arguments) use ($original, $a) {
-                        $curried = self::curry2($original);
-
-                        return $curried($a, ...func_get_args());
-                    });
-                case 2:
-                    return function ($c, ...$arguments) use ($original, $a, $b) {
-                        return $original($a, $b, ...func_get_args());
-                    };
-                    break;
-                default:
-                    return $original($a, $b, $c, ...$initialArguments);
-            }
-        };
+        switch (count($initialArguments)) {
+            case 0:
+                return function (...$arguments) use ($original) {
+                    return self::curry3($original, $arguments);
+                };
+            case 1:
+                return function (...$arguments) use ($original, $initialArguments) {
+                    return self::curry3($original, array_merge($initialArguments, $arguments));
+                };
+            case 2:
+                return function (...$arguments) use ($original, $initialArguments) {
+                    return $original(...array_merge($initialArguments, $arguments));
+                };
+                break;
+            default:
+                return $original(...$initialArguments);
+        }
     }
 
     protected static function testSpecificationPart($name, $part, $object)

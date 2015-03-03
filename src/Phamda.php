@@ -23,11 +23,9 @@ class Phamda
      */
     public static function add($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a + $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -38,7 +36,7 @@ class Phamda
      */
     public static function all(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             foreach ($list as $value) {
                 if (! $function($value)) {
                     return false;
@@ -46,9 +44,7 @@ class Phamda
             }
 
             return true;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -71,7 +67,7 @@ class Phamda
      */
     public static function any(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             foreach ($list as $value) {
                 if ($function($value)) {
                     return true;
@@ -79,9 +75,7 @@ class Phamda
             }
 
             return false;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -92,13 +86,11 @@ class Phamda
      */
     public static function both(callable $a = null, callable $b = null)
     {
-        $func = static::curry2(function (callable $a, callable $b) {
+        return static::curry2(function (callable $a, callable $b) {
             return function (... $arguments) use ($a, $b) {
                 return $a(...$arguments) && $b(...$arguments);
             };
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -108,11 +100,9 @@ class Phamda
      */
     public static function clone_($object = null)
     {
-        $func = static::curry1(function ($object) {
+        return static::curry1(function ($object) {
             return clone $object;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -122,13 +112,11 @@ class Phamda
      */
     public static function comparator(callable $predicate = null)
     {
-        $func = static::curry1(function (callable $predicate) {
+        return static::curry1(function (callable $predicate) {
             return function ($a, $b) use ($predicate) {
                 return $predicate($a, $b) ? -1 : ($predicate($b, $a) ? 1 : 0);
             };
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -148,11 +136,9 @@ class Phamda
      */
     public static function construct($class = null)
     {
-        $func = static::curry1(function ($class) {
+        return static::curry1(function ($class) {
             return Phamda::constructN(static::getConstructorArity($class), $class);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -163,13 +149,11 @@ class Phamda
      */
     public static function constructN($arity = null, $class = null)
     {
-        $func = static::curry2(function ($arity, $class) {
+        return static::curry2(function ($arity, $class) {
             return static::_curryN($arity, function (... $arguments) use ($class) {
                 return new $class(...$arguments);
             });
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -180,11 +164,9 @@ class Phamda
      */
     public static function contains($value = null, array $list = null)
     {
-        $func = static::curry2(function ($value, array $list) {
+        return static::curry2(function ($value, array $list) {
             return in_array($value, $list, true);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -195,11 +177,9 @@ class Phamda
      */
     public static function curry(callable $function = null, ... $initialArguments)
     {
-        $func = static::curry1(function (callable $function, ... $initialArguments) {
+        return static::curry1(function (callable $function, ... $initialArguments) {
             return static::_curryN(static::getArity($function), $function, ...$initialArguments);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -211,11 +191,9 @@ class Phamda
      */
     public static function curryN($length = null, callable $function = null, ... $initialArguments)
     {
-        $func = static::curry2(function ($length, callable $function, ... $initialArguments) {
+        return static::curry2(function ($length, callable $function, ... $initialArguments) {
             return static::_curryN($length, $function, ...$initialArguments);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -225,11 +203,9 @@ class Phamda
      */
     public static function dec($number = null)
     {
-        $func = static::curry1(function ($number) {
+        return static::curry1(function ($number) {
             return Phamda::add(-1, $number);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -240,11 +216,9 @@ class Phamda
      */
     public static function defaultTo($default = null, $value = null)
     {
-        $func = static::curry2(function ($default, $value) {
+        return static::curry2(function ($default, $value) {
             return $value !== null ? $value : $default;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -255,11 +229,9 @@ class Phamda
      */
     public static function divide($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a / $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -270,13 +242,11 @@ class Phamda
      */
     public static function either(callable $a = null, callable $b = null)
     {
-        $func = static::curry2(function (callable $a, callable $b) {
+        return static::curry2(function (callable $a, callable $b) {
             return function (... $arguments) use ($a, $b) {
                 return $a(...$arguments) || $b(...$arguments);
             };
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -287,11 +257,9 @@ class Phamda
      */
     public static function eq($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a === $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -312,7 +280,7 @@ class Phamda
      */
     public static function filter(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             $result = [];
             foreach ($list as $key => $value) {
                 if ($function($value, $key, $list)) {
@@ -321,9 +289,7 @@ class Phamda
             }
 
             return $result;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -333,11 +299,9 @@ class Phamda
      */
     public static function first(array $list = null)
     {
-        $func = static::curry1(function (array $list) {
+        return static::curry1(function (array $list) {
             return reset($list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -347,13 +311,11 @@ class Phamda
      */
     public static function flip(callable $function = null)
     {
-        $func = static::curry1(function (callable $function) {
+        return static::curry1(function (callable $function) {
             return function ($a, $b, ... $arguments) use ($function) {
                 return $function($b, $a, ...$arguments);
             };
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -364,15 +326,13 @@ class Phamda
      */
     public static function groupBy(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             return Phamda::reduce(function (array $lists, $value) use ($function) {
                 $lists[$function($value)][] = $value;
 
                 return $lists;
             }, [], $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -383,11 +343,9 @@ class Phamda
      */
     public static function gt($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a > $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -398,11 +356,9 @@ class Phamda
      */
     public static function gte($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a >= $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -412,11 +368,9 @@ class Phamda
      */
     public static function identity($a = null)
     {
-        $func = static::curry1(function ($a) {
+        return static::curry1(function ($a) {
             return $a;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -428,13 +382,11 @@ class Phamda
      */
     public static function ifElse(callable $condition = null, callable $onTrue = null, callable $onFalse = null)
     {
-        $func = static::curry3(function (callable $condition, callable $onTrue, callable $onFalse) {
+        return static::curry3(function (callable $condition, callable $onTrue, callable $onFalse) {
             return function (... $arguments) use ($condition, $onTrue, $onFalse) {
                 return $condition(...$arguments) ? $onTrue(...$arguments) : $onFalse(...$arguments);
             };
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -444,11 +396,9 @@ class Phamda
      */
     public static function inc($number = null)
     {
-        $func = static::curry1(function ($number) {
+        return static::curry1(function ($number) {
             return Phamda::add(1, $number);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -459,7 +409,7 @@ class Phamda
      */
     public static function indexOf($value = null, array $list = null)
     {
-        $func = static::curry2(function ($value, array $list) {
+        return static::curry2(function ($value, array $list) {
             foreach ($list as $key => $current) {
                 if ($value === $current) {
                     return $key;
@@ -467,9 +417,7 @@ class Phamda
             }
 
             return false;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -497,11 +445,9 @@ class Phamda
      */
     public static function isEmpty(array $list = null)
     {
-        $func = static::curry1(function (array $list) {
+        return static::curry1(function (array $list) {
             return empty($list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -512,11 +458,9 @@ class Phamda
      */
     public static function isInstance($class = null, $object = null)
     {
-        $func = static::curry2(function ($class, $object) {
+        return static::curry2(function ($class, $object) {
             return $object instanceof $class;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -526,11 +470,9 @@ class Phamda
      */
     public static function last(array $list = null)
     {
-        $func = static::curry1(function (array $list) {
+        return static::curry1(function (array $list) {
             return end($list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -541,11 +483,9 @@ class Phamda
      */
     public static function lt($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a < $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -556,11 +496,9 @@ class Phamda
      */
     public static function lte($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a <= $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -571,16 +509,14 @@ class Phamda
      */
     public static function map(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             $result = [];
             foreach ($list as $key => $value) {
                 $result[$key] = $function($value, $key, $list);
             }
 
             return $result;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -590,11 +526,9 @@ class Phamda
      */
     public static function max(array $list = null)
     {
-        $func = static::curry1(function (array $list) {
+        return static::curry1(function (array $list) {
             return static::getCompareResult(Phamda::gt(), $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -605,11 +539,9 @@ class Phamda
      */
     public static function maxBy(callable $getValue = null, array $list = null)
     {
-        $func = static::curry2(function (callable $getValue, array $list) {
+        return static::curry2(function (callable $getValue, array $list) {
             return static::getCompareByResult(Phamda::gt(), $getValue, $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -619,11 +551,9 @@ class Phamda
      */
     public static function min(array $list = null)
     {
-        $func = static::curry1(function (array $list) {
+        return static::curry1(function (array $list) {
             return static::getCompareResult(Phamda::lt(), $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -634,11 +564,9 @@ class Phamda
      */
     public static function minBy(callable $getValue = null, array $list = null)
     {
-        $func = static::curry2(function (callable $getValue, array $list) {
+        return static::curry2(function (callable $getValue, array $list) {
             return static::getCompareByResult(Phamda::lt(), $getValue, $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -649,11 +577,9 @@ class Phamda
      */
     public static function modulo($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a % $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -664,11 +590,9 @@ class Phamda
      */
     public static function multiply($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a * $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -678,11 +602,9 @@ class Phamda
      */
     public static function negate($a = null)
     {
-        $func = static::curry1(function ($a) {
+        return static::curry1(function ($a) {
             return Phamda::multiply($a, -1);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -693,11 +615,9 @@ class Phamda
      */
     public static function none(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             return ! Phamda::any($function, $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -707,13 +627,11 @@ class Phamda
      */
     public static function not(callable $function = null)
     {
-        $func = static::curry1(function (callable $function) {
+        return static::curry1(function (callable $function) {
             return function (... $arguments) use ($function) {
                 return ! $function(...$arguments);
             };
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -752,15 +670,13 @@ class Phamda
      */
     public static function partition(callable $predicate = null, array $list = null)
     {
-        $func = static::curry2(function (callable $predicate, array $list) {
+        return static::curry2(function (callable $predicate, array $list) {
             return Phamda::reduce(function (array $lists, $value) use ($predicate) {
                 $lists[$predicate($value) ? 0 : 1][] = $value;
 
                 return $lists;
             }, [[], []], $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -771,11 +687,9 @@ class Phamda
      */
     public static function path($path = null, $object = null)
     {
-        $func = static::curry2(function ($path, $object) {
+        return static::curry2(function ($path, $object) {
             return Phamda::pathOn('.', $path, $object);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -787,15 +701,13 @@ class Phamda
      */
     public static function pathOn($separator = null, $path = null, $object = null)
     {
-        $func = static::curry3(function ($separator, $path, $object) {
+        return static::curry3(function ($separator, $path, $object) {
             foreach (explode($separator, $path) as $name) {
                 $object = Phamda::prop($name, $object);
             }
 
             return $object;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -806,7 +718,7 @@ class Phamda
      */
     public static function pick(array $names = null, array $item = null)
     {
-        $func = static::curry2(function (array $names, array $item) {
+        return static::curry2(function (array $names, array $item) {
             $new = [];
             foreach ($names as $name) {
                 if (array_key_exists($name, $item)) {
@@ -815,9 +727,7 @@ class Phamda
             }
 
             return $new;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -828,16 +738,14 @@ class Phamda
      */
     public static function pickAll(array $names = null, array $item = null)
     {
-        $func = static::curry2(function (array $names, array $item) {
+        return static::curry2(function (array $names, array $item) {
             $new = [];
             foreach ($names as $name) {
                 $new[$name] = isset($item[$name]) ? $item[$name] : null;
             }
 
             return $new;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -869,11 +777,9 @@ class Phamda
      */
     public static function pluck($name = null, array $list = null)
     {
-        $func = static::curry2(function ($name, array $list) {
+        return static::curry2(function ($name, array $list) {
             return Phamda::map(Phamda::prop($name), $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -883,11 +789,9 @@ class Phamda
      */
     public static function product(array $values = null)
     {
-        $func = static::curry1(function (array $values) {
+        return static::curry1(function (array $values) {
             return Phamda::reduce(Phamda::multiply(), 1, $values);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -898,11 +802,9 @@ class Phamda
      */
     public static function prop($name = null, $object = null)
     {
-        $func = static::curry2(function ($name, $object) {
+        return static::curry2(function ($name, $object) {
             return is_object($object) ? $object->{$name} : $object[$name];
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -914,11 +816,9 @@ class Phamda
      */
     public static function propEq($name = null, $value = null, $object = null)
     {
-        $func = static::curry3(function ($name, $value, $object) {
+        return static::curry3(function ($name, $value, $object) {
             return is_object($object) ? $object->{$name} === $value : $object[$name] === $value;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -930,15 +830,13 @@ class Phamda
      */
     public static function reduce(callable $function = null, $initial = null, array $list = null)
     {
-        $func = static::curry3(function (callable $function, $initial, array $list) {
+        return static::curry3(function (callable $function, $initial, array $list) {
             foreach ($list as $key => $value) {
                 $initial = $function($initial, $value, $key, $list);
             }
 
             return $initial;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -950,11 +848,9 @@ class Phamda
      */
     public static function reduceRight(callable $function = null, $initial = null, array $list = null)
     {
-        $func = static::curry3(function (callable $function, $initial, array $list) {
+        return static::curry3(function (callable $function, $initial, array $list) {
             return Phamda::reduce($function, $initial, array_reverse($list));
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -965,11 +861,9 @@ class Phamda
      */
     public static function reject(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             return Phamda::filter(Phamda::not($function), $list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -979,11 +873,9 @@ class Phamda
      */
     public static function reverse(array $list = null)
     {
-        $func = static::curry1(function (array $list) {
+        return static::curry1(function (array $list) {
             return array_reverse($list);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -995,11 +887,9 @@ class Phamda
      */
     public static function slice($start = null, $end = null, array $list = null)
     {
-        $func = static::curry3(function ($start, $end, array $list) {
+        return static::curry3(function ($start, $end, array $list) {
             return array_slice($list, $start, $end - $start);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -1010,13 +900,11 @@ class Phamda
      */
     public static function sort(callable $comparator = null, array $list = null)
     {
-        $func = static::curry2(function (callable $comparator, array $list) {
+        return static::curry2(function (callable $comparator, array $list) {
             usort($list, $comparator);
 
             return $list;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -1027,7 +915,7 @@ class Phamda
      */
     public static function sortBy(callable $function = null, array $list = null)
     {
-        $func = static::curry2(function (callable $function, array $list) {
+        return static::curry2(function (callable $function, array $list) {
             $comparator = function ($a, $b) use ($function) {
                 $aKey = $function($a);
                 $bKey = $function($b);
@@ -1037,9 +925,7 @@ class Phamda
             usort($list, $comparator);
 
             return $list;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -1050,11 +936,9 @@ class Phamda
      */
     public static function subtract($a = null, $b = null)
     {
-        $func = static::curry2(function ($a, $b) {
+        return static::curry2(function ($a, $b) {
             return $a - $b;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -1064,11 +948,9 @@ class Phamda
      */
     public static function sum(array $values = null)
     {
-        $func = static::curry1(function (array $values) {
+        return static::curry1(function (array $values) {
             return Phamda::reduce(Phamda::add(), 0, $values);
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -1089,7 +971,7 @@ class Phamda
      */
     public static function where(array $specification = null, $object = null)
     {
-        $func = static::curry2(function (array $specification, $object) {
+        return static::curry2(function (array $specification, $object) {
             foreach ($specification as $name => $part) {
                 if (! static::testSpecificationPart($name, $part, $object)) {
                     return false;
@@ -1097,9 +979,7 @@ class Phamda
             }
 
             return true;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -1110,16 +990,14 @@ class Phamda
      */
     public static function zip(array $a = null, array $b = null)
     {
-        $func = static::curry2(function (array $a, array $b) {
+        return static::curry2(function (array $a, array $b) {
             $zipped = [];
             foreach (array_intersect_key($a, $b) as $key => $value) {
                 $zipped[$key] = [$value, $b[$key]];
             }
 
             return $zipped;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 
     /**
@@ -1131,15 +1009,13 @@ class Phamda
      */
     public static function zipWith(callable $function = null, array $a = null, array $b = null)
     {
-        $func = static::curry3(function (callable $function, array $a, array $b) {
+        return static::curry3(function (callable $function, array $a, array $b) {
             $zipped = [];
             foreach (array_intersect_key($a, $b) as $key => $value) {
                 $zipped[$key] = $function($value, $b[$key]);
             }
 
             return $zipped;
-        });
-
-        return $func(...func_get_args());
+        }, func_get_args());
     }
 }
