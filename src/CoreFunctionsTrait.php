@@ -110,7 +110,6 @@ trait CoreFunctionsTrait
                 return function (...$arguments) use ($original, $initialArguments) {
                     return $original(...array_merge($initialArguments, $arguments));
                 };
-                break;
             default:
                 return $original(...$initialArguments);
         }
