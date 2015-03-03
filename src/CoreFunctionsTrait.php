@@ -76,50 +76,60 @@ trait CoreFunctionsTrait
 
     protected static function curry1(callable $original)
     {
-        return function ($a = null, ...$arguments) use ($original) {
+        return function ($a = null, ...$initialArguments) use ($original) {
             switch (func_num_args()) {
                 case 0:
                     return $original;
                 default:
-                    return $original($a, ...$arguments);
+                    return $original($a, ...$initialArguments);
             }
         };
     }
 
     protected static function curry2(callable $original)
     {
-        return function ($a = null, $b = null, ...$arguments) use ($original) {
+        return function ($a = null, $b = null, ...$initialArguments) use ($original) {
             switch (func_num_args()) {
                 case 0:
-                    return $original;
+                    return function ($a, $b = null, ...$arguments) use ($original) {
+                        $curried = self::curry2($original);
+
+                        return $curried(...func_get_args());
+                    };
                 case 1:
                     return function ($b, ...$arguments) use ($original, $a) {
-                        return $original($a, $b, ...$arguments);
+                        return $original($a, ...func_get_args());
                     };
                     break;
                 default:
-                    return $original($a, $b, ...$arguments);
+                    return $original($a, $b, ...$initialArguments);
             }
         };
     }
 
     protected static function curry3(callable $original)
     {
-        return function ($a = null, $b = null, $c = null, ...$arguments) use ($original) {
+        return function ($a = null, $b = null, $c = null, ...$initialArguments) use ($original) {
             switch (func_num_args()) {
                 case 0:
-                    return $original;
+                    return function ($a, $b = null, $c = null, ...$arguments) use ($original) {
+                        $curried = self::curry3($original);
+
+                        return $curried(...func_get_args());
+                    };
                 case 1:
-                    return self::curry2(function ($b, $c, ...$arguments) use ($original, $a) {
-                        return $original($a, $b, $c, ...$arguments);
+                    return self::curry2(function ($b, $c = null, ...$arguments) use ($original, $a) {
+                        $curried = self::curry2($original);
+
+                        return $curried($a, ...func_get_args());
                     });
                 case 2:
                     return function ($c, ...$arguments) use ($original, $a, $b) {
-                        return $original($a, $b, $c, ...$arguments);
+                        return $original($a, $b, ...func_get_args());
                     };
                     break;
                 default:
-                    return $original($a, $b, $c, ...$arguments);
+                    return $original($a, $b, $c, ...$initialArguments);
             }
         };
     }
