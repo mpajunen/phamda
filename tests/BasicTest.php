@@ -42,6 +42,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getAllPassData
+     */
+    public function testAllPass($expected, array $predicates, ... $arguments)
+    {
+        $main0 = Phamda::allPass($predicates);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried0 = Phamda::allPass();
+        $main1    = $curried0($predicates);
+        $this->assertSame($expected, $main1(...$arguments));
+    }
+
+    /**
      * @dataProvider getAlwaysData
      */
     public function testAlways($expected, $value)
@@ -60,6 +72,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($function, $list));
         $curried1 = Phamda::any($function);
         $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getAnyPassData
+     */
+    public function testAnyPass($expected, array $predicates, ... $arguments)
+    {
+        $main0 = Phamda::anyPass($predicates);
+        $this->assertSame($expected, $main0(...$arguments));
+        $curried0 = Phamda::anyPass();
+        $main1    = $curried0($predicates);
+        $this->assertSame($expected, $main1(...$arguments));
     }
 
     /**

@@ -25,12 +25,25 @@ trait BasicProvidersTrait
 
     public function getAllData()
     {
-        $isPositive = function($x) { return $x > 0; };
+        $isPositive = function ($x) { return $x > 0; };
 
         return [
             [false, $isPositive, [1, 2, 0, -5]],
             [false, $isPositive, [-3, -7, -1, -5]],
             [true, $isPositive, [1, 2, 1, 11]],
+        ];
+    }
+
+    public function getAllPassData()
+    {
+        $isSumEven     = function ($x, $y) { return ($x + $y) % 2 === 0; };
+        $isSumPositive = function ($x, $y) { return ($x + $y) > 0; };
+
+        return [
+            [true, [$isSumEven, $isSumPositive], 15, 27],
+            [false, [$isSumEven, $isSumPositive], 15, -25],
+            [false, [$isSumEven, $isSumPositive], 15, 8],
+            [false, [$isSumEven, $isSumPositive], -3, -4],
         ];
     }
 
@@ -48,12 +61,25 @@ trait BasicProvidersTrait
 
     public function getAnyData()
     {
-        $isPositive = function($x) { return $x > 0; };
+        $isPositive = function ($x) { return $x > 0; };
 
         return [
             [true, $isPositive, [1, 2, 0, -5]],
             [false, $isPositive, [-3, -7, -1, -5]],
             [true, $isPositive, [1, 2, 1, 11]],
+        ];
+    }
+
+    public function getAnyPassData()
+    {
+        $isSumEven     = function ($x, $y) { return ($x + $y) % 2 === 0; };
+        $isSumPositive = function ($x, $y) { return ($x + $y) > 0; };
+
+        return [
+            [true, [$isSumEven, $isSumPositive], 15, 27],
+            [true, [$isSumEven, $isSumPositive], 15, -25],
+            [true, [$isSumEven, $isSumPositive], 15, 8],
+            [false, [$isSumEven, $isSumPositive], -3, -4],
         ];
     }
 

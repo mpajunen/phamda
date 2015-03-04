@@ -48,6 +48,26 @@ class Phamda
     }
 
     /**
+     * @param callable[] $predicates
+     *
+     * @return callable
+     */
+    public static function allPass(array $predicates = null)
+    {
+        return static::curry1(function (array $predicates) {
+            return function (... $arguments) use ($predicates) {
+                foreach ($predicates as $predicate) {
+                    if (! $predicate(...$arguments)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            };
+        }, func_get_args());
+    }
+
+    /**
      * @param mixed $value
      *
      * @return callable
@@ -75,6 +95,26 @@ class Phamda
             }
 
             return false;
+        }, func_get_args());
+    }
+
+    /**
+     * @param callable[] $predicates
+     *
+     * @return callable
+     */
+    public static function anyPass(array $predicates = null)
+    {
+        return static::curry1(function (array $predicates) {
+            return function (... $arguments) use ($predicates) {
+                foreach ($predicates as $predicate) {
+                    if ($predicate(...$arguments)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
         }, func_get_args());
     }
 
