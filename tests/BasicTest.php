@@ -726,6 +726,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getTapData
+     */
+    public function testTap($expected, callable $function, $object)
+    {
+        $this->assertSame($expected, Phamda::tap($function, $object));
+        $curried0 = Phamda::tap();
+        $this->assertSame($expected, $curried0($function, $object));
+        $curried1 = Phamda::tap($function);
+        $this->assertSame($expected, $curried1($object));
+    }
+
+    /**
      * @dataProvider getTrueData
      */
     public function testTrue($expected)

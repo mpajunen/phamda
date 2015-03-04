@@ -954,6 +954,21 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     * @param object   $object
+     *
+     * @return callable|object
+     */
+    public static function tap(callable $function = null, $object = null)
+    {
+        return static::curry2(function (callable $function, $object) {
+            $function($object);
+
+            return $object;
+        }, func_get_args());
+    }
+
+    /**
      * @return callable
      */
     public static function true()

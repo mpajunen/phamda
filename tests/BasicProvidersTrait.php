@@ -721,6 +721,16 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getTapData()
+    {
+        $counter = new Counter();
+        $addFive = function ($object) { $object->value += 5; };
+
+        return [
+            [$counter, $addFive, $counter],
+        ];
+    }
+
     public function getTrueData()
     {
         return [
