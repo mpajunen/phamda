@@ -731,6 +731,16 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getTimesData()
+    {
+        $double = function ($number) { return $number * 2; };
+
+        return [
+            [[0, 1, 2, 3, 4], Phamda::identity(), 5],
+            [[0, 2, 4, 6, 8], $double, 5],
+        ];
+    }
+
     public function getTrueData()
     {
         return [

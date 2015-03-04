@@ -969,6 +969,19 @@ class Phamda
     }
 
     /**
+     * @param callable $function
+     * @param int      $count
+     *
+     * @return callable|array
+     */
+    public static function times(callable $function = null, $count = null)
+    {
+        return static::curry2(function (callable $function, $count) {
+            return Phamda::map($function, range(0, $count - 1));
+        }, func_get_args());
+    }
+
+    /**
      * @return callable
      */
     public static function true()

@@ -738,6 +738,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getTimesData
+     */
+    public function testTimes($expected, callable $function, $count)
+    {
+        $this->assertSame($expected, Phamda::times($function, $count));
+        $curried0 = Phamda::times();
+        $this->assertSame($expected, $curried0($function, $count));
+        $curried1 = Phamda::times($function);
+        $this->assertSame($expected, $curried1($count));
+    }
+
+    /**
      * @dataProvider getTrueData
      */
     public function testTrue($expected)
