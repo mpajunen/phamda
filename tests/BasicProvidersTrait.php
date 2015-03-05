@@ -257,6 +257,26 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFindData()
+    {
+        $isPositive = function($x) { return $x > 0; };
+
+        return [
+            [15, $isPositive, [-5, 0, 15, 33, -2]],
+            [22, $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+        ];
+    }
+
+    public function getFindLastData()
+    {
+        $isPositive = function($x) { return $x > 0; };
+
+        return [
+            [33, $isPositive, [-5, 0, 15, 33, -2]],
+            [13, $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+        ];
+    }
+
     public function getFirstData()
     {
         $a = (object) [];

@@ -243,6 +243,30 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFindData
+     */
+    public function testFind($expected, callable $predicate, array $list)
+    {
+        $this->assertSame($expected, Phamda::find($predicate, $list));
+        $curried0 = Phamda::find();
+        $this->assertSame($expected, $curried0($predicate, $list));
+        $curried1 = Phamda::find($predicate);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getFindLastData
+     */
+    public function testFindLast($expected, callable $predicate, array $list)
+    {
+        $this->assertSame($expected, Phamda::findLast($predicate, $list));
+        $curried0 = Phamda::findLast();
+        $this->assertSame($expected, $curried0($predicate, $list));
+        $curried1 = Phamda::findLast($predicate);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getFirstData
      */
     public function testFirst($expected, array $list)

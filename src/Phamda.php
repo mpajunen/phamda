@@ -333,6 +333,44 @@ class Phamda
     }
 
     /**
+     * @param callable $predicate
+     * @param array    $list
+     *
+     * @return callable|mixed|null
+     */
+    public static function find(callable $predicate = null, array $list = null)
+    {
+        return static::curry2(function (callable $predicate, array $list) {
+            foreach ($list as $value) {
+                if ($predicate($value)) {
+                    return $value;
+                }
+            }
+
+            return null;
+        }, func_get_args());
+    }
+
+    /**
+     * @param callable $predicate
+     * @param array    $list
+     *
+     * @return callable|mixed|null
+     */
+    public static function findLast(callable $predicate = null, array $list = null)
+    {
+        return static::curry2(function (callable $predicate, array $list) {
+            foreach (array_reverse($list) as $value) {
+                if ($predicate($value)) {
+                    return $value;
+                }
+            }
+
+            return null;
+        }, func_get_args());
+    }
+
+    /**
      * @param array $list
      *
      * @return callable|mixed
