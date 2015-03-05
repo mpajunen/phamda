@@ -355,6 +355,25 @@ class Phamda
      * @param callable $predicate
      * @param array    $list
      *
+     * @return callable|int|string|null
+     */
+    public static function findIndex(callable $predicate = null, array $list = null)
+    {
+        return static::curry2(function (callable $predicate, array $list) {
+            foreach ($list as $index => $value) {
+                if ($predicate($value)) {
+                    return $index;
+                }
+            }
+
+            return null;
+        }, func_get_args());
+    }
+
+    /**
+     * @param callable $predicate
+     * @param array    $list
+     *
      * @return callable|mixed|null
      */
     public static function findLast(callable $predicate = null, array $list = null)
@@ -363,6 +382,25 @@ class Phamda
             foreach (array_reverse($list) as $value) {
                 if ($predicate($value)) {
                     return $value;
+                }
+            }
+
+            return null;
+        }, func_get_args());
+    }
+
+    /**
+     * @param callable $predicate
+     * @param array    $list
+     *
+     * @return callable|int|string|null
+     */
+    public static function findLastIndex(callable $predicate = null, array $list = null)
+    {
+        return static::curry2(function (callable $predicate, array $list) {
+            foreach (array_reverse($list, true) as $index => $value) {
+                if ($predicate($value)) {
+                    return $index;
                 }
             }
 

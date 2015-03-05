@@ -255,6 +255,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFindIndexData
+     */
+    public function testFindIndex($expected, callable $predicate, array $list)
+    {
+        $this->assertSame($expected, Phamda::findIndex($predicate, $list));
+        $curried0 = Phamda::findIndex();
+        $this->assertSame($expected, $curried0($predicate, $list));
+        $curried1 = Phamda::findIndex($predicate);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
      * @dataProvider getFindLastData
      */
     public function testFindLast($expected, callable $predicate, array $list)
@@ -263,6 +275,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $curried0 = Phamda::findLast();
         $this->assertSame($expected, $curried0($predicate, $list));
         $curried1 = Phamda::findLast($predicate);
+        $this->assertSame($expected, $curried1($list));
+    }
+
+    /**
+     * @dataProvider getFindLastIndexData
+     */
+    public function testFindLastIndex($expected, callable $predicate, array $list)
+    {
+        $this->assertSame($expected, Phamda::findLastIndex($predicate, $list));
+        $curried0 = Phamda::findLastIndex();
+        $this->assertSame($expected, $curried0($predicate, $list));
+        $curried1 = Phamda::findLastIndex($predicate);
         $this->assertSame($expected, $curried1($list));
     }
 

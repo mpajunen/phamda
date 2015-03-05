@@ -267,6 +267,16 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFindIndexData()
+    {
+        $isPositive = function($x) { return $x > 0; };
+
+        return [
+            [2, $isPositive, [-5, 0, 15, 33, -2]],
+            ['b', $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+        ];
+    }
+
     public function getFindLastData()
     {
         $isPositive = function($x) { return $x > 0; };
@@ -274,6 +284,16 @@ trait BasicProvidersTrait
         return [
             [33, $isPositive, [-5, 0, 15, 33, -2]],
             [13, $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+        ];
+    }
+
+    public function getFindLastIndexData()
+    {
+        $isPositive = function($x) { return $x > 0; };
+
+        return [
+            [3, $isPositive, [-5, 0, 15, 33, -2]],
+            ['c', $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
         ];
     }
 
