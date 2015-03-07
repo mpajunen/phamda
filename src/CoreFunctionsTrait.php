@@ -63,6 +63,18 @@ trait CoreFunctionsTrait
         return $result;
     }
 
+    protected static function _assoc($property, $value, $object)
+    {
+        if (is_object($object)) {
+            $object            = clone $object;
+            $object->$property = $value;
+        } else {
+            $object[$property] = $value;
+        }
+
+        return $object;
+    }
+
     protected static function _curryN($length, callable $function, ...$initialArguments)
     {
         return $length - count($initialArguments) <= 0

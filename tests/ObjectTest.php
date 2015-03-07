@@ -15,6 +15,20 @@ use Phamda\Phamda;
 
 class ObjectTest extends \PHPUnit_Framework_TestCase
 {
+    use BasicProvidersTrait;
+
+    /**
+     * @dataProvider getAssocData
+     */
+    public function testAssoc($expected, $property, $value, $object)
+    {
+        $realObject = (object) $object;
+        $result     = Phamda::assoc($property, $value, $realObject);
+
+        $this->assertNotSame($realObject, $result);
+        $this->assertSame($expected, (array) $result);
+    }
+
     public function testTap()
     {
         $counter = new Counter();

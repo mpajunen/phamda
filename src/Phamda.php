@@ -119,6 +119,20 @@ class Phamda
     }
 
     /**
+     * @param string       $property
+     * @param mixed        $value
+     * @param array|object $object
+     *
+     * @return callable|array|object
+     */
+    public static function assoc($property = null, $value = null, $object = null)
+    {
+        return static::curry3(function ($property, $value, $object) {
+            return static::_assoc($property, $value, $object);
+        }, func_get_args());
+    }
+
+    /**
      * @param callable $a
      * @param callable $b
      *

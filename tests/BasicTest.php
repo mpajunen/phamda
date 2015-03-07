@@ -87,6 +87,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getAssocData
+     */
+    public function testAssoc($expected, $property, $value, $object)
+    {
+        $this->assertSame($expected, Phamda::assoc($property, $value, $object));
+        $curried0 = Phamda::assoc();
+        $this->assertSame($expected, $curried0($property, $value, $object));
+        $curried1 = Phamda::assoc($property);
+        $this->assertSame($expected, $curried1($value, $object));
+        $curried2 = Phamda::assoc($property, $value);
+        $this->assertSame($expected, $curried2($object));
+    }
+
+    /**
      * @dataProvider getBothData
      */
     public function testBoth($expected, callable $a, callable $b, ... $arguments)

@@ -83,6 +83,15 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getAssocData()
+    {
+        return [
+            [['foo' => 1, 'bar' => 3], 'bar', 3, ['foo' => 1]],
+            [['foo' => 1, 'bar' => 3], 'bar', 3, ['foo' => 1, 'bar' => 2]],
+            [['foo' => null, 'bar' => 7], 'foo', null, ['foo' => 15, 'bar' => 7]],
+        ];
+    }
+
     public function getBothData()
     {
         $true  = function () { return true; };
