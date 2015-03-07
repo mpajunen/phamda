@@ -590,18 +590,9 @@ trait BasicProvidersTrait
     public function getPathData()
     {
         return [
-            [15, 'foo.bar', ['foo' => ['baz' => 26, 'bar' => 15]]],
-            [26, 'foo.baz', ['foo' => (object) ['baz' => 26, 'bar' => 15]]],
-            [null, 'bar.baz', ['bar' => ['baz' => null, 'foo' => 15]]],
-        ];
-    }
-
-    public function getPathOnData()
-    {
-        return [
-            [15, '/', 'foo/bar', ['foo' => ['baz' => 26, 'bar' => 15]]],
-            [26, '/', 'foo/baz', ['foo' => (object) ['baz' => 26, 'bar' => 15]]],
-            [null, '*', 'bar*baz', ['bar' => ['baz' => null, 'foo' => 15]]],
+            [15, ['foo', 'bar'], ['foo' => ['baz' => 26, 'bar' => 15]]],
+            [26, ['foo', 'baz'], ['foo' => (object) ['baz' => 26, 'bar' => 15]]],
+            [null, ['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]],
         ];
     }
 

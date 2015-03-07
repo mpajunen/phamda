@@ -583,27 +583,13 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPathData
      */
-    public function testPath($expected, $path, $object)
+    public function testPath($expected, array $path, $object)
     {
         $this->assertSame($expected, Phamda::path($path, $object));
         $curried0 = Phamda::path();
         $this->assertSame($expected, $curried0($path, $object));
         $curried1 = Phamda::path($path);
         $this->assertSame($expected, $curried1($object));
-    }
-
-    /**
-     * @dataProvider getPathOnData
-     */
-    public function testPathOn($expected, $separator, $path, $object)
-    {
-        $this->assertSame($expected, Phamda::pathOn($separator, $path, $object));
-        $curried0 = Phamda::pathOn();
-        $this->assertSame($expected, $curried0($separator, $path, $object));
-        $curried1 = Phamda::pathOn($separator);
-        $this->assertSame($expected, $curried1($path, $object));
-        $curried2 = Phamda::pathOn($separator, $path);
-        $this->assertSame($expected, $curried2($object));
     }
 
     /**

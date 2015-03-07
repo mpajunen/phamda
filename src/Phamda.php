@@ -796,29 +796,15 @@ class Phamda
     }
 
     /**
-     * @param string       $path
+     * @param array        $path
      * @param array|object $object
      *
      * @return callable|mixed
      */
-    public static function path($path = null, $object = null)
+    public static function path(array $path = null, $object = null)
     {
-        return static::curry2(function ($path, $object) {
-            return Phamda::pathOn('.', $path, $object);
-        }, func_get_args());
-    }
-
-    /**
-     * @param string       $separator
-     * @param string       $path
-     * @param array|object $object
-     *
-     * @return callable|mixed
-     */
-    public static function pathOn($separator = null, $path = null, $object = null)
-    {
-        return static::curry3(function ($separator, $path, $object) {
-            foreach (explode($separator, $path) as $name) {
+        return static::curry2(function (array $path, $object) {
+            foreach ($path as $name) {
                 $object = Phamda::prop($name, $object);
             }
 
