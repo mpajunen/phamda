@@ -593,6 +593,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getPathEqData
+     */
+    public function testPathEq($expected, array $path, $value, $object)
+    {
+        $this->assertSame($expected, Phamda::pathEq($path, $value, $object));
+        $curried0 = Phamda::pathEq();
+        $this->assertSame($expected, $curried0($path, $value, $object));
+        $curried1 = Phamda::pathEq($path);
+        $this->assertSame($expected, $curried1($value, $object));
+        $curried2 = Phamda::pathEq($path, $value);
+        $this->assertSame($expected, $curried2($object));
+    }
+
+    /**
      * @dataProvider getPickData
      */
     public function testPick($expected, array $names, array $item)

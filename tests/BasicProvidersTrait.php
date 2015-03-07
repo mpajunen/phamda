@@ -596,6 +596,18 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getPathEqData()
+    {
+        return [
+            [false, ['foo', 'bar'], 44, ['foo' => ['baz' => 26, 'bar' => 15]]],
+            [true, ['foo', 'baz'], 26, ['foo' => ['baz' => 26, 'bar' => 15]]],
+            [false, ['foo', 'baz'], 37, ['foo' => (object) ['baz' => 26, 'bar' => 15]]],
+            [true, ['foo', 'bar'], 15, ['foo' => (object) ['baz' => 26, 'bar' => 15]]],
+            [true, ['bar', 'baz'], null, ['bar' => ['baz' => null, 'foo' => 15]]],
+            [false, ['bar', 'baz'], 1, ['bar' => ['baz' => null, 'foo' => 15]]],
+        ];
+    }
+
     public function getPickData()
     {
         $item = ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'];

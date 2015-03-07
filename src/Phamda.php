@@ -813,6 +813,20 @@ class Phamda
     }
 
     /**
+     * @param array        $path
+     * @param mixed        $value
+     * @param array|object $object
+     *
+     * @return callable|boolean
+     */
+    public static function pathEq(array $path = null, $value = null, $object = null)
+    {
+        return static::curry3(function (array $path, $value, $object) {
+            return Phamda::path($path, $object) === $value;
+        }, func_get_args());
+    }
+
+    /**
      * @param array $names
      * @param array $item
      *
