@@ -75,6 +75,24 @@ trait CoreFunctionsTrait
         return $object;
     }
 
+    protected static function _assocPath(array $path, $value, $object)
+    {
+        $property = $path[0];
+
+        if (count($path) > 1) {
+            if (is_object($object)) {
+                $object            = clone $object;
+                $object->$property = static::_assocPath(array_slice($path, 1), $value, $object->$property);
+            } else {
+                $object[$property] = static::_assocPath(array_slice($path, 1), $value, $object[$property]);
+            }
+        } else {
+            $object = static::_assoc($property, $value, $object);
+        }
+
+        return $object;
+    }
+
     protected static function _curryN($length, callable $function, ...$initialArguments)
     {
         return $length - count($initialArguments) <= 0

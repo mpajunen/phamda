@@ -29,6 +29,18 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, (array) $result);
     }
 
+    /**
+     * @dataProvider getAssocPathData
+     */
+    public function testAssocPath($expected, array $path, $value, $object)
+    {
+        $realObject = (object) $object;
+        $result     = Phamda::assocPath($path, $value, $realObject);
+
+        $this->assertNotSame($realObject, $result);
+        $this->assertSame($expected, (array) $result);
+    }
+
     public function testTap()
     {
         $counter = new Counter();

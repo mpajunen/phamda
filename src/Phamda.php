@@ -133,6 +133,20 @@ class Phamda
     }
 
     /**
+     * @param array        $path
+     * @param mixed        $value
+     * @param array|object $object
+     *
+     * @return callable|array|object
+     */
+    public static function assocPath(array $path = null, $value = null, $object = null)
+    {
+        return static::curry3(function (array $path, $value, $object) {
+            return static::_assocPath($path, $value, $object);
+        }, func_get_args());
+    }
+
+    /**
      * @param callable $a
      * @param callable $b
      *

@@ -92,6 +92,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getAssocPathData()
+    {
+        return [
+            [['foo' => 1, 'bar' => 3], ['bar'], 3, ['foo' => 1, 'bar' => 2]],
+            [['foo' => 1, 'bar' => ['baz' => 4]], ['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]],
+        ];
+    }
+
     public function getBothData()
     {
         $true  = function () { return true; };

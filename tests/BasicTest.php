@@ -101,6 +101,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getAssocPathData
+     */
+    public function testAssocPath($expected, array $path, $value, $object)
+    {
+        $this->assertSame($expected, Phamda::assocPath($path, $value, $object));
+        $curried0 = Phamda::assocPath();
+        $this->assertSame($expected, $curried0($path, $value, $object));
+        $curried1 = Phamda::assocPath($path);
+        $this->assertSame($expected, $curried1($value, $object));
+        $curried2 = Phamda::assocPath($path, $value);
+        $this->assertSame($expected, $curried2($object));
+    }
+
+    /**
      * @dataProvider getBothData
      */
     public function testBoth($expected, callable $a, callable $b, ... $arguments)
