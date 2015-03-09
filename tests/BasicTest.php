@@ -32,7 +32,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAllData
      */
-    public function testAll($expected, callable $predicate, array $collection)
+    public function testAll($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::all($predicate, $collection));
         $curried0 = Phamda::all();
@@ -65,7 +65,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAnyData
      */
-    public function testAny($expected, callable $predicate, array $collection)
+    public function testAny($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::any($predicate, $collection));
         $curried0 = Phamda::any();
@@ -153,12 +153,12 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getContainsData
      */
-    public function testContains($expected, $item, array $collection)
+    public function testContains($expected, $value, $collection)
     {
-        $this->assertSame($expected, Phamda::contains($item, $collection));
+        $this->assertSame($expected, Phamda::contains($value, $collection));
         $curried0 = Phamda::contains();
-        $this->assertSame($expected, $curried0($item, $collection));
-        $curried1 = Phamda::contains($item);
+        $this->assertSame($expected, $curried0($value, $collection));
+        $curried1 = Phamda::contains($value);
         $this->assertSame($expected, $curried1($collection));
     }
 
@@ -273,7 +273,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFindData
      */
-    public function testFind($expected, callable $predicate, array $collection)
+    public function testFind($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::find($predicate, $collection));
         $curried0 = Phamda::find();
@@ -285,7 +285,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFindIndexData
      */
-    public function testFindIndex($expected, callable $predicate, array $collection)
+    public function testFindIndex($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::findIndex($predicate, $collection));
         $curried0 = Phamda::findIndex();
@@ -297,7 +297,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFindLastData
      */
-    public function testFindLast($expected, callable $predicate, array $collection)
+    public function testFindLast($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::findLast($predicate, $collection));
         $curried0 = Phamda::findLast();
@@ -309,7 +309,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFindLastIndexData
      */
-    public function testFindLastIndex($expected, callable $predicate, array $collection)
+    public function testFindLastIndex($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::findLastIndex($predicate, $collection));
         $curried0 = Phamda::findLastIndex();
@@ -497,7 +497,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMaxData
      */
-    public function testMax($expected, array $collection)
+    public function testMax($expected, $collection)
     {
         $this->assertSame($expected, Phamda::max($collection));
         $curried0 = Phamda::max();
@@ -507,7 +507,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMaxByData
      */
-    public function testMaxBy($expected, callable $getValue, array $collection)
+    public function testMaxBy($expected, callable $getValue, $collection)
     {
         $this->assertSame($expected, Phamda::maxBy($getValue, $collection));
         $curried0 = Phamda::maxBy();
@@ -519,7 +519,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMinData
      */
-    public function testMin($expected, array $collection)
+    public function testMin($expected, $collection)
     {
         $this->assertSame($expected, Phamda::min($collection));
         $curried0 = Phamda::min();
@@ -529,7 +529,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMinByData
      */
-    public function testMinBy($expected, callable $getValue, array $collection)
+    public function testMinBy($expected, callable $getValue, $collection)
     {
         $this->assertSame($expected, Phamda::minBy($getValue, $collection));
         $curried0 = Phamda::minBy();
@@ -575,7 +575,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getNoneData
      */
-    public function testNone($expected, callable $predicate, array $collection)
+    public function testNone($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::none($predicate, $collection));
         $curried0 = Phamda::none();
@@ -718,7 +718,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getReduceData
      */
-    public function testReduce($expected, callable $function, $initial, array $collection)
+    public function testReduce($expected, callable $function, $initial, $collection)
     {
         $this->assertSame($expected, Phamda::reduce($function, $initial, $collection));
         $curried0 = Phamda::reduce();
@@ -732,7 +732,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getReduceRightData
      */
-    public function testReduceRight($expected, callable $function, $initial, array $collection)
+    public function testReduceRight($expected, callable $function, $initial, $collection)
     {
         $this->assertSame($expected, Phamda::reduceRight($function, $initial, $collection));
         $curried0 = Phamda::reduceRight();
@@ -758,7 +758,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getReverseData
      */
-    public function testReverse($expected, array $collection)
+    public function testReverse($expected, $collection)
     {
         $this->assertSame($expected, Phamda::reverse($collection));
         $curried0 = Phamda::reverse();

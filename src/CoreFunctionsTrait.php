@@ -35,7 +35,14 @@ trait CoreFunctionsTrait
             ->getNumberOfRequiredParameters();
     }
 
-    protected static function getCompareByResult(callable $comparator, callable $getValue, array $collection)
+    /**
+     * @param callable           $comparator
+     * @param callable           $getValue
+     * @param array|\Traversable $collection
+     *
+     * @return mixed
+     */
+    protected static function getCompareByResult(callable $comparator, callable $getValue, $collection)
     {
         $comparison = null;
         $result     = null;
@@ -51,7 +58,13 @@ trait CoreFunctionsTrait
         return $result;
     }
 
-    protected static function getCompareResult(callable $comparator, array $collection)
+    /**
+     * @param callable           $comparator
+     * @param array|\Traversable $collection
+     *
+     * @return mixed
+     */
+    protected static function getCompareResult(callable $comparator, $collection)
     {
         $result = null;
 

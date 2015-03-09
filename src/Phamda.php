@@ -29,14 +29,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable           $predicate
+     * @param array|\Traversable $collection
      *
      * @return callable|bool
      */
-    public static function all(callable $predicate = null, array $collection = null)
+    public static function all(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             foreach ($collection as $item) {
                 if (! $predicate($item)) {
                     return false;
@@ -80,14 +80,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable           $predicate
+     * @param array|\Traversable $collection
      *
      * @return callable|bool
      */
-    public static function any(callable $predicate = null, array $collection = null)
+    public static function any(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             foreach ($collection as $item) {
                 if ($predicate($item)) {
                     return true;
@@ -225,15 +225,21 @@ class Phamda
     }
 
     /**
-     * @param mixed $item
-     * @param array $collection
+     * @param mixed              $value
+     * @param array|\Traversable $collection
      *
      * @return callable|bool
      */
-    public static function contains($item = null, array $collection = null)
+    public static function contains($value = null, $collection = null)
     {
-        return static::curry2(function ($item, array $collection) {
-            return in_array($item, $collection, true);
+        return static::curry2(function ($value, $collection) {
+            foreach ($collection as $item) {
+                if ($item === $value) {
+                    return true;
+                }
+            }
+
+            return false;
         }, func_get_args());
     }
 
@@ -361,14 +367,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable           $predicate
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed|null
      */
-    public static function find(callable $predicate = null, array $collection = null)
+    public static function find(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             foreach ($collection as $item) {
                 if ($predicate($item)) {
                     return $item;
@@ -380,14 +386,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable           $predicate
+     * @param array|\Traversable $collection
      *
      * @return callable|int|string|null
      */
-    public static function findIndex(callable $predicate = null, array $collection = null)
+    public static function findIndex(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             foreach ($collection as $index => $item) {
                 if ($predicate($item)) {
                     return $index;
@@ -399,14 +405,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable           $predicate
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed|null
      */
-    public static function findLast(callable $predicate = null, array $collection = null)
+    public static function findLast(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             foreach (static::_reverse($collection) as $item) {
                 if ($predicate($item)) {
                     return $item;
@@ -418,14 +424,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable           $predicate
+     * @param array|\Traversable $collection
      *
      * @return callable|int|string|null
      */
-    public static function findLastIndex(callable $predicate = null, array $collection = null)
+    public static function findLastIndex(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             foreach (static::_reverse($collection, true) as $index => $item) {
                 if ($predicate($item)) {
                     return $index;
@@ -546,8 +552,8 @@ class Phamda
     }
 
     /**
-     * @param mixed $item
-     * @param array $collection
+     * @param mixed              $item
+     * @param array|\Traversable $collection
      *
      * @return callable|int|string|false
      */
@@ -664,51 +670,51 @@ class Phamda
     }
 
     /**
-     * @param array $collection
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed
      */
-    public static function max(array $collection = null)
+    public static function max($collection = null)
     {
-        return static::curry1(function (array $collection) {
+        return static::curry1(function ($collection) {
             return static::getCompareResult(Phamda::gt(), $collection);
         }, func_get_args());
     }
 
     /**
-     * @param callable $getValue
-     * @param array    $collection
+     * @param callable           $getValue
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed
      */
-    public static function maxBy(callable $getValue = null, array $collection = null)
+    public static function maxBy(callable $getValue = null, $collection = null)
     {
-        return static::curry2(function (callable $getValue, array $collection) {
+        return static::curry2(function (callable $getValue, $collection) {
             return static::getCompareByResult(Phamda::gt(), $getValue, $collection);
         }, func_get_args());
     }
 
     /**
-     * @param array $collection
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed
      */
-    public static function min(array $collection = null)
+    public static function min($collection = null)
     {
-        return static::curry1(function (array $collection) {
+        return static::curry1(function ($collection) {
             return static::getCompareResult(Phamda::lt(), $collection);
         }, func_get_args());
     }
 
     /**
-     * @param callable $getValue
-     * @param array    $collection
+     * @param callable           $getValue
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed
      */
-    public static function minBy(callable $getValue = null, array $collection = null)
+    public static function minBy(callable $getValue = null, $collection = null)
     {
-        return static::curry2(function (callable $getValue, array $collection) {
+        return static::curry2(function (callable $getValue, $collection) {
             return static::getCompareByResult(Phamda::lt(), $getValue, $collection);
         }, func_get_args());
     }
@@ -752,14 +758,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable           $predicate
+     * @param array|\Traversable $collection
      *
      * @return callable|bool
      */
-    public static function none(callable $predicate = null, array $collection = null)
+    public static function none(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             return ! Phamda::any($predicate, $collection);
         }, func_get_args());
     }
@@ -966,29 +972,29 @@ class Phamda
     }
 
     /**
-     * @param callable $function
-     * @param mixed    $initial
-     * @param array    $collection
+     * @param callable           $function
+     * @param mixed              $initial
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed
      */
-    public static function reduce(callable $function = null, $initial = null, array $collection = null)
+    public static function reduce(callable $function = null, $initial = null, $collection = null)
     {
-        return static::curry3(function (callable $function, $initial, array $collection) {
+        return static::curry3(function (callable $function, $initial, $collection) {
             return static::_reduce($function, $initial, $collection);
         }, func_get_args());
     }
 
     /**
-     * @param callable $function
-     * @param mixed    $initial
-     * @param array    $collection
+     * @param callable           $function
+     * @param mixed              $initial
+     * @param array|\Traversable $collection
      *
      * @return callable|mixed
      */
-    public static function reduceRight(callable $function = null, $initial = null, array $collection = null)
+    public static function reduceRight(callable $function = null, $initial = null, $collection = null)
     {
-        return static::curry3(function (callable $function, $initial, array $collection) {
+        return static::curry3(function (callable $function, $initial, $collection) {
             return static::_reduce($function, $initial, static::_reverse($collection));
         }, func_get_args());
     }
@@ -1007,13 +1013,13 @@ class Phamda
     }
 
     /**
-     * @param array $collection
+     * @param array|\Traversable $collection
      *
      * @return callable|array
      */
-    public static function reverse(array $collection = null)
+    public static function reverse($collection = null)
     {
-        return static::curry1(function (array $collection) {
+        return static::curry1(function ($collection) {
             return static::_reverse($collection);
         }, func_get_args());
     }
