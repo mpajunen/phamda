@@ -13,12 +13,12 @@ namespace Phamda;
 
 trait CoreFunctionsTrait
 {
-    protected static function getArity(callable $a)
+    protected static function getArity(callable $function)
     {
-        if (is_string($a) || $a instanceof \Closure) {
-            $function = new \ReflectionFunction($a);
-        } elseif (is_array($a)) {
-            list($class, $name) = $a;
+        if (is_string($function) || $function instanceof \Closure) {
+            $function = new \ReflectionFunction($function);
+        } elseif (is_array($function)) {
+            list($class, $name) = $function;
 
             $function = new \ReflectionMethod($class, $name);
         } else {
@@ -35,12 +35,12 @@ trait CoreFunctionsTrait
             ->getNumberOfRequiredParameters();
     }
 
-    protected static function getCompareByResult(callable $comparator, callable $getValue, array $list)
+    protected static function getCompareByResult(callable $comparator, callable $getValue, array $collection)
     {
         $comparison = null;
         $result     = null;
 
-        foreach ($list as $item) {
+        foreach ($collection as $item) {
             $value = $getValue($item);
             if ($comparison === null || $comparator($value, $comparison)) {
                 $comparison = $value;
@@ -51,12 +51,13 @@ trait CoreFunctionsTrait
         return $result;
     }
 
-    protected static function getCompareResult(callable $comparator, array $list)
+    protected static function getCompareResult(callable $comparator, array $collection)
     {
         $result = null;
-        foreach ($list as $value) {
-            if ($result === null || $comparator($value, $result)) {
-                $result = $value;
+
+        foreach ($collection as $item) {
+            if ($result === null || $comparator($item, $result)) {
+                $result = $item;
             }
         }
 

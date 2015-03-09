@@ -81,7 +81,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getReduceData
      */
-    public function testReduceRecurry($expected, callable $function, $initial, array $list)
+    public function testReduceRecurry($expected, callable $function, $initial, array $collection)
     {
         $curried0 = Phamda::reduce();
         $this->assertInstanceOf('\Closure', $curried0);
@@ -89,7 +89,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Closure', $curried1);
         $curried2 = $curried1($initial);
         $this->assertInstanceOf('\Closure', $curried2);
-        $result = $curried2($list);
+        $result = $curried2($collection);
         $this->assertSame($expected, $result);
     }
 
