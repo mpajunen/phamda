@@ -105,6 +105,41 @@ trait CoreFunctionsTrait
             };
     }
 
+    /**
+     * @param callable           $function
+     * @param mixed              $initial
+     * @param array|\Traversable $collection
+     *
+     * @return mixed
+     */
+    protected static function _reduce(callable $function, $initial, $collection)
+    {
+        foreach ($collection as $key => $item) {
+            $initial = $function($initial, $item, $key, $collection);
+        }
+
+        return $initial;        
+    }
+
+    /**
+     * @param array|\Traversable $collection
+     *
+     * @return array|\Traversable
+     */
+    protected static function _reverse($collection, $preserveKeys = false)
+    {
+        if (is_array($collection)) {
+            $items = $collection;
+        } else {
+            $items = [];
+            foreach ($collection as $key => $item) {
+                $items[$key] = $item;
+            }
+        }
+
+        return array_reverse($items, $preserveKeys);
+    }
+
     protected static function curry1(callable $original, array $initialArguments)
     {
         return count($initialArguments) === 0 ? $original : $original(...$initialArguments);
