@@ -263,7 +263,7 @@ trait BasicProvidersTrait
     {
         $gt2               = function ($x) { return $x > 2; };
         $isEven            = function ($x) { return $x % 2 === 0; };
-        $isSmallerThanNext = function ($value, $key, array $list) {
+        $isSmallerThanNext = function ($value, $key, $list) {
             return isset($list[$key + 1]) ? $value < $list[$key + 1] : false;
         };
 
@@ -469,7 +469,7 @@ trait BasicProvidersTrait
 
     public function getMapData()
     {
-        $lengthKeyMultiply = function ($value, $key, array $list) {
+        $lengthKeyMultiply = function ($value, $key, $list) {
             return $value * $key * count($list);
         };
         $square            = function ($x) { return $x ** 2; };
@@ -707,7 +707,7 @@ trait BasicProvidersTrait
     public function getReduceData()
     {
         $concat         = function ($x, $y) { return $x . $y; };
-        $keyValueConcat = function ($accumulator, $value, $key, array $list) {
+        $keyValueConcat = function ($accumulator, $value, $key, $list) {
             return $accumulator . $value . ($key !== $value ? $list[$value] : '');
         };
         $sum            = function ($x, $y) { return $x + $y; };
@@ -724,7 +724,7 @@ trait BasicProvidersTrait
     public function getReduceRightData()
     {
         $concat         = function ($x, $y) { return $x . $y; };
-        $keyValueConcat = function ($accumulator, $value, $key, array $list) {
+        $keyValueConcat = function ($accumulator, $value, $key, $list) {
             return $accumulator . $value . ($key !== $value ? $list[$value] : '');
         };
         $sum            = function ($x, $y) { return $x + $y; };
