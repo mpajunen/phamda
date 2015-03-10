@@ -24,7 +24,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testAll($expected, callable $predicate, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::all($predicate, $_collection));
+        $result      = Phamda::all($predicate, $_collection);
+        $this->assertSame($expected, $result, 'all works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'all does not modify to original collection values.');
     }
 
     /**
@@ -33,7 +35,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testAny($expected, callable $predicate, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::any($predicate, $_collection));
+        $result      = Phamda::any($predicate, $_collection);
+        $this->assertSame($expected, $result, 'any works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'any does not modify to original collection values.');
     }
 
     /**
@@ -42,7 +46,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testContains($expected, $value, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::contains($value, $_collection));
+        $result      = Phamda::contains($value, $_collection);
+        $this->assertSame($expected, $result, 'contains works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'contains does not modify to original collection values.');
     }
 
     /**
@@ -51,7 +57,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testFind($expected, callable $predicate, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::find($predicate, $_collection));
+        $result      = Phamda::find($predicate, $_collection);
+        $this->assertSame($expected, $result, 'find works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'find does not modify to original collection values.');
     }
 
     /**
@@ -60,7 +68,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testFindIndex($expected, callable $predicate, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::findIndex($predicate, $_collection));
+        $result      = Phamda::findIndex($predicate, $_collection);
+        $this->assertSame($expected, $result, 'findIndex works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'findIndex does not modify to original collection values.');
     }
 
     /**
@@ -69,7 +79,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testFindLast($expected, callable $predicate, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::findLast($predicate, $_collection));
+        $result      = Phamda::findLast($predicate, $_collection);
+        $this->assertSame($expected, $result, 'findLast works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'findLast does not modify to original collection values.');
     }
 
     /**
@@ -78,7 +90,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testFindLastIndex($expected, callable $predicate, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::findLastIndex($predicate, $_collection));
+        $result      = Phamda::findLastIndex($predicate, $_collection);
+        $this->assertSame($expected, $result, 'findLastIndex works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'findLastIndex does not modify to original collection values.');
     }
 
     /**
@@ -87,7 +101,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testFirst($expected, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::first($_collection));
+        $result      = Phamda::first($_collection);
+        $this->assertSame($expected, $result, 'first works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'first does not modify to original collection values.');
     }
 
     /**
@@ -96,7 +112,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testIndexOf($expected, $item, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::indexOf($item, $_collection));
+        $result      = Phamda::indexOf($item, $_collection);
+        $this->assertSame($expected, $result, 'indexOf works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'indexOf does not modify to original collection values.');
     }
 
     /**
@@ -105,7 +123,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testIsEmpty($expected, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::isEmpty($_collection));
+        $result      = Phamda::isEmpty($_collection);
+        $this->assertSame($expected, $result, 'isEmpty works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'isEmpty does not modify to original collection values.');
     }
 
     /**
@@ -114,7 +134,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testLast($expected, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::last($_collection));
+        $result      = Phamda::last($_collection);
+        $this->assertSame($expected, $result, 'last works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'last does not modify to original collection values.');
     }
 
     /**
@@ -123,7 +145,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testMax($expected, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::max($_collection));
+        $result      = Phamda::max($_collection);
+        $this->assertSame($expected, $result, 'max works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'max does not modify to original collection values.');
     }
 
     /**
@@ -132,7 +156,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testMaxBy($expected, callable $getValue, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::maxBy($getValue, $_collection));
+        $result      = Phamda::maxBy($getValue, $_collection);
+        $this->assertSame($expected, $result, 'maxBy works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'maxBy does not modify to original collection values.');
     }
 
     /**
@@ -141,7 +167,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testMin($expected, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::min($_collection));
+        $result      = Phamda::min($_collection);
+        $this->assertSame($expected, $result, 'min works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'min does not modify to original collection values.');
     }
 
     /**
@@ -150,7 +178,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testMinBy($expected, callable $getValue, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::minBy($getValue, $_collection));
+        $result      = Phamda::minBy($getValue, $_collection);
+        $this->assertSame($expected, $result, 'minBy works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'minBy does not modify to original collection values.');
     }
 
     /**
@@ -159,7 +189,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testNone($expected, callable $predicate, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::none($predicate, $_collection));
+        $result      = Phamda::none($predicate, $_collection);
+        $this->assertSame($expected, $result, 'none works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'none does not modify to original collection values.');
     }
 
     /**
@@ -168,7 +200,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testProduct($expected, $values)
     {
         $_values = new ArrayCollection($values);
-        $this->assertSame($expected, Phamda::product($_values));
+        $result  = Phamda::product($_values);
+        $this->assertSame($expected, $result, 'product works for collection objects.');
+        $this->assertSame($values, $_values->toArray(), 'product does not modify to original collection values.');
     }
 
     /**
@@ -177,7 +211,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testReduce($expected, callable $function, $initial, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::reduce($function, $initial, $_collection));
+        $result      = Phamda::reduce($function, $initial, $_collection);
+        $this->assertSame($expected, $result, 'reduce works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'reduce does not modify to original collection values.');
     }
 
     /**
@@ -186,7 +222,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testReduceRight($expected, callable $function, $initial, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::reduceRight($function, $initial, $_collection));
+        $result      = Phamda::reduceRight($function, $initial, $_collection);
+        $this->assertSame($expected, $result, 'reduceRight works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'reduceRight does not modify to original collection values.');
     }
 
     /**
@@ -195,7 +233,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testReverse($expected, $collection)
     {
         $_collection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::reverse($_collection));
+        $result      = Phamda::reverse($_collection);
+        $this->assertSame($expected, $result, 'reverse works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'reverse does not modify to original collection values.');
     }
 
     /**
@@ -204,6 +244,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testSum($expected, $values)
     {
         $_values = new ArrayCollection($values);
-        $this->assertSame($expected, Phamda::sum($_values));
+        $result  = Phamda::sum($_values);
+        $this->assertSame($expected, $result, 'sum works for collection objects.');
+        $this->assertSame($values, $_values->toArray(), 'sum does not modify to original collection values.');
     }
 }
