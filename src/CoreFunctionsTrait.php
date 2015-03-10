@@ -119,6 +119,51 @@ trait CoreFunctionsTrait
     }
 
     /**
+     * @param callable $predicate
+     * @param array    $collection
+     *
+     * @return array
+     */
+    protected static function _filter(callable $predicate, array $collection)
+    {
+        $result = [];
+        foreach ($collection as $key => $item) {
+            if ($predicate($item, $key, $collection)) {
+                $result[$key] = $item;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param callable $function
+     * @param array    $collection
+     *
+     * @return array
+     */
+    protected static function _map(callable $function, array $collection)
+    {
+        $result = [];
+        foreach ($collection as $key => $item) {
+            $result[$key] = $function($item, $key, $collection);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string                    $name
+     * @param array|object|\ArrayAccess $object
+     *
+     * @return mixed
+     */
+    protected static function _prop($name, $object)
+    {
+        return is_array($object) || $object instanceof \ArrayAccess ? $object[$name] : $object->$name;
+    }
+
+    /**
      * @param callable           $function
      * @param mixed              $initial
      * @param array|\Traversable $collection
@@ -131,13 +176,14 @@ trait CoreFunctionsTrait
             $initial = $function($initial, $item, $key, $collection);
         }
 
-        return $initial;        
+        return $initial;
     }
 
     /**
      * @param array|\Traversable $collection
+     * @param bool               $preserveKeys
      *
-     * @return array|\Traversable
+     * @return array
      */
     protected static function _reverse($collection, $preserveKeys = false)
     {

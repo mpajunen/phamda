@@ -355,14 +355,7 @@ class Phamda
     public static function filter(callable $predicate = null, array $collection = null)
     {
         return static::curry2(function (callable $predicate, array $collection) {
-            $result = [];
-            foreach ($collection as $key => $item) {
-                if ($predicate($item, $key, $collection)) {
-                    $result[$key] = $item;
-                }
-            }
-
-            return $result;
+            return static::_filter($predicate, $collection);
         }, func_get_args());
     }
 
@@ -660,12 +653,7 @@ class Phamda
     public static function map(callable $function = null, array $collection = null)
     {
         return static::curry2(function (callable $function, array $collection) {
-            $result = [];
-            foreach ($collection as $key => $item) {
-                $result[$key] = $function($item, $key, $collection);
-            }
-
-            return $result;
+            return static::_map($function, $collection);
         }, func_get_args());
     }
 
@@ -839,7 +827,7 @@ class Phamda
     {
         return static::curry2(function (array $path, $object) {
             foreach ($path as $name) {
-                $object = Phamda::prop($name, $object);
+                $object = static::_prop($name, $object);
             }
 
             return $object;
@@ -928,7 +916,7 @@ class Phamda
     public static function pluck($name = null, array $collection = null)
     {
         return static::curry2(function ($name, array $collection) {
-            return Phamda::map(Phamda::prop($name), $collection);
+            return static::_map(Phamda::prop($name), $collection);
         }, func_get_args());
     }
 
@@ -945,15 +933,15 @@ class Phamda
     }
 
     /**
-     * @param string       $name
-     * @param array|object $object
+     * @param string                    $name
+     * @param array|object|\ArrayAccess $object
      *
      * @return callable|mixed
      */
     public static function prop($name = null, $object = null)
     {
         return static::curry2(function ($name, $object) {
-            return is_object($object) ? $object->{$name} : $object[$name];
+            return static::_prop($name, $object);
         }, func_get_args());
     }
 
@@ -967,7 +955,7 @@ class Phamda
     public static function propEq($name = null, $value = null, $object = null)
     {
         return static::curry3(function ($name, $value, $object) {
-            return is_object($object) ? $object->{$name} === $value : $object[$name] === $value;
+            return static::_prop($name, $object) === $value;
         }, func_get_args());
     }
 
@@ -1008,7 +996,7 @@ class Phamda
     public static function reject(callable $predicate = null, array $collection = null)
     {
         return static::curry2(function (callable $predicate, array $collection) {
-            return Phamda::filter(Phamda::not($predicate), $collection);
+            return static::_filter(Phamda::not($predicate), $collection);
         }, func_get_args());
     }
 
@@ -1123,7 +1111,7 @@ class Phamda
     public static function times(callable $function = null, $count = null)
     {
         return static::curry2(function (callable $function, $count) {
-            return Phamda::map($function, range(0, $count - 1));
+            return static::_map($function, range(0, $count - 1));
         }, func_get_args());
     }
 
