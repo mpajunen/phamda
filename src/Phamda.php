@@ -11,6 +11,8 @@
 
 namespace Phamda;
 
+use Doctrine\Common\Collections\Collection;
+
 class Phamda
 {
     use CoreFunctionsTrait;
@@ -436,14 +438,24 @@ class Phamda
     }
 
     /**
-     * @param array $collection
+     * @param array|\Traversable|Collection $collection
      *
      * @return callable|mixed
      */
-    public static function first(array $collection = null)
+    public static function first($collection = null)
     {
-        return static::curry1(function (array $collection) {
-            return reset($collection);
+        return static::curry1(function ($collection) {
+            if (is_array($collection)) {
+                return reset($collection);
+            } elseif (method_exists($collection, 'first')) {
+                return $collection->first();
+            } else {
+                foreach (static::_reverse($collection) as $item) {
+                    return $item;
+                }
+
+                return false;
+            }
         }, func_get_args());
     }
 
@@ -550,9 +562,9 @@ class Phamda
      *
      * @return callable|int|string|false
      */
-    public static function indexOf($item = null, array $collection = null)
+    public static function indexOf($item = null, $collection = null)
     {
-        return static::curry2(function ($item, array $collection) {
+        return static::curry2(function ($item, $collection) {
             foreach ($collection as $key => $current) {
                 if ($item === $current) {
                     return $key;
@@ -582,14 +594,24 @@ class Phamda
     }
 
     /**
-     * @param array $collection
+     * @param array|\Traversable|Collection $collection
      *
      * @return callable|bool
      */
-    public static function isEmpty(array $collection = null)
+    public static function isEmpty($collection = null)
     {
-        return static::curry1(function (array $collection) {
-            return empty($collection);
+        return static::curry1(function ($collection) {
+            if (is_array($collection)) {
+                return empty($collection);
+            } elseif (method_exists($collection, 'empty')) {
+                return $collection->empty();
+            } else {
+                foreach ($collection as $item) {
+                    return false;
+                }
+
+                return true;
+            }
         }, func_get_args());
     }
 
@@ -607,14 +629,24 @@ class Phamda
     }
 
     /**
-     * @param array $collection
+     * @param array|\Traversable|Collection $collection
      *
      * @return callable|mixed
      */
-    public static function last(array $collection = null)
+    public static function last($collection = null)
     {
-        return static::curry1(function (array $collection) {
-            return end($collection);
+        return static::curry1(function ($collection) {
+            if (is_array($collection)) {
+                return end($collection);
+            } elseif (method_exists($collection, 'last')) {
+                return $collection->last();
+            } else {
+                foreach (static::_reverse($collection) as $item) {
+                    return $item;
+                }
+
+                return false;
+            }
         }, func_get_args());
     }
 
@@ -925,9 +957,9 @@ class Phamda
      *
      * @return callable|int|float
      */
-    public static function product(array $values = null)
+    public static function product($values = null)
     {
-        return static::curry1(function (array $values) {
+        return static::curry1(function ($values) {
             return static::_reduce(Phamda::multiply(), 1, $values);
         }, func_get_args());
     }
@@ -1080,9 +1112,9 @@ class Phamda
      *
      * @return callable|int|float
      */
-    public static function sum(array $values = null)
+    public static function sum($values = null)
     {
-        return static::curry1(function (array $values) {
+        return static::curry1(function ($values) {
             return static::_reduce(Phamda::add(), 0, $values);
         }, func_get_args());
     }

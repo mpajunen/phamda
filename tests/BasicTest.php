@@ -321,7 +321,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFirstData
      */
-    public function testFirst($expected, array $collection)
+    public function testFirst($expected, $collection)
     {
         $this->assertSame($expected, Phamda::first($collection));
         $curried0 = Phamda::first();
@@ -417,7 +417,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getIndexOfData
      */
-    public function testIndexOf($expected, $item, array $collection)
+    public function testIndexOf($expected, $item, $collection)
     {
         $this->assertSame($expected, Phamda::indexOf($item, $collection));
         $curried0 = Phamda::indexOf();
@@ -429,7 +429,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getIsEmptyData
      */
-    public function testIsEmpty($expected, array $collection)
+    public function testIsEmpty($expected, $collection)
     {
         $this->assertSame($expected, Phamda::isEmpty($collection));
         $curried0 = Phamda::isEmpty();
@@ -451,7 +451,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getLastData
      */
-    public function testLast($expected, array $collection)
+    public function testLast($expected, $collection)
     {
         $this->assertSame($expected, Phamda::last($collection));
         $curried0 = Phamda::last();
@@ -682,7 +682,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getProductData
      */
-    public function testProduct($expected, array $values)
+    public function testProduct($expected, $values)
     {
         $this->assertSame($expected, Phamda::product($values));
         $curried0 = Phamda::product();
@@ -818,7 +818,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getSumData
      */
-    public function testSum($expected, array $values)
+    public function testSum($expected, $values)
     {
         $this->assertSame($expected, Phamda::sum($values));
         $curried0 = Phamda::sum();

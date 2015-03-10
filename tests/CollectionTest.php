@@ -23,8 +23,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAll($expected, callable $predicate, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::all($predicate, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::all($predicate, $_collection));
     }
 
     /**
@@ -32,8 +32,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAny($expected, callable $predicate, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::any($predicate, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::any($predicate, $_collection));
     }
 
     /**
@@ -41,8 +41,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testContains($expected, $value, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::contains($value, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::contains($value, $_collection));
     }
 
     /**
@@ -50,8 +50,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFind($expected, callable $predicate, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::find($predicate, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::find($predicate, $_collection));
     }
 
     /**
@@ -59,8 +59,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindIndex($expected, callable $predicate, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::findIndex($predicate, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::findIndex($predicate, $_collection));
     }
 
     /**
@@ -68,8 +68,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindLast($expected, callable $predicate, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::findLast($predicate, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::findLast($predicate, $_collection));
     }
 
     /**
@@ -77,8 +77,44 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindLastIndex($expected, callable $predicate, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::findLastIndex($predicate, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::findLastIndex($predicate, $_collection));
+    }
+
+    /**
+     * @dataProvider getFirstData
+     */
+    public function testFirst($expected, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::first($_collection));
+    }
+
+    /**
+     * @dataProvider getIndexOfData
+     */
+    public function testIndexOf($expected, $item, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::indexOf($item, $_collection));
+    }
+
+    /**
+     * @dataProvider getIsEmptyData
+     */
+    public function testIsEmpty($expected, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::isEmpty($_collection));
+    }
+
+    /**
+     * @dataProvider getLastData
+     */
+    public function testLast($expected, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::last($_collection));
     }
 
     /**
@@ -86,8 +122,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testMax($expected, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::max($arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::max($_collection));
     }
 
     /**
@@ -95,8 +131,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testMaxBy($expected, callable $getValue, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::maxBy($getValue, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::maxBy($getValue, $_collection));
     }
 
     /**
@@ -104,8 +140,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testMin($expected, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::min($arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::min($_collection));
     }
 
     /**
@@ -113,8 +149,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testMinBy($expected, callable $getValue, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::minBy($getValue, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::minBy($getValue, $_collection));
     }
 
     /**
@@ -122,8 +158,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testNone($expected, callable $predicate, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::none($predicate, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::none($predicate, $_collection));
+    }
+
+    /**
+     * @dataProvider getProductData
+     */
+    public function testProduct($expected, $values)
+    {
+        $_values = new ArrayCollection($values);
+        $this->assertSame($expected, Phamda::product($_values));
     }
 
     /**
@@ -131,8 +176,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReduce($expected, callable $function, $initial, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::reduce($function, $initial, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::reduce($function, $initial, $_collection));
     }
 
     /**
@@ -140,8 +185,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReduceRight($expected, callable $function, $initial, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::reduceRight($function, $initial, $arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::reduceRight($function, $initial, $_collection));
     }
 
     /**
@@ -149,7 +194,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReverse($expected, $collection)
     {
-        $arrayCollection = new ArrayCollection($collection);
-        $this->assertSame($expected, Phamda::reverse($arrayCollection));
+        $_collection = new ArrayCollection($collection);
+        $this->assertSame($expected, Phamda::reverse($_collection));
+    }
+
+    /**
+     * @dataProvider getSumData
+     */
+    public function testSum($expected, $values)
+    {
+        $_values = new ArrayCollection($values);
+        $this->assertSame($expected, Phamda::sum($_values));
     }
 }
