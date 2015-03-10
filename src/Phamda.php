@@ -943,7 +943,7 @@ class Phamda
      * @param string $name
      * @param array  $collection
      *
-     * @return callable|mixed
+     * @return callable|array
      */
     public static function pluck($name = null, array $collection = null)
     {
