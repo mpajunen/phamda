@@ -11,8 +11,8 @@
 
 namespace Phamda\Tests;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Phamda\Phamda;
+use Phamda\Tests\Fixtures\ArrayCollection;
 
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {

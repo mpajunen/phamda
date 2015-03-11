@@ -11,7 +11,7 @@
 
 namespace Phamda;
 
-use Doctrine\Common\Collections\Collection;
+use Phamda\Collection\Collection;
 
 class Phamda
 {
