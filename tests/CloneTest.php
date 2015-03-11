@@ -12,6 +12,7 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda;
+use Phamda\Tests\Fixtures\Test1;
 
 class CloneTest extends \PHPUnit_Framework_TestCase
 {

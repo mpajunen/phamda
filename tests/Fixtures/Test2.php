@@ -9,19 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Phamda\Tests;
+namespace Phamda\Tests\Fixtures;
 
-class ConstructableConcat
+class Test2
 {
-    private $string;
-
-    public function __construct($a, $b, $c)
-    {
-        $this->string = $a . $b . $c;
-    }
-
-    public function __toString()
-    {
-        return $this->string;
-    }
 }

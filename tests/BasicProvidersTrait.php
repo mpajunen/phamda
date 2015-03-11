@@ -12,6 +12,9 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda;
+use Phamda\Tests\Fixtures\Calculator;
+use Phamda\Tests\Fixtures\Counter;
+use Phamda\Tests\Fixtures\Test1;
 
 trait BasicProvidersTrait
 {
@@ -141,16 +144,16 @@ trait BasicProvidersTrait
     public function getConstructData()
     {
         return [
-            ['abc', '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c'],
-            ['abc', '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
+            ['abc', '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c'],
+            ['abc', '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
         ];
     }
 
     public function getConstructNData()
     {
         return [
-            ['abc', 3, '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c'],
-            ['abc', 3, '\Phamda\Tests\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
+            ['abc', 3, '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c'],
+            ['abc', 3, '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
         ];
     }
 
@@ -432,8 +435,8 @@ trait BasicProvidersTrait
     public function getIsInstanceData()
     {
         return [
-            [true, 'Phamda\\Tests\\Test1', new Test1()],
-            [false, 'Phamda\\Tests\\Test2', new Test1()],
+            [true, '\Phamda\Tests\Fixtures\Test1', new Test1()],
+            [false, '\Phamda\Tests\Fixtures\Test2', new Test1()],
         ];
     }
 

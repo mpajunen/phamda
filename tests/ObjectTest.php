@@ -12,6 +12,7 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda;
+use Phamda\Tests\Fixtures\Counter;
 
 class ObjectTest extends \PHPUnit_Framework_TestCase
 {

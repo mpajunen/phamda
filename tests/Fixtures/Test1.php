@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Phamda\Tests;
+namespace Phamda\Tests\Fixtures;
 
-class Test2
+class Test1
 {
 }
