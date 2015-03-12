@@ -349,14 +349,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable                      $predicate
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
-    public static function filter(callable $predicate = null, array $collection = null)
+    public static function filter(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             return static::_filter($predicate, $collection);
         }, func_get_args());
     }
@@ -474,14 +474,18 @@ class Phamda
     }
 
     /**
-     * @param callable $function
-     * @param array    $collection
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array[]
+     * @return callable|array[]|Collection[]
      */
-    public static function groupBy(callable $function = null, array $collection = null)
+    public static function groupBy(callable $function = null, $collection = null)
     {
-        return static::curry2(function (callable $function, array $collection) {
+        return static::curry2(function (callable $function, $collection) {
+            if (method_exists($collection, 'groupBy')) {
+                return $collection->groupBy($function);
+            }
+
             return static::_reduce(function (array $collections, $item) use ($function) {
                 $collections[$function($item)][] = $item;
 
@@ -677,14 +681,14 @@ class Phamda
     }
 
     /**
-     * @param callable $function
-     * @param array    $collection
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
-    public static function map(callable $function = null, array $collection = null)
+    public static function map(callable $function = null, $collection = null)
     {
-        return static::curry2(function (callable $function, array $collection) {
+        return static::curry2(function (callable $function, $collection) {
             return static::_map($function, $collection);
         }, func_get_args());
     }
@@ -833,14 +837,18 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable                      $predicate
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array[]
+     * @return callable|array[]|Collection[]
      */
-    public static function partition(callable $predicate = null, array $collection = null)
+    public static function partition(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
+            if (method_exists($collection, 'partition')) {
+                return $collection->partition($predicate);
+            }
+
             return static::_reduce(function (array $collections, $item) use ($predicate) {
                 $collections[$predicate($item) ? 0 : 1][] = $item;
 
@@ -940,14 +948,14 @@ class Phamda
     }
 
     /**
-     * @param string $name
-     * @param array  $collection
+     * @param string                        $name
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
-    public static function pluck($name = null, array $collection = null)
+    public static function pluck($name = null, $collection = null)
     {
-        return static::curry2(function ($name, array $collection) {
+        return static::curry2(function ($name, $collection) {
             return static::_map(Phamda::prop($name), $collection);
         }, func_get_args());
     }
@@ -1020,14 +1028,14 @@ class Phamda
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable                      $predicate
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
-    public static function reject(callable $predicate = null, array $collection = null)
+    public static function reject(callable $predicate = null, $collection = null)
     {
-        return static::curry2(function (callable $predicate, array $collection) {
+        return static::curry2(function (callable $predicate, $collection) {
             return static::_filter(Phamda::not($predicate), $collection);
         }, func_get_args());
     }
@@ -1045,52 +1053,49 @@ class Phamda
     }
 
     /**
-     * @param int   $start
-     * @param int   $end
-     * @param array $collection
+     * @param int                           $start
+     * @param int                           $end
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
-    public static function slice($start = null, $end = null, array $collection = null)
+    public static function slice($start = null, $end = null, $collection = null)
     {
-        return static::curry3(function ($start, $end, array $collection) {
-            return array_slice($collection, $start, $end - $start);
+        return static::curry3(function ($start, $end, $collection) {
+            return static::_slice($start, $end, $collection);
         }, func_get_args());
     }
 
     /**
-     * @param callable $comparator
-     * @param array    $collection
+     * @param callable                      $comparator
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
-    public static function sort(callable $comparator = null, array $collection = null)
+    public static function sort(callable $comparator = null, $collection = null)
     {
-        return static::curry2(function (callable $comparator, array $collection) {
-            usort($collection, $comparator);
-
-            return $collection;
+        return static::curry2(function (callable $comparator, $collection) {
+            return static::_sort($comparator, $collection);
         }, func_get_args());
     }
 
     /**
-     * @param callable $function
-     * @param array    $collection
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
-    public static function sortBy(callable $function = null, array $collection = null)
+    public static function sortBy(callable $function = null, $collection = null)
     {
-        return static::curry2(function (callable $function, array $collection) {
+        return static::curry2(function (callable $function, $collection) {
             $comparator = function ($x, $y) use ($function) {
                 $xKey = $function($x);
                 $yKey = $function($y);
 
                 return $xKey < $yKey ? -1 : ($xKey > $yKey ? 1 : 0);
             };
-            usort($collection, $comparator);
 
-            return $collection;
+            return static::_sort($comparator, $collection);
         }, func_get_args());
     }
 

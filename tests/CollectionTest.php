@@ -16,7 +16,7 @@ use Phamda\Tests\Fixtures\ArrayCollection;
 
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {
-    use BasicProvidersTrait;
+    use BasicProvidersTrait, CollectionTestTrait;
 
     /**
      * @dataProvider getAllData
@@ -49,6 +49,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result      = Phamda::contains($value, $_collection);
         $this->assertSame($expected, $result, 'contains works for collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'contains does not modify to original collection values.');
+    }
+
+    /**
+     * @dataProvider getFilterData
+     */
+    public function testFilter($expected, callable $predicate, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::filter($predicate, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'filter works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'filter does not modify to original collection values.');
     }
 
     /**
@@ -107,6 +118,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getGroupByData
+     */
+    public function testGroupBy($expected, callable $function, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::groupBy($function, $_collection);
+        $this->assertSame($expected, $this->getCollectionGroupArray($result), 'groupBy works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'groupBy does not modify to original collection values.');
+    }
+
+    /**
      * @dataProvider getIndexOfData
      */
     public function testIndexOf($expected, $item, $collection)
@@ -137,6 +159,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result      = Phamda::last($_collection);
         $this->assertSame($expected, $result, 'last works for collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'last does not modify to original collection values.');
+    }
+
+    /**
+     * @dataProvider getMapData
+     */
+    public function testMap($expected, callable $function, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::map($function, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'map works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'map does not modify to original collection values.');
     }
 
     /**
@@ -195,6 +228,28 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getPartitionData
+     */
+    public function testPartition($expected, callable $predicate, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::partition($predicate, $_collection);
+        $this->assertSame($expected, $this->getCollectionGroupArray($result), 'partition works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'partition does not modify to original collection values.');
+    }
+
+    /**
+     * @dataProvider getPluckData
+     */
+    public function testPluck($expected, $name, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::pluck($name, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'pluck works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'pluck does not modify to original collection values.');
+    }
+
+    /**
      * @dataProvider getProductData
      */
     public function testProduct($expected, $values)
@@ -228,6 +283,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getRejectData
+     */
+    public function testReject($expected, callable $predicate, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::reject($predicate, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'reject works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'reject does not modify to original collection values.');
+    }
+
+    /**
      * @dataProvider getReverseData
      */
     public function testReverse($expected, $collection)
@@ -236,6 +302,39 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result      = Phamda::reverse($_collection);
         $this->assertSame($expected, $result, 'reverse works for collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'reverse does not modify to original collection values.');
+    }
+
+    /**
+     * @dataProvider getSliceData
+     */
+    public function testSlice($expected, $start, $end, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::slice($start, $end, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'slice works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'slice does not modify to original collection values.');
+    }
+
+    /**
+     * @dataProvider getSortData
+     */
+    public function testSort($expected, callable $comparator, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::sort($comparator, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'sort works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'sort does not modify to original collection values.');
+    }
+
+    /**
+     * @dataProvider getSortByData
+     */
+    public function testSortBy($expected, callable $function, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::sortBy($function, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'sortBy works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'sortBy does not modify to original collection values.');
     }
 
     /**

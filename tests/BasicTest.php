@@ -261,7 +261,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFilterData
      */
-    public function testFilter($expected, callable $predicate, array $collection)
+    public function testFilter($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::filter($predicate, $collection));
         $curried0 = Phamda::filter();
@@ -343,7 +343,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getGroupByData
      */
-    public function testGroupBy($expected, callable $function, array $collection)
+    public function testGroupBy($expected, callable $function, $collection)
     {
         $this->assertSame($expected, Phamda::groupBy($function, $collection));
         $curried0 = Phamda::groupBy();
@@ -485,7 +485,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMapData
      */
-    public function testMap($expected, callable $function, array $collection)
+    public function testMap($expected, callable $function, $collection)
     {
         $this->assertSame($expected, Phamda::map($function, $collection));
         $curried0 = Phamda::map();
@@ -599,7 +599,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPartitionData
      */
-    public function testPartition($expected, callable $predicate, array $collection)
+    public function testPartition($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::partition($predicate, $collection));
         $curried0 = Phamda::partition();
@@ -670,7 +670,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPluckData
      */
-    public function testPluck($expected, $name, array $collection)
+    public function testPluck($expected, $name, $collection)
     {
         $this->assertSame($expected, Phamda::pluck($name, $collection));
         $curried0 = Phamda::pluck();
@@ -746,7 +746,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getRejectData
      */
-    public function testReject($expected, callable $predicate, array $collection)
+    public function testReject($expected, callable $predicate, $collection)
     {
         $this->assertSame($expected, Phamda::reject($predicate, $collection));
         $curried0 = Phamda::reject();
@@ -768,7 +768,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getSliceData
      */
-    public function testSlice($expected, $start, $end, array $collection)
+    public function testSlice($expected, $start, $end, $collection)
     {
         $this->assertSame($expected, Phamda::slice($start, $end, $collection));
         $curried0 = Phamda::slice();
@@ -782,7 +782,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getSortData
      */
-    public function testSort($expected, callable $comparator, array $collection)
+    public function testSort($expected, callable $comparator, $collection)
     {
         $this->assertSame($expected, Phamda::sort($comparator, $collection));
         $curried0 = Phamda::sort();
@@ -794,7 +794,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getSortByData
      */
-    public function testSortBy($expected, callable $function, array $collection)
+    public function testSortBy($expected, callable $function, $collection)
     {
         $this->assertSame($expected, Phamda::sortBy($function, $collection));
         $curried0 = Phamda::sortBy();

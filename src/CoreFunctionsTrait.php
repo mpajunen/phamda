@@ -11,6 +11,8 @@
 
 namespace Phamda;
 
+use Phamda\Collection\Collection;
+
 trait CoreFunctionsTrait
 {
     protected static function getArity(callable $function)
@@ -119,13 +121,17 @@ trait CoreFunctionsTrait
     }
 
     /**
-     * @param callable $predicate
-     * @param array    $collection
+     * @param callable                      $predicate
+     * @param array|\Traversable|Collection $collection
      *
-     * @return array
+     * @return array|Collection
      */
-    protected static function _filter(callable $predicate, array $collection)
+    protected static function _filter(callable $predicate, $collection)
     {
+        if (method_exists($collection, 'filter')) {
+            return $collection->filter($predicate);
+        }
+
         $result = [];
         foreach ($collection as $key => $item) {
             if ($predicate($item, $key, $collection)) {
@@ -137,13 +143,17 @@ trait CoreFunctionsTrait
     }
 
     /**
-     * @param callable $function
-     * @param array    $collection
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
      *
-     * @return array
+     * @return array|Collection
      */
-    protected static function _map(callable $function, array $collection)
+    protected static function _map(callable $function, $collection)
     {
+        if (method_exists($collection, 'map')) {
+            return $collection->map($function);
+        }
+
         $result = [];
         foreach ($collection as $key => $item) {
             $result[$key] = $function($item, $key, $collection);
@@ -180,23 +190,62 @@ trait CoreFunctionsTrait
     }
 
     /**
-     * @param array|\Traversable $collection
-     * @param bool               $preserveKeys
+     * @param array|\Traversable|Collection $collection
+     * @param bool                          $preserveKeys
      *
-     * @return array
+     * @return array|Collection
      */
     protected static function _reverse($collection, $preserveKeys = false)
     {
-        if (is_array($collection)) {
-            $items = $collection;
-        } else {
-            $items = [];
-            foreach ($collection as $key => $item) {
-                $items[$key] = $item;
-            }
-        }
+        $items = is_array($collection) ? $collection : self::getCollectionItems($collection);
 
         return array_reverse($items, $preserveKeys);
+    }
+
+    /**
+     * @param int                           $start
+     * @param int                           $end
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return array|Collection
+     */
+    protected static function _slice($start, $end, $collection)
+    {
+        if (is_array($collection)) {
+            return array_slice($collection, $start, $end - $start);
+        } elseif (method_exists($collection, 'slice')) {
+            return $collection->slice($start, $end);
+        } else {
+            $i      = 0;
+            $result = [];
+            foreach ($collection as $item) {
+                if ($i < $start) {
+                    continue;
+                } elseif ($i >= $end) {
+                    break;
+                }
+                $result[] = $item;
+            }
+
+            return $result;
+        }
+    }
+
+    /**
+     * @param callable                      $comparator
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return array|Collection
+     */
+    protected static function _sort(callable $comparator, $collection)
+    {
+        if (method_exists($collection, 'sort')) {
+            return $collection->sort($comparator);
+        }
+
+        usort($collection, $comparator);
+
+        return $collection;
     }
 
     protected static function curry1(callable $original, array $initialArguments)
@@ -247,5 +296,18 @@ trait CoreFunctionsTrait
         return is_callable($part)
             ? $part($value, $object)
             : $value === $part;
+    }
+
+    /**
+     * @param \Traversable $collection
+     */
+    private static function getCollectionItems($collection)
+    {
+        $items = [];
+        foreach ($collection as $key => $item) {
+            $items[$key] = $item;
+        }
+
+        return $items;
     }
 }
