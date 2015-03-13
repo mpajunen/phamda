@@ -450,7 +450,7 @@ class Phamda
             } elseif (method_exists($collection, 'first')) {
                 return $collection->first();
             } else {
-                foreach (static::_reverse($collection) as $item) {
+                foreach ($collection as $item) {
                     return $item;
                 }
 

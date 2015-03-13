@@ -220,11 +220,13 @@ trait CoreFunctionsTrait
             $result = [];
             foreach ($collection as $item) {
                 if ($i < $start) {
-                    continue;
                 } elseif ($i >= $end) {
-                    break;
+                    return $result;
+                } else {
+                    $result[] = $item;
                 }
-                $result[] = $item;
+
+                $i++;
             }
 
             return $result;
@@ -241,6 +243,13 @@ trait CoreFunctionsTrait
     {
         if (method_exists($collection, 'sort')) {
             return $collection->sort($comparator);
+        } elseif (! is_array($collection)) {
+            $items = [];
+            foreach ($collection as $key => $item) {
+                $items[$key] = $item;
+            }
+
+            $collection = $items;
         }
 
         usort($collection, $comparator);
