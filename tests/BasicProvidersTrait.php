@@ -12,6 +12,7 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda;
+use Phamda\Tests\Fixtures\Adder;
 use Phamda\Tests\Fixtures\Calculator;
 use Phamda\Tests\Fixtures\Counter;
 use Phamda\Tests\Fixtures\Test1;
@@ -179,6 +180,8 @@ trait BasicProvidersTrait
             [1234, $sum, 1000, 200, 30, 4, 5],
             [true, Phamda::eq(), 5, 5],
             [false, Phamda::eq(), 5, 7],
+            [true, ['\Phamda\Phamda', 'eq'], 5, 5],
+            [42, new Adder(), 23, 19],
         ];
     }
 
@@ -191,6 +194,8 @@ trait BasicProvidersTrait
             [1234, 4, $sum, 1000, 200, 30, 4, 5],
             [true, 2, Phamda::eq(), 5, 5],
             [false, 2, Phamda::eq(), 5, 7],
+            [true, 2, ['\Phamda\Phamda', 'eq'], 5, 5],
+            [42, 2, new Adder(), 23, 19],
         ];
     }
 

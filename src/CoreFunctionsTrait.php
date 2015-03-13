@@ -18,16 +18,17 @@ trait CoreFunctionsTrait
     protected static function getArity(callable $function)
     {
         if (is_string($function) || $function instanceof \Closure) {
-            $function = new \ReflectionFunction($function);
+            $reflection = new \ReflectionFunction($function);
         } elseif (is_array($function)) {
             list($class, $name) = $function;
 
-            $function = new \ReflectionMethod($class, $name);
+            $reflection = new \ReflectionMethod($class, $name);
         } else {
-            throw new \LogicException('Invalid callable.');
+            $reflectionObject = new \ReflectionObject($function);
+            $reflection       = $reflectionObject->getMethod('__invoke');
         }
 
-        return $function->getNumberOfRequiredParameters();
+        return $reflection->getNumberOfRequiredParameters();
     }
 
     protected static function getConstructorArity($class)
