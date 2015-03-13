@@ -284,6 +284,7 @@ trait BasicProvidersTrait
         return [
             [15, $isPositive, [-5, 0, 15, 33, -2]],
             [22, $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+            [null, $isPositive, [-5, 0, -8, -1, -2]],
         ];
     }
 
@@ -294,6 +295,7 @@ trait BasicProvidersTrait
         return [
             [2, $isPositive, [-5, 0, 15, 33, -2]],
             ['b', $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+            [null, $isPositive, [-5, 0, -8, -1, -2]],
         ];
     }
 
@@ -304,6 +306,7 @@ trait BasicProvidersTrait
         return [
             [33, $isPositive, [-5, 0, 15, 33, -2]],
             [13, $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+            [null, $isPositive, [-5, 0, -8, -1, -2]],
         ];
     }
 
@@ -314,6 +317,7 @@ trait BasicProvidersTrait
         return [
             [3, $isPositive, [-5, 0, 15, 33, -2]],
             ['c', $isPositive, ['a' => -3, 'b' => 22, 'c' => 13, 'd' => 0, 'e' => -3]],
+            [null, $isPositive, [-5, 0, -8, -1, -2]],
         ];
     }
 
@@ -326,6 +330,7 @@ trait BasicProvidersTrait
         return [
             [5, [5, 8, 9, 13]],
             [$a, [$a, $b, $c]],
+            [false, []],
         ];
     }
 
@@ -397,6 +402,8 @@ trait BasicProvidersTrait
         return [
             [3, 16, [1, 6, 44, 16, 52]],
             ['a', $a, ['a' => $a, 'b' => $b, 'c' => $c]],
+            [false, 15, [1, 6, 44, 16, 52]],
+            [false, 15, []],
         ];
     }
 
@@ -449,6 +456,7 @@ trait BasicProvidersTrait
         return [
             [13, [5, 8, 9, 13]],
             [$c, [$a, $b, $c]],
+            [false, []],
         ];
     }
 
