@@ -13,16 +13,8 @@ namespace Phamda\Tests\Fixtures;
 
 use Phamda\Collection\Collection;
 
-class ArrayCollection implements Collection, \ArrayAccess, \Countable, \IteratorAggregate
+class ArrayCollection extends ArrayContainer implements Collection
 {
-    /** @var mixed[] */
-    private $values;
-
-    public function __construct(array $values)
-    {
-        $this->values = $values;
-    }
-
     /**
      * @param mixed $item
      *
@@ -31,14 +23,6 @@ class ArrayCollection implements Collection, \ArrayAccess, \Countable, \Iterator
     public function contains($item)
     {
         return in_array($item, $this->values, true);
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->values);
     }
 
     /**
@@ -64,14 +48,6 @@ class ArrayCollection implements Collection, \ArrayAccess, \Countable, \Iterator
     public function first()
     {
         return reset($this->values);
-    }
-
-    /**
-     * @return \ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->values);
     }
 
     /**
@@ -133,43 +109,6 @@ class ArrayCollection implements Collection, \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * @param int|string $offset
-     *
-     * @return bool
-     */
-    public function offsetExists($offset)
-    {
-        return array_key_exists($offset, $this->values);
-    }
-
-    /**
-     * @param int|string $offset
-     *
-     * @return mixed
-     */
-    public function offsetGet($offset)
-    {
-        return $this->values[$offset];
-    }
-
-    /**
-     * @param int|string $offset
-     * @param mixed      $value
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->values[$offset] = $value;
-    }
-
-    /**
-     * @param int|string $offset
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->values[$offset]);
-    }
-
-    /**
      * @param callable $predicate
      *
      * @return static[]
@@ -216,13 +155,5 @@ class ArrayCollection implements Collection, \ArrayAccess, \Countable, \Iterator
         usort($values, $comparator);
 
         return new static($values);
-    }
-
-    /**
-     * @return \mixed[]
-     */
-    public function toArray()
-    {
-        return $this->values;
     }
 }
