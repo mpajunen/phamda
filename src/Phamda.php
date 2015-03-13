@@ -12,6 +12,7 @@
 namespace Phamda;
 
 use Phamda\Collection\Collection;
+use Phamda\Exception\InvalidFunctionCompositionException;
 
 class Phamda
 {
@@ -934,7 +935,7 @@ class Phamda
     public static function pipe(... $functions)
     {
         if (count($functions) < 2) {
-            throw new \LogicException('Pipe requires at least two argument functions.');
+            throw InvalidFunctionCompositionException::create();
         }
 
         return function (... $arguments) use ($functions) {
