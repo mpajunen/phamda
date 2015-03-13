@@ -607,8 +607,8 @@ class Phamda
         return static::curry1(function ($collection) {
             if (is_array($collection)) {
                 return empty($collection);
-            } elseif (method_exists($collection, 'empty')) {
-                return $collection->empty();
+            } elseif (method_exists($collection, 'isEmpty')) {
+                return $collection->isEmpty();
             } else {
                 foreach ($collection as $item) {
                     return false;
