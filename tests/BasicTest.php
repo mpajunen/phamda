@@ -47,7 +47,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testAllPass($expected, array $predicates, ... $arguments)
     {
         $main0 = Phamda::allPass($predicates);
-        $this->assertSame($expected, $main0(...$arguments), 'allPass is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'allPass produces correct results.');
         $curried0 = Phamda::allPass();
         $main1    = $curried0($predicates);
         $this->assertSame($expected, $main1(...$arguments), 'allPass is curried correctly.');
@@ -59,7 +59,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testAlways($expected, $value)
     {
         $main0 = Phamda::always($value);
-        $this->assertSame($expected, $main0(), 'always is curried correctly.');
+        $this->assertSame($expected, $main0(), 'always produces correct results.');
         $curried0 = Phamda::always();
         $main1    = $curried0($value);
         $this->assertSame($expected, $main1(), 'always is curried correctly.');
@@ -83,7 +83,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testAnyPass($expected, array $predicates, ... $arguments)
     {
         $main0 = Phamda::anyPass($predicates);
-        $this->assertSame($expected, $main0(...$arguments), 'anyPass is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'anyPass produces correct results.');
         $curried0 = Phamda::anyPass();
         $main1    = $curried0($predicates);
         $this->assertSame($expected, $main1(...$arguments), 'anyPass is curried correctly.');
@@ -123,7 +123,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testBoth($expected, callable $a, callable $b, ... $arguments)
     {
         $main0 = Phamda::both($a, $b);
-        $this->assertSame($expected, $main0(...$arguments), 'both is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'both produces correct results.');
         $curried0 = Phamda::both();
         $main1    = $curried0($a, $b);
         $this->assertSame($expected, $main1(...$arguments), 'both is curried correctly.');
@@ -138,7 +138,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testComparator($expected, callable $predicate, $x, $y)
     {
         $main0 = Phamda::comparator($predicate);
-        $this->assertSame($expected, $main0($x, $y), 'comparator is curried correctly.');
+        $this->assertSame($expected, $main0($x, $y), 'comparator produces correct results.');
         $curried0 = Phamda::comparator();
         $main1    = $curried0($predicate);
         $this->assertSame($expected, $main1($x, $y), 'comparator is curried correctly.');
@@ -150,7 +150,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testCompose($expected, array $functions, ... $arguments)
     {
         $main0 = Phamda::compose(...$functions);
-        $this->assertSame($expected, $main0(...$arguments), 'compose is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'compose produces correct results.');
     }
 
     /**
@@ -231,7 +231,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testEither($expected, callable $a, callable $b, ... $arguments)
     {
         $main0 = Phamda::either($a, $b);
-        $this->assertSame($expected, $main0(...$arguments), 'either is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'either produces correct results.');
         $curried0 = Phamda::either();
         $main1    = $curried0($a, $b);
         $this->assertSame($expected, $main1(...$arguments), 'either is curried correctly.');
@@ -258,7 +258,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testFalse($expected)
     {
         $main0 = Phamda::false();
-        $this->assertSame($expected, $main0(), 'false is curried correctly.');
+        $this->assertSame($expected, $main0(), 'false produces correct results.');
     }
 
     /**
@@ -337,7 +337,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testFlip($expected, callable $function, $a, $b, ... $arguments)
     {
         $main0 = Phamda::flip($function);
-        $this->assertSame($expected, $main0($a, $b, ...$arguments), 'flip is curried correctly.');
+        $this->assertSame($expected, $main0($a, $b, ...$arguments), 'flip produces correct results.');
         $curried0 = Phamda::flip();
         $main1    = $curried0($function);
         $this->assertSame($expected, $main1($a, $b, ...$arguments), 'flip is curried correctly.');
@@ -395,7 +395,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, ... $arguments)
     {
         $main0 = Phamda::ifElse($condition, $onTrue, $onFalse);
-        $this->assertSame($expected, $main0(...$arguments), 'ifElse is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'ifElse produces correct results.');
         $curried0 = Phamda::ifElse();
         $main1    = $curried0($condition, $onTrue, $onFalse);
         $this->assertSame($expected, $main1(...$arguments), 'ifElse is curried correctly.');
@@ -593,7 +593,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testNot($expected, callable $predicate, ... $arguments)
     {
         $main0 = Phamda::not($predicate);
-        $this->assertSame($expected, $main0(...$arguments), 'not is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'not produces correct results.');
         $curried0 = Phamda::not();
         $main1    = $curried0($predicate);
         $this->assertSame($expected, $main1(...$arguments), 'not is curried correctly.');
@@ -667,7 +667,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testPipe($expected, array $functions, ... $arguments)
     {
         $main0 = Phamda::pipe(...$functions);
-        $this->assertSame($expected, $main0(...$arguments), 'pipe is curried correctly.');
+        $this->assertSame($expected, $main0(...$arguments), 'pipe produces correct results.');
     }
 
     /**
@@ -858,7 +858,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     public function testTrue($expected)
     {
         $main0 = Phamda::true();
-        $this->assertSame($expected, $main0(), 'true is curried correctly.');
+        $this->assertSame($expected, $main0(), 'true produces correct results.');
     }
 
     /**
