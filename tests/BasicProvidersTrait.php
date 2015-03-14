@@ -359,7 +359,7 @@ trait BasicProvidersTrait
             [
                 ['a' => ['abc', 'aba', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa'], 'd' => ['dfe']],
                 $firstChar,
-                ['abc', 'aba', 'cbc', 'cab', 'baa', 'ayb', 'dfe']
+                ['abc', 'aba', 'cbc', 'cab', 'baa', 'ayb', 'dfe'],
             ],
         ];
     }
@@ -802,7 +802,7 @@ trait BasicProvidersTrait
             [
                 [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]],
                 $getFoo,
-                [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]]
+                [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]],
             ],
         ];
     }
@@ -869,7 +869,7 @@ trait BasicProvidersTrait
         return [
             [[[1, 4], [2, 5], [3, 6]], [1, 2, 3], [4, 5, 6]],
             [['a' => [1, 3]], ['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4]],
-            [[], [1, 2, 3], []]
+            [[], [1, 2, 3], []],
         ];
     }
 

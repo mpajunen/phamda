@@ -829,10 +829,10 @@ class Phamda
      */
     public static function partialN($arity, callable $function, ... $initialArguments)
     {
+        $remainingCount = $arity - count($initialArguments);
         $partial        = function (... $arguments) use ($function, $initialArguments) {
             return $function(...array_merge($initialArguments, $arguments));
         };
-        $remainingCount = $arity - count($initialArguments);
 
         return $remainingCount > 0 ? static::_curryN($remainingCount, $partial) : $partial;
     }
