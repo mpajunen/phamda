@@ -75,11 +75,13 @@ class Phamda
      *
      * @return callable
      */
-    public static function always($value)
+    public static function always($value = null)
     {
-        return function () use ($value) {
-            return $value;
-        };
+        return static::curry1(function ($value) {
+            return function () use ($value) {
+                return $value;
+            };
+        }, func_get_args());
     }
 
     /**

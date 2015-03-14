@@ -58,8 +58,11 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAlways($expected, $value)
     {
-        $wrapped = Phamda::always($value);
-        $this->assertSame($expected, $wrapped(), 'always is curried correctly.');
+        $main0 = Phamda::always($value);
+        $this->assertSame($expected, $main0(), 'always is curried correctly.');
+        $curried0 = Phamda::always();
+        $main1    = $curried0($value);
+        $this->assertSame($expected, $main1(), 'always is curried correctly.');
     }
 
     /**
