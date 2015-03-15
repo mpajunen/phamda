@@ -213,9 +213,9 @@ trait BasicProvidersTrait
     {
         return [
             [15, 22, 15],
+            [42, 42, null],
             [false, 15, false],
             [null, null, null],
-            [42, 42, null],
         ];
     }
 
@@ -336,8 +336,8 @@ trait BasicProvidersTrait
 
         return [
             [5, [5, 8, 9, 13]],
-            [$a, [$a, $b, $c]],
             [false, []],
+            [$a, [$a, $b, $c]],
         ];
     }
 
@@ -408,8 +408,8 @@ trait BasicProvidersTrait
 
         return [
             [3, 16, [1, 6, 44, 16, 52]],
-            ['a', $a, ['a' => $a, 'b' => $b, 'c' => $c]],
             [false, 15, [1, 6, 44, 16, 52]],
+            ['a', $a, ['a' => $a, 'b' => $b, 'c' => $c]],
             [false, 15, []],
         ];
     }
@@ -860,6 +860,7 @@ trait BasicProvidersTrait
 
         return [
             [false, ['a' => 15, 'b' => 16], $x],
+            [true, ['a' => 15, 'b' => 16], $y],
             [true, ['a' => 15, 'b' => 16], (object) $y],
             [true, ['d' => $isLargest], $y],
             [false, ['b' => $isLargest], $x],
