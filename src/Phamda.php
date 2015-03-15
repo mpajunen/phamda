@@ -19,6 +19,8 @@ class Phamda
     use CoreFunctionsTrait;
 
     /**
+     * Adds two numbers.
+     *
      * ```php
      * Phamda::add(15, 27); // => 42
      * Phamda::add(36, -8); // => 28
@@ -37,6 +39,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if all elements of the collection match the predicate, `false` otherwise.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -64,6 +68,8 @@ class Phamda
     }
 
     /**
+     * Creates a single predicate from a list of predicates that returns `true` when all the predicates match, `false` otherwise.
+     *
      * ```php
      * $isEven = function ($x) {
      *     return $x % 2 === 0;
@@ -97,6 +103,8 @@ class Phamda
     }
 
     /**
+     * Returns a function that always returns the passed value.
+     *
      * ```php
      * $alwaysFoo = Phamda::always('foo');
      * $alwaysFoo(); // => 'foo'
@@ -116,6 +124,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if any element of the collection matches the predicate, `false` otherwise.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -143,6 +153,8 @@ class Phamda
     }
 
     /**
+     * Creates a single predicate from a list of predicates that returns `true` when any of the predicates matches, `false` otherwise.
+     *
      * ```php
      * $isEven = function ($x) {
      *     return $x % 2 === 0;
@@ -176,6 +188,8 @@ class Phamda
     }
 
     /**
+     * Returns a new array or object, setting the given value to the specified property.
+     *
      * ```php
      * Phamda::assoc('bar', 3, ['foo' => 1]); // => ['foo' => 1, 'bar' => 3]
      * Phamda::assoc('bar', 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
@@ -196,6 +210,8 @@ class Phamda
     }
 
     /**
+     * Returns a new array or object, setting the given value to the property specified by the path.
+     *
      * ```php
      * Phamda::assocPath(['bar'], 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
      * Phamda::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' => 1, 'bar' => ['baz' => 4]]
@@ -215,6 +231,8 @@ class Phamda
     }
 
     /**
+     * Returns a function that returns `true` when both of the predicates match, `false` otherwise.
+     *
      * ```php
      * $lt = function ($x, $y) {
      *     return $x < $y;
@@ -243,6 +261,8 @@ class Phamda
     }
 
     /**
+     * Clones an object.
+     *
      *
      * @param object $object
      *
@@ -256,6 +276,8 @@ class Phamda
     }
 
     /**
+     * Creates a comparator function from a function that returns whether the first argument is less than the second.
+     *
      * ```php
      * $lt = function ($x, $y) {
      *     return $x < $y;
@@ -280,6 +302,8 @@ class Phamda
     }
 
     /**
+     * Returns a new function that calls each supplied function in turn in reverse order and passes the result as a parameter to the next function.
+     *
      * ```php
      * $add5 = function ($x) {
      *     return $x + 5;
@@ -308,6 +332,8 @@ class Phamda
     }
 
     /**
+     * Wraps the constructor of the given class to a function.
+     *
      * ```php
      * $date = Phamda::construct(\DateTime::class, '2015-03-15');
      * $date->format('Y-m-d'); // => '2015-03-15'
@@ -325,6 +351,8 @@ class Phamda
     }
 
     /**
+     * Wraps the constructor of the given class to a function of specified arity.
+     *
      * ```php
      * $construct = Phamda::constructN(1, \DateTime::class);
      * $construct('2015-03-15')->format('Y-m-d'); // => '2015-03-15'
@@ -345,6 +373,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if the specified item is found in the collection, `false` otherwise.
+     *
      * ```php
      * Phamda::contains('a', ['a', 'b', 'c', 'e']); // => true
      * Phamda::contains('d', ['a', 'b', 'c', 'e']); // => false
@@ -369,6 +399,8 @@ class Phamda
     }
 
     /**
+     * Wraps the given function to a function that returns a new function until all required parameters are given.
+     *
      * ```php
      * $add = function ($x, $y, $z) {
      *     return $x + $y + $z;
@@ -390,6 +422,8 @@ class Phamda
     }
 
     /**
+     * Wraps the given function to a function of specified arity that returns a new function until all required parameters are given.
+     *
      * ```php
      * $add = function ($x, $y, $z = 0) {
      *     return $x + $y + $z;
@@ -414,6 +448,8 @@ class Phamda
     }
 
     /**
+     * Decrements the given number.
+     *
      * ```php
      * Phamda::dec(43); // => 42
      * Phamda::dec(-14); // => -15
@@ -431,6 +467,8 @@ class Phamda
     }
 
     /**
+     * Returns the default argument if the value argument is `null`.
+     *
      * ```php
      * Phamda::defaultTo(22, 15); // => 15
      * Phamda::defaultTo(42, null); // => 42
@@ -450,6 +488,8 @@ class Phamda
     }
 
     /**
+     * Divides two numbers.
+     *
      * ```php
      * Phamda::divide(55, 11); // => 5
      * Phamda::divide(48, -8); // => -6
@@ -468,6 +508,8 @@ class Phamda
     }
 
     /**
+     * Returns a function that returns `true` when either of the predicates matches, `false` otherwise.
+     *
      * ```php
      * $lt = function ($x, $y) {
      *     return $x < $y;
@@ -496,6 +538,8 @@ class Phamda
     }
 
     /**
+     * Return true when the arguments are strictly equal.
+     *
      * ```php
      * Phamda::eq('a', 'a'); // => true
      * Phamda::eq('a', 'b'); // => false
@@ -515,6 +559,8 @@ class Phamda
     }
 
     /**
+     * Returns a function that always returns `false`.
+     *
      * ```php
      * $false = Phamda::false();
      * $false(); // => false
@@ -530,6 +576,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection containing the items that match the given predicate.
+     *
      * ```php
      * $gt2 = function ($x) {
      *     return $x > 2;
@@ -550,6 +598,8 @@ class Phamda
     }
 
     /**
+     * Returns the first item of a collection for which the given predicate matches, or null if no match is found.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -576,6 +626,8 @@ class Phamda
     }
 
     /**
+     * Returns the index of the first item of a collection for which the given predicate matches, or null if no match is found.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -602,6 +654,8 @@ class Phamda
     }
 
     /**
+     * Returns the last item of a collection for which the given predicate matches, or null if no match is found.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -628,6 +682,8 @@ class Phamda
     }
 
     /**
+     * Returns the index of the last item of a collection for which the given predicate matches, or null if no match is found.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -654,6 +710,8 @@ class Phamda
     }
 
     /**
+     * Returns the first item of a collection, or false if the collection is empty.
+     *
      * ```php
      * Phamda::first([5, 8, 9, 13]); // => 5
      * Phamda::first([]); // => false
@@ -681,6 +739,8 @@ class Phamda
     }
 
     /**
+     * Wraps the given function and returns a new function for which the order of the first two parameters is reversed.
+     *
      * ```php
      * $sub = function ($x, $y) {
      *     return $x - $y;
@@ -703,6 +763,8 @@ class Phamda
     }
 
     /**
+     * Returns an array of sub collections based on a function that returns the group keys for each item.
+     *
      * ```php
      * $firstChar = function ($string) {
      *     return $string[0];
@@ -732,6 +794,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if the first parameter is greater than the second, `false` otherwise.
+     *
      * ```php
      * Phamda::gt(1, 2); // => false
      * Phamda::gt(1, 1); // => false
@@ -751,6 +815,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if the first parameter is greater than or equal to the second, `false` otherwise.
+     *
      * ```php
      * Phamda::gte(1, 2); // => false
      * Phamda::gte(1, 1); // => true
@@ -770,6 +836,8 @@ class Phamda
     }
 
     /**
+     * Returns the given parameter.
+     *
      * ```php
      * Phamda::identity(1); // => 1
      * Phamda::identity(null); // => null
@@ -788,6 +856,8 @@ class Phamda
     }
 
     /**
+     * Returns a function that applies either the `onTrue` or the `onFalse` function, depending on the result of the `condition` predicate.
+     *
      * ```php
      * $addOrSub = Phamda::ifElse(Phamda::lt(0), Phamda::add(-10), Phamda::add(10));
      * $addOrSub(25); // => 15
@@ -810,6 +880,8 @@ class Phamda
     }
 
     /**
+     * Increments the given number.
+     *
      * ```php
      * Phamda::inc(41); // => 42
      * Phamda::inc(-16); // => -15
@@ -827,6 +899,8 @@ class Phamda
     }
 
     /**
+     * Returns the index of the given item in a collection, or `false` if the item is not found.
+     *
      * ```php
      * Phamda::indexOf(16, [1, 6, 44, 16, 52]); // => 3
      * Phamda::indexOf(15, [1, 6, 44, 16, 52]); // => false
@@ -851,6 +925,8 @@ class Phamda
     }
 
     /**
+     * Returns a function that calls the specified method of a given object.
+     *
      * ```php
      * $addDay = Phamda::invoker(1, 'add', new \DateInterval('P1D'));
      * $addDay(new \DateTime('2015-03-15'))->format('Y-m-d'); // => '2015-03-16'
@@ -875,6 +951,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if a collection has no elements, `false` otherwise.
+     *
      * ```php
      * Phamda::isEmpty([1, 2, 3]); // => false
      * Phamda::isEmpty([0]); // => false
@@ -903,6 +981,8 @@ class Phamda
     }
 
     /**
+     * Return `true` if an object is of the specified class, `false` otherwise.
+     *
      * ```php
      * $isDate = Phamda::isInstance(\DateTime::class);
      * $isDate(new \DateTime()); // => true
@@ -922,6 +1002,8 @@ class Phamda
     }
 
     /**
+     * Returns the last item of a collection, or false if the collection is empty.
+     *
      * ```php
      * Phamda::last([5, 8, 9, 13]); // => 13
      * Phamda::last([]); // => false
@@ -949,6 +1031,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if the first parameter is less than the second, `false` otherwise.
+     *
      * ```php
      * Phamda::lt(1, 2); // => true
      * Phamda::lt(1, 1); // => false
@@ -968,6 +1052,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if the first parameter is less than or equal to the second, `false` otherwise.
+     *
      * ```php
      * Phamda::lte(1, 2); // => true
      * Phamda::lte(1, 1); // => true
@@ -987,6 +1073,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection where values are created from the original collection by calling the supplied function.
+     *
      * ```php
      * $square = function ($x) {
      *     return $x ** 2;
@@ -1007,6 +1095,8 @@ class Phamda
     }
 
     /**
+     * Returns the largest value in the collection.
+     *
      * ```php
      * Phamda::max([6, 15, 8, 9, -2, -3]); // => 15
      * Phamda::max(['bar', 'foo', 'baz']); // => 'foo'
@@ -1024,6 +1114,8 @@ class Phamda
     }
 
     /**
+     * Returns the item from a collection for which the supplied function returns the largest value.
+     *
      * ```php
      * $getFoo = function ($item) {
      *     return $item->foo;
@@ -1047,6 +1139,8 @@ class Phamda
     }
 
     /**
+     * Returns the smallest value in the collection.
+     *
      * ```php
      * Phamda::min([6, 15, 8, 9, -2, -3]); // => -3
      * Phamda::min(['bar', 'foo', 'baz']); // => 'bar'
@@ -1064,6 +1158,8 @@ class Phamda
     }
 
     /**
+     * Returns the item from a collection for which the supplied function returns the smallest value.
+     *
      * ```php
      * $getFoo = function ($item) {
      *     return $item->foo;
@@ -1087,6 +1183,8 @@ class Phamda
     }
 
     /**
+     * Divides two integers and returns the modulo.
+     *
      * ```php
      * Phamda::modulo(15, 6); // => 3
      * Phamda::modulo(22, 11); // => 0
@@ -1106,6 +1204,8 @@ class Phamda
     }
 
     /**
+     * Multiplies two numbers.
+     *
      * ```php
      * Phamda::multiply(15, 27); // => 405
      * Phamda::multiply(36, -8); // => -288
@@ -1124,6 +1224,8 @@ class Phamda
     }
 
     /**
+     * Returns the negation of a number.
+     *
      * ```php
      * Phamda::negate(15); // => -15
      * Phamda::negate(-0.7); // => 0.7
@@ -1142,6 +1244,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if no element in the collection matches the predicate, `false` otherwise.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -1163,6 +1267,8 @@ class Phamda
     }
 
     /**
+     * Wraps a predicate and returns a function that return `true` if the wrapped function returns a falsey value, `false` otherwise.
+     *
      * ```php
      * $equal = function ($a, $b) {
      *     return $a === $b;
@@ -1186,6 +1292,8 @@ class Phamda
     }
 
     /**
+     * Wraps the given function and returns a new function that can be called with the remaining parameters.
+     *
      * ```php
      * $add = function ($x, $y, $z) {
      *     return $x + $y + $z;
@@ -1207,6 +1315,8 @@ class Phamda
     }
 
     /**
+     * Wraps the given function and returns a new function of fixed arity that can be called with the remaining parameters.
+     *
      * ```php
      * $add = function ($x, $y, $z = 0) {
      *     return $x + $y + $z;
@@ -1233,6 +1343,8 @@ class Phamda
     }
 
     /**
+     * Returns the items of the original collection divided into two collections based on a predicate function.
+     *
      * ```php
      * $isPositive = function ($x) {
      *     return $x > 0;
@@ -1261,6 +1373,8 @@ class Phamda
     }
 
     /**
+     * Returns a value found at the given path.
+     *
      * ```php
      * Phamda::path(['foo', 'bar'], ['foo' => ['baz' => 26, 'bar' => 15]]); // => 15
      * Phamda::path(['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]); // => null
@@ -1283,6 +1397,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if the given value is found at the specified path, `false` otherwise.
+     *
      * ```php
      * Phamda::pathEq(['foo', 'bar'], 44, ['foo' => ['baz' => 26, 'bar' => 15]]); // => false
      * Phamda::pathEq(['foo', 'baz'], 26, ['foo' => ['baz' => 26, 'bar' => 15]]); // => true
@@ -1302,6 +1418,8 @@ class Phamda
     }
 
     /**
+     * Returns a new array, containing only the values that have keys matching the given list.
+     *
      * ```php
      * Phamda::pick(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz']
      * Phamda::pick(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => []
@@ -1328,6 +1446,8 @@ class Phamda
     }
 
     /**
+     * Returns a new array, containing the values that have keys matching the given list, including keys that are not found in the item.
+     *
      * ```php
      * Phamda::pickAll(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'fib' => null]
      * Phamda::pickAll(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['fob' => null, 'fib' => null]
@@ -1352,6 +1472,8 @@ class Phamda
     }
 
     /**
+     * Returns a new function that calls each supplied function in turn and passes the result as a parameter to the next function.
+     *
      * ```php
      * $add5 = function ($x) {
      *     return $x + 5;
@@ -1391,6 +1513,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection, where the items are single properties plucked from the given collection.
+     *
      * ```php
      * Phamda::pluck('foo', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => [null, 'fii']
      * Phamda::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => ['bob', 'pob']
@@ -1409,6 +1533,8 @@ class Phamda
     }
 
     /**
+     * Multiplies a list of numbers.
+     *
      * ```php
      * Phamda::product([11, -8, 3]); // => -264
      * Phamda::product([1, 2, 3, 4, 5, 6]); // => 720
@@ -1426,6 +1552,8 @@ class Phamda
     }
 
     /**
+     * Returns the given element of an array or property of an object.
+     *
      * ```php
      * Phamda::prop('bar', ['bar' => 'fuz', 'baz' => null]); // => 'fuz'
      * Phamda::prop('baz', ['bar' => 'fuz', 'baz' => null]); // => null
@@ -1444,6 +1572,8 @@ class Phamda
     }
 
     /**
+     * Returns `true` if the specified property has the given value, `false` otherwise.
+     *
      * ```php
      * Phamda::propEq('foo', 'bar', ['foo' => 'bar']); // => true
      * Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
@@ -1463,6 +1593,8 @@ class Phamda
     }
 
     /**
+     * Returns a value accumulated by calling the given function for each element of the collection.
+     *
      * ```php
      * $concat = function ($x, $y) {
      *     return $x . $y;
@@ -1484,6 +1616,8 @@ class Phamda
     }
 
     /**
+     * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
+     *
      * ```php
      * $concat = function ($x, $y) {
      *     return $x . $y;
@@ -1505,6 +1639,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection containing the items that do not match the given predicate.
+     *
      * ```php
      * $isEven = function ($x) {
      *     return $x % 2 === 0;
@@ -1525,6 +1661,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection where the items are in a reverse order.
+     *
      * ```php
      * Phamda::reverse([3, 2, 1]); // => [1, 2, 3]
      * Phamda::reverse([22, 4, 16, 5]); // => [5, 16, 4, 22]
@@ -1543,6 +1681,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection, containing the items of the original from index `start` (inclusive) to index `end` (exclusive).
+     *
      * ```php
      * Phamda::slice(2, 6, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [3, 4, 5, 6]
      * Phamda::slice(0, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [1, 2, 3]
@@ -1563,6 +1703,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection sorted by the given comparator function.
+     *
      * ```php
      * $sub = function ($a, $b) {
      *     return $a - $b;
@@ -1583,6 +1725,8 @@ class Phamda
     }
 
     /**
+     * Returns a new collection sorted by comparing the values provided by calling the given function for each item.
+     *
      * ```php
      * $getFoo = function ($a) {
      *     return $a['foo'];
@@ -1611,6 +1755,8 @@ class Phamda
     }
 
     /**
+     * Subtracts two numbers.
+     *
      * ```php
      * Phamda::subtract(15, 27); // => -12
      * Phamda::subtract(36, -8); // => 44
@@ -1629,6 +1775,8 @@ class Phamda
     }
 
     /**
+     * Adds together a list of numbers.
+     *
      * ```php
      * Phamda::sum([1, 2, 3, 4, 5, 6]); // => 21
      * Phamda::sum([11, 0, 2, -4, 7]); // => 16
@@ -1646,6 +1794,8 @@ class Phamda
     }
 
     /**
+     * Calls the provided function with the given value as a parameter and returns the value.
+     *
      * ```php
      * $addDay = function (\DateTime $date) {
      *     $date->add(new \DateInterval('P1D'));
@@ -1670,6 +1820,8 @@ class Phamda
     }
 
     /**
+     * Calls the provided function the specified number of times and returns the results in an array.
+     *
      * ```php
      * $double = function ($number) {
      *     return $number * 2;
@@ -1690,6 +1842,8 @@ class Phamda
     }
 
     /**
+     * Returns a function that always returns `true`.
+     *
      * ```php
      * $true = Phamda::true();
      * $true(); // => true
@@ -1705,6 +1859,8 @@ class Phamda
     }
 
     /**
+     * Returns true if the given object matches the specification.
+     *
      * ```php
      * Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 42, 'c' => 88, 'd' => -10]); // => false
      * Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 16, 'c' => -20, 'd' => 77]); // => true
@@ -1729,6 +1885,8 @@ class Phamda
     }
 
     /**
+     * Returns a new array of value pairs from the values of the given arrays with matching keys.
+     *
      * ```php
      * Phamda::zip([1, 2, 3], [4, 5, 6]); // => [[1, 4], [2, 5], [3, 6]]
      * Phamda::zip(['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4]); // => ['a' => [1, 3]]
@@ -1753,6 +1911,8 @@ class Phamda
     }
 
     /**
+     * Returns a new array of values created by calling the given function with the matching values of the given arrays.
+     *
      * ```php
      * $sum = function ($x, $y) {
      *     return $x + $y;
