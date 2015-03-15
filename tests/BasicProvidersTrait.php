@@ -108,7 +108,7 @@ trait BasicProvidersTrait
     {
         $true  = function () { return true; };
         $false = function () { return false; };
-        $equal = function($a, $b) { return $a == $b; };
+        $equal = function ($a, $b) { return $a === $b; };
 
         return [
             [true, $true, $true],
@@ -229,7 +229,7 @@ trait BasicProvidersTrait
     {
         $true  = function () { return true; };
         $false = function () { return false; };
-        $equal = function($a, $b) { return $a == $b; };
+        $equal = function ($a, $b) { return $a === $b; };
 
         return [
             [true, $true, $true],
@@ -284,7 +284,7 @@ trait BasicProvidersTrait
 
     public function getFindData()
     {
-        $isPositive = function($x) { return $x > 0; };
+        $isPositive = function ($x) { return $x > 0; };
 
         return [
             [15, $isPositive, [-5, 0, 15, 33, -2]],
@@ -295,7 +295,7 @@ trait BasicProvidersTrait
 
     public function getFindIndexData()
     {
-        $isPositive = function($x) { return $x > 0; };
+        $isPositive = function ($x) { return $x > 0; };
 
         return [
             [2, $isPositive, [-5, 0, 15, 33, -2]],
@@ -306,7 +306,7 @@ trait BasicProvidersTrait
 
     public function getFindLastData()
     {
-        $isPositive = function($x) { return $x > 0; };
+        $isPositive = function ($x) { return $x > 0; };
 
         return [
             [33, $isPositive, [-5, 0, 15, 33, -2]],
@@ -317,7 +317,7 @@ trait BasicProvidersTrait
 
     public function getFindLastIndexData()
     {
-        $isPositive = function($x) { return $x > 0; };
+        $isPositive = function ($x) { return $x > 0; };
 
         return [
             [3, $isPositive, [-5, 0, 15, 33, -2]],
@@ -569,7 +569,7 @@ trait BasicProvidersTrait
 
     public function getNoneData()
     {
-        $isPositive = function($x) { return $x > 0; };
+        $isPositive = function ($x) { return $x > 0; };
 
         return [
             [false, $isPositive, [1, 2, 0, -5]],
@@ -580,7 +580,7 @@ trait BasicProvidersTrait
 
     public function getNotData()
     {
-        $equal = function($a, $b) { return $a == $b; };
+        $equal = function ($a, $b) { return $a === $b; };
 
         return [
             [false, $equal, 1, 1],
