@@ -14,8 +14,10 @@ namespace Phamda\Tests;
 use Phamda\Phamda;
 use Phamda\Tests\Fixtures\Adder;
 use Phamda\Tests\Fixtures\Calculator;
+use Phamda\Tests\Fixtures\ConstructableConcat;
 use Phamda\Tests\Fixtures\Counter;
 use Phamda\Tests\Fixtures\Test1;
+use Phamda\Tests\Fixtures\Test2;
 
 trait BasicProvidersTrait
 {
@@ -145,16 +147,16 @@ trait BasicProvidersTrait
     public function getConstructData()
     {
         return [
-            ['abc', '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c'],
-            ['abc', '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
+            ['abc', ConstructableConcat::class, 'a', 'b', 'c'],
+            ['abc', ConstructableConcat::class, 'a', 'b', 'c', 'x', 'y', 'z'],
         ];
     }
 
     public function getConstructNData()
     {
         return [
-            ['abc', 3, '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c'],
-            ['abc', 3, '\Phamda\Tests\Fixtures\ConstructableConcat', 'a', 'b', 'c', 'x', 'y', 'z'],
+            ['abc', 3, ConstructableConcat::class, 'a', 'b', 'c'],
+            ['abc', 3, ConstructableConcat::class, 'a', 'b', 'c', 'x', 'y', 'z'],
         ];
     }
 
@@ -180,7 +182,7 @@ trait BasicProvidersTrait
             [1234, $sum, 1000, 200, 30, 4, 5],
             [true, Phamda::eq(), 5, 5],
             [false, Phamda::eq(), 5, 7],
-            [true, ['\Phamda\Phamda', 'eq'], 5, 5],
+            [true, [Phamda::class, 'eq'], 5, 5],
             [42, new Adder(), 23, 19],
         ];
     }
@@ -194,7 +196,7 @@ trait BasicProvidersTrait
             [1234, 4, $sum, 1000, 200, 30, 4, 5],
             [true, 2, Phamda::eq(), 5, 5],
             [false, 2, Phamda::eq(), 5, 7],
-            [true, 2, ['\Phamda\Phamda', 'eq'], 5, 5],
+            [true, 2, [Phamda::class, 'eq'], 5, 5],
             [42, 2, new Adder(), 23, 19],
         ];
     }
@@ -447,8 +449,8 @@ trait BasicProvidersTrait
     public function getIsInstanceData()
     {
         return [
-            [true, '\Phamda\Tests\Fixtures\Test1', new Test1()],
-            [false, '\Phamda\Tests\Fixtures\Test2', new Test1()],
+            [true, Test1::class, new Test1()],
+            [false, Test2::class, new Test1()],
         ];
     }
 
