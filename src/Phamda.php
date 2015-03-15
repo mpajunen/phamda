@@ -19,6 +19,11 @@ class Phamda
     use CoreFunctionsTrait;
 
     /**
+     * ```php
+     * Phamda::add(15, 27); // => 42
+     * Phamda::add(36, -8); // => 28
+     * ```
+     *
      * @param int|float $x
      * @param int|float $y
      *
@@ -32,6 +37,14 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::all($isPositive, [1, 2, 0, -5]); // => false
+     * Phamda::all($isPositive, [1, 2, 1, 11]); // => true
+     * ```
+     *
      * @param callable           $predicate
      * @param array|\Traversable $collection
      *
@@ -51,6 +64,19 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isEven = function ($x) {
+     *     return $x % 2 === 0;
+     * };
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * $isEvenAndPositive = Phamda::allPass([$isEven, $isPositive]);
+     * $isEvenAndPositive(5); // => false
+     * $isEvenAndPositive(-4); // => false
+     * $isEvenAndPositive(6); // => true
+     * ```
+     *
      * @param callable[] $predicates
      *
      * @return callable
@@ -71,6 +97,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $alwaysFoo = Phamda::always('foo');
+     * $alwaysFoo(); // => 'foo'
+     * ```
+     *
      * @param mixed $value
      *
      * @return callable
@@ -85,6 +116,14 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::any($isPositive, [1, 2, 0, -5]); // => true
+     * Phamda::any($isPositive, [-3, -7, -1, -5]); // => false
+     * ```
+     *
      * @param callable           $predicate
      * @param array|\Traversable $collection
      *
@@ -104,6 +143,19 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isEven = function ($x) {
+     *     return $x % 2 === 0;
+     * };
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * $isEvenOrPositive = Phamda::anyPass([$isEven, $isPositive]);
+     * $isEvenOrPositive(5); // => true
+     * $isEvenOrPositive(-4); // => true
+     * $isEvenOrPositive(-3); // => false
+     * ```
+     *
      * @param callable[] $predicates
      *
      * @return callable
@@ -124,6 +176,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::assoc('bar', 3, ['foo' => 1]); // => ['foo' => 1, 'bar' => 3]
+     * Phamda::assoc('bar', 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
+     * Phamda::assoc('foo', null, ['foo' => 15, 'bar' => 7]); // => ['foo' => null, 'bar' => 7]
+     * ```
+     *
      * @param string       $property
      * @param mixed        $value
      * @param array|object $object
@@ -138,6 +196,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::assocPath(['bar'], 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
+     * Phamda::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' => 1, 'bar' => ['baz' => 4]]
+     * ```
+     *
      * @param array        $path
      * @param mixed        $value
      * @param array|object $object
@@ -152,6 +215,19 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $lt = function ($x, $y) {
+     *     return $x < $y;
+     * };
+     * $arePositive = function ($x, $y) {
+     *     return $x > 0 && $y > 0;
+     * };
+     * $test = Phamda::both($lt, $arePositive);
+     * $test(9, 4); // => false
+     * $test(-3, 11); // => false
+     * $test(5, 17); // => true
+     * ```
+     *
      * @param callable $a
      * @param callable $b
      *
@@ -167,6 +243,7 @@ class Phamda
     }
 
     /**
+     *
      * @param object $object
      *
      * @return callable|mixed
@@ -179,6 +256,16 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $lt = function ($x, $y) {
+     *     return $x < $y;
+     * };
+     * $compare = Phamda::comparator($lt);
+     * $compare(5, 6); // => -1
+     * $compare(6, 5); // => 1
+     * $compare(5, 5); // => 0
+     * ```
+     *
      * @param callable $predicate
      *
      * @return callable
@@ -193,6 +280,24 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $add5 = function ($x) {
+     *     return $x + 5;
+     * };
+     * $square = function ($x) {
+     *     return $x ** 2;
+     * };
+     * $addToSquared = Phamda::compose($add5, $square);
+     * $addToSquared(4); // => 21
+     * $hello = function ($target) {
+     *     return 'Hello ' . $target;
+     * };
+     * $helloUpper = Phamda::compose($hello, 'strtoupper');
+     * $upperHello = Phamda::compose('strtoupper', $hello);
+     * $helloUpper('world'); // => 'Hello WORLD'
+     * $upperHello('world'); // => 'HELLO WORLD'
+     * ```
+     *
      * @param callable ...$functions
      *
      * @return callable
@@ -203,6 +308,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $date = Phamda::construct(\DateTime::class, '2015-03-15');
+     * $date->format('Y-m-d'); // => '2015-03-15'
+     * ```
+     *
      * @param string $class
      *
      * @return callable|object
@@ -215,6 +325,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $construct = Phamda::constructN(1, \DateTime::class);
+     * $construct('2015-03-15')->format('Y-m-d'); // => '2015-03-15'
+     * ```
+     *
      * @param int    $arity
      * @param string $class
      *
@@ -230,6 +345,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::contains('a', ['a', 'b', 'c', 'e']); // => true
+     * Phamda::contains('d', ['a', 'b', 'c', 'e']); // => false
+     * ```
+     *
      * @param mixed              $value
      * @param array|\Traversable $collection
      *
@@ -249,6 +369,14 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $add = function ($x, $y, $z) {
+     *     return $x + $y + $z;
+     * };
+     * $addHundred = Phamda::curry($add, 100);
+     * $addHundred(20, 3); // => 123
+     * ```
+     *
      * @param callable $function
      * @param mixed    ...$initialArguments
      *
@@ -262,6 +390,16 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $add = function ($x, $y, $z = 0) {
+     *     return $x + $y + $z;
+     * };
+     * $addTen = Phamda::curryN(3, $add, 10);
+     * $addTen(10, 3); // => 23
+     * $addTwenty = $addTen(10);
+     * $addTwenty(5); // => 25
+     * ```
+     *
      * @param int      $length
      * @param callable $function
      * @param mixed    ...$initialArguments
@@ -276,6 +414,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::dec(43); // => 42
+     * Phamda::dec(-14); // => -15
+     * ```
+     *
      * @param int|float $number
      *
      * @return callable|int|float
@@ -288,6 +431,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::defaultTo(22, 15); // => 15
+     * Phamda::defaultTo(42, null); // => 42
+     * Phamda::defaultTo(15, false); // => false
+     * ```
+     *
      * @param mixed $default
      * @param mixed $value
      *
@@ -301,6 +450,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::divide(55, 11); // => 5
+     * Phamda::divide(48, -8); // => -6
+     * ```
+     *
      * @param int|float $x
      * @param int|float $y
      *
@@ -314,6 +468,19 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $lt = function ($x, $y) {
+     *     return $x < $y;
+     * };
+     * $arePositive = function ($x, $y) {
+     *     return $x > 0 && $y > 0;
+     * };
+     * $test = Phamda::either($lt, $arePositive);
+     * $test(-5, -16); // => false
+     * $test(-3, 11); // => true
+     * $test(17, 3); // => true
+     * ```
+     *
      * @param callable $a
      * @param callable $b
      *
@@ -329,6 +496,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::eq('a', 'a'); // => true
+     * Phamda::eq('a', 'b'); // => false
+     * Phamda::eq(null, null); // => true
+     * ```
+     *
      * @param mixed $x
      * @param mixed $y
      *
@@ -342,6 +515,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $false = Phamda::false();
+     * $false(); // => false
+     * ```
+     *
      * @return callable
      */
     public static function false()
@@ -352,6 +530,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $gt2 = function ($x) {
+     *     return $x > 2;
+     * };
+     * Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
+     * ```
+     *
      * @param callable                      $predicate
      * @param array|\Traversable|Collection $collection
      *
@@ -365,6 +550,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
+     * ```
+     *
      * @param callable           $predicate
      * @param array|\Traversable $collection
      *
@@ -384,6 +576,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
+     * ```
+     *
      * @param callable           $predicate
      * @param array|\Traversable $collection
      *
@@ -403,6 +602,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
+     * ```
+     *
      * @param callable           $predicate
      * @param array|\Traversable $collection
      *
@@ -422,6 +628,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::findLastIndex($isPositive, [-5, 0, 15, 33, -2]); // => 3
+     * ```
+     *
      * @param callable           $predicate
      * @param array|\Traversable $collection
      *
@@ -441,6 +654,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::first([5, 8, 9, 13]); // => 5
+     * Phamda::first([]); // => false
+     * ```
+     *
      * @param array|\Traversable|Collection $collection
      *
      * @return callable|mixed
@@ -463,6 +681,14 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $sub = function ($x, $y) {
+     *     return $x - $y;
+     * };
+     * $flippedSub = Phamda::flip($sub);
+     * $flippedSub(20, 30); // => 10
+     * ```
+     *
      * @param callable $function
      *
      * @return callable
@@ -477,6 +703,14 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $firstChar = function ($string) {
+     *     return $string[0];
+     * };
+     * $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
+     * Phamda::groupBy($firstChar, $collection); // => ['a' => ['abc', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa']]
+     * ```
+     *
      * @param callable                      $function
      * @param array|\Traversable|Collection $collection
      *
@@ -498,6 +732,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::gt(1, 2); // => false
+     * Phamda::gt(1, 1); // => false
+     * Phamda::gt(2, 1); // => true
+     * ```
+     *
      * @param mixed $x
      * @param mixed $y
      *
@@ -511,6 +751,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::gte(1, 2); // => false
+     * Phamda::gte(1, 1); // => true
+     * Phamda::gte(2, 1); // => true
+     * ```
+     *
      * @param mixed $x
      * @param mixed $y
      *
@@ -524,6 +770,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::identity(1); // => 1
+     * Phamda::identity(null); // => null
+     * Phamda::identity('abc'); // => 'abc'
+     * ```
+     *
      * @param mixed $x
      *
      * @return callable|mixed
@@ -536,6 +788,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $addOrSub = Phamda::ifElse(Phamda::lt(0), Phamda::add(-10), Phamda::add(10));
+     * $addOrSub(25); // => 15
+     * $addOrSub(-3); // => 7
+     * ```
+     *
      * @param callable $condition
      * @param callable $onTrue
      * @param callable $onFalse
@@ -552,6 +810,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::inc(41); // => 42
+     * Phamda::inc(-16); // => -15
+     * ```
+     *
      * @param int|float $number
      *
      * @return callable|int|float
@@ -564,6 +827,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::indexOf(16, [1, 6, 44, 16, 52]); // => 3
+     * Phamda::indexOf(15, [1, 6, 44, 16, 52]); // => false
+     * ```
+     *
      * @param mixed              $item
      * @param array|\Traversable $collection
      *
@@ -583,6 +851,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $addDay = Phamda::invoker(1, 'add', new \DateInterval('P1D'));
+     * $addDay(new \DateTime('2015-03-15'))->format('Y-m-d'); // => '2015-03-16'
+     * $addDay(new \DateTime('2015-03-12'))->format('Y-m-d'); // => '2015-03-13'
+     * ```
+     *
      * @param int    $arity
      * @param string $method
      * @param mixed  ...$initialArguments
@@ -601,6 +875,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::isEmpty([1, 2, 3]); // => false
+     * Phamda::isEmpty([0]); // => false
+     * Phamda::isEmpty([]); // => true
+     * ```
+     *
      * @param array|\Traversable|Collection $collection
      *
      * @return callable|bool
@@ -623,6 +903,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isDate = Phamda::isInstance(\DateTime::class);
+     * $isDate(new \DateTime()); // => true
+     * $isDate(new \DateTimeImmutable()); // => false
+     * ```
+     *
      * @param string $class
      * @param object $object
      *
@@ -636,6 +922,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::last([5, 8, 9, 13]); // => 13
+     * Phamda::last([]); // => false
+     * ```
+     *
      * @param array|\Traversable|Collection $collection
      *
      * @return callable|mixed
@@ -658,6 +949,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::lt(1, 2); // => true
+     * Phamda::lt(1, 1); // => false
+     * Phamda::lt(2, 1); // => false
+     * ```
+     *
      * @param mixed $x
      * @param mixed $y
      *
@@ -671,6 +968,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::lte(1, 2); // => true
+     * Phamda::lte(1, 1); // => true
+     * Phamda::lte(2, 1); // => false
+     * ```
+     *
      * @param mixed $x
      * @param mixed $y
      *
@@ -684,6 +987,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $square = function ($x) {
+     *     return $x ** 2;
+     * };
+     * Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
+     * ```
+     *
      * @param callable                      $function
      * @param array|\Traversable|Collection $collection
      *
@@ -697,6 +1007,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::max([6, 15, 8, 9, -2, -3]); // => 15
+     * Phamda::max(['bar', 'foo', 'baz']); // => 'foo'
+     * ```
+     *
      * @param array|\Traversable $collection
      *
      * @return callable|mixed
@@ -709,6 +1024,16 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $getFoo = function ($item) {
+     *     return $item->foo;
+     * };
+     * $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
+     * $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
+     * $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
+     * Phamda::maxBy($getFoo, [$a, $b, $c]); // => $b
+     * ```
+     *
      * @param callable           $getValue
      * @param array|\Traversable $collection
      *
@@ -722,6 +1047,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::min([6, 15, 8, 9, -2, -3]); // => -3
+     * Phamda::min(['bar', 'foo', 'baz']); // => 'bar'
+     * ```
+     *
      * @param array|\Traversable $collection
      *
      * @return callable|mixed
@@ -734,6 +1064,16 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $getFoo = function ($item) {
+     *     return $item->foo;
+     * };
+     * $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
+     * $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
+     * $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
+     * Phamda::minBy($getFoo, [$a, $b, $c]); // => $c
+     * ```
+     *
      * @param callable           $getValue
      * @param array|\Traversable $collection
      *
@@ -747,6 +1087,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::modulo(15, 6); // => 3
+     * Phamda::modulo(22, 11); // => 0
+     * Phamda::modulo(-23, 6); // => -5
+     * ```
+     *
      * @param int $x
      * @param int $y
      *
@@ -760,6 +1106,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::multiply(15, 27); // => 405
+     * Phamda::multiply(36, -8); // => -288
+     * ```
+     *
      * @param int|float $x
      * @param int|float $y
      *
@@ -773,6 +1124,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::negate(15); // => -15
+     * Phamda::negate(-0.7); // => 0.7
+     * Phamda::negate(0); // => 0
+     * ```
+     *
      * @param int|float $x
      *
      * @return callable|int|float
@@ -785,6 +1142,14 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::none($isPositive, [1, 2, 0, -5]); // => false
+     * Phamda::none($isPositive, [-3, -7, -1, -5]); // => true
+     * ```
+     *
      * @param callable           $predicate
      * @param array|\Traversable $collection
      *
@@ -798,6 +1163,15 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $equal = function ($a, $b) {
+     *     return $a === $b;
+     * };
+     * $notEqual = Phamda::not($equal);
+     * $notEqual(15, 13); // => true
+     * $notEqual(7, 7); // => false
+     * ```
+     *
      * @param callable $predicate
      *
      * @return callable
@@ -812,6 +1186,16 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $add = function ($x, $y, $z) {
+     *     return $x + $y + $z;
+     * };
+     * $addTen = Phamda::partial($add, 10);
+     * $addTen(3, 4); // => 17
+     * $addTwenty = Phamda::partial($add, 2, 3, 15);
+     * $addTwenty(); // => 20
+     * ```
+     *
      * @param callable $function
      * @param mixed    ...$initialArguments
      *
@@ -823,6 +1207,15 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $add = function ($x, $y, $z = 0) {
+     *     return $x + $y + $z;
+     * };
+     * $addTen = Phamda::partialN(3, $add, 10);
+     * $addTwenty = $addTen(10);
+     * $addTwenty(5); // => 25
+     * ```
+     *
      * @param int      $arity
      * @param callable $function
      * @param mixed    ...$initialArguments
@@ -840,6 +1233,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isPositive = function ($x) {
+     *     return $x > 0;
+     * };
+     * Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[4, 7, 2, 88], [-16, -3]]
+     * ```
+     *
      * @param callable                      $predicate
      * @param array|\Traversable|Collection $collection
      *
@@ -861,6 +1261,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::path(['foo', 'bar'], ['foo' => ['baz' => 26, 'bar' => 15]]); // => 15
+     * Phamda::path(['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]); // => null
+     * ```
+     *
      * @param array        $path
      * @param array|object $object
      *
@@ -878,6 +1283,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::pathEq(['foo', 'bar'], 44, ['foo' => ['baz' => 26, 'bar' => 15]]); // => false
+     * Phamda::pathEq(['foo', 'baz'], 26, ['foo' => ['baz' => 26, 'bar' => 15]]); // => true
+     * ```
+     *
      * @param array        $path
      * @param mixed        $value
      * @param array|object $object
@@ -892,6 +1302,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::pick(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz']
+     * Phamda::pick(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => []
+     * Phamda::pick(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
+     * ```
+     *
      * @param array $names
      * @param array $item
      *
@@ -912,6 +1328,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::pickAll(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'fib' => null]
+     * Phamda::pickAll(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['fob' => null, 'fib' => null]
+     * Phamda::pickAll(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
+     * ```
+     *
      * @param array $names
      * @param array $item
      *
@@ -930,6 +1352,24 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $add5 = function ($x) {
+     *     return $x + 5;
+     * };
+     * $square = function ($x) {
+     *     return $x ** 2;
+     * };
+     * $squareAdded = Phamda::pipe($add5, $square);
+     * $squareAdded(4); // => 81
+     * $hello = function ($target) {
+     *     return 'Hello ' . $target;
+     * };
+     * $helloUpper = Phamda::pipe('strtoupper', $hello);
+     * $upperHello = Phamda::pipe($hello, 'strtoupper');
+     * $helloUpper('world'); // => 'Hello WORLD'
+     * $upperHello('world'); // => 'HELLO WORLD'
+     * ```
+     *
      * @param callable ...$functions
      *
      * @return callable
@@ -951,6 +1391,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::pluck('foo', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => [null, 'fii']
+     * Phamda::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => ['bob', 'pob']
+     * ```
+     *
      * @param string                        $name
      * @param array|\Traversable|Collection $collection
      *
@@ -964,6 +1409,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::product([11, -8, 3]); // => -264
+     * Phamda::product([1, 2, 3, 4, 5, 6]); // => 720
+     * ```
+     *
      * @param int[]|float[] $values
      *
      * @return callable|int|float
@@ -976,6 +1426,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::prop('bar', ['bar' => 'fuz', 'baz' => null]); // => 'fuz'
+     * Phamda::prop('baz', ['bar' => 'fuz', 'baz' => null]); // => null
+     * ```
+     *
      * @param string                    $name
      * @param array|object|\ArrayAccess $object
      *
@@ -989,6 +1444,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::propEq('foo', 'bar', ['foo' => 'bar']); // => true
+     * Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
+     * ```
+     *
      * @param string       $name
      * @param mixed        $value
      * @param array|object $object
@@ -1003,6 +1463,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $concat = function ($x, $y) {
+     *     return $x . $y;
+     * };
+     * Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
+     * ```
+     *
      * @param callable           $function
      * @param mixed              $initial
      * @param array|\Traversable $collection
@@ -1017,6 +1484,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $concat = function ($x, $y) {
+     *     return $x . $y;
+     * };
+     * Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
+     * ```
+     *
      * @param callable           $function
      * @param mixed              $initial
      * @param array|\Traversable $collection
@@ -1031,6 +1505,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $isEven = function ($x) {
+     *     return $x % 2 === 0;
+     * };
+     * Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
+     * ```
+     *
      * @param callable                      $predicate
      * @param array|\Traversable|Collection $collection
      *
@@ -1044,6 +1525,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::reverse([3, 2, 1]); // => [1, 2, 3]
+     * Phamda::reverse([22, 4, 16, 5]); // => [5, 16, 4, 22]
+     * Phamda::reverse([]); // => []
+     * ```
+     *
      * @param array|\Traversable $collection
      *
      * @return callable|array
@@ -1056,6 +1543,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::slice(2, 6, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [3, 4, 5, 6]
+     * Phamda::slice(0, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [1, 2, 3]
+     * Phamda::slice(7, 11, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [8, 9]
+     * ```
+     *
      * @param int                           $start
      * @param int                           $end
      * @param array|\Traversable|Collection $collection
@@ -1070,6 +1563,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $sub = function ($a, $b) {
+     *     return $a - $b;
+     * };
+     * Phamda::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
+     * ```
+     *
      * @param callable                      $comparator
      * @param array|\Traversable|Collection $collection
      *
@@ -1083,6 +1583,14 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $getFoo = function ($a) {
+     *     return $a['foo'];
+     * };
+     * $collection = [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]];
+     * Phamda::sortBy($getFoo, $collection); // => [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]]
+     * ```
+     *
      * @param callable                      $function
      * @param array|\Traversable|Collection $collection
      *
@@ -1103,6 +1611,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::subtract(15, 27); // => -12
+     * Phamda::subtract(36, -8); // => 44
+     * ```
+     *
      * @param int|float $x
      * @param int|float $y
      *
@@ -1116,6 +1629,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::sum([1, 2, 3, 4, 5, 6]); // => 21
+     * Phamda::sum([11, 0, 2, -4, 7]); // => 16
+     * ```
+     *
      * @param int[]|float[] $values
      *
      * @return callable|int|float
@@ -1128,6 +1646,15 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $addDay = function (\DateTime $date) {
+     *     $date->add(new \DateInterval('P1D'));
+     * };
+     * $date = new \DateTime('2015-03-15');
+     * Phamda::tap($addDay, $date); // => $date
+     * $date->format('Y-m-d'); // => '2015-03-16'
+     * ```
+     *
      * @param callable $function
      * @param object   $object
      *
@@ -1143,6 +1670,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $double = function ($number) {
+     *     return $number * 2;
+     * };
+     * Phamda::times($double, 5); // => [0, 2, 4, 6, 8]
+     * ```
+     *
      * @param callable $function
      * @param int      $count
      *
@@ -1156,6 +1690,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $true = Phamda::true();
+     * $true(); // => true
+     * ```
+     *
      * @return callable
      */
     public static function true()
@@ -1166,6 +1705,11 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 42, 'c' => 88, 'd' => -10]); // => false
+     * Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 16, 'c' => -20, 'd' => 77]); // => true
+     * ```
+     *
      * @param array        $specification
      * @param array|object $object
      *
@@ -1185,6 +1729,12 @@ class Phamda
     }
 
     /**
+     * ```php
+     * Phamda::zip([1, 2, 3], [4, 5, 6]); // => [[1, 4], [2, 5], [3, 6]]
+     * Phamda::zip(['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4]); // => ['a' => [1, 3]]
+     * Phamda::zip([1, 2, 3], []); // => []
+     * ```
+     *
      * @param array $a
      * @param array $b
      *
@@ -1203,6 +1753,13 @@ class Phamda
     }
 
     /**
+     * ```php
+     * $sum = function ($x, $y) {
+     *     return $x + $y;
+     * };
+     * Phamda::zipWith($sum, [1, 2, 3], [5, 6]); // => [6, 8]
+     * ```
+     *
      * @param callable $function
      * @param array    $a
      * @param array    $b
