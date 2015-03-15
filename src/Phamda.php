@@ -1669,7 +1669,7 @@ class Phamda
      * Phamda::reverse([]); // => []
      * ```
      *
-     * @param array|\Traversable $collection
+     * @param array|\Traversable|Collection $collection
      *
      * @return callable|array
      */
@@ -1806,9 +1806,9 @@ class Phamda
      * ```
      *
      * @param callable $function
-     * @param object   $object
+     * @param mixed    $object
      *
-     * @return callable|object
+     * @return callable|mixed
      */
     public static function tap(callable $function = null, $object = null)
     {

@@ -829,8 +829,10 @@ trait BasicProvidersTrait
     {
         $counter = new Counter();
         $addFive = function ($object) { $object->value += 5; };
+        $addTwo  = function (&$value) { $value += 2; };
 
         return [
+            [42, $addTwo, 40],
             [$counter, $addFive, $counter],
         ];
     }
