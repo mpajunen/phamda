@@ -32,7 +32,7 @@ class ConstructTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructN($expected, $arity, $class, ...$arguments)
     {
-        foreach ($this->getCurriedResults(Phamda::construct($class, $arity), ...$arguments) as $result) {
+        foreach ($this->getCurriedResults(Phamda::constructN($arity, $class), ...$arguments) as $result) {
             $this->checkConstructResult($expected, $class, $result);
         }
     }
