@@ -1,11 +1,9 @@
-Phamda
-======
+# Phamda
 
 Phamda is a set of functional programming tools for PHP, heavily inspired by the Javascript library
 [Ramda](http://ramdajs.com/). PHP 5.6+ or HHVM is required.
 
-Examples
-========
+## Examples
 
 Phamda includes several typical functional programming tools, for example `filter` and `map`:
 
@@ -96,7 +94,8 @@ $result = $process($products);
 */
 ```
 
-License
-=======
+The [function list](docs/Functions.md) includes more examples.
+
+## License
 
 MIT license, see LICENSE file.
