@@ -3,7 +3,7 @@
 Phamda is a set of functional programming tools for PHP, heavily inspired by the Javascript library
 [Ramda](http://ramdajs.com/). PHP 5.6+ or HHVM is required.
 
-# Installation
+## Installation
 
 Phamda can be installed using composer, just add `phamda/phamda` to the `require` section of the
 `composer.json` file of your project and update your dependencies:
