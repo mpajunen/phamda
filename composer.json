@@ -1,5 +1,5 @@
 {
-    "name": "mpajunen/phamda",
+    "name": "phamda/phamda",
     "description": "Functional programming with automatically curried functions",
     "keywords": ["functional", "curry"],
     "license": "MIT",
