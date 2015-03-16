@@ -576,7 +576,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = Phamda::reverse($_collection);
-        $this->assertSame($expected, $result, 'reverse works for collection objects.');
+        $this->assertSame($expected, $this->getCollectionArray($result), 'reverse works for collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'reverse does not modify original collection values.');
     }
 

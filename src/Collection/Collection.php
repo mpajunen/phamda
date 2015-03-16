@@ -80,7 +80,7 @@ interface Collection
     /**
      * @return Collection
      */
-    public function reverse();
+    public function reverse($preserveKeys = false);
 
     /**
      * @param int $start

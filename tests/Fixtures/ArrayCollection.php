@@ -128,9 +128,9 @@ class ArrayCollection extends ArrayContainer implements Collection
     /**
      * @return static
      */
-    public function reverse()
+    public function reverse($preserveKeys = false)
     {
-        return new static(array_reverse($this->values));
+        return new static(array_reverse($this->values, $preserveKeys));
     }
 
     /**
