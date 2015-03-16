@@ -198,6 +198,10 @@ trait CoreFunctionsTrait
      */
     protected static function _reverse($collection, $preserveKeys = false)
     {
+        if (method_exists($collection, 'reverse')) {
+            return $collection->reverse($preserveKeys);
+        }
+
         $items = is_array($collection) ? $collection : self::getCollectionItems($collection);
 
         return array_reverse($items, $preserveKeys);
@@ -308,9 +312,6 @@ trait CoreFunctionsTrait
             : $value === $part;
     }
 
-    /**
-     * @param \Traversable $collection
-     */
     private static function getCollectionItems($collection)
     {
         $items = [];

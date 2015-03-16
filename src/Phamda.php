@@ -1673,7 +1673,7 @@ class Phamda
      *
      * @param array|\Traversable|Collection $collection
      *
-     * @return callable|array
+     * @return callable|array|Collection
      */
     public static function reverse($collection = null)
     {
