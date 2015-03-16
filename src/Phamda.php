@@ -340,13 +340,14 @@ class Phamda
      * ```
      *
      * @param string $class
+     * @param mixed  ...$initialArguments
      *
      * @return callable|object
      */
-    public static function construct($class = null)
+    public static function construct($class = null, ... $initialArguments)
     {
-        return static::curry1(function ($class) {
-            return Phamda::constructN(static::getConstructorArity($class), $class);
+        return static::curry1(function ($class, ... $initialArguments) {
+            return Phamda::constructN(static::getConstructorArity($class), $class, ...$initialArguments);
         }, func_get_args());
     }
 
@@ -360,15 +361,16 @@ class Phamda
      *
      * @param int    $arity
      * @param string $class
+     * @param mixed  ...$initialArguments
      *
      * @return callable|object
      */
-    public static function constructN($arity = null, $class = null)
+    public static function constructN($arity = null, $class = null, ... $initialArguments)
     {
-        return static::curry2(function ($arity, $class) {
+        return static::curry2(function ($arity, $class, ... $initialArguments) {
             return static::_curryN($arity, function (... $arguments) use ($class) {
-                return new $class(...$arguments);
-            });
+                return new $class(...array_merge($arguments));
+            }, ...$initialArguments);
         }, func_get_args());
     }
 
