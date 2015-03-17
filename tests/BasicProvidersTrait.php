@@ -560,6 +560,17 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getNAryData()
+    {
+        $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
+
+        return [
+            [42, 2, $add3, 27, 15, 33],
+            [27, 1, $add3, 27, 15, 33],
+            [0, 0, $add3, 27, 15, 33],
+        ];
+    }
+
     public function getNegateData()
     {
         return [

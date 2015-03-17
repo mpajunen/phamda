@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (80):
+Currently included functions (81):
 
 * [add](#add)
 * [all](#all)
@@ -52,6 +52,7 @@ Currently included functions (80):
 * [minBy](#minBy)
 * [modulo](#modulo)
 * [multiply](#multiply)
+* [nAry](#nAry)
 * [negate](#negate)
 * [none](#none)
 * [not](#not)
@@ -783,6 +784,23 @@ Multiplies two numbers.
 ```php
 Phamda::multiply(15, 27); // => 405
 Phamda::multiply(36, -8); // => -288
+```
+
+
+<a name="nAry"></a>
+### nAry
+`Phamda::nAry($arity, callable $function)`
+
+Wraps the given function in a function that accepts exactly the given amount of parameters.
+##### Examples
+```php
+$add3 = function ($a = 0, $b = 0, $c = 0) {
+    return $a + $b + $c;
+};
+$add2 = Phamda::nAry(2, $add3);
+$add2(27, 15, 33); // => 42
+$add1 = Phamda::nAry(1, $add3);
+$add1(27, 15, 33); // => 27
 ```
 
 

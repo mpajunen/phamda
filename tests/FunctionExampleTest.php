@@ -223,6 +223,15 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($c, Phamda::minBy($getFoo, [$a, $b, $c]));
     }
 
+    public function testNAry()
+    {
+        $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
+        $add2 = Phamda::nAry(2, $add3);
+        $this->assertSame(42, $add2(27, 15, 33));
+        $add1 = Phamda::nAry(1, $add3);
+        $this->assertSame(27, $add1(27, 15, 33));
+    }
+
     public function testNone()
     {
         $isPositive = function ($x) { return $x > 0; };

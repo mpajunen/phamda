@@ -1226,6 +1226,33 @@ class Phamda
     }
 
     /**
+     * Wraps the given function in a function that accepts exactly the given amount of parameters.
+     *
+     * ```php
+     * $add3 = function ($a = 0, $b = 0, $c = 0) {
+     *     return $a + $b + $c;
+     * };
+     * $add2 = Phamda::nAry(2, $add3);
+     * $add2(27, 15, 33); // => 42
+     * $add1 = Phamda::nAry(1, $add3);
+     * $add1(27, 15, 33); // => 27
+     * ```
+     *
+     * @param int      $arity
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function nAry($arity = null, callable $function = null)
+    {
+        return static::curry2(function ($arity, callable $function) {
+            return function (... $arguments) use ($arity, $function) {
+                return $function(...array_slice($arguments, 0, $arity));
+            };
+        }, func_get_args());
+    }
+
+    /**
      * Returns the negation of a number.
      *
      * ```php

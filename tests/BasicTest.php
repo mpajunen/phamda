@@ -566,6 +566,21 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getNAryData
+     */
+    public function testNAry($expected, $arity, callable $function, ... $arguments)
+    {
+        $main0 = Phamda::nAry($arity, $function);
+        $this->assertSame($expected, $main0(...$arguments), 'nAry produces correct results.');
+        $curried0 = Phamda::nAry();
+        $main1    = $curried0($arity, $function);
+        $this->assertSame($expected, $main1(...$arguments), 'nAry is curried correctly.');
+        $curried1 = Phamda::nAry($arity);
+        $main2    = $curried1($function);
+        $this->assertSame($expected, $main2(...$arguments), 'nAry is curried correctly.');
+    }
+
+    /**
      * @dataProvider getNegateData
      */
     public function testNegate($expected, $x)
