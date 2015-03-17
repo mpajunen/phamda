@@ -276,38 +276,20 @@ trait CoreFunctionsTrait
 
     protected static function curry2(callable $original, array $initialArguments)
     {
-        switch (count($initialArguments)) {
-            case 0:
-                return function (...$arguments) use ($original) {
-                    return self::curry2($original, $arguments);
-                };
-            case 1:
-                return function (...$arguments) use ($original, $initialArguments) {
-                    return $original(...array_merge($initialArguments, $arguments));
-                };
-            default:
-                return $original(...$initialArguments);
-        }
+        return count($initialArguments) >= 2 && (self::$placeholder === null || ! in_array(self::$placeholder, $initialArguments, true))
+            ? $original(...$initialArguments)
+            : function (...$newArguments) use ($original, $initialArguments) {
+                return self::curry2($original, self::resolveArguments($newArguments, $initialArguments));
+            };
     }
 
     protected static function curry3(callable $original, array $initialArguments)
     {
-        switch (count($initialArguments)) {
-            case 0:
-                return function (...$arguments) use ($original) {
-                    return self::curry3($original, $arguments);
-                };
-            case 1:
-                return function (...$arguments) use ($original, $initialArguments) {
-                    return self::curry3($original, array_merge($initialArguments, $arguments));
-                };
-            case 2:
-                return function (...$arguments) use ($original, $initialArguments) {
-                    return $original(...array_merge($initialArguments, $arguments));
-                };
-            default:
-                return $original(...$initialArguments);
-        }
+        return count($initialArguments) >= 3 && (self::$placeholder === null || ! in_array(self::$placeholder, $initialArguments, true))
+            ? $original(...$initialArguments)
+            : function (...$newArguments) use ($original, $initialArguments) {
+                return self::curry3($original, self::resolveArguments($newArguments, $initialArguments));
+            };
     }
 
     protected static function testSpecificationPart($name, $part, $object)
