@@ -231,6 +231,30 @@ class Phamda
     }
 
     /**
+     * Wraps the given function in a function that accepts exactly two parameters.
+     *
+     * ```php
+     * $add3 = function ($a = 0, $b = 0, $c = 0) {
+     *     return $a + $b + $c;
+     * };
+     * $add2 = Phamda::binary($add3);
+     * $add2(27, 15, 33); // => 42
+     * ```
+     *
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function binary(callable $function = null)
+    {
+        return static::curry1(function (callable $function) {
+            return function ($a, $b) use ($function) {
+                return $function($a, $b);
+            };
+        }, func_get_args());
+    }
+
+    /**
      * Returns a function that returns `true` when both of the predicates match, `false` otherwise.
      *
      * ```php
@@ -1885,6 +1909,30 @@ class Phamda
         return function () {
             return true;
         };
+    }
+
+    /**
+     * Wraps the given function in a function that accepts exactly one parameter.
+     *
+     * ```php
+     * $add2 = function ($a = 0, $b = 0) {
+     *     return $a + $b;
+     * };
+     * $add1 = Phamda::nAry(1, $add2);
+     * $add1(27, 15); // => 27
+     * ```
+     *
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function unary(callable $function = null)
+    {
+        return static::curry1(function (callable $function) {
+            return function ($a) use ($function) {
+                return $function($a);
+            };
+        }, func_get_args());
     }
 
     /**

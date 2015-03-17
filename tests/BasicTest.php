@@ -118,6 +118,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getBinaryData
+     */
+    public function testBinary($expected, callable $function, $a, $b)
+    {
+        $main0 = Phamda::binary($function);
+        $this->assertSame($expected, $main0($a, $b), 'binary produces correct results.');
+        $curried0 = Phamda::binary();
+        $main1    = $curried0($function);
+        $this->assertSame($expected, $main1($a, $b), 'binary is curried correctly.');
+    }
+
+    /**
      * @dataProvider getBothData
      */
     public function testBoth($expected, callable $a, callable $b, ... $arguments)
@@ -874,6 +886,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     {
         $main0 = Phamda::true();
         $this->assertSame($expected, $main0(), 'true produces correct results.');
+    }
+
+    /**
+     * @dataProvider getUnaryData
+     */
+    public function testUnary($expected, callable $function, $a)
+    {
+        $main0 = Phamda::unary($function);
+        $this->assertSame($expected, $main0($a), 'unary produces correct results.');
+        $curried0 = Phamda::unary();
+        $main1    = $curried0($function);
+        $this->assertSame($expected, $main1($a), 'unary is curried correctly.');
     }
 
     /**

@@ -55,6 +55,13 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(false, $isEvenOrPositive(-3));
     }
 
+    public function testBinary()
+    {
+        $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
+        $add2 = Phamda::binary($add3);
+        $this->assertSame(42, $add2(27, 15, 33));
+    }
+
     public function testBoth()
     {
         $lt          = function ($x, $y) { return $x < $y; };
@@ -335,6 +342,13 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
     {
         $true = Phamda::true();
         $this->assertSame(true, $true());
+    }
+
+    public function testUnary()
+    {
+        $add2 = function ($a = 0, $b = 0) { return $a + $b; };
+        $add1 = Phamda::nAry(1, $add2);
+        $this->assertSame(27, $add1(27, 15));
     }
 
     public function testZipWith()

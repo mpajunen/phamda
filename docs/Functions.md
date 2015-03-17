@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (81):
+Currently included functions (83):
 
 * [add](#add)
 * [all](#all)
@@ -10,6 +10,7 @@ Currently included functions (81):
 * [anyPass](#anyPass)
 * [assoc](#assoc)
 * [assocPath](#assocPath)
+* [binary](#binary)
 * [both](#both)
 * [clone_](#clone_)
 * [comparator](#comparator)
@@ -80,6 +81,7 @@ Currently included functions (81):
 * [tap](#tap)
 * [times](#times)
 * [true](#true)
+* [unary](#unary)
 * [where](#where)
 * [zip](#zip)
 * [zipWith](#zipWith)
@@ -201,6 +203,21 @@ Returns a new array or object, setting the given value to the property specified
 ```php
 Phamda::assocPath(['bar'], 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
 Phamda::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' => 1, 'bar' => ['baz' => 4]]
+```
+
+
+<a name="binary"></a>
+### binary
+`Phamda::binary(callable $function)`
+
+Wraps the given function in a function that accepts exactly two parameters.
+##### Examples
+```php
+$add3 = function ($a = 0, $b = 0, $c = 0) {
+    return $a + $b + $c;
+};
+$add2 = Phamda::binary($add3);
+$add2(27, 15, 33); // => 42
 ```
 
 
@@ -1178,6 +1195,21 @@ Returns a function that always returns `true`.
 ```php
 $true = Phamda::true();
 $true(); // => true
+```
+
+
+<a name="unary"></a>
+### unary
+`Phamda::unary(callable $function)`
+
+Wraps the given function in a function that accepts exactly one parameter.
+##### Examples
+```php
+$add2 = function ($a = 0, $b = 0) {
+    return $a + $b;
+};
+$add1 = Phamda::nAry(1, $add2);
+$add1(27, 15); // => 27
 ```
 
 

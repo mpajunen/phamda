@@ -106,6 +106,15 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getBinaryData()
+    {
+        $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
+
+        return [
+            [42, $add3, 27, 15, 33],
+        ];
+    }
+
     public function getBothData()
     {
         $true  = function () { return true; };
@@ -862,6 +871,15 @@ trait BasicProvidersTrait
     {
         return [
             [true],
+        ];
+    }
+
+    public function getUnaryData()
+    {
+        $add2 = function ($a = 0, $b = 0) { return $a + $b; };
+
+        return [
+            [27, $add2, 27, 15],
         ];
     }
 
