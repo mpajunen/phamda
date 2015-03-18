@@ -27,4 +27,21 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(25, $add15(10));
         $this->assertSame(42, $add15(27));
     }
+
+    public function testSubstring()
+    {
+        $subFiveFive = Phamda::curryN(3, 'substr', Phamda::_(), 5, 5);
+        $this->assertSame('fghij', $subFiveFive('abcdefghijklmn'));
+
+        $sub = Phamda::curryN(3, 'substr');
+        $subFourFour = $sub(Phamda::_(), 4, 4);
+        $this->assertSame('efgh', $subFourFour('abcdefghijklmn'));
+
+        $subFour = $sub(Phamda::_(), Phamda::_(), 4);
+        $this->assertSame('defg', $subFour('abcdefghijklmn', 3));
+
+        $subFourAlpha = $subFour('abcdefghijklmn');
+        $this->assertSame('ghij', $subFourAlpha(6));
+        $this->assertSame('cdef', $subFourAlpha(2));
+    }
 }
