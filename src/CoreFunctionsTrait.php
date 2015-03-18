@@ -119,12 +119,10 @@ trait CoreFunctionsTrait
 
     protected static function _curryN($length, callable $function, ...$initialArguments)
     {
-        return $length - count($initialArguments) <= 0
+        return count($initialArguments) >= $length
             ? $function(...$initialArguments)
             : function (... $arguments) use ($length, $function, $initialArguments) {
-                return static::_curryN($length, function (... $arguments) use ($function) {
-                    return $function(...$arguments);
-                }, ...array_merge($initialArguments, $arguments));
+                return self::_curryN($length, $function, ...array_merge($initialArguments, $arguments));
             };
     }
 
