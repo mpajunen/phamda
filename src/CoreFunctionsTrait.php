@@ -328,4 +328,19 @@ trait CoreFunctionsTrait
 
         return $items;
     }
+
+    private static function resolveArguments(array $arguments, array $initialArguments)
+    {
+        foreach ($initialArguments as $key => $argument) {
+            if ($argument instanceof Placeholder) {
+                if ($arguments === []) {
+                    return $initialArguments;
+                }
+
+                $initialArguments[$key] = array_shift($arguments);
+            }
+        }
+
+        return array_merge($initialArguments, $arguments);
+    }
 }
