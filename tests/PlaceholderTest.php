@@ -33,7 +33,7 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
         $subFiveFive = Phamda::curryN(3, 'substr', Phamda::_(), 5, 5);
         $this->assertSame('fghij', $subFiveFive('abcdefghijklmn'));
 
-        $sub = Phamda::curryN(3, 'substr');
+        $sub         = Phamda::curryN(3, 'substr');
         $subFourFour = $sub(Phamda::_(), 4, 4);
         $this->assertSame('efgh', $subFourFour('abcdefghijklmn'));
 
