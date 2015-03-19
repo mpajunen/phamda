@@ -106,9 +106,7 @@ Phamda::add(36, -8); // => 28
 Returns `true` if all elements of the collection match the predicate, `false` otherwise.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::all($isPositive, [1, 2, 0, -5]); // => false
 Phamda::all($isPositive, [1, 2, 1, 11]); // => true
 ```
@@ -121,12 +119,8 @@ Phamda::all($isPositive, [1, 2, 1, 11]); // => true
 Creates a single predicate from a list of predicates that returns `true` when all the predicates match, `false` otherwise.
 ##### Examples
 ```php
-$isEven = function ($x) {
-    return $x % 2 === 0;
-};
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isEven = function ($x) { return $x % 2 === 0; };
+$isPositive = function ($x) { return $x > 0; };
 $isEvenAndPositive = Phamda::allPass([$isEven, $isPositive]);
 $isEvenAndPositive(5); // => false
 $isEvenAndPositive(-4); // => false
@@ -153,9 +147,7 @@ $alwaysFoo(); // => 'foo'
 Returns `true` if any element of the collection matches the predicate, `false` otherwise.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::any($isPositive, [1, 2, 0, -5]); // => true
 Phamda::any($isPositive, [-3, -7, -1, -5]); // => false
 ```
@@ -168,12 +160,8 @@ Phamda::any($isPositive, [-3, -7, -1, -5]); // => false
 Creates a single predicate from a list of predicates that returns `true` when any of the predicates matches, `false` otherwise.
 ##### Examples
 ```php
-$isEven = function ($x) {
-    return $x % 2 === 0;
-};
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isEven = function ($x) { return $x % 2 === 0; };
+$isPositive = function ($x) { return $x > 0; };
 $isEvenOrPositive = Phamda::anyPass([$isEven, $isPositive]);
 $isEvenOrPositive(5); // => true
 $isEvenOrPositive(-4); // => true
@@ -213,9 +201,7 @@ Phamda::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' =>
 Wraps the given function in a function that accepts exactly two parameters.
 ##### Examples
 ```php
-$add3 = function ($a = 0, $b = 0, $c = 0) {
-    return $a + $b + $c;
-};
+$add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
 $add2 = Phamda::binary($add3);
 $add2(27, 15, 33); // => 42
 ```
@@ -228,12 +214,8 @@ $add2(27, 15, 33); // => 42
 Returns a function that returns `true` when both of the predicates match, `false` otherwise.
 ##### Examples
 ```php
-$lt = function ($x, $y) {
-    return $x < $y;
-};
-$arePositive = function ($x, $y) {
-    return $x > 0 && $y > 0;
-};
+$lt = function ($x, $y) { return $x < $y; };
+$arePositive = function ($x, $y) { return $x > 0 && $y > 0; };
 $test = Phamda::both($lt, $arePositive);
 $test(9, 4); // => false
 $test(-3, 11); // => false
@@ -257,9 +239,7 @@ Clones an object.
 Creates a comparator function from a function that returns whether the first argument is less than the second.
 ##### Examples
 ```php
-$lt = function ($x, $y) {
-    return $x < $y;
-};
+$lt = function ($x, $y) { return $x < $y; };
 $compare = Phamda::comparator($lt);
 $compare(5, 6); // => -1
 $compare(6, 5); // => 1
@@ -274,17 +254,11 @@ $compare(5, 5); // => 0
 Returns a new function that calls each supplied function in turn in reverse order and passes the result as a parameter to the next function.
 ##### Examples
 ```php
-$add5 = function ($x) {
-    return $x + 5;
-};
-$square = function ($x) {
-    return $x ** 2;
-};
+$add5 = function ($x) { return $x + 5; };
+$square = function ($x) { return $x ** 2; };
 $addToSquared = Phamda::compose($add5, $square);
 $addToSquared(4); // => 21
-$hello = function ($target) {
-    return 'Hello ' . $target;
-};
+$hello = function ($target) { return 'Hello ' . $target; };
 $helloUpper = Phamda::compose($hello, 'strtoupper');
 $upperHello = Phamda::compose('strtoupper', $hello);
 $helloUpper('world'); // => 'Hello WORLD'
@@ -335,9 +309,7 @@ Phamda::contains('d', ['a', 'b', 'c', 'e']); // => false
 Wraps the given function to a function that returns a new function until all required parameters are given.
 ##### Examples
 ```php
-$add = function ($x, $y, $z) {
-    return $x + $y + $z;
-};
+$add = function ($x, $y, $z) { return $x + $y + $z; };
 $addHundred = Phamda::curry($add, 100);
 $addHundred(20, 3); // => 123
 ```
@@ -350,9 +322,7 @@ $addHundred(20, 3); // => 123
 Wraps the given function to a function of specified arity that returns a new function until all required parameters are given.
 ##### Examples
 ```php
-$add = function ($x, $y, $z = 0) {
-    return $x + $y + $z;
-};
+$add = function ($x, $y, $z = 0) { return $x + $y + $z; };
 $addTen = Phamda::curryN(3, $add, 10);
 $addTen(10, 3); // => 23
 $addTwenty = $addTen(10);
@@ -404,12 +374,8 @@ Phamda::divide(48, -8); // => -6
 Returns a function that returns `true` when either of the predicates matches, `false` otherwise.
 ##### Examples
 ```php
-$lt = function ($x, $y) {
-    return $x < $y;
-};
-$arePositive = function ($x, $y) {
-    return $x > 0 && $y > 0;
-};
+$lt = function ($x, $y) { return $x < $y; };
+$arePositive = function ($x, $y) { return $x > 0 && $y > 0; };
 $test = Phamda::either($lt, $arePositive);
 $test(-5, -16); // => false
 $test(-3, 11); // => true
@@ -449,9 +415,7 @@ $false(); // => false
 Returns a new collection containing the items that match the given predicate.
 ##### Examples
 ```php
-$gt2 = function ($x) {
-    return $x > 2;
-};
+$gt2 = function ($x) { return $x > 2; };
 Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
 ```
 
@@ -463,9 +427,7 @@ Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, '
 Returns the first item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
 ```
 
@@ -477,9 +439,7 @@ Phamda::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
 Returns the index of the first item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
 ```
 
@@ -491,9 +451,7 @@ Phamda::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
 Returns the last item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
 ```
 
@@ -505,9 +463,7 @@ Phamda::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
 Returns the index of the last item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::findLastIndex($isPositive, [-5, 0, 15, 33, -2]); // => 3
 ```
 
@@ -531,9 +487,7 @@ Phamda::first([]); // => false
 Wraps the given function and returns a new function for which the order of the first two parameters is reversed.
 ##### Examples
 ```php
-$sub = function ($x, $y) {
-    return $x - $y;
-};
+$sub = function ($x, $y) { return $x - $y; };
 $flippedSub = Phamda::flip($sub);
 $flippedSub(20, 30); // => 10
 ```
@@ -546,9 +500,7 @@ $flippedSub(20, 30); // => 10
 Returns an array of sub collections based on a function that returns the group keys for each item.
 ##### Examples
 ```php
-$firstChar = function ($string) {
-    return $string[0];
-};
+$firstChar = function ($string) { return $string[0]; };
 $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
 Phamda::groupBy($firstChar, $collection); // => ['a' => ['abc', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa']]
 ```
@@ -714,9 +666,7 @@ Phamda::lte(2, 1); // => false
 Returns a new collection where values are created from the original collection by calling the supplied function.
 ##### Examples
 ```php
-$square = function ($x) {
-    return $x ** 2;
-};
+$square = function ($x) { return $x ** 2; };
 Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
 ```
 
@@ -740,9 +690,7 @@ Phamda::max(['bar', 'foo', 'baz']); // => 'foo'
 Returns the item from a collection for which the supplied function returns the largest value.
 ##### Examples
 ```php
-$getFoo = function ($item) {
-    return $item->foo;
-};
+$getFoo = function ($item) { return $item->foo; };
 $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
 $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
 $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
@@ -769,9 +717,7 @@ Phamda::min(['bar', 'foo', 'baz']); // => 'bar'
 Returns the item from a collection for which the supplied function returns the smallest value.
 ##### Examples
 ```php
-$getFoo = function ($item) {
-    return $item->foo;
-};
+$getFoo = function ($item) { return $item->foo; };
 $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
 $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
 $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
@@ -811,9 +757,7 @@ Phamda::multiply(36, -8); // => -288
 Wraps the given function in a function that accepts exactly the given amount of parameters.
 ##### Examples
 ```php
-$add3 = function ($a = 0, $b = 0, $c = 0) {
-    return $a + $b + $c;
-};
+$add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
 $add2 = Phamda::nAry(2, $add3);
 $add2(27, 15, 33); // => 42
 $add1 = Phamda::nAry(1, $add3);
@@ -841,9 +785,7 @@ Phamda::negate(0); // => 0
 Returns `true` if no element in the collection matches the predicate, `false` otherwise.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::none($isPositive, [1, 2, 0, -5]); // => false
 Phamda::none($isPositive, [-3, -7, -1, -5]); // => true
 ```
@@ -856,9 +798,7 @@ Phamda::none($isPositive, [-3, -7, -1, -5]); // => true
 Wraps a predicate and returns a function that return `true` if the wrapped function returns a falsey value, `false` otherwise.
 ##### Examples
 ```php
-$equal = function ($a, $b) {
-    return $a === $b;
-};
+$equal = function ($a, $b) { return $a === $b; };
 $notEqual = Phamda::not($equal);
 $notEqual(15, 13); // => true
 $notEqual(7, 7); // => false
@@ -872,9 +812,7 @@ $notEqual(7, 7); // => false
 Wraps the given function and returns a new function that can be called with the remaining parameters.
 ##### Examples
 ```php
-$add = function ($x, $y, $z) {
-    return $x + $y + $z;
-};
+$add = function ($x, $y, $z) { return $x + $y + $z; };
 $addTen = Phamda::partial($add, 10);
 $addTen(3, 4); // => 17
 $addTwenty = Phamda::partial($add, 2, 3, 15);
@@ -889,9 +827,7 @@ $addTwenty(); // => 20
 Wraps the given function and returns a new function of fixed arity that can be called with the remaining parameters.
 ##### Examples
 ```php
-$add = function ($x, $y, $z = 0) {
-    return $x + $y + $z;
-};
+$add = function ($x, $y, $z = 0) { return $x + $y + $z; };
 $addTen = Phamda::partialN(3, $add, 10);
 $addTwenty = $addTen(10);
 $addTwenty(5); // => 25
@@ -905,9 +841,7 @@ $addTwenty(5); // => 25
 Returns the items of the original collection divided into two collections based on a predicate function.
 ##### Examples
 ```php
-$isPositive = function ($x) {
-    return $x > 0;
-};
+$isPositive = function ($x) { return $x > 0; };
 Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[4, 7, 2, 88], [-16, -3]]
 ```
 
@@ -969,17 +903,11 @@ Phamda::pickAll(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'])
 Returns a new function that calls each supplied function in turn and passes the result as a parameter to the next function.
 ##### Examples
 ```php
-$add5 = function ($x) {
-    return $x + 5;
-};
-$square = function ($x) {
-    return $x ** 2;
-};
+$add5 = function ($x) { return $x + 5; };
+$square = function ($x) { return $x ** 2; };
 $squareAdded = Phamda::pipe($add5, $square);
 $squareAdded(4); // => 81
-$hello = function ($target) {
-    return 'Hello ' . $target;
-};
+$hello = function ($target) { return 'Hello ' . $target; };
 $helloUpper = Phamda::pipe('strtoupper', $hello);
 $upperHello = Phamda::pipe($hello, 'strtoupper');
 $helloUpper('world'); // => 'Hello WORLD'
@@ -1042,9 +970,7 @@ Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
 Returns a value accumulated by calling the given function for each element of the collection.
 ##### Examples
 ```php
-$concat = function ($x, $y) {
-    return $x . $y;
-};
+$concat = function ($x, $y) { return $x . $y; };
 Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
 ```
 
@@ -1056,9 +982,7 @@ Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
 Returns a value accumulated by calling the given function for each element of the collection in reverse order.
 ##### Examples
 ```php
-$concat = function ($x, $y) {
-    return $x . $y;
-};
+$concat = function ($x, $y) { return $x . $y; };
 Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
 ```
 
@@ -1070,9 +994,7 @@ Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
 Returns a new collection containing the items that do not match the given predicate.
 ##### Examples
 ```php
-$isEven = function ($x) {
-    return $x % 2 === 0;
-};
+$isEven = function ($x) { return $x % 2 === 0; };
 Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
 ```
 
@@ -1110,9 +1032,7 @@ Phamda::slice(7, 11, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [8, 9]
 Returns a new collection sorted by the given comparator function.
 ##### Examples
 ```php
-$sub = function ($a, $b) {
-    return $a - $b;
-};
+$sub = function ($a, $b) { return $a - $b; };
 Phamda::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
 ```
 
@@ -1124,9 +1044,7 @@ Phamda::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
 Returns a new collection sorted by comparing the values provided by calling the given function for each item.
 ##### Examples
 ```php
-$getFoo = function ($a) {
-    return $a['foo'];
-};
+$getFoo = function ($a) { return $a['foo']; };
 $collection = [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]];
 Phamda::sortBy($getFoo, $collection); // => [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]]
 ```
@@ -1163,9 +1081,7 @@ Phamda::sum([11, 0, 2, -4, 7]); // => 16
 Calls the provided function with the given value as a parameter and returns the value.
 ##### Examples
 ```php
-$addDay = function (\DateTime $date) {
-    $date->add(new \DateInterval('P1D'));
-};
+$addDay = function (\DateTime $date) { $date->add(new \DateInterval('P1D')); };
 $date = new \DateTime('2015-03-15');
 Phamda::tap($addDay, $date); // => $date
 $date->format('Y-m-d'); // => '2015-03-16'
@@ -1179,9 +1095,7 @@ $date->format('Y-m-d'); // => '2015-03-16'
 Calls the provided function the specified number of times and returns the results in an array.
 ##### Examples
 ```php
-$double = function ($number) {
-    return $number * 2;
-};
+$double = function ($number) { return $number * 2; };
 Phamda::times($double, 5); // => [0, 2, 4, 6, 8]
 ```
 
@@ -1205,9 +1119,7 @@ $true(); // => true
 Wraps the given function in a function that accepts exactly one parameter.
 ##### Examples
 ```php
-$add2 = function ($a = 0, $b = 0) {
-    return $a + $b;
-};
+$add2 = function ($a = 0, $b = 0) { return $a + $b; };
 $add1 = Phamda::nAry(1, $add2);
 $add1(27, 15); // => 27
 ```
@@ -1245,8 +1157,6 @@ Phamda::zip([1, 2, 3], []); // => []
 Returns a new array of values created by calling the given function with the matching values of the given arrays.
 ##### Examples
 ```php
-$sum = function ($x, $y) {
-    return $x + $y;
-};
+$sum = function ($x, $y) { return $x + $y; };
 Phamda::zipWith($sum, [1, 2, 3], [5, 6]); // => [6, 8]
 ```
