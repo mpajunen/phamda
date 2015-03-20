@@ -89,7 +89,7 @@ Currently included functions (83):
 
 <a name="add"></a>
 ### add
-`int|float Phamda::add($x, $y)`
+`int|float Phamda::add(int|float $x, int|float $y)`
 
 Adds two numbers.
 ##### Examples
@@ -101,7 +101,7 @@ Phamda::add(36, -8); // => 28
 
 <a name="all"></a>
 ### all
-`bool Phamda::all(callable $predicate, $collection)`
+`bool Phamda::all(callable $predicate, array|\Traversable $collection)`
 
 Returns `true` if all elements of the collection match the predicate, `false` otherwise.
 ##### Examples
@@ -114,7 +114,7 @@ Phamda::all($isPositive, [1, 2, 1, 11]); // => true
 
 <a name="allPass"></a>
 ### allPass
-`callable Phamda::allPass(array $predicates)`
+`callable Phamda::allPass(callable[] $predicates)`
 
 Creates a single predicate from a list of predicates that returns `true` when all the predicates match, `false` otherwise.
 ##### Examples
@@ -130,7 +130,7 @@ $isEvenAndPositive(6); // => true
 
 <a name="always"></a>
 ### always
-`callable Phamda::always($value)`
+`callable Phamda::always(mixed $value)`
 
 Returns a function that always returns the passed value.
 ##### Examples
@@ -142,7 +142,7 @@ $alwaysFoo(); // => 'foo'
 
 <a name="any"></a>
 ### any
-`bool Phamda::any(callable $predicate, $collection)`
+`bool Phamda::any(callable $predicate, array|\Traversable $collection)`
 
 Returns `true` if any element of the collection matches the predicate, `false` otherwise.
 ##### Examples
@@ -155,7 +155,7 @@ Phamda::any($isPositive, [-3, -7, -1, -5]); // => false
 
 <a name="anyPass"></a>
 ### anyPass
-`callable Phamda::anyPass(array $predicates)`
+`callable Phamda::anyPass(callable[] $predicates)`
 
 Creates a single predicate from a list of predicates that returns `true` when any of the predicates matches, `false` otherwise.
 ##### Examples
@@ -171,7 +171,7 @@ $isEvenOrPositive(-3); // => false
 
 <a name="assoc"></a>
 ### assoc
-`array|object Phamda::assoc($property, $value, $object)`
+`array|object Phamda::assoc(string $property, mixed $value, array|object $object)`
 
 Returns a new array or object, setting the given value to the specified property.
 ##### Examples
@@ -184,7 +184,7 @@ Phamda::assoc('foo', null, ['foo' => 15, 'bar' => 7]); // => ['foo' => null, 'ba
 
 <a name="assocPath"></a>
 ### assocPath
-`array|object Phamda::assocPath(array $path, $value, $object)`
+`array|object Phamda::assocPath(array $path, mixed $value, array|object $object)`
 
 Returns a new array or object, setting the given value to the property specified by the path.
 ##### Examples
@@ -225,7 +225,7 @@ $test(5, 17); // => true
 
 <a name="clone_"></a>
 ### clone_
-`mixed Phamda::clone_($object)`
+`mixed Phamda::clone_(object $object)`
 
 Clones an object.
 ##### Examples
@@ -249,7 +249,7 @@ $compare(5, 5); // => 0
 
 <a name="compose"></a>
 ### compose
-`callable Phamda::compose(... $functions)`
+`callable Phamda::compose(callable ... $functions)`
 
 Returns a new function that calls each supplied function in turn in reverse order and passes the result as a parameter to the next function.
 ##### Examples
@@ -268,7 +268,7 @@ $upperHello('world'); // => 'HELLO WORLD'
 
 <a name="construct"></a>
 ### construct
-`object Phamda::construct($class, ... $initialArguments)`
+`object Phamda::construct(string $class, mixed ... $initialArguments)`
 
 Wraps the constructor of the given class to a function.
 ##### Examples
@@ -280,7 +280,7 @@ $date->format('Y-m-d'); // => '2015-03-15'
 
 <a name="constructN"></a>
 ### constructN
-`object Phamda::constructN($arity, $class, ... $initialArguments)`
+`object Phamda::constructN(int $arity, string $class, mixed ... $initialArguments)`
 
 Wraps the constructor of the given class to a function of specified arity.
 ##### Examples
@@ -292,7 +292,7 @@ $construct('2015-03-15')->format('Y-m-d'); // => '2015-03-15'
 
 <a name="contains"></a>
 ### contains
-`bool Phamda::contains($value, $collection)`
+`bool Phamda::contains(mixed $value, array|\Traversable $collection)`
 
 Returns `true` if the specified item is found in the collection, `false` otherwise.
 ##### Examples
@@ -304,7 +304,7 @@ Phamda::contains('d', ['a', 'b', 'c', 'e']); // => false
 
 <a name="curry"></a>
 ### curry
-`callable Phamda::curry(callable $function, ... $initialArguments)`
+`callable Phamda::curry(callable $function, mixed ... $initialArguments)`
 
 Wraps the given function to a function that returns a new function until all required parameters are given.
 ##### Examples
@@ -317,7 +317,7 @@ $addHundred(20, 3); // => 123
 
 <a name="curryN"></a>
 ### curryN
-`callable Phamda::curryN($length, callable $function, ... $initialArguments)`
+`callable Phamda::curryN(int $length, callable $function, mixed ... $initialArguments)`
 
 Wraps the given function to a function of specified arity that returns a new function until all required parameters are given.
 ##### Examples
@@ -332,7 +332,7 @@ $addTwenty(5); // => 25
 
 <a name="dec"></a>
 ### dec
-`int|float Phamda::dec($number)`
+`int|float Phamda::dec(int|float $number)`
 
 Decrements the given number.
 ##### Examples
@@ -344,7 +344,7 @@ Phamda::dec(-14); // => -15
 
 <a name="defaultTo"></a>
 ### defaultTo
-`mixed Phamda::defaultTo($default, $value)`
+`mixed Phamda::defaultTo(mixed $default, mixed $value)`
 
 Returns the default argument if the value argument is `null`.
 ##### Examples
@@ -357,7 +357,7 @@ Phamda::defaultTo(15, false); // => false
 
 <a name="divide"></a>
 ### divide
-`int|float Phamda::divide($x, $y)`
+`int|float Phamda::divide(int|float $x, int|float $y)`
 
 Divides two numbers.
 ##### Examples
@@ -385,7 +385,7 @@ $test(17, 3); // => true
 
 <a name="eq"></a>
 ### eq
-`bool Phamda::eq($x, $y)`
+`bool Phamda::eq(mixed $x, mixed $y)`
 
 Return true when the arguments are strictly equal.
 ##### Examples
@@ -410,7 +410,7 @@ $false(); // => false
 
 <a name="filter"></a>
 ### filter
-`array|Collection Phamda::filter(callable $predicate, $collection)`
+`array|Collection Phamda::filter(callable $predicate, array|\Traversable|Collection $collection)`
 
 Returns a new collection containing the items that match the given predicate.
 ##### Examples
@@ -422,7 +422,7 @@ Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, '
 
 <a name="find"></a>
 ### find
-`mixed|null Phamda::find(callable $predicate, $collection)`
+`mixed|null Phamda::find(callable $predicate, array|\Traversable $collection)`
 
 Returns the first item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
@@ -434,7 +434,7 @@ Phamda::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
 
 <a name="findIndex"></a>
 ### findIndex
-`int|string|null Phamda::findIndex(callable $predicate, $collection)`
+`int|string|null Phamda::findIndex(callable $predicate, array|\Traversable $collection)`
 
 Returns the index of the first item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
@@ -446,7 +446,7 @@ Phamda::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
 
 <a name="findLast"></a>
 ### findLast
-`mixed|null Phamda::findLast(callable $predicate, $collection)`
+`mixed|null Phamda::findLast(callable $predicate, array|\Traversable $collection)`
 
 Returns the last item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
@@ -458,7 +458,7 @@ Phamda::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
 
 <a name="findLastIndex"></a>
 ### findLastIndex
-`int|string|null Phamda::findLastIndex(callable $predicate, $collection)`
+`int|string|null Phamda::findLastIndex(callable $predicate, array|\Traversable $collection)`
 
 Returns the index of the last item of a collection for which the given predicate matches, or null if no match is found.
 ##### Examples
@@ -470,7 +470,7 @@ Phamda::findLastIndex($isPositive, [-5, 0, 15, 33, -2]); // => 3
 
 <a name="first"></a>
 ### first
-`mixed Phamda::first($collection)`
+`mixed Phamda::first(array|\Traversable|Collection $collection)`
 
 Returns the first item of a collection, or false if the collection is empty.
 ##### Examples
@@ -495,7 +495,7 @@ $flippedSub(20, 30); // => 10
 
 <a name="groupBy"></a>
 ### groupBy
-`array[]|Collection[] Phamda::groupBy(callable $function, $collection)`
+`array[]|Collection[] Phamda::groupBy(callable $function, array|\Traversable|Collection $collection)`
 
 Returns an array of sub collections based on a function that returns the group keys for each item.
 ##### Examples
@@ -508,7 +508,7 @@ Phamda::groupBy($firstChar, $collection); // => ['a' => ['abc', 'ayb'], 'c' => [
 
 <a name="gt"></a>
 ### gt
-`bool Phamda::gt($x, $y)`
+`bool Phamda::gt(mixed $x, mixed $y)`
 
 Returns `true` if the first parameter is greater than the second, `false` otherwise.
 ##### Examples
@@ -521,7 +521,7 @@ Phamda::gt(2, 1); // => true
 
 <a name="gte"></a>
 ### gte
-`bool Phamda::gte($x, $y)`
+`bool Phamda::gte(mixed $x, mixed $y)`
 
 Returns `true` if the first parameter is greater than or equal to the second, `false` otherwise.
 ##### Examples
@@ -534,7 +534,7 @@ Phamda::gte(2, 1); // => true
 
 <a name="identity"></a>
 ### identity
-`mixed Phamda::identity($x)`
+`mixed Phamda::identity(mixed $x)`
 
 Returns the given parameter.
 ##### Examples
@@ -560,7 +560,7 @@ $addOrSub(-3); // => 7
 
 <a name="inc"></a>
 ### inc
-`int|float Phamda::inc($number)`
+`int|float Phamda::inc(int|float $number)`
 
 Increments the given number.
 ##### Examples
@@ -572,7 +572,7 @@ Phamda::inc(-16); // => -15
 
 <a name="indexOf"></a>
 ### indexOf
-`int|string|false Phamda::indexOf($item, $collection)`
+`int|string|false Phamda::indexOf(mixed $item, array|\Traversable $collection)`
 
 Returns the index of the given item in a collection, or `false` if the item is not found.
 ##### Examples
@@ -584,7 +584,7 @@ Phamda::indexOf(15, [1, 6, 44, 16, 52]); // => false
 
 <a name="invoker"></a>
 ### invoker
-`callable Phamda::invoker($arity, $method, ... $initialArguments)`
+`callable Phamda::invoker(int $arity, string $method, mixed ... $initialArguments)`
 
 Returns a function that calls the specified method of a given object.
 ##### Examples
@@ -597,7 +597,7 @@ $addDay(new \DateTime('2015-03-12'))->format('Y-m-d'); // => '2015-03-13'
 
 <a name="isEmpty"></a>
 ### isEmpty
-`bool Phamda::isEmpty($collection)`
+`bool Phamda::isEmpty(array|\Traversable|Collection $collection)`
 
 Returns `true` if a collection has no elements, `false` otherwise.
 ##### Examples
@@ -610,7 +610,7 @@ Phamda::isEmpty([]); // => true
 
 <a name="isInstance"></a>
 ### isInstance
-`bool Phamda::isInstance($class, $object)`
+`bool Phamda::isInstance(string $class, object $object)`
 
 Return `true` if an object is of the specified class, `false` otherwise.
 ##### Examples
@@ -623,7 +623,7 @@ $isDate(new \DateTimeImmutable()); // => false
 
 <a name="last"></a>
 ### last
-`mixed Phamda::last($collection)`
+`mixed Phamda::last(array|\Traversable|Collection $collection)`
 
 Returns the last item of a collection, or false if the collection is empty.
 ##### Examples
@@ -635,7 +635,7 @@ Phamda::last([]); // => false
 
 <a name="lt"></a>
 ### lt
-`bool Phamda::lt($x, $y)`
+`bool Phamda::lt(mixed $x, mixed $y)`
 
 Returns `true` if the first parameter is less than the second, `false` otherwise.
 ##### Examples
@@ -648,7 +648,7 @@ Phamda::lt(2, 1); // => false
 
 <a name="lte"></a>
 ### lte
-`bool Phamda::lte($x, $y)`
+`bool Phamda::lte(mixed $x, mixed $y)`
 
 Returns `true` if the first parameter is less than or equal to the second, `false` otherwise.
 ##### Examples
@@ -661,7 +661,7 @@ Phamda::lte(2, 1); // => false
 
 <a name="map"></a>
 ### map
-`array|Collection Phamda::map(callable $function, $collection)`
+`array|Collection Phamda::map(callable $function, array|\Traversable|Collection $collection)`
 
 Returns a new collection where values are created from the original collection by calling the supplied function.
 ##### Examples
@@ -673,7 +673,7 @@ Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
 
 <a name="max"></a>
 ### max
-`mixed Phamda::max($collection)`
+`mixed Phamda::max(array|\Traversable $collection)`
 
 Returns the largest value in the collection.
 ##### Examples
@@ -685,7 +685,7 @@ Phamda::max(['bar', 'foo', 'baz']); // => 'foo'
 
 <a name="maxBy"></a>
 ### maxBy
-`mixed Phamda::maxBy(callable $getValue, $collection)`
+`mixed Phamda::maxBy(callable $getValue, array|\Traversable $collection)`
 
 Returns the item from a collection for which the supplied function returns the largest value.
 ##### Examples
@@ -700,7 +700,7 @@ Phamda::maxBy($getFoo, [$a, $b, $c]); // => $b
 
 <a name="min"></a>
 ### min
-`mixed Phamda::min($collection)`
+`mixed Phamda::min(array|\Traversable $collection)`
 
 Returns the smallest value in the collection.
 ##### Examples
@@ -712,7 +712,7 @@ Phamda::min(['bar', 'foo', 'baz']); // => 'bar'
 
 <a name="minBy"></a>
 ### minBy
-`mixed Phamda::minBy(callable $getValue, $collection)`
+`mixed Phamda::minBy(callable $getValue, array|\Traversable $collection)`
 
 Returns the item from a collection for which the supplied function returns the smallest value.
 ##### Examples
@@ -727,7 +727,7 @@ Phamda::minBy($getFoo, [$a, $b, $c]); // => $c
 
 <a name="modulo"></a>
 ### modulo
-`int Phamda::modulo($x, $y)`
+`int Phamda::modulo(int $x, int $y)`
 
 Divides two integers and returns the modulo.
 ##### Examples
@@ -740,7 +740,7 @@ Phamda::modulo(-23, 6); // => -5
 
 <a name="multiply"></a>
 ### multiply
-`int|float Phamda::multiply($x, $y)`
+`int|float Phamda::multiply(int|float $x, int|float $y)`
 
 Multiplies two numbers.
 ##### Examples
@@ -752,7 +752,7 @@ Phamda::multiply(36, -8); // => -288
 
 <a name="nAry"></a>
 ### nAry
-`callable Phamda::nAry($arity, callable $function)`
+`callable Phamda::nAry(int $arity, callable $function)`
 
 Wraps the given function in a function that accepts exactly the given amount of parameters.
 ##### Examples
@@ -767,7 +767,7 @@ $add1(27, 15, 33); // => 27
 
 <a name="negate"></a>
 ### negate
-`int|float Phamda::negate($x)`
+`int|float Phamda::negate(int|float $x)`
 
 Returns the negation of a number.
 ##### Examples
@@ -780,7 +780,7 @@ Phamda::negate(0); // => 0
 
 <a name="none"></a>
 ### none
-`bool Phamda::none(callable $predicate, $collection)`
+`bool Phamda::none(callable $predicate, array|\Traversable $collection)`
 
 Returns `true` if no element in the collection matches the predicate, `false` otherwise.
 ##### Examples
@@ -807,7 +807,7 @@ $notEqual(7, 7); // => false
 
 <a name="partial"></a>
 ### partial
-`callable Phamda::partial(callable $function, ... $initialArguments)`
+`callable Phamda::partial(callable $function, mixed ... $initialArguments)`
 
 Wraps the given function and returns a new function that can be called with the remaining parameters.
 ##### Examples
@@ -822,7 +822,7 @@ $addTwenty(); // => 20
 
 <a name="partialN"></a>
 ### partialN
-`callable Phamda::partialN($arity, callable $function, ... $initialArguments)`
+`callable Phamda::partialN(int $arity, callable $function, mixed ... $initialArguments)`
 
 Wraps the given function and returns a new function of fixed arity that can be called with the remaining parameters.
 ##### Examples
@@ -836,7 +836,7 @@ $addTwenty(5); // => 25
 
 <a name="partition"></a>
 ### partition
-`array[]|Collection[] Phamda::partition(callable $predicate, $collection)`
+`array[]|Collection[] Phamda::partition(callable $predicate, array|\Traversable|Collection $collection)`
 
 Returns the items of the original collection divided into two collections based on a predicate function.
 ##### Examples
@@ -848,7 +848,7 @@ Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[4, 7, 2, 88], [-
 
 <a name="path"></a>
 ### path
-`mixed Phamda::path(array $path, $object)`
+`mixed Phamda::path(array $path, array|object $object)`
 
 Returns a value found at the given path.
 ##### Examples
@@ -860,7 +860,7 @@ Phamda::path(['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]); // => nul
 
 <a name="pathEq"></a>
 ### pathEq
-`boolean Phamda::pathEq(array $path, $value, $object)`
+`boolean Phamda::pathEq(array $path, mixed $value, array|object $object)`
 
 Returns `true` if the given value is found at the specified path, `false` otherwise.
 ##### Examples
@@ -898,7 +898,7 @@ Phamda::pickAll(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'])
 
 <a name="pipe"></a>
 ### pipe
-`callable Phamda::pipe(... $functions)`
+`callable Phamda::pipe(callable ... $functions)`
 
 Returns a new function that calls each supplied function in turn and passes the result as a parameter to the next function.
 ##### Examples
@@ -917,7 +917,7 @@ $upperHello('world'); // => 'HELLO WORLD'
 
 <a name="pluck"></a>
 ### pluck
-`array|Collection Phamda::pluck($name, $collection)`
+`array|Collection Phamda::pluck(string $name, array|\Traversable|Collection $collection)`
 
 Returns a new collection, where the items are single properties plucked from the given collection.
 ##### Examples
@@ -929,7 +929,7 @@ Phamda::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' =>
 
 <a name="product"></a>
 ### product
-`int|float Phamda::product($values)`
+`int|float Phamda::product(int[]|float[] $values)`
 
 Multiplies a list of numbers.
 ##### Examples
@@ -941,7 +941,7 @@ Phamda::product([1, 2, 3, 4, 5, 6]); // => 720
 
 <a name="prop"></a>
 ### prop
-`mixed Phamda::prop($name, $object)`
+`mixed Phamda::prop(string $name, array|object|\ArrayAccess $object)`
 
 Returns the given element of an array or property of an object.
 ##### Examples
@@ -953,7 +953,7 @@ Phamda::prop('baz', ['bar' => 'fuz', 'baz' => null]); // => null
 
 <a name="propEq"></a>
 ### propEq
-`bool Phamda::propEq($name, $value, $object)`
+`bool Phamda::propEq(string $name, mixed $value, array|object $object)`
 
 Returns `true` if the specified property has the given value, `false` otherwise.
 ##### Examples
@@ -965,7 +965,7 @@ Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
 
 <a name="reduce"></a>
 ### reduce
-`mixed Phamda::reduce(callable $function, $initial, $collection)`
+`mixed Phamda::reduce(callable $function, mixed $initial, array|\Traversable $collection)`
 
 Returns a value accumulated by calling the given function for each element of the collection.
 ##### Examples
@@ -977,7 +977,7 @@ Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
 
 <a name="reduceRight"></a>
 ### reduceRight
-`mixed Phamda::reduceRight(callable $function, $initial, $collection)`
+`mixed Phamda::reduceRight(callable $function, mixed $initial, array|\Traversable $collection)`
 
 Returns a value accumulated by calling the given function for each element of the collection in reverse order.
 ##### Examples
@@ -989,7 +989,7 @@ Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
 
 <a name="reject"></a>
 ### reject
-`array|Collection Phamda::reject(callable $predicate, $collection)`
+`array|Collection Phamda::reject(callable $predicate, array|\Traversable|Collection $collection)`
 
 Returns a new collection containing the items that do not match the given predicate.
 ##### Examples
@@ -1001,7 +1001,7 @@ Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
 
 <a name="reverse"></a>
 ### reverse
-`array|Collection Phamda::reverse($collection)`
+`array|Collection Phamda::reverse(array|\Traversable|Collection $collection)`
 
 Returns a new collection where the items are in a reverse order.
 ##### Examples
@@ -1014,7 +1014,7 @@ Phamda::reverse([]); // => []
 
 <a name="slice"></a>
 ### slice
-`array|Collection Phamda::slice($start, $end, $collection)`
+`array|Collection Phamda::slice(int $start, int $end, array|\Traversable|Collection $collection)`
 
 Returns a new collection, containing the items of the original from index `start` (inclusive) to index `end` (exclusive).
 ##### Examples
@@ -1027,7 +1027,7 @@ Phamda::slice(7, 11, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [8, 9]
 
 <a name="sort"></a>
 ### sort
-`array|Collection Phamda::sort(callable $comparator, $collection)`
+`array|Collection Phamda::sort(callable $comparator, array|\Traversable|Collection $collection)`
 
 Returns a new collection sorted by the given comparator function.
 ##### Examples
@@ -1039,7 +1039,7 @@ Phamda::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
 
 <a name="sortBy"></a>
 ### sortBy
-`array|Collection Phamda::sortBy(callable $function, $collection)`
+`array|Collection Phamda::sortBy(callable $function, array|\Traversable|Collection $collection)`
 
 Returns a new collection sorted by comparing the values provided by calling the given function for each item.
 ##### Examples
@@ -1052,7 +1052,7 @@ Phamda::sortBy($getFoo, $collection); // => [['foo' => 5, 'bar' => 42], ['foo' =
 
 <a name="subtract"></a>
 ### subtract
-`int|float Phamda::subtract($x, $y)`
+`int|float Phamda::subtract(int|float $x, int|float $y)`
 
 Subtracts two numbers.
 ##### Examples
@@ -1064,7 +1064,7 @@ Phamda::subtract(36, -8); // => 44
 
 <a name="sum"></a>
 ### sum
-`int|float Phamda::sum($values)`
+`int|float Phamda::sum(int[]|float[] $values)`
 
 Adds together a list of numbers.
 ##### Examples
@@ -1076,7 +1076,7 @@ Phamda::sum([11, 0, 2, -4, 7]); // => 16
 
 <a name="tap"></a>
 ### tap
-`mixed Phamda::tap(callable $function, $object)`
+`mixed Phamda::tap(callable $function, mixed $object)`
 
 Calls the provided function with the given value as a parameter and returns the value.
 ##### Examples
@@ -1090,7 +1090,7 @@ $date->format('Y-m-d'); // => '2015-03-16'
 
 <a name="times"></a>
 ### times
-`array Phamda::times(callable $function, $count)`
+`array Phamda::times(callable $function, int $count)`
 
 Calls the provided function the specified number of times and returns the results in an array.
 ##### Examples
@@ -1127,7 +1127,7 @@ $add1(27, 15); // => 27
 
 <a name="where"></a>
 ### where
-`mixed Phamda::where(array $specification, $object)`
+`mixed Phamda::where(array $specification, array|object $object)`
 
 Returns true if the given object matches the specification.
 ##### Examples
