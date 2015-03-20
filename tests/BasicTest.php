@@ -834,6 +834,30 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getStringIndexOfData
+     */
+    public function testStringIndexOf($expected, $substring, $string)
+    {
+        $this->assertSame($expected, Phamda::stringIndexOf($substring, $string), 'stringIndexOf produces correct results.');
+        $curried0 = Phamda::stringIndexOf();
+        $this->assertSame($expected, $curried0($substring, $string), 'stringIndexOf is curried correctly.');
+        $curried1 = Phamda::stringIndexOf($substring);
+        $this->assertSame($expected, $curried1($string), 'stringIndexOf is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getStringLastIndexOfData
+     */
+    public function testStringLastIndexOf($expected, $substring, $string)
+    {
+        $this->assertSame($expected, Phamda::stringLastIndexOf($substring, $string), 'stringLastIndexOf produces correct results.');
+        $curried0 = Phamda::stringLastIndexOf();
+        $this->assertSame($expected, $curried0($substring, $string), 'stringLastIndexOf is curried correctly.');
+        $curried1 = Phamda::stringLastIndexOf($substring);
+        $this->assertSame($expected, $curried1($string), 'stringLastIndexOf is curried correctly.');
+    }
+
+    /**
      * @dataProvider getSubtractData
      */
     public function testSubtract($expected, $x, $y)

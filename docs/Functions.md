@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (83):
+Currently included functions (85):
 
 * [add](#add)
 * [all](#all)
@@ -76,6 +76,8 @@ Currently included functions (83):
 * [slice](#slice)
 * [sort](#sort)
 * [sortBy](#sortBy)
+* [stringIndexOf](#stringIndexOf)
+* [stringLastIndexOf](#stringLastIndexOf)
 * [subtract](#subtract)
 * [sum](#sum)
 * [tap](#tap)
@@ -1047,6 +1049,32 @@ Returns a new collection sorted by comparing the values provided by calling the 
 $getFoo = function ($a) { return $a['foo']; };
 $collection = [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]];
 Phamda::sortBy($getFoo, $collection); // => [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]]
+```
+
+
+<a name="stringIndexOf"></a>
+### stringIndexOf
+`int|false Phamda::stringIndexOf(string $substring, string $string)`
+
+Returns the first index of a substring in a string, or `false` if the substring is not found.
+##### Examples
+```php
+Phamda::stringIndexOf('def', 'abcdefdef'); // => 3
+Phamda::stringIndexOf('a', 'abcdefgh'); // => 0
+Phamda::stringIndexOf('ghi', 'abcdefgh'); // => false
+```
+
+
+<a name="stringLastIndexOf"></a>
+### stringLastIndexOf
+`int|false Phamda::stringLastIndexOf(string $substring, string $string)`
+
+Returns the last index of a substring in a string, or `false` if the substring is not found.
+##### Examples
+```php
+Phamda::stringLastIndexOf('def', 'abcdefdef'); // => 6
+Phamda::stringLastIndexOf('a', 'abcdefgh'); // => 0
+Phamda::stringLastIndexOf('ghi', 'abcdefgh'); // => false
 ```
 
 

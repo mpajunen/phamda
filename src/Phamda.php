@@ -1726,6 +1726,48 @@ class Phamda
     }
 
     /**
+     * Returns the first index of a substring in a string, or `false` if the substring is not found.
+     *
+     * ```php
+     * Phamda::stringIndexOf('def', 'abcdefdef'); // => 3
+     * Phamda::stringIndexOf('a', 'abcdefgh'); // => 0
+     * Phamda::stringIndexOf('ghi', 'abcdefgh'); // => false
+     * ```
+     *
+     * @param string $substring
+     * @param string $string
+     *
+     * @return callable|int|false
+     */
+    public static function stringIndexOf($substring = null, $string = null)
+    {
+        return static::curry2(function ($substring, $string) {
+            return strpos($string, $substring);
+        }, func_get_args());
+    }
+
+    /**
+     * Returns the last index of a substring in a string, or `false` if the substring is not found.
+     *
+     * ```php
+     * Phamda::stringLastIndexOf('def', 'abcdefdef'); // => 6
+     * Phamda::stringLastIndexOf('a', 'abcdefgh'); // => 0
+     * Phamda::stringLastIndexOf('ghi', 'abcdefgh'); // => false
+     * ```
+     *
+     * @param string $substring
+     * @param string $string
+     *
+     * @return callable|int|false
+     */
+    public static function stringLastIndexOf($substring = null, $string = null)
+    {
+        return static::curry2(function ($substring, $string) {
+            return strrpos($string, $substring);
+        }, func_get_args());
+    }
+
+    /**
      * Subtracts two numbers.
      *
      * ```php

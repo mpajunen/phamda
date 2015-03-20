@@ -829,6 +829,28 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getStringIndexOfData()
+    {
+        return [
+            [3, 'def', 'abcdefdef'],
+            [0, 'a', 'abcdefgh'],
+            [false, 'ghi', 'abcdefgh'],
+            [false, 'xyz', 'abcdefgh'],
+            [false, 'cba', 'abcdefgh'],
+        ];
+    }
+
+    public function getStringLastIndexOfData()
+    {
+        return [
+            [6, 'def', 'abcdefdef'],
+            [0, 'a', 'abcdefgh'],
+            [false, 'ghi', 'abcdefgh'],
+            [false, 'xyz', 'abcdefgh'],
+            [false, 'cba', 'abcdefgh'],
+        ];
+    }
+
     public function getSubtractData()
     {
         return [
