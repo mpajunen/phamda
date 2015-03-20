@@ -1768,6 +1768,68 @@ class Phamda
     }
 
     /**
+     * Returns a substring of the original string between given indexes.
+     *
+     * ```php
+     * Phamda::substring(2, 5, 'foobarbaz'); // => 'oba'
+     * Phamda::substring(4, 8, 'foobarbaz'); // => 'arba'
+     * Phamda::substring(5, 5, 'foobarbaz'); // => ''
+     * ```
+     *
+     * @param int    $start
+     * @param int    $end
+     * @param string $string
+     *
+     * @return callable|string
+     */
+    public static function substring($start = null, $end = null, $string = null)
+    {
+        return static::curry3(function ($start, $end, $string) {
+            return substr($string, $start, $end - $start);
+        }, func_get_args());
+    }
+
+    /**
+     * Returns a substring of the original string starting from the given index.
+     *
+     * ```php
+     * Phamda::substringFrom(5, 'foobarbaz'); // => 'rbaz'
+     * Phamda::substringFrom(1, 'foobarbaz'); // => 'oobarbaz'
+     * ```
+     *
+     * @param int    $start
+     * @param string $string
+     *
+     * @return callable|string
+     */
+    public static function substringFrom($start = null, $string = null)
+    {
+        return static::curry2(function ($start, $string) {
+            return substr($string, $start);
+        }, func_get_args());
+    }
+
+    /**
+     * Returns a substring of the original string ending before the given index.
+     *
+     * ```php
+     * Phamda::substringTo(5, 'foobarbaz'); // => 'fooba'
+     * Phamda::substringTo(8, 'foobarbaz'); // => 'foobarba'
+     * ```
+     *
+     * @param int    $end
+     * @param string $string
+     *
+     * @return callable|string
+     */
+    public static function substringTo($end = null, $string = null)
+    {
+        return static::curry2(function ($end, $string) {
+            return substr($string, 0, $end);
+        }, func_get_args());
+    }
+
+    /**
      * Subtracts two numbers.
      *
      * ```php

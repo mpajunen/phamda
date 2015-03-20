@@ -851,6 +851,31 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getSubstringData()
+    {
+        return [
+            ['oba', 2, 5, 'foobarbaz'],
+            ['arba', 4, 8, 'foobarbaz'],
+            ['', 5, 5, 'foobarbaz'],
+        ];
+    }
+
+    public function getSubstringFromData()
+    {
+        return [
+            ['rbaz', 5, 'foobarbaz'],
+            ['oobarbaz', 1, 'foobarbaz'],
+        ];
+    }
+
+    public function getSubstringToData()
+    {
+        return [
+            ['fooba', 5, 'foobarbaz'],
+            ['foobarba', 8, 'foobarbaz'],
+        ];
+    }
+
     public function getSubtractData()
     {
         return [

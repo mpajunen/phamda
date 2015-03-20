@@ -858,6 +858,44 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getSubstringData
+     */
+    public function testSubstring($expected, $start, $end, $string)
+    {
+        $this->assertSame($expected, Phamda::substring($start, $end, $string), 'substring produces correct results.');
+        $curried0 = Phamda::substring();
+        $this->assertSame($expected, $curried0($start, $end, $string), 'substring is curried correctly.');
+        $curried1 = Phamda::substring($start);
+        $this->assertSame($expected, $curried1($end, $string), 'substring is curried correctly.');
+        $curried2 = Phamda::substring($start, $end);
+        $this->assertSame($expected, $curried2($string), 'substring is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getSubstringFromData
+     */
+    public function testSubstringFrom($expected, $start, $string)
+    {
+        $this->assertSame($expected, Phamda::substringFrom($start, $string), 'substringFrom produces correct results.');
+        $curried0 = Phamda::substringFrom();
+        $this->assertSame($expected, $curried0($start, $string), 'substringFrom is curried correctly.');
+        $curried1 = Phamda::substringFrom($start);
+        $this->assertSame($expected, $curried1($string), 'substringFrom is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getSubstringToData
+     */
+    public function testSubstringTo($expected, $end, $string)
+    {
+        $this->assertSame($expected, Phamda::substringTo($end, $string), 'substringTo produces correct results.');
+        $curried0 = Phamda::substringTo();
+        $this->assertSame($expected, $curried0($end, $string), 'substringTo is curried correctly.');
+        $curried1 = Phamda::substringTo($end);
+        $this->assertSame($expected, $curried1($string), 'substringTo is curried correctly.');
+    }
+
+    /**
      * @dataProvider getSubtractData
      */
     public function testSubtract($expected, $x, $y)

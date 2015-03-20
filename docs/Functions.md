@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (85):
+Currently included functions (88):
 
 * [add](#add)
 * [all](#all)
@@ -78,6 +78,9 @@ Currently included functions (85):
 * [sortBy](#sortBy)
 * [stringIndexOf](#stringIndexOf)
 * [stringLastIndexOf](#stringLastIndexOf)
+* [substring](#substring)
+* [substringFrom](#substringFrom)
+* [substringTo](#substringTo)
 * [subtract](#subtract)
 * [sum](#sum)
 * [tap](#tap)
@@ -1075,6 +1078,43 @@ Returns the last index of a substring in a string, or `false` if the substring i
 Phamda::stringLastIndexOf('def', 'abcdefdef'); // => 6
 Phamda::stringLastIndexOf('a', 'abcdefgh'); // => 0
 Phamda::stringLastIndexOf('ghi', 'abcdefgh'); // => false
+```
+
+
+<a name="substring"></a>
+### substring
+`string Phamda::substring(int $start, int $end, string $string)`
+
+Returns a substring of the original string between given indexes.
+##### Examples
+```php
+Phamda::substring(2, 5, 'foobarbaz'); // => 'oba'
+Phamda::substring(4, 8, 'foobarbaz'); // => 'arba'
+Phamda::substring(5, 5, 'foobarbaz'); // => ''
+```
+
+
+<a name="substringFrom"></a>
+### substringFrom
+`string Phamda::substringFrom(int $start, string $string)`
+
+Returns a substring of the original string starting from the given index.
+##### Examples
+```php
+Phamda::substringFrom(5, 'foobarbaz'); // => 'rbaz'
+Phamda::substringFrom(1, 'foobarbaz'); // => 'oobarbaz'
+```
+
+
+<a name="substringTo"></a>
+### substringTo
+`string Phamda::substringTo(int $end, string $string)`
+
+Returns a substring of the original string ending before the given index.
+##### Examples
+```php
+Phamda::substringTo(5, 'foobarbaz'); // => 'fooba'
+Phamda::substringTo(8, 'foobarbaz'); // => 'foobarba'
 ```
 
 
