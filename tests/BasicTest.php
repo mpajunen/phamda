@@ -265,6 +265,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getExplodeData
+     */
+    public function testExplode($expected, $delimiter, $string)
+    {
+        $this->assertSame($expected, Phamda::explode($delimiter, $string), 'explode produces correct results.');
+        $curried0 = Phamda::explode();
+        $this->assertSame($expected, $curried0($delimiter, $string), 'explode is curried correctly.');
+        $curried1 = Phamda::explode($delimiter);
+        $this->assertSame($expected, $curried1($string), 'explode is curried correctly.');
+    }
+
+    /**
      * @dataProvider getFalseData
      */
     public function testFalse($expected)
@@ -417,6 +429,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $curried2 = Phamda::ifElse($condition, $onTrue);
         $main3    = $curried2($onFalse);
         $this->assertSame($expected, $main3(...$arguments), 'ifElse is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getImplodeData
+     */
+    public function testImplode($expected, $glue, $strings)
+    {
+        $this->assertSame($expected, Phamda::implode($glue, $strings), 'implode produces correct results.');
+        $curried0 = Phamda::implode();
+        $this->assertSame($expected, $curried0($glue, $strings), 'implode is curried correctly.');
+        $curried1 = Phamda::implode($glue);
+        $this->assertSame($expected, $curried1($strings), 'implode is curried correctly.');
     }
 
     /**

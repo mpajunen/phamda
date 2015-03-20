@@ -271,6 +271,15 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getExplodeData()
+    {
+        return [
+            [['f', 'o', 'o'], '/', 'f/o/o'],
+            [['a', 'b', 'cd', ''], '.', 'a.b.cd.'],
+            [[''], '.', ''],
+        ];
+    }
+
     public function getFalseData()
     {
         return [
@@ -398,6 +407,15 @@ trait BasicProvidersTrait
         return [
             [42, Phamda::lt(0), Phamda::add(27), Phamda::add(3), 15],
             [0, Phamda::lt(0), Phamda::add(27), Phamda::add(3), -3],
+        ];
+    }
+
+    public function getImplodeData()
+    {
+        return [
+            ['f/o/o', '/', ['f', 'o', 'o']],
+            ['a.b.cd.', '.', ['a', 'b', 'cd', '']],
+            ['', '.', ['']],
         ];
     }
 

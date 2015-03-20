@@ -551,6 +551,27 @@ class Phamda
     }
 
     /**
+     * Returns an array containing the parts of a string split by the given delimiter.
+     *
+     * ```php
+     * Phamda::explode('/', 'f/o/o'); // => ['f', 'o', 'o']
+     * Phamda::explode('.', 'a.b.cd.'); // => ['a', 'b', 'cd', '']
+     * Phamda::explode('.', ''); // => ['']
+     * ```
+     *
+     * @param string $delimiter
+     * @param string $string
+     *
+     * @return callable|string[]
+     */
+    public static function explode($delimiter = null, $string = null)
+    {
+        return static::curry2(function ($delimiter, $string) {
+            return explode($delimiter, $string);
+        }, func_get_args());
+    }
+
+    /**
      * Returns a function that always returns `false`.
      *
      * ```php
@@ -854,6 +875,27 @@ class Phamda
             return function (... $arguments) use ($condition, $onTrue, $onFalse) {
                 return $condition(...$arguments) ? $onTrue(...$arguments) : $onFalse(...$arguments);
             };
+        }, func_get_args());
+    }
+
+    /**
+     * Returns a string formed by combining a list of strings using the given glue string.
+     *
+     * ```php
+     * Phamda::implode('/', ['f', 'o', 'o']); // => 'f/o/o'
+     * Phamda::implode('.', ['a', 'b', 'cd', '']); // => 'a.b.cd.'
+     * Phamda::implode('.', ['']); // => ''
+     * ```
+     *
+     * @param string   $glue
+     * @param string[] $strings
+     *
+     * @return callable|string
+     */
+    public static function implode($glue = null, $strings = null)
+    {
+        return static::curry2(function ($glue, $strings) {
+            return implode($glue, $strings);
         }, func_get_args());
     }
 

@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (88):
+Currently included functions (90):
 
 * [add](#add)
 * [all](#all)
@@ -25,6 +25,7 @@ Currently included functions (88):
 * [divide](#divide)
 * [either](#either)
 * [eq](#eq)
+* [explode](#explode)
 * [false](#false)
 * [filter](#filter)
 * [find](#find)
@@ -38,6 +39,7 @@ Currently included functions (88):
 * [gte](#gte)
 * [identity](#identity)
 * [ifElse](#ifElse)
+* [implode](#implode)
 * [inc](#inc)
 * [indexOf](#indexOf)
 * [invoker](#invoker)
@@ -401,6 +403,19 @@ Phamda::eq(null, null); // => true
 ```
 
 
+<a name="explode"></a>
+### explode
+`string[] Phamda::explode(string $delimiter, string $string)`
+
+Returns an array containing the parts of a string split by the given delimiter.
+##### Examples
+```php
+Phamda::explode('/', 'f/o/o'); // => ['f', 'o', 'o']
+Phamda::explode('.', 'a.b.cd.'); // => ['a', 'b', 'cd', '']
+Phamda::explode('.', ''); // => ['']
+```
+
+
 <a name="false"></a>
 ### false
 `callable Phamda::false()`
@@ -560,6 +575,19 @@ Returns a function that applies either the `onTrue` or the `onFalse` function, d
 $addOrSub = Phamda::ifElse(Phamda::lt(0), Phamda::add(-10), Phamda::add(10));
 $addOrSub(25); // => 15
 $addOrSub(-3); // => 7
+```
+
+
+<a name="implode"></a>
+### implode
+`string Phamda::implode(string $glue, string[] $strings)`
+
+Returns a string formed by combining a list of strings using the given glue string.
+##### Examples
+```php
+Phamda::implode('/', ['f', 'o', 'o']); // => 'f/o/o'
+Phamda::implode('.', ['a', 'b', 'cd', '']); // => 'a.b.cd.'
+Phamda::implode('.', ['']); // => ''
 ```
 
 
