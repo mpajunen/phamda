@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (90):
+Currently included functions (92):
 
 * [add](#add)
 * [all](#all)
@@ -8,6 +8,7 @@ Currently included functions (90):
 * [always](#always)
 * [any](#any)
 * [anyPass](#anyPass)
+* [append](#append)
 * [assoc](#assoc)
 * [assocPath](#assocPath)
 * [binary](#binary)
@@ -68,6 +69,7 @@ Currently included functions (90):
 * [pickAll](#pickAll)
 * [pipe](#pipe)
 * [pluck](#pluck)
+* [prepend](#prepend)
 * [product](#product)
 * [prop](#prop)
 * [propEq](#propEq)
@@ -173,6 +175,19 @@ $isEvenOrPositive = Phamda::anyPass([$isEven, $isPositive]);
 $isEvenOrPositive(5); // => true
 $isEvenOrPositive(-4); // => true
 $isEvenOrPositive(-3); // => false
+```
+
+
+<a name="append"></a>
+### append
+`array|Collection Phamda::append(mixed $item, array|Collection $collection)`
+
+Return a new collection that contains all the items in the given collection and the given item last.
+##### Examples
+```php
+Phamda::append('c', ['a', 'b']); // => ['a', 'b', 'c']
+Phamda::append('c', []); // => ['c']
+Phamda::append(['d', 'e'], ['a', 'b']); // => ['a', 'b', ['d', 'e']]
 ```
 
 
@@ -957,6 +972,19 @@ Returns a new collection, where the items are single properties plucked from the
 ```php
 Phamda::pluck('foo', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => [null, 'fii']
 Phamda::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => ['bob', 'pob']
+```
+
+
+<a name="prepend"></a>
+### prepend
+`array|Collection Phamda::prepend(mixed $item, array|Collection $collection)`
+
+Return a new collection that contains the given item first and all the items in the given collection.
+##### Examples
+```php
+Phamda::prepend('c', ['a', 'b']); // => ['c', 'a', 'b']
+Phamda::prepend('c', []); // => ['c']
+Phamda::prepend(['d', 'e'], ['a', 'b']); // => [['d', 'e'], 'a', 'b']
 ```
 
 

@@ -89,6 +89,15 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getAppendData()
+    {
+        return [
+            [['a', 'b', 'c'], 'c', ['a', 'b']],
+            [['c'], 'c', []],
+            [['a', 'b', ['d', 'e']], ['d', 'e'], ['a', 'b']],
+        ];
+    }
+
     public function getAssocData()
     {
         return [
@@ -727,6 +736,15 @@ trait BasicProvidersTrait
         return [
             [[null, 'fii'], 'foo', $items],
             [['bob', 'pob'], 'baz', $items],
+        ];
+    }
+
+    public function getPrependData()
+    {
+        return [
+            [['c', 'a', 'b'], 'c', ['a', 'b']],
+            [['c'], 'c', []],
+            [[['d', 'e'], 'a', 'b'], ['d', 'e'], ['a', 'b']],
         ];
     }
 

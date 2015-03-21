@@ -90,6 +90,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getAppendData
+     */
+    public function testAppend($expected, $item, $collection)
+    {
+        $this->assertSame($expected, Phamda::append($item, $collection), 'append produces correct results.');
+        $curried0 = Phamda::append();
+        $this->assertSame($expected, $curried0($item, $collection), 'append is curried correctly.');
+        $curried1 = Phamda::append($item);
+        $this->assertSame($expected, $curried1($collection), 'append is curried correctly.');
+    }
+
+    /**
      * @dataProvider getAssocData
      */
     public function testAssoc($expected, $property, $value, $object)
@@ -731,6 +743,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($name, $collection), 'pluck is curried correctly.');
         $curried1 = Phamda::pluck($name);
         $this->assertSame($expected, $curried1($collection), 'pluck is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getPrependData
+     */
+    public function testPrepend($expected, $item, $collection)
+    {
+        $this->assertSame($expected, Phamda::prepend($item, $collection), 'prepend produces correct results.');
+        $curried0 = Phamda::prepend();
+        $this->assertSame($expected, $curried0($item, $collection), 'prepend is curried correctly.');
+        $curried1 = Phamda::prepend($item);
+        $this->assertSame($expected, $curried1($collection), 'prepend is curried correctly.');
     }
 
     /**

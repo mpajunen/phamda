@@ -176,6 +176,40 @@ class Phamda
     }
 
     /**
+     * Return a new collection that contains all the items in the given collection and the given item last.
+     *
+     * ```php
+     * Phamda::append('c', ['a', 'b']); // => ['a', 'b', 'c']
+     * Phamda::append('c', []); // => ['c']
+     * Phamda::append(['d', 'e'], ['a', 'b']); // => ['a', 'b', ['d', 'e']]
+     * ```
+     *
+     * @param mixed            $item
+     * @param array|Collection $collection
+     *
+     * @return callable|array|Collection
+     */
+    public static function append($item = null, $collection = null)
+    {
+        return static::curry2(function ($item, $collection) {
+            if (is_array($collection)) {
+                $collection[] = $item;
+
+                return $collection;
+            } elseif (method_exists($collection, 'append')) {
+                return $collection->append($item);
+            } else {
+                foreach ($collection as $collectionItem) {
+                    $items[] = $collectionItem;
+                }
+                $items[] = $item;
+
+                return $items;
+            }
+        }, func_get_args());
+    }
+
+    /**
      * Returns a new array or object, setting the given value to the specified property.
      *
      * ```php
@@ -1552,6 +1586,40 @@ class Phamda
     {
         return static::curry2(function ($name, $collection) {
             return static::_map(Phamda::prop($name), $collection);
+        }, func_get_args());
+    }
+
+    /**
+     * Return a new collection that contains the given item first and all the items in the given collection.
+     *
+     * ```php
+     * Phamda::prepend('c', ['a', 'b']); // => ['c', 'a', 'b']
+     * Phamda::prepend('c', []); // => ['c']
+     * Phamda::prepend(['d', 'e'], ['a', 'b']); // => [['d', 'e'], 'a', 'b']
+     * ```
+     *
+     * @param mixed            $item
+     * @param array|Collection $collection
+     *
+     * @return callable|array|Collection
+     */
+    public static function prepend($item = null, $collection = null)
+    {
+        return static::curry2(function ($item, $collection) {
+            if (is_array($collection)) {
+                array_unshift($collection, $item);
+
+                return $collection;
+            } elseif (method_exists($collection, 'prepend')) {
+                return $collection->prepend($item);
+            } else {
+                $items[] = $item;
+                foreach ($collection as $collectionItem) {
+                    $items[] = $collectionItem;
+                }
+
+                return $items;
+            }
         }, func_get_args());
     }
 

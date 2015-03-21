@@ -64,6 +64,28 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getAppendData
+     */
+    public function testAppend($expected, $item, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::append($item, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'append works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'append does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getAppendData
+     */
+    public function testAppendSimple($expected, $item, $collection)
+    {
+        $_collection = new ArrayContainer($collection);
+        $result      = Phamda::append($item, $_collection);
+        $this->assertSame($expected, $result, 'append works for simple collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'append does not modify original collection values.');
+    }
+
+    /**
      * @dataProvider getContainsData
      */
     public function testContains($expected, $value, $collection)
@@ -479,6 +501,28 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result      = Phamda::pluck($name, $_collection);
         $this->assertSame($expected, $result, 'pluck works for simple collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'pluck does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getPrependData
+     */
+    public function testPrepend($expected, $item, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::prepend($item, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'prepend works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'prepend does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getPrependData
+     */
+    public function testPrependSimple($expected, $item, $collection)
+    {
+        $_collection = new ArrayContainer($collection);
+        $result      = Phamda::prepend($item, $_collection);
+        $this->assertSame($expected, $result, 'prepend works for simple collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'prepend does not modify original collection values.');
     }
 
     /**
