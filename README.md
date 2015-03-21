@@ -18,7 +18,8 @@ Phamda can be installed using composer, just add `phamda/phamda` to the `require
 
 ## Examples
 
-Phamda includes several typical functional programming tools, for example `filter` and `map`:
+Phamda includes several typical functional programming tools, though the argument order may be atypical. For
+example `filter` and `map`:
 
 ```php
 use Phamda\Phamda;
@@ -26,38 +27,46 @@ use Phamda\Phamda;
 $list = [5, 7, -3, 19, 0, 2];
 
 $isPositive = function ($x) { return $x > 0; };
-$result     = Phamda::filter($isPositive, $list); // [5, 7, 19, 2]
+$result     = Phamda::filter($isPositive, $list); // => [5, 7, 19, 2]
 
 $double = function ($x) { return $x * 2; };
-$result = Phamda::map($double, $list); // [10, 14, -6, 38, 0, 4]
+$result = Phamda::map($double, $list); // => [10, 14, -6, 38, 0, 4]
 ```
 
-The main feature of the library is that nearly all of the functions use automatic partial application or
-currying. This means that you can call the `filter` function with only the predicate callback, resulting in
-a new function:
+The argument order supports the main feature of Phamda: Nearly all of the functions use **automatic partial
+application** or currying. This means that you can call the `filter` function with only the predicate
+callback, resulting in a new function:
 
 ```php
 $getPositives = Phamda::filter($isPositive);
-$result       = $getPositives($list); // [5, 7, 19, 2]
+$result       = $getPositives($list); // => [5, 7, 19, 2]
 ```
 
-The final result is the same as using two parameters directly. Of course this new function could now be
-used to filter other lists as well.
+The final result is the same as using two arguments directly. Of course this new function could now be used
+to filter other lists as well.
 
-Another major feature of Phamda is that the functions can easily be used to create new functions and there
-are tools specifically aimed at function composition. For example the `compose` function takes multiple
-functions as parameters and returns a new function. Calling this new function applies the parameter
-functions in succession:
+Another major feature of Phamda is that the functions are **composable**. The basic functions can be used to
+create more complex ones. In addition there are several functions to help with function composition, for
+example the `compose` function that takes multiple argument functions and returns a new function. Calling
+this new function applies the argument functions in succession:
 
 ```php
 $addFive          = function ($x) { return $x + 5; };
 $addFiveAndDouble = Phamda::compose($double, $addFive);
-$result           = $addFiveAndDouble(16); // 42
+$result           = $addFiveAndDouble(16); // => 42
 // Equivalent to calling $double($addFive(16));
 ```
 
+Phamda also supports **placeholder arguments**. A placeholder can be created by calling the `_` function.
+A placeholder can be used with all curried functions, for example:
+
+```php
+$subtractTen = Phamda::subtract(Phamda::_(), 10);
+$result      = $subtractTen(22); // => 12
+```
+
 In the next example these concepts are applied to processing a list of badly formatted product data.
-The `pipe` function is used here. It's similar to `compose` but the parameter functions are applied in
+The `pipe` function is used here. It's similar to `compose` but the argument functions are applied in
 reverse order:
 
 ```php
@@ -76,7 +85,7 @@ $process = Phamda::pipe(
     Phamda::filter( // Only include products that...
         Phamda::pipe(
             Phamda::prop('weight'), // ... weigh...
-            Phamda::gt(50.0) // ... less than 50.0. (The parameter order is unintuitive here.)
+            Phamda::lt(Phamda::_(), 50.0) // ... less than 50.0.
         )
     ),
     Phamda::map( // For each product...
@@ -96,7 +105,7 @@ $process = Phamda::pipe(
 
 // Note that the actual data is not used before the next row.
 $result = $process($products);
-/*
+/* =>
 [
     ['number' => 38718, 'category' => 'ETW', 'price' => '271.80'],
     ['number' => 46289, 'category' => 'XPA', 'price' => '650.31'],

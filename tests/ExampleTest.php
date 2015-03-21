@@ -15,7 +15,7 @@ use Phamda\Phamda;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {
-    public function testExample1()
+    public function testFilterMapExample()
     {
         $list = [5, 7, -3, 19, 0, 2];
 
@@ -30,7 +30,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([10, 14, -6, 38, 0, 4], $result);
     }
 
-    public function testExample2()
+    public function testCurriedExample()
     {
         $list = [5, 7, -3, 19, 0, 2];
 
@@ -42,7 +42,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([5, 7, 3 => 19, 5 => 2], $result);
     }
 
-    public function testExample3()
+    public function testComposeExample()
     {
         $double = function ($x) { return $x * 2; };
 
@@ -53,7 +53,15 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(42, $result);
     }
 
-    public function testExample4()
+    public function testPlaceholderExample()
+    {
+        $subtractTen = Phamda::subtract(Phamda::_(), 10);
+        $result      = $subtractTen(22);
+
+        $this->assertSame(12, $result);
+    }
+
+    public function testProductList()
     {
         $products = [
             ['category' => 'QDT', 'weight' => 65.8, 'price' => 293.5, 'number' => 15708],
@@ -70,7 +78,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
             Phamda::filter(
                 Phamda::pipe(
                     Phamda::prop('weight'),
-                    Phamda::gt(50.0)
+                    Phamda::lt(Phamda::_(), 50.0)
                 )
             ),
             Phamda::map(
