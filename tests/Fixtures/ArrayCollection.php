@@ -18,6 +18,20 @@ class ArrayCollection extends ArrayContainer implements Collection
     /**
      * @param mixed $item
      *
+     * @return Collection
+     */
+    public function append($item)
+    {
+        $values = $this->values;
+
+        $values[] = $item;
+
+        return new static($values);
+    }
+
+    /**
+     * @param mixed $item
+     *
      * @return bool
      */
     public function contains($item)
@@ -123,6 +137,20 @@ class ArrayCollection extends ArrayContainer implements Collection
         return array_map(function (array $group) {
             return new static($group);
         }, $groups);
+    }
+
+    /**
+     * @param mixed $item
+     *
+     * @return Collection
+     */
+    public function prepend($item)
+    {
+        $values = $this->values;
+
+        array_unshift($values, $item);
+
+        return new static($values);
     }
 
     /**

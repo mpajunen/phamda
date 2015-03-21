@@ -23,6 +23,13 @@ interface Collection
     /**
      * @param mixed $item
      *
+     * @return Collection
+     */
+    public function append($item);
+
+    /**
+     * @param mixed $item
+     *
      * @return bool
      */
     public function contains($item);
@@ -78,6 +85,15 @@ interface Collection
     public function partition(callable $predicate);
 
     /**
+     * @param mixed $item
+     *
+     * @return Collection
+     */
+    public function prepend($item);
+
+    /**
+     * @param bool $preserveKeys
+     *
      * @return Collection
      */
     public function reverse($preserveKeys = false);
