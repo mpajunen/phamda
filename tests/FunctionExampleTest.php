@@ -15,6 +15,12 @@ use Phamda\Phamda;
 
 class FunctionExampleTest extends \PHPUnit_Framework_TestCase
 {
+    public function test_()
+    {
+        $sub10 = Phamda::subtract(Phamda::_(), 10);
+        $this->assertSame(42, $sub10(52));
+    }
+
     public function testAll()
     {
         $isPositive = function ($x) { return $x > 0; };

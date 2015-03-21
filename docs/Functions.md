@@ -1,7 +1,8 @@
 # Phamda functions
 
-Currently included functions (92):
+Currently included functions (93):
 
+* [_](#_)
 * [add](#add)
 * [all](#all)
 * [allPass](#allPass)
@@ -94,6 +95,18 @@ Currently included functions (92):
 * [where](#where)
 * [zip](#zip)
 * [zipWith](#zipWith)
+
+
+<a name="_"></a>
+### _
+`Placeholder Phamda::_()`
+
+Returns a placeholder to be used with curried functions.
+##### Examples
+```php
+$sub10 = Phamda::subtract(Phamda::_(), 10);
+$sub10(52); // => 42
+```
 
 
 <a name="add"></a>
@@ -250,7 +263,6 @@ $test(5, 17); // => true
 `mixed Phamda::clone_(object $object)`
 
 Clones an object.
-##### Examples
 
 
 

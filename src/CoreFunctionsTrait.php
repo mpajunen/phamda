@@ -17,11 +17,6 @@ trait CoreFunctionsTrait
 {
     private static $placeholder;
 
-    public static function _()
-    {
-        return self::$placeholder ?: self::$placeholder = new Placeholder();
-    }
-
     protected static function getArity(callable $function)
     {
         if (is_string($function) || $function instanceof \Closure) {
