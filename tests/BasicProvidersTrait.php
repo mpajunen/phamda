@@ -386,7 +386,7 @@ trait BasicProvidersTrait
 
         return [
             [
-                ['a' => ['abc', 'aba', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa'], 'd' => ['dfe']],
+                ['a' => [0 => 'abc', 1 => 'aba', 5 => 'ayb'], 'c' => [2 => 'cbc', 3 => 'cab'], 'b' => [4 => 'baa'], 'd' => [6 => 'dfe']],
                 $firstChar,
                 ['abc', 'aba', 'cbc', 'cab', 'baa', 'ayb', 'dfe'],
             ],
@@ -664,8 +664,8 @@ trait BasicProvidersTrait
         $largerThanFive = function ($x) { return $x > 5; };
 
         return [
-            [[[16, 7, 88], [4, -3, 2]], $largerThanFive, [4, 16, 7, -3, 2, 88]],
-            [[[4, -3, 2], [16, 7, 88]], Phamda::not($largerThanFive), [4, 16, 7, -3, 2, 88]],
+            [[[1 => 16, 2 => 7, 5 => 88], [0 => 4, 3 => -3, 4 => 2]], $largerThanFive, [4, 16, 7, -3, 2, 88]],
+            [[[0 => 4, 3 => -3, 4 => 2], [1 => 16, 2 => 7, 5 => 88]], Phamda::not($largerThanFive), [4, 16, 7, -3, 2, 88]],
         ];
     }
 
@@ -826,8 +826,8 @@ trait BasicProvidersTrait
     public function getReverseData()
     {
         return [
-            [[1, 2, 3], [3, 2, 1]],
-            [[5, 16, 4, 22], [22, 4, 16, 5]],
+            [[2 => 1, 1 => 2, 0 => 3], [3, 2, 1]],
+            [[3 => 5, 2 => 16, 1 => 4, 0 => 22], [22, 4, 16, 5]],
             [[], []],
         ];
     }

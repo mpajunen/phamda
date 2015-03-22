@@ -196,15 +196,15 @@ trait CoreFunctionsTrait
      *
      * @return array|Collection
      */
-    protected static function _reverse($collection, $preserveKeys = false)
+    protected static function _reverse($collection)
     {
         if (method_exists($collection, 'reverse')) {
-            return $collection->reverse($preserveKeys);
+            return $collection->reverse();
         }
 
         $items = is_array($collection) ? $collection : self::getCollectionItems($collection);
 
-        return array_reverse($items, $preserveKeys);
+        return array_reverse($items, true);
     }
 
     /**

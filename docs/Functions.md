@@ -549,7 +549,7 @@ Returns an array of sub collections based on a function that returns the group k
 ```php
 $firstChar = function ($string) { return $string[0]; };
 $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
-Phamda::groupBy($firstChar, $collection); // => ['a' => ['abc', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa']]
+Phamda::groupBy($firstChar, $collection); // => ['a' => [0 => 'abc', 4 => 'ayb'], 'c' => [1 => 'cbc', 2 => 'cab'], 'b' => [3 => 'baa']]
 ```
 
 
@@ -902,7 +902,7 @@ Returns the items of the original collection divided into two collections based 
 ##### Examples
 ```php
 $isPositive = function ($x) { return $x > 0; };
-Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[4, 7, 2, 88], [-16, -3]]
+Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[0 => 4, 2 => 7, 4 => 2, 5 => 88], [1 => -16, 3 => -3]]
 ```
 
 
@@ -1079,8 +1079,8 @@ Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
 Returns a new collection where the items are in a reverse order.
 ##### Examples
 ```php
-Phamda::reverse([3, 2, 1]); // => [1, 2, 3]
-Phamda::reverse([22, 4, 16, 5]); // => [5, 16, 4, 22]
+Phamda::reverse([3, 2, 1]); // => [2 => 1, 1 => 2, 0 => 3]
+Phamda::reverse([22, 4, 16, 5]); // => [3 => 5, 2 => 16, 1 => 4, 0 => 22]
 Phamda::reverse([]); // => []
 ```
 

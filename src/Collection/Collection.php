@@ -96,7 +96,7 @@ interface Collection
      *
      * @return Collection
      */
-    public function reverse($preserveKeys = false);
+    public function reverse();
 
     /**
      * @param int $start

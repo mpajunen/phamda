@@ -73,7 +73,7 @@ class ArrayCollection extends ArrayContainer implements Collection
     {
         $groups = [];
         foreach ($this->values as $key => $item) {
-            $groups[$function($item, $key, $this)][] = $item;
+            $groups[$function($item, $key, $this)][$key] = $item;
         }
 
         return array_map(function (array $group) {
@@ -131,7 +131,7 @@ class ArrayCollection extends ArrayContainer implements Collection
     {
         $groups = [[], []];
         foreach ($this->values as $key => $item) {
-            $groups[$predicate($item, $key, $this) ? 0 : 1][] = $item;
+            $groups[$predicate($item, $key, $this) ? 0 : 1][$key] = $item;
         }
 
         return array_map(function (array $group) {
@@ -156,9 +156,9 @@ class ArrayCollection extends ArrayContainer implements Collection
     /**
      * @return static
      */
-    public function reverse($preserveKeys = false)
+    public function reverse()
     {
-        return new static(array_reverse($this->values, $preserveKeys));
+        return new static(array_reverse($this->values, true));
     }
 
     /**

@@ -751,7 +751,7 @@ class Phamda
     public static function findLastIndex(callable $predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
-            foreach (static::_reverse($collection, true) as $index => $item) {
+            foreach (static::_reverse($collection) as $index => $item) {
                 if ($predicate($item)) {
                     return $index;
                 }
@@ -818,7 +818,7 @@ class Phamda
      * ```php
      * $firstChar = function ($string) { return $string[0]; };
      * $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
-     * Phamda::groupBy($firstChar, $collection); // => ['a' => ['abc', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa']]
+     * Phamda::groupBy($firstChar, $collection); // => ['a' => [0 => 'abc', 4 => 'ayb'], 'c' => [1 => 'cbc', 2 => 'cab'], 'b' => [3 => 'baa']]
      * ```
      *
      * @param callable                      $function
@@ -833,8 +833,8 @@ class Phamda
                 return $collection->groupBy($function);
             }
 
-            return static::_reduce(function (array $collections, $item) use ($function) {
-                $collections[$function($item)][] = $item;
+            return static::_reduce(function (array $collections, $item, $key) use ($function) {
+                $collections[$function($item)][$key] = $item;
 
                 return $collections;
             }, [], $collection);
@@ -1427,7 +1427,7 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[4, 7, 2, 88], [-16, -3]]
+     * Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[0 => 4, 2 => 7, 4 => 2, 5 => 88], [1 => -16, 3 => -3]]
      * ```
      *
      * @param callable                      $predicate
@@ -1442,8 +1442,8 @@ class Phamda
                 return $collection->partition($predicate);
             }
 
-            return static::_reduce(function (array $collections, $item) use ($predicate) {
-                $collections[$predicate($item) ? 0 : 1][] = $item;
+            return static::_reduce(function (array $collections, $item, $key) use ($predicate) {
+                $collections[$predicate($item) ? 0 : 1][$key] = $item;
 
                 return $collections;
             }, [[], []], $collection);
@@ -1764,8 +1764,8 @@ class Phamda
      * Returns a new collection where the items are in a reverse order.
      *
      * ```php
-     * Phamda::reverse([3, 2, 1]); // => [1, 2, 3]
-     * Phamda::reverse([22, 4, 16, 5]); // => [5, 16, 4, 22]
+     * Phamda::reverse([3, 2, 1]); // => [2 => 1, 1 => 2, 0 => 3]
+     * Phamda::reverse([22, 4, 16, 5]); // => [3 => 5, 2 => 16, 1 => 4, 0 => 22]
      * Phamda::reverse([]); // => []
      * ```
      *

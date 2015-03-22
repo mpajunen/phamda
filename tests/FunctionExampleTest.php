@@ -186,7 +186,7 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $firstChar  = function ($string) { return $string[0]; };
         $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
         $this->assertSame(
-            ['a' => ['abc', 'ayb'], 'c' => ['cbc', 'cab'], 'b' => ['baa']],
+            ['a' => [0 => 'abc', 4 => 'ayb'], 'c' => [1 => 'cbc', 2 => 'cab'], 'b' => [3 => 'baa']],
             Phamda::groupBy($firstChar, $collection)
         );
     }
@@ -280,7 +280,7 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
     public function testPartition()
     {
         $isPositive = function ($x) { return $x > 0; };
-        $this->assertSame([[4, 7, 2, 88], [-16, -3]], Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]));
+        $this->assertSame([[0 => 4, 2 => 7, 4 => 2, 5 => 88], [1 => -16, 3 => -3]], Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]));
     }
 
     public function testPipe()
