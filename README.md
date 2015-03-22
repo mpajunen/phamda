@@ -5,16 +5,7 @@ Phamda is a set of functional programming tools for PHP, heavily inspired by the
 
 ## Installation
 
-Phamda can be installed using composer, just add `phamda/phamda` to the `require` section of the
-`composer.json` file of your project and update your dependencies:
-
-```
-{
-    "require": {
-        "phamda/phamda": "dev-master"
-    }
-}
-```
+Using composer: `composer require phamda/phamda`
 
 ## Examples
 
