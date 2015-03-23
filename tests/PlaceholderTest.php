@@ -15,6 +15,17 @@ use Phamda\Phamda;
 
 class PlaceholderTest extends \PHPUnit_Framework_TestCase
 {
+    use BasicProvidersTrait;
+
+    /**
+     * @dataProvider getMapData
+     */
+    public function testMap($expected, callable $function, $collection)
+    {
+        $curried = Phamda::map(Phamda::_(), $collection);
+        $this->assertSame($expected, $curried($function));
+    }
+
     public function testSubtract()
     {
         $sub10 = Phamda::subtract(Phamda::_(), 10);
