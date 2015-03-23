@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (93):
+Currently included functions (94):
 
 * [_](#_)
 * [add](#add)
@@ -25,6 +25,7 @@ Currently included functions (93):
 * [dec](#dec)
 * [defaultTo](#defaultTo)
 * [divide](#divide)
+* [each](#each)
 * [either](#either)
 * [eq](#eq)
 * [explode](#explode)
@@ -398,6 +399,20 @@ Divides two numbers.
 ```php
 Phamda::divide(55, 11); // => 5
 Phamda::divide(48, -8); // => -6
+```
+
+
+<a name="each"></a>
+### each
+`array|\Traversable|Collection Phamda::each(callable $function, array|\Traversable|Collection $collection)`
+
+Calls the given function for each element in the collection and returns the original collection.
+##### Examples
+```php
+$date = new \DateTime('2015-02-02');
+$addDays = function ($number) use ($date) { $date->modify("+{$number} days"); };
+Phamda::each($addDays, [3, 6, 2]);
+$date->format('Y-m-d'); // => '2015-02-13'
 ```
 
 

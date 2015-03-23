@@ -128,6 +128,14 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(25, $addTwenty(5));
     }
 
+    public function testEach()
+    {
+        $date    = new \DateTime('2015-02-02');
+        $addDays = function ($number) use ($date) { $date->modify("+$number days"); };
+        Phamda::each($addDays, [3, 6, 2]);
+        $this->assertSame('2015-02-13', $date->format('Y-m-d'));
+    }
+
     public function testEither()
     {
         $lt          = function ($x, $y) { return $x < $y; };

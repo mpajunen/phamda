@@ -553,6 +553,32 @@ class Phamda
     }
 
     /**
+     * Calls the given function for each element in the collection and returns the original collection.
+     *
+     * ```php
+     * $date = new \DateTime('2015-02-02');
+     * $addDays = function ($number) use ($date) { $date->modify("+{$number} days"); };
+     * Phamda::each($addDays, [3, 6, 2]);
+     * $date->format('Y-m-d'); // => '2015-02-13'
+     * ```
+     *
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return callable|array|\Traversable|Collection
+     */
+    public static function each($function = null, $collection = null)
+    {
+        return static::curry2(function (callable $function, $collection) {
+            foreach ($collection as $key => $item) {
+                $function($item, $key, $collection);
+            }
+
+            return $collection;
+        }, func_get_args());
+    }
+
+    /**
      * Returns a function that returns `true` when either of the predicates matches, `false` otherwise.
      *
      * ```php

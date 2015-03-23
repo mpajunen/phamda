@@ -108,6 +108,28 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getEachData
+     */
+    public function testEach($expected, callable $function, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::each($function, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'each works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'each does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getEachData
+     */
+    public function testEachSimple($expected, callable $function, $collection)
+    {
+        $_collection = new ArrayContainer($collection);
+        $result      = Phamda::each($function, $_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'each works for simple collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'each does not modify original collection values.');
+    }
+
+    /**
      * @dataProvider getFilterData
      */
     public function testFilter($expected, callable $predicate, $collection)

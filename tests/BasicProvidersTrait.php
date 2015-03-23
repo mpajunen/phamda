@@ -245,6 +245,16 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getEachData()
+    {
+        $counter  = new Counter();
+        $addCount = function ($number) use ($counter) { $counter->value += $number; };
+
+        return [
+            [[1, 2, 3, 4, 5], $addCount, [1, 2, 3, 4, 5]],
+        ];
+    }
+
     public function getEitherData()
     {
         $true  = function () { return true; };

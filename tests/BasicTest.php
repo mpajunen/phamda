@@ -250,6 +250,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getEachData
+     */
+    public function testEach($expected, callable $function, $collection)
+    {
+        $this->assertSame($expected, Phamda::each($function, $collection), 'each produces correct results.');
+        $curried0 = Phamda::each();
+        $this->assertSame($expected, $curried0($function, $collection), 'each is curried correctly.');
+        $curried1 = Phamda::each($function);
+        $this->assertSame($expected, $curried1($collection), 'each is curried correctly.');
+    }
+
+    /**
      * @dataProvider getEitherData
      */
     public function testEither($expected, callable $a, callable $b, ... $arguments)
