@@ -12,10 +12,16 @@
 namespace Phamda\Tests;
 
 use Phamda\Tests\Fixtures\ArrayCollection;
+use Phamda\Tests\Fixtures\ArrayContainer;
 
 trait CollectionTestTrait
 {
-    protected function getCollectionArray(ArrayCollection $collection)
+    /**
+     * @param ArrayCollection|ArrayContainer $collection
+     *
+     * @return array
+     */
+    protected function getCollectionArray($collection)
     {
         return $collection->toArray();
     }
