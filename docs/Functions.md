@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (94):
+Currently included functions (95):
 
 * [_](#_)
 * [add](#add)
@@ -54,6 +54,7 @@ Currently included functions (94):
 * [map](#map)
 * [max](#max)
 * [maxBy](#maxBy)
+* [merge](#merge)
 * [min](#min)
 * [minBy](#minBy)
 * [modulo](#modulo)
@@ -770,6 +771,18 @@ $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
 $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
 $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
 Phamda::maxBy($getFoo, [$a, $b, $c]); // => $b
+```
+
+
+<a name="merge"></a>
+### merge
+`array Phamda::merge(array $a, array $b)`
+
+Returns an array containing that contains all the values in arrays `a` and `b`.
+##### Examples
+```php
+Phamda::merge([1, 2], [3, 4, 5]); // => [1, 2, 3, 4, 5]
+Phamda::merge(['a', 'b'], ['a', 'b']); // => ['a', 'b', 'a', 'b']
 ```
 
 

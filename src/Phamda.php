@@ -1232,6 +1232,30 @@ class Phamda
     }
 
     /**
+     * Returns an array containing that contains all the values in arrays `a` and `b`.
+     *
+     * ```php
+     * Phamda::merge([1, 2], [3, 4, 5]); // => [1, 2, 3, 4, 5]
+     * Phamda::merge(['a', 'b'], ['a', 'b']); // => ['a', 'b', 'a', 'b']
+     * ```
+     *
+     * @param array $a
+     * @param array $b
+     *
+     * @return callable|array
+     */
+    public static function merge($a = null, $b = null)
+    {
+        return static::curry2(function (array $a, array $b) {
+            foreach ($b as $item) {
+                $a[] = $item;
+            }
+
+            return $a;
+        }, func_get_args());
+    }
+
+    /**
      * Returns the smallest value in the collection.
      *
      * ```php

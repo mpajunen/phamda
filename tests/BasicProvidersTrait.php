@@ -567,6 +567,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getMergeData()
+    {
+        return [
+            [[1, 2, 3, 4, 5], [1, 2], [3, 4, 5]],
+            [['a', 'b', 'a', 'b'], ['a', 'b'], ['a', 'b']],
+        ];
+    }
+
     public function getMinData()
     {
         return [

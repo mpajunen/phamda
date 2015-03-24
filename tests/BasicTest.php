@@ -580,6 +580,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getMergeData
+     */
+    public function testMerge($expected, array $a, array $b)
+    {
+        $this->assertSame($expected, Phamda::merge($a, $b), 'merge produces correct results.');
+        $curried0 = Phamda::merge();
+        $this->assertSame($expected, $curried0($a, $b), 'merge is curried correctly.');
+        $curried1 = Phamda::merge($a);
+        $this->assertSame($expected, $curried1($b), 'merge is curried correctly.');
+    }
+
+    /**
      * @dataProvider getMinData
      */
     public function testMin($expected, $collection)
