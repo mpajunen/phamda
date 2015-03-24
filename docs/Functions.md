@@ -609,7 +609,7 @@ Phamda::identity('abc'); // => 'abc'
 
 <a name="ifElse"></a>
 ### ifElse
-`mixed Phamda::ifElse(callable $condition, callable $onTrue, callable $onFalse)`
+`callable Phamda::ifElse(callable $condition, callable $onTrue, callable $onFalse)`
 
 Returns a function that applies either the `onTrue` or the `onFalse` function, depending on the result of the `condition` predicate.
 ##### Examples

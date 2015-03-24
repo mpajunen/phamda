@@ -30,7 +30,7 @@ class Phamda
      */
     public static function _()
     {
-        return self::$placeholder ?: (self::$placeholder = new Placeholder());
+        return static::$placeholder ?: (static::$placeholder = new Placeholder());
     }
 
     /**
@@ -942,7 +942,7 @@ class Phamda
      * @param callable $onTrue
      * @param callable $onFalse
      *
-     * @return callable|mixed
+     * @return callable
      */
     public static function ifElse($condition = null, $onTrue = null, $onFalse = null)
     {
