@@ -1034,15 +1034,17 @@ class Phamda
      *
      * @return callable
      */
-    public static function invoker($arity, $method, ... $initialArguments)
+    public static function invoker($arity = null, $method = null, ... $initialArguments)
     {
-        $remainingCount = $arity - count($initialArguments) + 1;
+        return static::curry2(function ($arity, $method, ... $initialArguments) {
+            $remainingCount = $arity - count($initialArguments) + 1;
 
-        return static::_curryN($remainingCount, function (... $arguments) use ($method, $initialArguments) {
-            $object = array_pop($arguments);
+            return static::_curryN($remainingCount, function (... $arguments) use ($method, $initialArguments) {
+                $object = array_pop($arguments);
 
-            return $object->{$method}(...array_merge($initialArguments, $arguments));
-        });
+                return $object->{$method}(...array_merge($initialArguments, $arguments));
+            });
+        }, func_get_args());
     }
 
     /**
@@ -1417,9 +1419,11 @@ class Phamda
      *
      * @return callable
      */
-    public static function partial(callable $function, ... $initialArguments)
+    public static function partial($function = null, ... $initialArguments)
     {
-        return Phamda::partialN(static::getArity($function), $function, ...$initialArguments);
+        return static::curry1(function (callable $function, ... $initialArguments) {
+            return static::_partialN(static::getArity($function), $function, ...$initialArguments);
+        }, func_get_args());
     }
 
     /**
@@ -1438,14 +1442,11 @@ class Phamda
      *
      * @return callable
      */
-    public static function partialN($arity, callable $function, ... $initialArguments)
+    public static function partialN($arity = null, $function = null, ... $initialArguments)
     {
-        $remainingCount = $arity - count($initialArguments);
-        $partial        = function (... $arguments) use ($function, $initialArguments) {
-            return $function(...array_merge($initialArguments, $arguments));
-        };
-
-        return $remainingCount > 0 ? static::_curryN($remainingCount, $partial) : $partial;
+        return static::curry2(function ($arity, callable $function, ... $initialArguments) {
+            return static::_partialN($arity, $function, ...$initialArguments);
+        }, func_get_args());
     }
 
     /**

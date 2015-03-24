@@ -164,6 +164,23 @@ trait CoreFunctionsTrait
     }
 
     /**
+     * @param int      $arity
+     * @param callable $function
+     * @param mixed    ...$initialArguments
+     *
+     * @return callable
+     */
+    protected static function _partialN($arity, callable $function, ... $initialArguments)
+    {
+        $remainingCount = $arity - count($initialArguments);
+        $partial        = function (... $arguments) use ($function, $initialArguments) {
+            return $function(...array_merge($initialArguments, $arguments));
+        };
+
+        return $remainingCount > 0 ? static::_curryN($remainingCount, $partial) : $partial;
+    }
+
+    /**
      * @param string                    $name
      * @param array|object|\ArrayAccess $object
      *
