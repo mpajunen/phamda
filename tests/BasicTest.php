@@ -157,6 +157,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getCastData
+     */
+    public function testCast($expected, $type, $value)
+    {
+        $this->assertSame($expected, Phamda::cast($type, $value), 'cast produces correct results.');
+        $curried0 = Phamda::cast();
+        $this->assertSame($expected, $curried0($type, $value), 'cast is curried correctly.');
+        $curried1 = Phamda::cast($type);
+        $this->assertSame($expected, $curried1($value), 'cast is curried correctly.');
+    }
+
+    /**
      * @dataProvider getComparatorData
      */
     public function testComparator($expected, callable $predicate, $x, $y)

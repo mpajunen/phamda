@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (95):
+Currently included functions (96):
 
 * [_](#_)
 * [add](#add)
@@ -14,6 +14,7 @@ Currently included functions (95):
 * [assocPath](#assocPath)
 * [binary](#binary)
 * [both](#both)
+* [cast](#cast)
 * [clone_](#clone_)
 * [comparator](#comparator)
 * [compose](#compose)
@@ -257,6 +258,18 @@ $test = Phamda::both($lt, $arePositive);
 $test(9, 4); // => false
 $test(-3, 11); // => false
 $test(5, 17); // => true
+```
+
+
+<a name="cast"></a>
+### cast
+`mixed Phamda::cast(string $type, mixed $value)`
+
+Return the given `value` cast to the given `type`.
+##### Examples
+```php
+Phamda::cast('string', 3); // => '3'
+Phamda::cast('int', 4.55); // => 4
 ```
 
 

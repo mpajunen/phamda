@@ -42,6 +42,14 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, (array) $result);
     }
 
+    public function testCast()
+    {
+        $object = (object) ['foo', 'bar'];
+
+        $this->assertSame(['foo', 'bar'], Phamda::cast('array', $object));
+        $this->assertInstanceOf(\stdClass::class, $object);
+    }
+
     public function testTap()
     {
         $counter = new Counter();

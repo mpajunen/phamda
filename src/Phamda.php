@@ -316,6 +316,28 @@ class Phamda
     }
 
     /**
+     * Return the given `value` cast to the given `type`.
+     *
+     * ```php
+     * Phamda::cast('string', 3); // => '3'
+     * Phamda::cast('int', 4.55); // => 4
+     * ```
+     *
+     * @param string $type
+     * @param mixed  $value
+     *
+     * @return callable|mixed
+     */
+    public static function cast($type = null, $value = null)
+    {
+        return static::curry2(function ($type, $value) {
+            settype($value, $type);
+
+            return $value;
+        }, func_get_args());
+    }
+
+    /**
      * Clones an object.
      *
      *

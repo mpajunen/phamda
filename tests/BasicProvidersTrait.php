@@ -141,6 +141,17 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getCastData()
+    {
+        $values = ['a' => 1, 'b' => 2];
+
+        return [
+            [$values, 'array', (object) $values],
+            ['3', 'string', 3],
+            [4, 'int', 4.55],
+        ];
+    }
+
     public function getComparatorData()
     {
         return [
