@@ -225,6 +225,28 @@ class Phamda
     }
 
     /**
+     * Calls the `function` using the values of the given `arguments` list as positional arguments.
+     *
+     * Effectively creates an unary function from a variadic function.
+     *
+     * ```php
+     * $concat3 = function ($a, $b, $c) { return $a . $b . $c; };
+     * Phamda::apply($concat3, ['foo', 'ba', 'rba']); // => 'foobarba'
+     * ```
+     *
+     * @param callable $function
+     * @param array    $arguments
+     *
+     * @return callable|mixed
+     */
+    public static function apply($function = null, $arguments = null)
+    {
+        return static::curry2(function (callable $function, array $arguments) {
+            return $function(...$arguments);
+        }, func_get_args());
+    }
+
+    /**
      * Returns a new array or object, setting the given value to the specified property.
      *
      * ```php
@@ -2146,6 +2168,28 @@ class Phamda
             return function ($a) use ($function) {
                 return $function($a);
             };
+        }, func_get_args());
+    }
+
+    /**
+     * Calls the `function` using the given `arguments` as a single array list argument.
+     *
+     * Effectively creates an variadic function from a unary function.
+     *
+     * ```php
+     * $concat = function (array $strings) { return implode(' ', $strings); };
+     * Phamda::unapply($concat, 'foo', 'ba', 'rba'); // => 'foo ba rba'
+     * ```
+     *
+     * @param callable $function
+     * @param mixed    ...$arguments
+     *
+     * @return callable|mixed
+     */
+    public static function unapply($function = null, ... $arguments)
+    {
+        return static::curry2(function (callable $function, ... $arguments) {
+            return $function($arguments);
         }, func_get_args());
     }
 

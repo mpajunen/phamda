@@ -61,6 +61,12 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(false, $isEvenOrPositive(-3));
     }
 
+    public function testApply()
+    {
+        $concat3 = function ($a, $b, $c) { return $a . $b . $c; };
+        $this->assertSame('foobarba', Phamda::apply($concat3, ['foo', 'ba', 'rba']));
+    }
+
     public function testBinary()
     {
         $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
@@ -356,6 +362,12 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
     {
         $true = Phamda::true();
         $this->assertSame(true, $true());
+    }
+
+    public function testUnapply()
+    {
+        $concat = function (array $strings) { return implode(' ', $strings); };
+        $this->assertSame('foo ba rba', Phamda::unapply($concat, 'foo', 'ba', 'rba'));
     }
 
     public function testUnary()

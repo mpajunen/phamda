@@ -102,6 +102,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getApplyData
+     */
+    public function testApply($expected, callable $function, array $arguments)
+    {
+        $this->assertSame($expected, Phamda::apply($function, $arguments), 'apply produces correct results.');
+        $curried0 = Phamda::apply();
+        $this->assertSame($expected, $curried0($function, $arguments), 'apply is curried correctly.');
+        $curried1 = Phamda::apply($function);
+        $this->assertSame($expected, $curried1($arguments), 'apply is curried correctly.');
+    }
+
+    /**
      * @dataProvider getAssocData
      */
     public function testAssoc($expected, $property, $value, $object)
@@ -1044,6 +1056,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $curried0 = Phamda::unary();
         $main1    = $curried0($function);
         $this->assertSame($expected, $main1($a), 'unary is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getUnapplyData
+     */
+    public function testUnapply($expected, callable $function, ... $arguments)
+    {
+        $this->assertSame($expected, Phamda::unapply($function, ...$arguments), 'unapply produces correct results.');
+        $curried0 = Phamda::unapply();
+        $this->assertSame($expected, $curried0($function, ...$arguments), 'unapply is curried correctly.');
+        $curried1 = Phamda::unapply($function);
+        $this->assertSame($expected, $curried1(...$arguments), 'unapply is curried correctly.');
     }
 
     /**

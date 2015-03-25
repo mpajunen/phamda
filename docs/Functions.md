@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (96):
+Currently included functions (98):
 
 * [_](#_)
 * [add](#add)
@@ -10,6 +10,7 @@ Currently included functions (96):
 * [any](#any)
 * [anyPass](#anyPass)
 * [append](#append)
+* [apply](#apply)
 * [assoc](#assoc)
 * [assocPath](#assocPath)
 * [binary](#binary)
@@ -95,6 +96,7 @@ Currently included functions (96):
 * [times](#times)
 * [true](#true)
 * [unary](#unary)
+* [unapply](#unapply)
 * [where](#where)
 * [zip](#zip)
 * [zipWith](#zipWith)
@@ -204,6 +206,20 @@ Return a new collection that contains all the items in the given collection and 
 Phamda::append('c', ['a', 'b']); // => ['a', 'b', 'c']
 Phamda::append('c', []); // => ['c']
 Phamda::append(['d', 'e'], ['a', 'b']); // => ['a', 'b', ['d', 'e']]
+```
+
+
+<a name="apply"></a>
+### apply
+`mixed Phamda::apply(callable $function, array $arguments)`
+
+Calls the `function` using the values of the given `arguments` list as positional arguments.
+
+Effectively creates an unary function from a variadic function.
+##### Examples
+```php
+$concat3 = function ($a, $b, $c) { return $a . $b . $c; };
+Phamda::apply($concat3, ['foo', 'ba', 'rba']); // => 'foobarba'
 ```
 
 
@@ -1299,6 +1315,20 @@ Wraps the given function in a function that accepts exactly one parameter.
 $add2 = function ($a = 0, $b = 0) { return $a + $b; };
 $add1 = Phamda::nAry(1, $add2);
 $add1(27, 15); // => 27
+```
+
+
+<a name="unapply"></a>
+### unapply
+`mixed Phamda::unapply(callable $function, mixed ... $arguments)`
+
+Calls the `function` using the given `arguments` as a single array list argument.
+
+Effectively creates an variadic function from a unary function.
+##### Examples
+```php
+$concat = function (array $strings) { return implode(' ', $strings); };
+Phamda::unapply($concat, 'foo', 'ba', 'rba'); // => 'foo ba rba'
 ```
 
 

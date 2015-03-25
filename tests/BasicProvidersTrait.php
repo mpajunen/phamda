@@ -98,6 +98,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getApplyData()
+    {
+        return [
+            [42, 'max', [13, -3, 42, 3]],
+            [[1, 2, 3, 4], 'array_merge', [[1, 2], [3], [4]]],
+        ];
+    }
+
     public function getAssocData()
     {
         return [
@@ -992,6 +1000,14 @@ trait BasicProvidersTrait
 
         return [
             [27, $add2, 27, 15],
+        ];
+    }
+
+    public function getUnapplyData()
+    {
+        return [
+            [42, 'max', 13, -3, 42, 3],
+            [[1, 2, 3], 'array_merge', 1, 2, 3],
         ];
     }
 
