@@ -169,7 +169,7 @@ class ArrayCollection extends ArrayContainer implements Collection
      */
     public function slice($start, $end)
     {
-        return new static(array_slice($this->values, $start, $end - $start));
+        return new static(array_slice($this->values, $start, $end >= 0 ? $end - $start : $end));
     }
 
     /**
