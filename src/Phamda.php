@@ -1993,7 +1993,7 @@ class Phamda
      * ```php
      * Phamda::substring(2, 5, 'foobarbaz'); // => 'oba'
      * Phamda::substring(4, 8, 'foobarbaz'); // => 'arba'
-     * Phamda::substring(5, 5, 'foobarbaz'); // => ''
+     * Phamda::substring(3, -2, 'foobarbaz'); // => 'barb'
      * ```
      *
      * @param int    $start
@@ -2005,7 +2005,7 @@ class Phamda
     public static function substring($start = null, $end = null, $string = null)
     {
         return static::curry3(function ($start, $end, $string) {
-            return substr($string, $start, $end - $start);
+            return substr($string, $start, $end >= 0 ? $end - $start : $end);
         }, func_get_args());
     }
 
@@ -2015,6 +2015,7 @@ class Phamda
      * ```php
      * Phamda::substringFrom(5, 'foobarbaz'); // => 'rbaz'
      * Phamda::substringFrom(1, 'foobarbaz'); // => 'oobarbaz'
+     * Phamda::substringFrom(-2, 'foobarbaz'); // => 'az'
      * ```
      *
      * @param int    $start
@@ -2035,6 +2036,7 @@ class Phamda
      * ```php
      * Phamda::substringTo(5, 'foobarbaz'); // => 'fooba'
      * Phamda::substringTo(8, 'foobarbaz'); // => 'foobarba'
+     * Phamda::substringTo(-3, 'foobarbaz'); // => 'foobar'
      * ```
      *
      * @param int    $end

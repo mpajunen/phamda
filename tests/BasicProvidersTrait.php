@@ -931,6 +931,7 @@ trait BasicProvidersTrait
         return [
             ['oba', 2, 5, 'foobarbaz'],
             ['arba', 4, 8, 'foobarbaz'],
+            ['barb', 3, -2, 'foobarbaz'],
             ['', 5, 5, 'foobarbaz'],
         ];
     }
@@ -940,6 +941,7 @@ trait BasicProvidersTrait
         return [
             ['rbaz', 5, 'foobarbaz'],
             ['oobarbaz', 1, 'foobarbaz'],
+            ['az', -2, 'foobarbaz'],
         ];
     }
 
@@ -948,6 +950,7 @@ trait BasicProvidersTrait
         return [
             ['fooba', 5, 'foobarbaz'],
             ['foobarba', 8, 'foobarbaz'],
+            ['foobar', -3, 'foobarbaz'],
         ];
     }
 
