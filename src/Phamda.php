@@ -1254,7 +1254,7 @@ class Phamda
     }
 
     /**
-     * Returns an array containing that contains all the values in arrays `a` and `b`.
+     * Returns an array that contains all the values in arrays `a` and `b`.
      *
      * ```php
      * Phamda::merge([1, 2], [3, 4, 5]); // => [1, 2, 3, 4, 5]
