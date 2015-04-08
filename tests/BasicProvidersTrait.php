@@ -405,6 +405,22 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFlattenData()
+    {
+        return [
+            [[1, 2, 3, 4], [1, [2, 3], [4]]],
+            [[1, 2, 3, 4], [1, [2, [3]], [[4]]]],
+        ];
+    }
+
+    public function getFlattenLevelData()
+    {
+        return [
+            [[1, 2, 3, 4], [1, [2, 3], [4]]],
+            [[1, 2, [3], [4]], [1, [2, [3]], [[4]]]],
+        ];
+    }
+
     public function getFlipData()
     {
         $subMany = function ($a, $b, $c = 0, $d = 0, $e = 0) {

@@ -144,6 +144,26 @@ trait CoreFunctionsTrait
     }
 
     /**
+     * @param array $list
+     * @param bool  $recursive
+     *
+     * @return array
+     */
+    protected static function _flatten(array $list, $recursive)
+    {
+        $result = [];
+        foreach ($list as $item) {
+            if (is_array($item)) {
+                $result = array_merge($result, $recursive ? self::_flatten($item, $recursive) : $item);
+            } else {
+                $result[] = $item;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @param callable                      $function
      * @param array|\Traversable|Collection $collection
      *

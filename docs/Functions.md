@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (100):
+Currently included functions (102):
 
 * [_](#_)
 * [add](#add)
@@ -39,6 +39,8 @@ Currently included functions (100):
 * [findLast](#findLast)
 * [findLastIndex](#findLastIndex)
 * [first](#first)
+* [flatten](#flatten)
+* [flattenLevel](#flattenLevel)
 * [flip](#flip)
 * [groupBy](#groupBy)
 * [gt](#gt)
@@ -583,6 +585,30 @@ Returns the first item of a collection, or false if the collection is empty.
 ```php
 Phamda::first([5, 8, 9, 13]); // => 5
 Phamda::first([]); // => false
+```
+
+
+<a name="flatten"></a>
+### flatten
+`array Phamda::flatten(array $list)`
+
+Returns an array that contains all the items on the `list`, with all arrays flattened.
+##### Examples
+```php
+Phamda::flatten([1, [2, 3], [4]]); // => [1, 2, 3, 4]
+Phamda::flatten([1, [2, [3]], [[4]]]); // => [1, 2, 3, 4]
+```
+
+
+<a name="flattenLevel"></a>
+### flattenLevel
+`array Phamda::flattenLevel(array $list)`
+
+Returns an array that contains all the items on the `list`, with arrays on the first nesting level flattened.
+##### Examples
+```php
+Phamda::flattenLevel([1, [2, 3], [4]]); // => [1, 2, 3, 4]
+Phamda::flattenLevel([1, [2, [3]], [[4]]]); // => [1, 2, [3], [4]]
 ```
 
 

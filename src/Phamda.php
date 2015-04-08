@@ -881,6 +881,44 @@ class Phamda
     }
 
     /**
+     * Returns an array that contains all the items on the `list`, with all arrays flattened.
+     *
+     * ```php
+     * Phamda::flatten([1, [2, 3], [4]]); // => [1, 2, 3, 4]
+     * Phamda::flatten([1, [2, [3]], [[4]]]); // => [1, 2, 3, 4]
+     * ```
+     *
+     * @param array $list
+     *
+     * @return callable|array
+     */
+    public static function flatten($list = null)
+    {
+        return static::curry1(function (array $list) {
+            return static::_flatten($list, true);
+        }, func_get_args());
+    }
+
+    /**
+     * Returns an array that contains all the items on the `list`, with arrays on the first nesting level flattened.
+     *
+     * ```php
+     * Phamda::flattenLevel([1, [2, 3], [4]]); // => [1, 2, 3, 4]
+     * Phamda::flattenLevel([1, [2, [3]], [[4]]]); // => [1, 2, [3], [4]]
+     * ```
+     *
+     * @param array $list
+     *
+     * @return callable|array
+     */
+    public static function flattenLevel($list = null)
+    {
+        return static::curry1(function (array $list) {
+            return static::_flatten($list, false);
+        }, func_get_args());
+    }
+
+    /**
      * Wraps the given function and returns a new function for which the order of the first two parameters is reversed.
      *
      * ```php

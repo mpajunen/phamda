@@ -416,6 +416,26 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFlattenData
+     */
+    public function testFlatten($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::flatten($list), 'flatten produces correct results.');
+        $curried0 = Phamda::flatten();
+        $this->assertSame($expected, $curried0($list), 'flatten is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getFlattenLevelData
+     */
+    public function testFlattenLevel($expected, array $list)
+    {
+        $this->assertSame($expected, Phamda::flattenLevel($list), 'flattenLevel produces correct results.');
+        $curried0 = Phamda::flattenLevel();
+        $this->assertSame($expected, $curried0($list), 'flattenLevel is curried correctly.');
+    }
+
+    /**
      * @dataProvider getFlipData
      */
     public function testFlip($expected, callable $function, $a, $b, ... $arguments)
