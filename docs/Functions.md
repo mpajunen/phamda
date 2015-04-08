@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (98):
+Currently included functions (99):
 
 * [_](#_)
 * [add](#add)
@@ -92,6 +92,7 @@ Currently included functions (98):
 * [substringTo](#substringTo)
 * [subtract](#subtract)
 * [sum](#sum)
+* [tail](#tail)
 * [tap](#tap)
 * [times](#times)
 * [true](#true)
@@ -1266,6 +1267,17 @@ Adds together a list of numbers.
 ```php
 Phamda::sum([1, 2, 3, 4, 5, 6]); // => 21
 Phamda::sum([11, 0, 2, -4, 7]); // => 16
+```
+
+
+<a name="tail"></a>
+### tail
+`array|Collection Phamda::tail(array|\Traversable|Collection $collection)`
+
+Returns a new collection that contains all the items from the original `collection` except the first.
+##### Examples
+```php
+Phamda::tail([2, 4, 6, 3]); // => [4, 6, 3]
 ```
 
 

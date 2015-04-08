@@ -744,4 +744,26 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $result, 'sum works for simple collection objects.');
         $this->assertSame($values, $_values->toArray(), 'sum does not modify original collection values.');
     }
+
+    /**
+     * @dataProvider getTailData
+     */
+    public function testTail($expected, $collection)
+    {
+        $_collection = new ArrayCollection($collection);
+        $result      = Phamda::tail($_collection);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'tail works for collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'tail does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getTailData
+     */
+    public function testTailSimple($expected, $collection)
+    {
+        $_collection = new ArrayContainer($collection);
+        $result      = Phamda::tail($_collection);
+        $this->assertSame($expected, $result, 'tail works for simple collection objects.');
+        $this->assertSame($collection, $_collection->toArray(), 'tail does not modify original collection values.');
+    }
 }

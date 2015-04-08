@@ -2091,6 +2091,24 @@ class Phamda
     }
 
     /**
+     * Returns a new collection that contains all the items from the original `collection` except the first.
+     *
+     * ```php
+     * Phamda::tail([2, 4, 6, 3]); // => [4, 6, 3]
+     * ```
+     *
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return callable|array|Collection
+     */
+    public static function tail($collection = null)
+    {
+        return static::curry1(function ($collection) {
+            return static::_slice(1, null, $collection);
+        }, func_get_args());
+    }
+
+    /**
      * Calls the provided function with the given value as a parameter and returns the value.
      *
      * ```php

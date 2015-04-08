@@ -1014,6 +1014,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getTailData
+     */
+    public function testTail($expected, $collection)
+    {
+        $this->assertSame($expected, Phamda::tail($collection), 'tail produces correct results.');
+        $curried0 = Phamda::tail();
+        $this->assertSame($expected, $curried0($collection), 'tail is curried correctly.');
+    }
+
+    /**
      * @dataProvider getTapData
      */
     public function testTap($expected, callable $function, $object)

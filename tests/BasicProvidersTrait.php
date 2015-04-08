@@ -970,6 +970,13 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getTailData()
+    {
+        return [
+            [[4, 6, 3], [2, 4, 6, 3]],
+        ];
+    }
+
     public function getTapData()
     {
         $counter = new Counter();
