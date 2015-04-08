@@ -234,7 +234,7 @@ trait CoreFunctionsTrait
     protected static function _slice($start, $end, $collection)
     {
         if (is_array($collection)) {
-            return array_slice($collection, $start, $end >= 0 ? $end - $start : $end);
+            return array_slice($collection, $start, $end !== null && $end >= 0 ? $end - $start : $end);
         } elseif (method_exists($collection, 'slice')) {
             return $collection->slice($start, $end);
         } else {
@@ -242,7 +242,7 @@ trait CoreFunctionsTrait
             $result = [];
             foreach ($collection as $item) {
                 if ($start >= 0 && $i < $start) {
-                } elseif ($end >= 0 && $i >= $end) {
+                } elseif ($end !== null && $end >= 0 && $i >= $end) {
                     return $result;
                 } else {
                     $result[] = $item;
@@ -251,7 +251,7 @@ trait CoreFunctionsTrait
                 $i++;
             }
 
-            return array_slice($result, $start < 0 ? $start : 0, $end < 0 ? $end : null);
+            return array_slice($result, $start < 0 ? $start : 0, $end !== null && $end < 0 ? $end : null);
         }
     }
 

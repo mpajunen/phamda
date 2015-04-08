@@ -99,8 +99,8 @@ interface Collection
     public function reverse();
 
     /**
-     * @param int $start
-     * @param int $end
+     * @param int      $start
+     * @param int|null $end
      *
      * @return Collection
      */

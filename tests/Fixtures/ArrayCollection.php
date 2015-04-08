@@ -162,14 +162,14 @@ class ArrayCollection extends ArrayContainer implements Collection
     }
 
     /**
-     * @param int $start
-     * @param int $end
+     * @param int      $start
+     * @param int|null $end
      *
-     * @return Collection
+     * @return static
      */
     public function slice($start, $end)
     {
-        return new static(array_slice($this->values, $start, $end >= 0 ? $end - $start : $end));
+        return new static(array_slice($this->values, $start, $end !== null && $end >= 0 ? $end - $start : $end));
     }
 
     /**
