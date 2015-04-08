@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (102):
+Currently included functions (103):
 
 * [_](#_)
 * [add](#add)
@@ -39,6 +39,7 @@ Currently included functions (102):
 * [findLast](#findLast)
 * [findLastIndex](#findLastIndex)
 * [first](#first)
+* [flatMap](#flatMap)
 * [flatten](#flatten)
 * [flattenLevel](#flattenLevel)
 * [flip](#flip)
@@ -585,6 +586,18 @@ Returns the first item of a collection, or false if the collection is empty.
 ```php
 Phamda::first([5, 8, 9, 13]); // => 5
 Phamda::first([]); // => false
+```
+
+
+<a name="flatMap"></a>
+### flatMap
+`array Phamda::flatMap(callable $function, array $list)`
+
+Returns a list containing the flattened items created by applying the `function` to each item of the `list`.
+##### Examples
+```php
+$split = function ($string) { return str_split($string); };
+Phamda::flatMap($split, ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
 ```
 
 

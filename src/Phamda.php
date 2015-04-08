@@ -881,6 +881,26 @@ class Phamda
     }
 
     /**
+     * Returns a list containing the flattened items created by applying the `function` to each item of the `list`.
+     *
+     * ```php
+     * $split = function ($string) { return str_split($string); };
+     * Phamda::flatMap($split, ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
+     * ```
+     *
+     * @param callable $function
+     * @param array    $list
+     *
+     * @return callable|array
+     */
+    public static function flatMap($function = null, $list = null)
+    {
+        return static::curry2(function (callable $function, array $list) {
+            return static::_flatten(static::_map($function, $list), false);
+        }, func_get_args());
+    }
+
+    /**
      * Returns an array that contains all the items on the `list`, with all arrays flattened.
      *
      * ```php

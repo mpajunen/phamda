@@ -188,6 +188,12 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(3, Phamda::findLastIndex($isPositive, [-5, 0, 15, 33, -2]));
     }
 
+    public function testFlatMap()
+    {
+        $split = function ($string) { return str_split($string); };
+        $this->assertSame(['a', 'b', 'c', 'd', 'e'], Phamda::flatMap($split, ['abc', 'de']));
+    }
+
     public function testFlip()
     {
         $sub        = function ($x, $y) { return $x - $y; };

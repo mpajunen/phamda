@@ -405,6 +405,15 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFlatMapData()
+    {
+        $duplicate = function ($x) { return [$x, $x]; };
+
+        return [
+            [[2, 2, 3, 3, 6, 6], $duplicate, [2, 3, 6]],
+        ];
+    }
+
     public function getFlattenData()
     {
         return [

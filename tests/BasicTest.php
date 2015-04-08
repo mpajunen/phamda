@@ -416,6 +416,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFlatMapData
+     */
+    public function testFlatMap($expected, callable $function, array $list)
+    {
+        $this->assertSame($expected, Phamda::flatMap($function, $list), 'flatMap produces correct results.');
+        $curried0 = Phamda::flatMap();
+        $this->assertSame($expected, $curried0($function, $list), 'flatMap is curried correctly.');
+        $curried1 = Phamda::flatMap($function);
+        $this->assertSame($expected, $curried1($list), 'flatMap is curried correctly.');
+    }
+
+    /**
      * @dataProvider getFlattenData
      */
     public function testFlatten($expected, array $list)
