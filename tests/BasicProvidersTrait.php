@@ -181,6 +181,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getConcatData()
+    {
+        return [
+            ['abcd', 'ab', 'cd'],
+            ['abc', 'abc', ''],
+        ];
+    }
+
     public function getConstructData()
     {
         return [

@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (99):
+Currently included functions (100):
 
 * [_](#_)
 * [add](#add)
@@ -19,6 +19,7 @@ Currently included functions (99):
 * [clone_](#clone_)
 * [comparator](#comparator)
 * [compose](#compose)
+* [concat](#concat)
 * [construct](#construct)
 * [constructN](#constructN)
 * [contains](#contains)
@@ -329,6 +330,18 @@ $helloUpper = Phamda::compose($hello, 'strtoupper');
 $upperHello = Phamda::compose('strtoupper', $hello);
 $helloUpper('world'); // => 'Hello WORLD'
 $upperHello('world'); // => 'HELLO WORLD'
+```
+
+
+<a name="concat"></a>
+### concat
+`string Phamda::concat(string $a, string $b)`
+
+Returns a string concatenated of `a` and `b`.
+##### Examples
+```php
+Phamda::concat('ab', 'cd'); // => 'abcd'
+Phamda::concat('abc', ''); // => 'abc'
 ```
 
 

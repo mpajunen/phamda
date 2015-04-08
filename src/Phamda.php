@@ -423,6 +423,26 @@ class Phamda
     }
 
     /**
+     * Returns a string concatenated of `a` and `b`.
+     *
+     * ```php
+     * Phamda::concat('ab', 'cd'); // => 'abcd'
+     * Phamda::concat('abc', ''); // => 'abc'
+     * ```
+     *
+     * @param string $a
+     * @param string $b
+     *
+     * @return callable|string
+     */
+    public static function concat($a = null, $b = null)
+    {
+        return static::curry2(function ($a, $b) {
+            return $a . $b;
+        }, func_get_args());
+    }
+
+    /**
      * Wraps the constructor of the given class to a function.
      *
      * ```php

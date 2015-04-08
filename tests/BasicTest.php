@@ -202,6 +202,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getConcatData
+     */
+    public function testConcat($expected, $a, $b)
+    {
+        $this->assertSame($expected, Phamda::concat($a, $b), 'concat produces correct results.');
+        $curried0 = Phamda::concat();
+        $this->assertSame($expected, $curried0($a, $b), 'concat is curried correctly.');
+        $curried1 = Phamda::concat($a);
+        $this->assertSame($expected, $curried1($b), 'concat is curried correctly.');
+    }
+
+    /**
      * @dataProvider getContainsData
      */
     public function testContains($expected, $value, $collection)
