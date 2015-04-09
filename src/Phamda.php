@@ -619,6 +619,8 @@ class Phamda
     /**
      * Calls the given function for each element in the collection and returns the original collection.
      *
+     * The supplied `function` receives one argument: `item`.
+     *
      * ```php
      * $date = new \DateTime('2015-02-02');
      * $addDays = function ($number) use ($date) { $date->modify("+{$number} days"); };
@@ -635,7 +637,7 @@ class Phamda
     {
         return static::curry2(function (callable $function, $collection) {
             foreach ($collection as $key => $item) {
-                $function($item, $key, $collection);
+                $function($item);
             }
 
             return $collection;
@@ -758,6 +760,8 @@ class Phamda
     /**
      * Returns a new collection containing the items that match the given predicate.
      *
+     * The supplied `predicate` receives one argument: `item`.
+     *
      * ```php
      * $gt2 = function ($x) { return $x > 2; };
      * Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
@@ -793,7 +797,7 @@ class Phamda
     public static function filterIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
-            return static::_filter($predicate, $collection);
+            return static::_filterIndexed($predicate, $collection);
         }, func_get_args());
     }
 
@@ -1344,6 +1348,8 @@ class Phamda
     /**
      * Returns a new collection where values are created from the original collection by calling the supplied function.
      *
+     * The supplied `function` receives one argument: `item`.
+     *
      * ```php
      * $square = function ($x) { return $x ** 2; };
      * Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
@@ -1379,7 +1385,7 @@ class Phamda
     public static function mapIndexed($function = null, $collection = null)
     {
         return static::curry2(function (callable $function, $collection) {
-            return static::_map($function, $collection);
+            return static::_mapIndexed($function, $collection);
         }, func_get_args());
     }
 
@@ -1946,6 +1952,8 @@ class Phamda
     /**
      * Returns a value accumulated by calling the given function for each element of the collection.
      *
+     * The supplied `function` receives one argument: `item`.
+     *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
      * Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
@@ -1983,12 +1991,14 @@ class Phamda
     public static function reduceIndexed($function = null, $initial = null, $collection = null)
     {
         return static::curry3(function (callable $function, $initial, $collection) {
-            return static::_reduce($function, $initial, $collection);
+            return static::_reduceIndexed($function, $initial, $collection);
         }, func_get_args());
     }
 
     /**
      * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
+     *
+     * The supplied `function` receives one argument: `item`.
      *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
@@ -2027,12 +2037,14 @@ class Phamda
     public static function reduceRightIndexed($function = null, $initial = null, $collection = null)
     {
         return static::curry3(function (callable $function, $initial, $collection) {
-            return static::_reduce($function, $initial, static::_reverse($collection));
+            return static::_reduceIndexed($function, $initial, static::_reverse($collection));
         }, func_get_args());
     }
 
     /**
      * Returns a new collection containing the items that do not match the given predicate.
+     *
+     * The supplied `predicate` receives one argument: `item`.
      *
      * ```php
      * $isEven = function ($x) { return $x % 2 === 0; };
@@ -2069,7 +2081,7 @@ class Phamda
     public static function rejectIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
-            return static::_filter(Phamda::not($predicate), $collection);
+            return static::_filterIndexed(Phamda::not($predicate), $collection);
         }, func_get_args());
     }
 

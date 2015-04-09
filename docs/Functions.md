@@ -460,6 +460,8 @@ Phamda::divide(48, -8); // => -6
 `array|\Traversable|Collection Phamda::each(callable $function, array|\Traversable|Collection $collection)`
 
 Calls the given function for each element in the collection and returns the original collection.
+
+The supplied `function` receives one argument: `item`.
 ##### Examples
 ```php
 $date = new \DateTime('2015-02-02');
@@ -544,6 +546,8 @@ $false(); // => false
 `array|Collection Phamda::filter(callable $predicate, array|\Traversable|Collection $collection)`
 
 Returns a new collection containing the items that match the given predicate.
+
+The supplied `predicate` receives one argument: `item`.
 ##### Examples
 ```php
 $gt2 = function ($x) { return $x > 2; };
@@ -858,6 +862,8 @@ Phamda::lte(2, 1); // => false
 `array|Collection Phamda::map(callable $function, array|\Traversable|Collection $collection)`
 
 Returns a new collection where values are created from the original collection by calling the supplied function.
+
+The supplied `function` receives one argument: `item`.
 ##### Examples
 ```php
 $square = function ($x) { return $x ** 2; };
@@ -1201,6 +1207,8 @@ Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
 `mixed Phamda::reduce(callable $function, mixed $initial, array|\Traversable $collection)`
 
 Returns a value accumulated by calling the given function for each element of the collection.
+
+The supplied `function` receives one argument: `item`.
 ##### Examples
 ```php
 $concat = function ($x, $y) { return $x . $y; };
@@ -1227,6 +1235,8 @@ Phamda::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'n
 `mixed Phamda::reduceRight(callable $function, mixed $initial, array|\Traversable $collection)`
 
 Returns a value accumulated by calling the given function for each element of the collection in reverse order.
+
+The supplied `function` receives one argument: `item`.
 ##### Examples
 ```php
 $concat = function ($x, $y) { return $x . $y; };
@@ -1253,6 +1263,8 @@ Phamda::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // 
 `array|Collection Phamda::reject(callable $predicate, array|\Traversable|Collection $collection)`
 
 Returns a new collection containing the items that do not match the given predicate.
+
+The supplied `predicate` receives one argument: `item`.
 ##### Examples
 ```php
 $isEven = function ($x) { return $x % 2 === 0; };

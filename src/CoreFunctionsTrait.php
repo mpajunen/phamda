@@ -135,6 +135,28 @@ trait CoreFunctionsTrait
 
         $result = [];
         foreach ($collection as $key => $item) {
+            if ($predicate($item)) {
+                $result[$key] = $item;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param callable                      $predicate
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return array|Collection
+     */
+    protected static function _filterIndexed(callable $predicate, $collection)
+    {
+        if (method_exists($collection, 'filter')) {
+            return $collection->filter($predicate);
+        }
+
+        $result = [];
+        foreach ($collection as $key => $item) {
             if ($predicate($item, $key, $collection)) {
                 $result[$key] = $item;
             }
@@ -170,6 +192,26 @@ trait CoreFunctionsTrait
      * @return array|Collection
      */
     protected static function _map(callable $function, $collection)
+    {
+        if (method_exists($collection, 'map')) {
+            return $collection->map($function);
+        }
+
+        $result = [];
+        foreach ($collection as $key => $item) {
+            $result[$key] = $function($item);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return array|Collection
+     */
+    protected static function _mapIndexed(callable $function, $collection)
     {
         if (method_exists($collection, 'map')) {
             return $collection->map($function);
@@ -219,6 +261,22 @@ trait CoreFunctionsTrait
      * @return mixed
      */
     protected static function _reduce(callable $function, $initial, $collection)
+    {
+        foreach ($collection as $key => $item) {
+            $initial = $function($initial, $item);
+        }
+
+        return $initial;
+    }
+
+    /**
+     * @param callable           $function
+     * @param mixed              $initial
+     * @param array|\Traversable $collection
+     *
+     * @return mixed
+     */
+    protected static function _reduceIndexed(callable $function, $initial, $collection)
     {
         foreach ($collection as $key => $item) {
             $initial = $function($initial, $item, $key, $collection);
