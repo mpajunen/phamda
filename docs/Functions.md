@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (109):
+Currently included functions (110):
 
 * [_](#_)
 * [add](#add)
@@ -32,6 +32,7 @@ Currently included functions (109):
 * [eachIndexed](#eachIndexed)
 * [either](#either)
 * [eq](#eq)
+* [evolve](#evolve)
 * [explode](#explode)
 * [false](#false)
 * [filter](#filter)
@@ -513,6 +514,18 @@ Return true when the arguments are strictly equal.
 Phamda::eq('a', 'a'); // => true
 Phamda::eq('a', 'b'); // => false
 Phamda::eq(null, null); // => true
+```
+
+
+<a name="evolve"></a>
+### evolve
+`array|object Phamda::evolve(callable[] $transformations, array|object|\ArrayAccess $object)`
+
+Returns a new object or array containing all the fields of the original `object`, using given `transformations`.
+##### Examples
+```php
+$object = ['foo' => 'bar', 'fiz' => 'buz'];
+Phamda::evolve(['foo' => 'strtoupper'], $object); // => ['foo' => 'BAR', 'fiz' => 'buz']
 ```
 
 

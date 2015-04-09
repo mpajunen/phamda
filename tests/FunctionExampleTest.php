@@ -160,6 +160,12 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(true, $test(17, 3));
     }
 
+    public function testEvolve()
+    {
+        $object = ['foo' => 'bar', 'fiz' => 'buz'];
+        $this->assertSame(['foo' => 'BAR', 'fiz' => 'buz'], Phamda::evolve(['foo' => 'strtoupper'], $object));
+    }
+
     public function testFalse()
     {
         $false = Phamda::false();

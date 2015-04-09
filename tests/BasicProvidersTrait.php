@@ -327,6 +327,13 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getEvolveData()
+    {
+        return [
+            [['foo' => ['b', 'a', 'r'], 'biz' => 'buz'], ['foo' => 'str_split'], ['foo' => 'bar', 'biz' => 'buz']],
+        ];
+    }
+
     public function getExplodeData()
     {
         return [

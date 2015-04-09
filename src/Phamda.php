@@ -720,6 +720,39 @@ class Phamda
     }
 
     /**
+     * Returns a new object or array containing all the fields of the original `object`, using given `transformations`.
+     *
+     * ```php
+     * $object = ['foo' => 'bar', 'fiz' => 'buz'];
+     * Phamda::evolve(['foo' => 'strtoupper'], $object); // => ['foo' => 'BAR', 'fiz' => 'buz']
+     * ```
+     *
+     * @param callable[]                $transformations
+     * @param array|object|\ArrayAccess $object
+     *
+     * @return callable|array|object
+     */
+    public static function evolve($transformations = null, $object = null)
+    {
+        return static::curry2(function (array $transformations, $object) {
+            $isObject = is_object($object);
+            if ($isObject) {
+                $object = clone $object;
+            }
+            foreach ($transformations as $field => $function) {
+                $value = $function(static::_prop($field, $object));
+                if ($isObject && ! $object instanceof \ArrayAccess) {
+                    $object->{$field} = $value;
+                } else {
+                    $object[$field] = $value;
+                }
+            }
+
+            return $object;
+        }, func_get_args());
+    }
+
+    /**
      * Returns an array containing the parts of a string split by the given delimiter.
      *
      * ```php

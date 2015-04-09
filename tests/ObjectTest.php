@@ -50,6 +50,18 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(\stdClass::class, $object);
     }
 
+    /**
+     * @dataProvider getEvolveData
+     */
+    public function testEvolve($expected, array $transformations, $object)
+    {
+        $realObject = (object) $object;
+        $result     = Phamda::evolve($transformations, $realObject);
+
+        $this->assertNotSame($realObject, $result);
+        $this->assertSame($expected, (array) $result);
+    }
+
     public function testTap()
     {
         $counter = new Counter();

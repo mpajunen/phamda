@@ -337,6 +337,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getEvolveData
+     */
+    public function testEvolve($expected, array $transformations, $object)
+    {
+        $this->assertSame($expected, Phamda::evolve($transformations, $object), 'evolve produces correct results.');
+        $curried0 = Phamda::evolve();
+        $this->assertSame($expected, $curried0($transformations, $object), 'evolve is curried correctly.');
+        $curried1 = Phamda::evolve($transformations);
+        $this->assertSame($expected, $curried1($object), 'evolve is curried correctly.');
+    }
+
+    /**
      * @dataProvider getExplodeData
      */
     public function testExplode($expected, $delimiter, $string)
