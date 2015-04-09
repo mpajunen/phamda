@@ -643,6 +643,34 @@ class Phamda
     }
 
     /**
+     * Calls the given function for each element in the collection and returns the original collection.
+     *
+     * Like `each`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+     *
+     * ```php
+     * $date = new \DateTime('2015-02-02');
+     * $addCalendar = function ($number, $type) use ($date) { $date->modify("+{$number} {$type}"); };
+     * Phamda::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
+     * $date->format('Y-m-d'); // => '2015-06-15'
+     * ```
+     *
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return callable|array|\Traversable|Collection
+     */
+    public static function eachIndexed($function = null, $collection = null)
+    {
+        return static::curry2(function (callable $function, $collection) {
+            foreach ($collection as $key => $item) {
+                $function($item, $key, $collection);
+            }
+
+            return $collection;
+        }, func_get_args());
+    }
+
+    /**
      * Returns a function that returns `true` when either of the predicates matches, `false` otherwise.
      *
      * ```php
@@ -741,6 +769,28 @@ class Phamda
      * @return callable|array|Collection
      */
     public static function filter($predicate = null, $collection = null)
+    {
+        return static::curry2(function (callable $predicate, $collection) {
+            return static::_filter($predicate, $collection);
+        }, func_get_args());
+    }
+
+    /**
+     * Returns a new collection containing the items that match the given predicate.
+     *
+     * Like `filter`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
+     *
+     * ```php
+     * $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
+     * Phamda::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
+     * ```
+     *
+     * @param callable                      $predicate
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return callable|array|Collection
+     */
+    public static function filterIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
             return static::_filter($predicate, $collection);
@@ -1305,6 +1355,28 @@ class Phamda
      * @return callable|array|Collection
      */
     public static function map($function = null, $collection = null)
+    {
+        return static::curry2(function (callable $function, $collection) {
+            return static::_map($function, $collection);
+        }, func_get_args());
+    }
+
+    /**
+     * Returns a new collection where values are created from the original collection by calling the supplied function.
+     *
+     * Like `map`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+     *
+     * ```php
+     * $keyExp = function ($value, $key) { return $value ** $key; };
+     * Phamda::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
+     * ```
+     *
+     * @param callable                      $function
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return callable|array|Collection
+     */
+    public static function mapIndexed($function = null, $collection = null)
     {
         return static::curry2(function (callable $function, $collection) {
             return static::_map($function, $collection);
@@ -1893,6 +1965,29 @@ class Phamda
     }
 
     /**
+     * Returns a value accumulated by calling the given function for each element of the collection.
+     *
+     * Like `reduce`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+     *
+     * ```php
+     * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
+     * Phamda::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
+     * ```
+     *
+     * @param callable           $function
+     * @param mixed              $initial
+     * @param array|\Traversable $collection
+     *
+     * @return callable|mixed
+     */
+    public static function reduceIndexed($function = null, $initial = null, $collection = null)
+    {
+        return static::curry3(function (callable $function, $initial, $collection) {
+            return static::_reduce($function, $initial, $collection);
+        }, func_get_args());
+    }
+
+    /**
      * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
      *
      * ```php
@@ -1914,6 +2009,29 @@ class Phamda
     }
 
     /**
+     * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
+     *
+     * Like `reduceRight`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+     *
+     * ```php
+     * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
+     * Phamda::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
+     * ```
+     *
+     * @param callable           $function
+     * @param mixed              $initial
+     * @param array|\Traversable $collection
+     *
+     * @return callable|mixed
+     */
+    public static function reduceRightIndexed($function = null, $initial = null, $collection = null)
+    {
+        return static::curry3(function (callable $function, $initial, $collection) {
+            return static::_reduce($function, $initial, static::_reverse($collection));
+        }, func_get_args());
+    }
+
+    /**
      * Returns a new collection containing the items that do not match the given predicate.
      *
      * ```php
@@ -1927,6 +2045,28 @@ class Phamda
      * @return callable|array|Collection
      */
     public static function reject($predicate = null, $collection = null)
+    {
+        return static::curry2(function (callable $predicate, $collection) {
+            return static::_filter(Phamda::not($predicate), $collection);
+        }, func_get_args());
+    }
+
+    /**
+     * Returns a new collection containing the items that do not match the given predicate.
+     *
+     * Like `reject`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
+     *
+     * ```php
+     * $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
+     * Phamda::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
+     * ```
+     *
+     * @param callable                      $predicate
+     * @param array|\Traversable|Collection $collection
+     *
+     * @return callable|array|Collection
+     */
+    public static function rejectIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
             return static::_filter(Phamda::not($predicate), $collection);

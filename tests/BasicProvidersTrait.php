@@ -282,6 +282,16 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getEachIndexedData()
+    {
+        $counter  = new Counter();
+        $addCount = function ($number, $index) use ($counter) { $counter->value += $number + $index; };
+
+        return [
+            [[1, 2, 3, 4, 5], $addCount, [1, 2, 3, 4, 5]],
+        ];
+    }
+
     public function getEitherData()
     {
         $true  = function () { return true; };
@@ -335,15 +345,22 @@ trait BasicProvidersTrait
 
     public function getFilterData()
     {
-        $gt2               = function ($x) { return $x > 2; };
-        $isEven            = function ($x) { return $x % 2 === 0; };
+        $gt2    = function ($x) { return $x > 2; };
+        $isEven = function ($x) { return $x % 2 === 0; };
+
+        return [
+            [[2 => 3, 3 => 4], $gt2, [1, 2, 3, 4]],
+            [[1 => 2, 3 => 4], $isEven, [1, 2, 3, 4]],
+        ];
+    }
+
+    public function getFilterIndexedData()
+    {
         $isSmallerThanNext = function ($value, $key, $list) {
             return isset($list[$key + 1]) ? $value < $list[$key + 1] : false;
         };
 
         return [
-            [[2 => 3, 3 => 4], $gt2, [1, 2, 3, 4]],
-            [[1 => 2, 3 => 4], $isEven, [1, 2, 3, 4]],
             [[0 => 3, 2 => 2, 3 => 19], $isSmallerThanNext, [3, 6, 2, 19, 44, 5]],
         ];
     }
@@ -585,14 +602,21 @@ trait BasicProvidersTrait
 
     public function getMapData()
     {
-        $lengthKeyMultiply = function ($value, $key, $list) {
-            return $value * $key * count($list);
-        };
-        $square            = function ($x) { return $x ** 2; };
+        $square = function ($x) { return $x ** 2; };
 
         return [
             [[1, 4, 9, 16], $square, [1, 2, 3, 4]],
             [[], $square, []],
+        ];
+    }
+
+    public function getMapIndexedData()
+    {
+        $lengthKeyMultiply = function ($value, $key, $list) {
+            return $value * $key * count($list);
+        };
+
+        return [
             [[0, 8, 24, 48], $lengthKeyMultiply, [1, 2, 3, 4]],
         ];
     }
@@ -850,34 +874,48 @@ trait BasicProvidersTrait
 
     public function getReduceData()
     {
-        $concat         = function ($x, $y) { return $x . $y; };
-        $keyValueConcat = function ($accumulator, $value, $key, $list) {
-            return $accumulator . $value . ($key !== $value ? $list[$value] : '');
-        };
-        $sum            = function ($x, $y) { return $x + $y; };
+        $concat = function ($x, $y) { return $x . $y; };
+        $sum    = function ($x, $y) { return $x + $y; };
 
         return [
             [10, $sum, 0, [1, 2, 3, 4]],
             [20, $sum, 10, [1, 2, 3, 4]],
             [5, $sum, 5, []],
             ['xabcd', $concat, 'x', ['a', 'b', 'c', 'd']],
+        ];
+    }
+
+    public function getReduceIndexedData()
+    {
+        $keyValueConcat = function ($accumulator, $value, $key, $list) {
+            return $accumulator . $value . ($key !== $value ? $list[$value] : '');
+        };
+
+        return [
             ['efcdbdaac', $keyValueConcat, 'ef', ['a' => 'c', 'b' => 'b', 'c' => 'd', 'd' => 'a']],
         ];
     }
 
     public function getReduceRightData()
     {
-        $concat         = function ($x, $y) { return $x . $y; };
-        $keyValueConcat = function ($accumulator, $value, $key, $list) {
-            return $accumulator . $value . ($key !== $value ? $list[$value] : '');
-        };
-        $sum            = function ($x, $y) { return $x + $y; };
+        $concat = function ($x, $y) { return $x . $y; };
+        $sum    = function ($x, $y) { return $x + $y; };
 
         return [
             [10, $sum, 0, [1, 2, 3, 4]],
             [20, $sum, 10, [1, 2, 3, 4]],
             [5, $sum, 5, []],
             ['xdcba', $concat, 'x', ['a', 'b', 'c', 'd']],
+        ];
+    }
+
+    public function getReduceRightIndexedData()
+    {
+        $keyValueConcat = function ($accumulator, $value, $key, $list) {
+            return $accumulator . $value . ($key !== $value ? $list[$value] : '');
+        };
+
+        return [
             ['efacdabcd', $keyValueConcat, 'ef', ['a' => 'c', 'b' => 'b', 'c' => 'd', 'd' => 'a']],
         ];
     }
@@ -890,6 +928,17 @@ trait BasicProvidersTrait
         return [
             [[0 => 1, 1 => 2], $gt2, [1, 2, 3, 4]],
             [[0 => 1, 2 => 3], $isEven, [1, 2, 3, 4]],
+        ];
+    }
+
+    public function getRejectIndexedData()
+    {
+        $isSmallerThanNext = function ($value, $key, $list) {
+            return isset($list[$key + 1]) ? $value < $list[$key + 1] : false;
+        };
+
+        return [
+            [[1 => 6, 4 => 44, 5 => 5], $isSmallerThanNext, [3, 6, 2, 19, 44, 5]],
         ];
     }
 

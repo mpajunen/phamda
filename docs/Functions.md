@@ -1,6 +1,6 @@
 # Phamda functions
 
-Currently included functions (103):
+Currently included functions (109):
 
 * [_](#_)
 * [add](#add)
@@ -29,11 +29,13 @@ Currently included functions (103):
 * [defaultTo](#defaultTo)
 * [divide](#divide)
 * [each](#each)
+* [eachIndexed](#eachIndexed)
 * [either](#either)
 * [eq](#eq)
 * [explode](#explode)
 * [false](#false)
 * [filter](#filter)
+* [filterIndexed](#filterIndexed)
 * [find](#find)
 * [findIndex](#findIndex)
 * [findLast](#findLast)
@@ -58,6 +60,7 @@ Currently included functions (103):
 * [lt](#lt)
 * [lte](#lte)
 * [map](#map)
+* [mapIndexed](#mapIndexed)
 * [max](#max)
 * [maxBy](#maxBy)
 * [merge](#merge)
@@ -83,8 +86,11 @@ Currently included functions (103):
 * [prop](#prop)
 * [propEq](#propEq)
 * [reduce](#reduce)
+* [reduceIndexed](#reduceIndexed)
 * [reduceRight](#reduceRight)
+* [reduceRightIndexed](#reduceRightIndexed)
 * [reject](#reject)
+* [rejectIndexed](#rejectIndexed)
 * [reverse](#reverse)
 * [slice](#slice)
 * [sort](#sort)
@@ -463,6 +469,22 @@ $date->format('Y-m-d'); // => '2015-02-13'
 ```
 
 
+<a name="eachIndexed"></a>
+### eachIndexed
+`array|\Traversable|Collection Phamda::eachIndexed(callable $function, array|\Traversable|Collection $collection)`
+
+Calls the given function for each element in the collection and returns the original collection.
+
+Like `each`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+##### Examples
+```php
+$date = new \DateTime('2015-02-02');
+$addCalendar = function ($number, $type) use ($date) { $date->modify("+{$number} {$type}"); };
+Phamda::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
+$date->format('Y-m-d'); // => '2015-06-15'
+```
+
+
 <a name="either"></a>
 ### either
 `callable Phamda::either(callable $a, callable $b)`
@@ -526,6 +548,20 @@ Returns a new collection containing the items that match the given predicate.
 ```php
 $gt2 = function ($x) { return $x > 2; };
 Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
+```
+
+
+<a name="filterIndexed"></a>
+### filterIndexed
+`array|Collection Phamda::filterIndexed(callable $predicate, array|\Traversable|Collection $collection)`
+
+Returns a new collection containing the items that match the given predicate.
+
+Like `filter`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
+##### Examples
+```php
+$smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
+Phamda::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
 ```
 
 
@@ -826,6 +862,20 @@ Returns a new collection where values are created from the original collection b
 ```php
 $square = function ($x) { return $x ** 2; };
 Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
+```
+
+
+<a name="mapIndexed"></a>
+### mapIndexed
+`array|Collection Phamda::mapIndexed(callable $function, array|\Traversable|Collection $collection)`
+
+Returns a new collection where values are created from the original collection by calling the supplied function.
+
+Like `map`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+##### Examples
+```php
+$keyExp = function ($value, $key) { return $value ** $key; };
+Phamda::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
 ```
 
 
@@ -1158,6 +1208,20 @@ Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
 ```
 
 
+<a name="reduceIndexed"></a>
+### reduceIndexed
+`mixed Phamda::reduceIndexed(callable $function, mixed $initial, array|\Traversable $collection)`
+
+Returns a value accumulated by calling the given function for each element of the collection.
+
+Like `reduce`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+##### Examples
+```php
+$concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
+Phamda::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
+```
+
+
 <a name="reduceRight"></a>
 ### reduceRight
 `mixed Phamda::reduceRight(callable $function, mixed $initial, array|\Traversable $collection)`
@@ -1170,6 +1234,20 @@ Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
 ```
 
 
+<a name="reduceRightIndexed"></a>
+### reduceRightIndexed
+`mixed Phamda::reduceRightIndexed(callable $function, mixed $initial, array|\Traversable $collection)`
+
+Returns a value accumulated by calling the given function for each element of the collection in reverse order.
+
+Like `reduceRight`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+##### Examples
+```php
+$concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
+Phamda::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
+```
+
+
 <a name="reject"></a>
 ### reject
 `array|Collection Phamda::reject(callable $predicate, array|\Traversable|Collection $collection)`
@@ -1179,6 +1257,20 @@ Returns a new collection containing the items that do not match the given predic
 ```php
 $isEven = function ($x) { return $x % 2 === 0; };
 Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
+```
+
+
+<a name="rejectIndexed"></a>
+### rejectIndexed
+`array|Collection Phamda::rejectIndexed(callable $predicate, array|\Traversable|Collection $collection)`
+
+Returns a new collection containing the items that do not match the given predicate.
+
+Like `reject`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
+##### Examples
+```php
+$smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
+Phamda::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
 ```
 
 

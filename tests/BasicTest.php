@@ -298,6 +298,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getEachIndexedData
+     */
+    public function testEachIndexed($expected, callable $function, $collection)
+    {
+        $this->assertSame($expected, Phamda::eachIndexed($function, $collection), 'eachIndexed produces correct results.');
+        $curried0 = Phamda::eachIndexed();
+        $this->assertSame($expected, $curried0($function, $collection), 'eachIndexed is curried correctly.');
+        $curried1 = Phamda::eachIndexed($function);
+        $this->assertSame($expected, $curried1($collection), 'eachIndexed is curried correctly.');
+    }
+
+    /**
      * @dataProvider getEitherData
      */
     public function testEither($expected, callable $a, callable $b, ... $arguments)
@@ -355,6 +367,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($predicate, $collection), 'filter is curried correctly.');
         $curried1 = Phamda::filter($predicate);
         $this->assertSame($expected, $curried1($collection), 'filter is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getFilterIndexedData
+     */
+    public function testFilterIndexed($expected, callable $predicate, $collection)
+    {
+        $this->assertSame($expected, Phamda::filterIndexed($predicate, $collection), 'filterIndexed produces correct results.');
+        $curried0 = Phamda::filterIndexed();
+        $this->assertSame($expected, $curried0($predicate, $collection), 'filterIndexed is curried correctly.');
+        $curried1 = Phamda::filterIndexed($predicate);
+        $this->assertSame($expected, $curried1($collection), 'filterIndexed is curried correctly.');
     }
 
     /**
@@ -623,6 +647,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($function, $collection), 'map is curried correctly.');
         $curried1 = Phamda::map($function);
         $this->assertSame($expected, $curried1($collection), 'map is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getMapIndexedData
+     */
+    public function testMapIndexed($expected, callable $function, $collection)
+    {
+        $this->assertSame($expected, Phamda::mapIndexed($function, $collection), 'mapIndexed produces correct results.');
+        $curried0 = Phamda::mapIndexed();
+        $this->assertSame($expected, $curried0($function, $collection), 'mapIndexed is curried correctly.');
+        $curried1 = Phamda::mapIndexed($function);
+        $this->assertSame($expected, $curried1($collection), 'mapIndexed is curried correctly.');
     }
 
     /**
@@ -900,6 +936,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getReduceIndexedData
+     */
+    public function testReduceIndexed($expected, callable $function, $initial, $collection)
+    {
+        $this->assertSame($expected, Phamda::reduceIndexed($function, $initial, $collection), 'reduceIndexed produces correct results.');
+        $curried0 = Phamda::reduceIndexed();
+        $this->assertSame($expected, $curried0($function, $initial, $collection), 'reduceIndexed is curried correctly.');
+        $curried1 = Phamda::reduceIndexed($function);
+        $this->assertSame($expected, $curried1($initial, $collection), 'reduceIndexed is curried correctly.');
+        $curried2 = Phamda::reduceIndexed($function, $initial);
+        $this->assertSame($expected, $curried2($collection), 'reduceIndexed is curried correctly.');
+    }
+
+    /**
      * @dataProvider getReduceRightData
      */
     public function testReduceRight($expected, callable $function, $initial, $collection)
@@ -914,6 +964,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getReduceRightIndexedData
+     */
+    public function testReduceRightIndexed($expected, callable $function, $initial, $collection)
+    {
+        $this->assertSame($expected, Phamda::reduceRightIndexed($function, $initial, $collection), 'reduceRightIndexed produces correct results.');
+        $curried0 = Phamda::reduceRightIndexed();
+        $this->assertSame($expected, $curried0($function, $initial, $collection), 'reduceRightIndexed is curried correctly.');
+        $curried1 = Phamda::reduceRightIndexed($function);
+        $this->assertSame($expected, $curried1($initial, $collection), 'reduceRightIndexed is curried correctly.');
+        $curried2 = Phamda::reduceRightIndexed($function, $initial);
+        $this->assertSame($expected, $curried2($collection), 'reduceRightIndexed is curried correctly.');
+    }
+
+    /**
      * @dataProvider getRejectData
      */
     public function testReject($expected, callable $predicate, $collection)
@@ -923,6 +987,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $curried0($predicate, $collection), 'reject is curried correctly.');
         $curried1 = Phamda::reject($predicate);
         $this->assertSame($expected, $curried1($collection), 'reject is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getRejectIndexedData
+     */
+    public function testRejectIndexed($expected, callable $predicate, $collection)
+    {
+        $this->assertSame($expected, Phamda::rejectIndexed($predicate, $collection), 'rejectIndexed produces correct results.');
+        $curried0 = Phamda::rejectIndexed();
+        $this->assertSame($expected, $curried0($predicate, $collection), 'rejectIndexed is curried correctly.');
+        $curried1 = Phamda::rejectIndexed($predicate);
+        $this->assertSame($expected, $curried1($collection), 'rejectIndexed is curried correctly.');
     }
 
     /**

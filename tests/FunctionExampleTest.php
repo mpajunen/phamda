@@ -142,6 +142,14 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('2015-02-13', $date->format('Y-m-d'));
     }
 
+    public function testEachIndexed()
+    {
+        $date        = new \DateTime('2015-02-02');
+        $addCalendar = function ($number, $type) use ($date) { $date->modify("+$number $type"); };
+        Phamda::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
+        $this->assertSame('2015-06-15', $date->format('Y-m-d'));
+    }
+
     public function testEither()
     {
         $lt          = function ($x, $y) { return $x < $y; };
@@ -162,6 +170,12 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
     {
         $gt2 = function ($x) { return $x > 2; };
         $this->assertSame(['bar' => 3, 'baz' => 4], Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]));
+    }
+
+    public function testFilterIndexed()
+    {
+        $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
+        $this->assertSame([0 => 3, 2 => 2], Phamda::filterIndexed($smallerThanNext, [3, 6, 2, 19]));
     }
 
     public function testFind()
@@ -236,6 +250,12 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
     {
         $square = function ($x) { return $x ** 2; };
         $this->assertSame([1, 4, 9, 16], Phamda::map($square, [1, 2, 3, 4]));
+    }
+
+    public function testMapIndexed()
+    {
+        $keyExp = function ($value, $key) { return $value ** $key; };
+        $this->assertSame([1, 2, 9, 64], Phamda::mapIndexed($keyExp, [1, 2, 3, 4]));
     }
 
     public function testMaxBy()
@@ -322,16 +342,34 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foobarbaz', Phamda::reduce($concat, 'foo', ['bar', 'baz']));
     }
 
+    public function testReduceIndexed()
+    {
+        $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
+        $this->assertSame('nofoobarfizbuz', Phamda::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']));
+    }
+
     public function testReduceRight()
     {
         $concat = function ($x, $y) { return $x . $y; };
         $this->assertSame('foobazbar', Phamda::reduceRight($concat, 'foo', ['bar', 'baz']));
     }
 
+    public function testReduceRightIndexed()
+    {
+        $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
+        $this->assertSame('nofizbuzfoobar', Phamda::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']));
+    }
+
     public function testReject()
     {
         $isEven = function ($x) { return $x % 2 === 0; };
         $this->assertSame([0 => 1, 2 => 3], Phamda::reject($isEven, [1, 2, 3, 4]));
+    }
+
+    public function testRejectIndexed()
+    {
+        $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
+        $this->assertSame([1 => 6, 3 => 19], Phamda::rejectIndexed($smallerThanNext, [3, 6, 2, 19]));
     }
 
     public function testSort()
