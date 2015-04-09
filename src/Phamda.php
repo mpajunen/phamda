@@ -1031,7 +1031,7 @@ class Phamda
                 return $collection->groupBy($function);
             }
 
-            return static::_reduce(function (array $collections, $item, $key) use ($function) {
+            return static::_reduceIndexed(function (array $collections, $item, $key) use ($function) {
                 $collections[$function($item)][$key] = $item;
 
                 return $collections;
@@ -1687,7 +1687,7 @@ class Phamda
                 return $collection->partition($predicate);
             }
 
-            return static::_reduce(function (array $collections, $item, $key) use ($predicate) {
+            return static::_reduceIndexed(function (array $collections, $item, $key) use ($predicate) {
                 $collections[$predicate($item) ? 0 : 1][$key] = $item;
 
                 return $collections;
