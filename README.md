@@ -72,7 +72,8 @@ $products = [
     ['category' => 'KCF', 'price' => 581.85, 'weight' => 31.9, 'number' => 48160],
 ];
 
-$process = Phamda::pipe(
+$formatPrice = Phamda::curry('number_format', Phamda::_(), 2);
+$process     = Phamda::pipe(
     Phamda::filter( // Only include products that...
         Phamda::pipe(
             Phamda::prop('weight'), // ... weigh...
@@ -80,13 +81,9 @@ $process = Phamda::pipe(
         )
     ),
     Phamda::map( // For each product...
-        Phamda::pick(['number', 'category', 'price']) // ... drop the weight field and fix field order.
-    ),
-    Phamda::map( // For each product...
-        Phamda::map( // ... check the fields...
-            function ($value, $key) {
-                return $key === 'price' ? number_format($value, 2) : $value; // ... and format the price.
-            }
+        Phamda::pipe(
+            Phamda::pick(['number', 'category', 'price']), // ... drop the weight field and fix field order.
+            Phamda::evolve(['price' => $formatPrice]) // ... and format the price.
         )
     ),
     Phamda::sortBy( // Sort the products by...

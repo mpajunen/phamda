@@ -74,7 +74,8 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
             ['category' => 'KCF', 'price' => 581.85, 'weight' => 31.9, 'number' => 48160],
         ];
 
-        $process = Phamda::pipe(
+        $formatPrice = Phamda::curry('number_format', Phamda::_(), 2);
+        $process     = Phamda::pipe(
             Phamda::filter(
                 Phamda::pipe(
                     Phamda::prop('weight'),
@@ -82,13 +83,9 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             Phamda::map(
-                Phamda::pick(['number', 'category', 'price'])
-            ),
-            Phamda::map(
-                Phamda::map(
-                    function ($value, $key) {
-                        return $key === 'price' ? number_format($value, 2) : $value;
-                    }
+                Phamda::pipe(
+                    Phamda::pick(['number', 'category', 'price']),
+                    Phamda::evolve(['price' => $formatPrice])
                 )
             ),
             Phamda::sortBy(

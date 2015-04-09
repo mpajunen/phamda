@@ -210,8 +210,7 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
 
     public function testFlatMap()
     {
-        $split = function ($string) { return str_split($string); };
-        $this->assertSame(['a', 'b', 'c', 'd', 'e'], Phamda::flatMap($split, ['abc', 'de']));
+        $this->assertSame(['a', 'b', 'c', 'd', 'e'], Phamda::flatMap('str_split', ['abc', 'de']));
     }
 
     public function testFlip()

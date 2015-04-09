@@ -649,8 +649,7 @@ Phamda::first([]); // => false
 Returns a list containing the flattened items created by applying the `function` to each item of the `list`.
 ##### Examples
 ```php
-$split = function ($string) { return str_split($string); };
-Phamda::flatMap($split, ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
+Phamda::flatMap('str_split', ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
 ```
 
 
