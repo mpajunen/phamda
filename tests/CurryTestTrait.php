@@ -15,12 +15,13 @@ trait CurryTestTrait
 {
     public function getCurriedResults(callable $function, ...$arguments)
     {
-        $results = [];
+        $results   = [];
+        $arguments = $arguments ?: [];
 
-        foreach (range(0, count($arguments)) as $index) {
+        foreach (range(1, count($arguments)) as $index) {
             $curried = $function(...array_slice($arguments, 0, $index));
 
-            $results[$index] = is_callable($curried)
+            $results[$index] = is_callable($curried) && $index < count($arguments)
                 ? $curried(...array_slice($arguments, $index))
                 : $curried;
         }
