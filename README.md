@@ -104,7 +104,7 @@ $result = $process($products);
 */
 ```
 
-The [function list](docs/Functions.md) includes more examples.
+The [function list](docs/Functions.rst) includes more examples.
 
 ## License
 
