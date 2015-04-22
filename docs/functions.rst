@@ -11,7 +11,7 @@ _
 
 Returns a placeholder to be used with curried functions.
 
-.. code:: php
+.. code-block:: php
 
     $sub10 = Phamda::subtract(Phamda::_(), 10);
     $sub10(52); // => 42
@@ -23,7 +23,7 @@ add
 
 Adds two numbers.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::add(15, 27); // => 42
     Phamda::add(36, -8); // => 28
@@ -35,7 +35,7 @@ all
 
 Returns ``true`` if all elements of the collection match the predicate, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::all($isPositive, [1, 2, 0, -5]); // => false
@@ -48,7 +48,7 @@ allPass
 
 Creates a single predicate from a list of predicates that returns ``true`` when all the predicates match, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $isEven = function ($x) { return $x % 2 === 0; };
     $isPositive = function ($x) { return $x > 0; };
@@ -64,7 +64,7 @@ always
 
 Returns a function that always returns the passed value.
 
-.. code:: php
+.. code-block:: php
 
     $alwaysFoo = Phamda::always('foo');
     $alwaysFoo(); // => 'foo'
@@ -76,7 +76,7 @@ any
 
 Returns ``true`` if any element of the collection matches the predicate, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::any($isPositive, [1, 2, 0, -5]); // => true
@@ -89,7 +89,7 @@ anyPass
 
 Creates a single predicate from a list of predicates that returns ``true`` when any of the predicates matches, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $isEven = function ($x) { return $x % 2 === 0; };
     $isPositive = function ($x) { return $x > 0; };
@@ -105,7 +105,7 @@ append
 
 Return a new collection that contains all the items in the given collection and the given item last.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::append('c', ['a', 'b']); // => ['a', 'b', 'c']
     Phamda::append('c', []); // => ['c']
@@ -120,7 +120,7 @@ Calls the ``function`` using the values of the given ``arguments`` list as posit
 
 Effectively creates an unary function from a variadic function.
 
-.. code:: php
+.. code-block:: php
 
     $concat3 = function ($a, $b, $c) { return $a . $b . $c; };
     Phamda::apply($concat3, ['foo', 'ba', 'rba']); // => 'foobarba'
@@ -132,7 +132,7 @@ assoc
 
 Returns a new array or object, setting the given value to the specified property.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::assoc('bar', 3, ['foo' => 1]); // => ['foo' => 1, 'bar' => 3]
     Phamda::assoc('bar', 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
@@ -145,7 +145,7 @@ assocPath
 
 Returns a new array or object, setting the given value to the property specified by the path.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::assocPath(['bar'], 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
     Phamda::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' => 1, 'bar' => ['baz' => 4]]
@@ -157,7 +157,7 @@ binary
 
 Wraps the given function in a function that accepts exactly two parameters.
 
-.. code:: php
+.. code-block:: php
 
     $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
     $add2 = Phamda::binary($add3);
@@ -170,7 +170,7 @@ both
 
 Returns a function that returns ``true`` when both of the predicates match, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $lt = function ($x, $y) { return $x < $y; };
     $arePositive = function ($x, $y) { return $x > 0 && $y > 0; };
@@ -186,7 +186,7 @@ cast
 
 Return the given ``value`` cast to the given ``type``.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::cast('string', 3); // => '3'
     Phamda::cast('int', 4.55); // => 4
@@ -207,7 +207,7 @@ comparator
 
 Creates a comparator function from a function that returns whether the first argument is less than the second.
 
-.. code:: php
+.. code-block:: php
 
     $lt = function ($x, $y) { return $x < $y; };
     $compare = Phamda::comparator($lt);
@@ -222,7 +222,7 @@ compose
 
 Returns a new function that calls each supplied function in turn in reverse order and passes the result as a parameter to the next function.
 
-.. code:: php
+.. code-block:: php
 
     $add5 = function ($x) { return $x + 5; };
     $square = function ($x) { return $x ** 2; };
@@ -241,7 +241,7 @@ concat
 
 Returns a string concatenated of ``a`` and ``b``.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::concat('ab', 'cd'); // => 'abcd'
     Phamda::concat('abc', ''); // => 'abc'
@@ -253,7 +253,7 @@ construct
 
 Wraps the constructor of the given class to a function.
 
-.. code:: php
+.. code-block:: php
 
     $date = Phamda::construct(\DateTime::class, '2015-03-15');
     $date->format('Y-m-d'); // => '2015-03-15'
@@ -265,7 +265,7 @@ constructN
 
 Wraps the constructor of the given class to a function of specified arity.
 
-.. code:: php
+.. code-block:: php
 
     $construct = Phamda::constructN(1, \DateTime::class);
     $construct('2015-03-15')->format('Y-m-d'); // => '2015-03-15'
@@ -277,7 +277,7 @@ contains
 
 Returns ``true`` if the specified item is found in the collection, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::contains('a', ['a', 'b', 'c', 'e']); // => true
     Phamda::contains('d', ['a', 'b', 'c', 'e']); // => false
@@ -289,7 +289,7 @@ curry
 
 Wraps the given function to a function that returns a new function until all required parameters are given.
 
-.. code:: php
+.. code-block:: php
 
     $add = function ($x, $y, $z) { return $x + $y + $z; };
     $addHundred = Phamda::curry($add, 100);
@@ -302,7 +302,7 @@ curryN
 
 Wraps the given function to a function of specified arity that returns a new function until all required parameters are given.
 
-.. code:: php
+.. code-block:: php
 
     $add = function ($x, $y, $z = 0) { return $x + $y + $z; };
     $addTen = Phamda::curryN(3, $add, 10);
@@ -317,7 +317,7 @@ dec
 
 Decrements the given number.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::dec(43); // => 42
     Phamda::dec(-14); // => -15
@@ -329,7 +329,7 @@ defaultTo
 
 Returns the default argument if the value argument is ``null``.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::defaultTo(22, 15); // => 15
     Phamda::defaultTo(42, null); // => 42
@@ -342,7 +342,7 @@ divide
 
 Divides two numbers.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::divide(55, 11); // => 5
     Phamda::divide(48, -8); // => -6
@@ -356,7 +356,7 @@ Calls the given function for each element in the collection and returns the orig
 
 The supplied ``function`` receives one argument: ``item``.
 
-.. code:: php
+.. code-block:: php
 
     $date = new \DateTime('2015-02-02');
     $addDays = function ($number) use ($date) { $date->modify("+{$number} days"); };
@@ -372,7 +372,7 @@ Calls the given function for each element in the collection and returns the orig
 
 Like ``each``, but the supplied ``function`` receives three arguments: ``item``, ``index``, ``collection``.
 
-.. code:: php
+.. code-block:: php
 
     $date = new \DateTime('2015-02-02');
     $addCalendar = function ($number, $type) use ($date) { $date->modify("+{$number} {$type}"); };
@@ -386,7 +386,7 @@ either
 
 Returns a function that returns ``true`` when either of the predicates matches, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $lt = function ($x, $y) { return $x < $y; };
     $arePositive = function ($x, $y) { return $x > 0 && $y > 0; };
@@ -402,7 +402,7 @@ eq
 
 Return true when the arguments are strictly equal.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::eq('a', 'a'); // => true
     Phamda::eq('a', 'b'); // => false
@@ -415,7 +415,7 @@ evolve
 
 Returns a new object or array containing all the fields of the original ``object``, using given ``transformations``.
 
-.. code:: php
+.. code-block:: php
 
     $object = ['foo' => 'bar', 'fiz' => 'buz'];
     Phamda::evolve(['foo' => 'strtoupper'], $object); // => ['foo' => 'BAR', 'fiz' => 'buz']
@@ -427,7 +427,7 @@ explode
 
 Returns an array containing the parts of a string split by the given delimiter.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::explode('/', 'f/o/o'); // => ['f', 'o', 'o']
     Phamda::explode('.', 'a.b.cd.'); // => ['a', 'b', 'cd', '']
@@ -440,7 +440,7 @@ false
 
 Returns a function that always returns ``false``.
 
-.. code:: php
+.. code-block:: php
 
     $false = Phamda::false();
     $false(); // => false
@@ -454,7 +454,7 @@ Returns a new collection containing the items that match the given predicate.
 
 The supplied ``predicate`` receives one argument: ``item``.
 
-.. code:: php
+.. code-block:: php
 
     $gt2 = function ($x) { return $x > 2; };
     Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
@@ -468,7 +468,7 @@ Returns a new collection containing the items that match the given predicate.
 
 Like ``filter``, but the supplied ``predicate`` receives three arguments: ``item``, ``index``, ``collection``.
 
-.. code:: php
+.. code-block:: php
 
     $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
     Phamda::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
@@ -480,7 +480,7 @@ find
 
 Returns the first item of a collection for which the given predicate matches, or null if no match is found.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
@@ -492,7 +492,7 @@ findIndex
 
 Returns the index of the first item of a collection for which the given predicate matches, or null if no match is found.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
@@ -504,7 +504,7 @@ findLast
 
 Returns the last item of a collection for which the given predicate matches, or null if no match is found.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
@@ -516,7 +516,7 @@ findLastIndex
 
 Returns the index of the last item of a collection for which the given predicate matches, or null if no match is found.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::findLastIndex($isPositive, [-5, 0, 15, 33, -2]); // => 3
@@ -528,7 +528,7 @@ first
 
 Returns the first item of a collection, or false if the collection is empty.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::first([5, 8, 9, 13]); // => 5
     Phamda::first([]); // => false
@@ -540,7 +540,7 @@ flatMap
 
 Returns a list containing the flattened items created by applying the ``function`` to each item of the ``list``.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::flatMap('str_split', ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
 
@@ -551,7 +551,7 @@ flatten
 
 Returns an array that contains all the items on the ``list``, with all arrays flattened.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::flatten([1, [2, 3], [4]]); // => [1, 2, 3, 4]
     Phamda::flatten([1, [2, [3]], [[4]]]); // => [1, 2, 3, 4]
@@ -563,7 +563,7 @@ flattenLevel
 
 Returns an array that contains all the items on the ``list``, with arrays on the first nesting level flattened.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::flattenLevel([1, [2, 3], [4]]); // => [1, 2, 3, 4]
     Phamda::flattenLevel([1, [2, [3]], [[4]]]); // => [1, 2, [3], [4]]
@@ -575,7 +575,7 @@ flip
 
 Wraps the given function and returns a new function for which the order of the first two parameters is reversed.
 
-.. code:: php
+.. code-block:: php
 
     $sub = function ($x, $y) { return $x - $y; };
     $flippedSub = Phamda::flip($sub);
@@ -588,7 +588,7 @@ groupBy
 
 Returns an array of sub collections based on a function that returns the group keys for each item.
 
-.. code:: php
+.. code-block:: php
 
     $firstChar = function ($string) { return $string[0]; };
     $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
@@ -601,7 +601,7 @@ gt
 
 Returns ``true`` if the first parameter is greater than the second, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::gt(1, 2); // => false
     Phamda::gt(1, 1); // => false
@@ -614,7 +614,7 @@ gte
 
 Returns ``true`` if the first parameter is greater than or equal to the second, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::gte(1, 2); // => false
     Phamda::gte(1, 1); // => true
@@ -627,7 +627,7 @@ identity
 
 Returns the given parameter.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::identity(1); // => 1
     Phamda::identity(null); // => null
@@ -640,7 +640,7 @@ ifElse
 
 Returns a function that applies either the ``onTrue`` or the ``onFalse`` function, depending on the result of the ``condition`` predicate.
 
-.. code:: php
+.. code-block:: php
 
     $addOrSub = Phamda::ifElse(Phamda::lt(0), Phamda::add(-10), Phamda::add(10));
     $addOrSub(25); // => 15
@@ -653,7 +653,7 @@ implode
 
 Returns a string formed by combining a list of strings using the given glue string.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::implode('/', ['f', 'o', 'o']); // => 'f/o/o'
     Phamda::implode('.', ['a', 'b', 'cd', '']); // => 'a.b.cd.'
@@ -666,7 +666,7 @@ inc
 
 Increments the given number.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::inc(41); // => 42
     Phamda::inc(-16); // => -15
@@ -678,7 +678,7 @@ indexOf
 
 Returns the index of the given item in a collection, or ``false`` if the item is not found.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::indexOf(16, [1, 6, 44, 16, 52]); // => 3
     Phamda::indexOf(15, [1, 6, 44, 16, 52]); // => false
@@ -690,7 +690,7 @@ invoker
 
 Returns a function that calls the specified method of a given object.
 
-.. code:: php
+.. code-block:: php
 
     $addDay = Phamda::invoker(1, 'add', new \DateInterval('P1D'));
     $addDay(new \DateTime('2015-03-15'))->format('Y-m-d'); // => '2015-03-16'
@@ -703,7 +703,7 @@ isEmpty
 
 Returns ``true`` if a collection has no elements, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::isEmpty([1, 2, 3]); // => false
     Phamda::isEmpty([0]); // => false
@@ -716,7 +716,7 @@ isInstance
 
 Return ``true`` if an object is of the specified class, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $isDate = Phamda::isInstance(\DateTime::class);
     $isDate(new \DateTime()); // => true
@@ -729,7 +729,7 @@ last
 
 Returns the last item of a collection, or false if the collection is empty.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::last([5, 8, 9, 13]); // => 13
     Phamda::last([]); // => false
@@ -741,7 +741,7 @@ lt
 
 Returns ``true`` if the first parameter is less than the second, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::lt(1, 2); // => true
     Phamda::lt(1, 1); // => false
@@ -754,7 +754,7 @@ lte
 
 Returns ``true`` if the first parameter is less than or equal to the second, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::lte(1, 2); // => true
     Phamda::lte(1, 1); // => true
@@ -769,7 +769,7 @@ Returns a new collection where values are created from the original collection b
 
 The supplied ``function`` receives one argument: ``item``.
 
-.. code:: php
+.. code-block:: php
 
     $square = function ($x) { return $x ** 2; };
     Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
@@ -783,7 +783,7 @@ Returns a new collection where values are created from the original collection b
 
 Like ``map``, but the supplied ``function`` receives three arguments: ``item``, ``index``, ``collection``.
 
-.. code:: php
+.. code-block:: php
 
     $keyExp = function ($value, $key) { return $value ** $key; };
     Phamda::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
@@ -795,7 +795,7 @@ max
 
 Returns the largest value in the collection.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::max([6, 15, 8, 9, -2, -3]); // => 15
     Phamda::max(['bar', 'foo', 'baz']); // => 'foo'
@@ -807,7 +807,7 @@ maxBy
 
 Returns the item from a collection for which the supplied function returns the largest value.
 
-.. code:: php
+.. code-block:: php
 
     $getFoo = function ($item) { return $item->foo; };
     $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
@@ -822,7 +822,7 @@ merge
 
 Returns an array that contains all the values in arrays ``a`` and ``b``.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::merge([1, 2], [3, 4, 5]); // => [1, 2, 3, 4, 5]
     Phamda::merge(['a', 'b'], ['a', 'b']); // => ['a', 'b', 'a', 'b']
@@ -834,7 +834,7 @@ min
 
 Returns the smallest value in the collection.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::min([6, 15, 8, 9, -2, -3]); // => -3
     Phamda::min(['bar', 'foo', 'baz']); // => 'bar'
@@ -846,7 +846,7 @@ minBy
 
 Returns the item from a collection for which the supplied function returns the smallest value.
 
-.. code:: php
+.. code-block:: php
 
     $getFoo = function ($item) { return $item->foo; };
     $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
@@ -861,7 +861,7 @@ modulo
 
 Divides two integers and returns the modulo.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::modulo(15, 6); // => 3
     Phamda::modulo(22, 11); // => 0
@@ -874,7 +874,7 @@ multiply
 
 Multiplies two numbers.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::multiply(15, 27); // => 405
     Phamda::multiply(36, -8); // => -288
@@ -886,7 +886,7 @@ nAry
 
 Wraps the given function in a function that accepts exactly the given amount of parameters.
 
-.. code:: php
+.. code-block:: php
 
     $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
     $add2 = Phamda::nAry(2, $add3);
@@ -901,7 +901,7 @@ negate
 
 Returns the negation of a number.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::negate(15); // => -15
     Phamda::negate(-0.7); // => 0.7
@@ -914,7 +914,7 @@ none
 
 Returns ``true`` if no element in the collection matches the predicate, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::none($isPositive, [1, 2, 0, -5]); // => false
@@ -927,7 +927,7 @@ not
 
 Wraps a predicate and returns a function that return ``true`` if the wrapped function returns a falsey value, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     $equal = function ($a, $b) { return $a === $b; };
     $notEqual = Phamda::not($equal);
@@ -941,7 +941,7 @@ partial
 
 Wraps the given function and returns a new function that can be called with the remaining parameters.
 
-.. code:: php
+.. code-block:: php
 
     $add = function ($x, $y, $z) { return $x + $y + $z; };
     $addTen = Phamda::partial($add, 10);
@@ -956,7 +956,7 @@ partialN
 
 Wraps the given function and returns a new function of fixed arity that can be called with the remaining parameters.
 
-.. code:: php
+.. code-block:: php
 
     $add = function ($x, $y, $z = 0) { return $x + $y + $z; };
     $addTen = Phamda::partialN(3, $add, 10);
@@ -970,7 +970,7 @@ partition
 
 Returns the items of the original collection divided into two collections based on a predicate function.
 
-.. code:: php
+.. code-block:: php
 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[0 => 4, 2 => 7, 4 => 2, 5 => 88], [1 => -16, 3 => -3]]
@@ -982,7 +982,7 @@ path
 
 Returns a value found at the given path.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::path(['foo', 'bar'], ['foo' => ['baz' => 26, 'bar' => 15]]); // => 15
     Phamda::path(['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]); // => null
@@ -994,7 +994,7 @@ pathEq
 
 Returns ``true`` if the given value is found at the specified path, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::pathEq(['foo', 'bar'], 44, ['foo' => ['baz' => 26, 'bar' => 15]]); // => false
     Phamda::pathEq(['foo', 'baz'], 26, ['foo' => ['baz' => 26, 'bar' => 15]]); // => true
@@ -1006,7 +1006,7 @@ pick
 
 Returns a new array, containing only the values that have keys matching the given list.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::pick(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz']
     Phamda::pick(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => []
@@ -1019,7 +1019,7 @@ pickAll
 
 Returns a new array, containing the values that have keys matching the given list, including keys that are not found in the item.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::pickAll(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'fib' => null]
     Phamda::pickAll(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['fob' => null, 'fib' => null]
@@ -1032,7 +1032,7 @@ pipe
 
 Returns a new function that calls each supplied function in turn and passes the result as a parameter to the next function.
 
-.. code:: php
+.. code-block:: php
 
     $add5 = function ($x) { return $x + 5; };
     $square = function ($x) { return $x ** 2; };
@@ -1051,7 +1051,7 @@ pluck
 
 Returns a new collection, where the items are single properties plucked from the given collection.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::pluck('foo', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => [null, 'fii']
     Phamda::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => ['bob', 'pob']
@@ -1063,7 +1063,7 @@ prepend
 
 Return a new collection that contains the given item first and all the items in the given collection.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::prepend('c', ['a', 'b']); // => ['c', 'a', 'b']
     Phamda::prepend('c', []); // => ['c']
@@ -1076,7 +1076,7 @@ product
 
 Multiplies a list of numbers.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::product([11, -8, 3]); // => -264
     Phamda::product([1, 2, 3, 4, 5, 6]); // => 720
@@ -1088,7 +1088,7 @@ prop
 
 Returns the given element of an array or property of an object.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::prop('bar', ['bar' => 'fuz', 'baz' => null]); // => 'fuz'
     Phamda::prop('baz', ['bar' => 'fuz', 'baz' => null]); // => null
@@ -1100,7 +1100,7 @@ propEq
 
 Returns ``true`` if the specified property has the given value, ``false`` otherwise.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::propEq('foo', 'bar', ['foo' => 'bar']); // => true
     Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
@@ -1114,7 +1114,7 @@ Returns a value accumulated by calling the given function for each element of th
 
 The supplied ``function`` receives one argument: ``item``.
 
-.. code:: php
+.. code-block:: php
 
     $concat = function ($x, $y) { return $x . $y; };
     Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
@@ -1128,7 +1128,7 @@ Returns a value accumulated by calling the given function for each element of th
 
 Like ``reduce``, but the supplied ``function`` receives three arguments: ``item``, ``index``, ``collection``.
 
-.. code:: php
+.. code-block:: php
 
     $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
     Phamda::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
@@ -1142,7 +1142,7 @@ Returns a value accumulated by calling the given function for each element of th
 
 The supplied ``function`` receives one argument: ``item``.
 
-.. code:: php
+.. code-block:: php
 
     $concat = function ($x, $y) { return $x . $y; };
     Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
@@ -1156,7 +1156,7 @@ Returns a value accumulated by calling the given function for each element of th
 
 Like ``reduceRight``, but the supplied ``function`` receives three arguments: ``item``, ``index``, ``collection``.
 
-.. code:: php
+.. code-block:: php
 
     $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
     Phamda::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
@@ -1170,7 +1170,7 @@ Returns a new collection containing the items that do not match the given predic
 
 The supplied ``predicate`` receives one argument: ``item``.
 
-.. code:: php
+.. code-block:: php
 
     $isEven = function ($x) { return $x % 2 === 0; };
     Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
@@ -1184,7 +1184,7 @@ Returns a new collection containing the items that do not match the given predic
 
 Like ``reject``, but the supplied ``predicate`` receives three arguments: ``item``, ``index``, ``collection``.
 
-.. code:: php
+.. code-block:: php
 
     $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
     Phamda::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
@@ -1196,7 +1196,7 @@ reverse
 
 Returns a new collection where the items are in a reverse order.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::reverse([3, 2, 1]); // => [2 => 1, 1 => 2, 0 => 3]
     Phamda::reverse([22, 4, 16, 5]); // => [3 => 5, 2 => 16, 1 => 4, 0 => 22]
@@ -1209,7 +1209,7 @@ slice
 
 Returns a new collection, containing the items of the original from index ``start`` (inclusive) to index ``end`` (exclusive).
 
-.. code:: php
+.. code-block:: php
 
     Phamda::slice(2, 6, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [3, 4, 5, 6]
     Phamda::slice(0, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [1, 2, 3]
@@ -1222,7 +1222,7 @@ sort
 
 Returns a new collection sorted by the given comparator function.
 
-.. code:: php
+.. code-block:: php
 
     $sub = function ($a, $b) { return $a - $b; };
     Phamda::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
@@ -1234,7 +1234,7 @@ sortBy
 
 Returns a new collection sorted by comparing the values provided by calling the given function for each item.
 
-.. code:: php
+.. code-block:: php
 
     $getFoo = function ($a) { return $a['foo']; };
     $collection = [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]];
@@ -1247,7 +1247,7 @@ stringIndexOf
 
 Returns the first index of a substring in a string, or ``false`` if the substring is not found.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::stringIndexOf('def', 'abcdefdef'); // => 3
     Phamda::stringIndexOf('a', 'abcdefgh'); // => 0
@@ -1260,7 +1260,7 @@ stringLastIndexOf
 
 Returns the last index of a substring in a string, or ``false`` if the substring is not found.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::stringLastIndexOf('def', 'abcdefdef'); // => 6
     Phamda::stringLastIndexOf('a', 'abcdefgh'); // => 0
@@ -1273,7 +1273,7 @@ substring
 
 Returns a substring of the original string between given indexes.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::substring(2, 5, 'foobarbaz'); // => 'oba'
     Phamda::substring(4, 8, 'foobarbaz'); // => 'arba'
@@ -1286,7 +1286,7 @@ substringFrom
 
 Returns a substring of the original string starting from the given index.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::substringFrom(5, 'foobarbaz'); // => 'rbaz'
     Phamda::substringFrom(1, 'foobarbaz'); // => 'oobarbaz'
@@ -1299,7 +1299,7 @@ substringTo
 
 Returns a substring of the original string ending before the given index.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::substringTo(5, 'foobarbaz'); // => 'fooba'
     Phamda::substringTo(8, 'foobarbaz'); // => 'foobarba'
@@ -1312,7 +1312,7 @@ subtract
 
 Subtracts two numbers.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::subtract(15, 27); // => -12
     Phamda::subtract(36, -8); // => 44
@@ -1324,7 +1324,7 @@ sum
 
 Adds together a list of numbers.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::sum([1, 2, 3, 4, 5, 6]); // => 21
     Phamda::sum([11, 0, 2, -4, 7]); // => 16
@@ -1336,7 +1336,7 @@ tail
 
 Returns a new collection that contains all the items from the original ``collection`` except the first.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::tail([2, 4, 6, 3]); // => [4, 6, 3]
 
@@ -1347,7 +1347,7 @@ tap
 
 Calls the provided function with the given value as a parameter and returns the value.
 
-.. code:: php
+.. code-block:: php
 
     $addDay = function (\DateTime $date) { $date->add(new \DateInterval('P1D')); };
     $date = new \DateTime('2015-03-15');
@@ -1361,7 +1361,7 @@ times
 
 Calls the provided function the specified number of times and returns the results in an array.
 
-.. code:: php
+.. code-block:: php
 
     $double = function ($number) { return $number * 2; };
     Phamda::times($double, 5); // => [0, 2, 4, 6, 8]
@@ -1373,7 +1373,7 @@ true
 
 Returns a function that always returns ``true``.
 
-.. code:: php
+.. code-block:: php
 
     $true = Phamda::true();
     $true(); // => true
@@ -1385,7 +1385,7 @@ unary
 
 Wraps the given function in a function that accepts exactly one parameter.
 
-.. code:: php
+.. code-block:: php
 
     $add2 = function ($a = 0, $b = 0) { return $a + $b; };
     $add1 = Phamda::nAry(1, $add2);
@@ -1400,7 +1400,7 @@ Calls the ``function`` using the given ``arguments`` as a single array list argu
 
 Effectively creates an variadic function from a unary function.
 
-.. code:: php
+.. code-block:: php
 
     $concat = function (array $strings) { return implode(' ', $strings); };
     Phamda::unapply($concat, 'foo', 'ba', 'rba'); // => 'foo ba rba'
@@ -1412,7 +1412,7 @@ where
 
 Returns true if the given object matches the specification.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 42, 'c' => 88, 'd' => -10]); // => false
     Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 16, 'c' => -20, 'd' => 77]); // => true
@@ -1424,7 +1424,7 @@ zip
 
 Returns a new array of value pairs from the values of the given arrays with matching keys.
 
-.. code:: php
+.. code-block:: php
 
     Phamda::zip([1, 2, 3], [4, 5, 6]); // => [[1, 4], [2, 5], [3, 6]]
     Phamda::zip(['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4]); // => ['a' => [1, 3]]
@@ -1437,7 +1437,7 @@ zipWith
 
 Returns a new array of values created by calling the given function with the matching values of the given arrays.
 
-.. code:: php
+.. code-block:: php
 
     $sum = function ($x, $y) { return $x + $y; };
     Phamda::zipWith($sum, [1, 2, 3], [5, 6]); // => [6, 8]
