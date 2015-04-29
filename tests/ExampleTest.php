@@ -11,54 +11,56 @@
 
 namespace Phamda\Tests;
 
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFilterMapExample()
-    {
-        $list = [5, 7, -3, 19, 0, 2];
-
-        $isPositive = function ($x) { return $x > 0; };
-        $result     = Phamda::filter($isPositive, $list);
-
-        $this->assertSame([5, 7, 3 => 19, 5 => 2], $result);
-
-        $double = function ($x) { return $x * 2; };
-        $result = Phamda::map($double, $list);
-
-        $this->assertSame([10, 14, -6, 38, 0, 4], $result);
-    }
-
     public function testCurriedExample()
     {
-        $list = [5, 7, -3, 19, 0, 2];
-
-        $isPositive = function ($x) { return $x > 0; };
-
-        $getPositives = Phamda::filter($isPositive);
-        $result       = $getPositives($list);
+        $isPositive   = function ($x) { return $x > 0; };
+        $list         = [5, 7, -3, 19, 0, 2];
+        $getPositives = P::filter($isPositive);
+        $result       = $getPositives($list); // => [5, 7, 19, 2]
 
         $this->assertSame([5, 7, 3 => 19, 5 => 2], $result);
+    }
+
+    public function testCurriedNativeExample()
+    {
+        $replaceBad = P::curry('str_replace', 'bad', 'good');
+        $dayResult  = $replaceBad('bad day'); // => 'good day'
+        $notResult  = $replaceBad('not bad'); // => 'not good'
+
+        $this->assertSame('good day', $dayResult);
+        $this->assertSame('not good', $notResult);
     }
 
     public function testComposeExample()
     {
-        $double = function ($x) { return $x * 2; };
-
+        $double           = function ($x) { return $x * 2; };
         $addFive          = function ($x) { return $x + 5; };
-        $addFiveAndDouble = Phamda::compose($double, $addFive);
-        $result           = $addFiveAndDouble(16);
+        $addFiveAndDouble = P::compose($double, $addFive);
+        $result           = $addFiveAndDouble(16); // => 42
+        // Equivalent to calling $double($addFive(16));
 
         $this->assertSame(42, $result);
     }
 
     public function testPlaceholderExample()
     {
-        $subtractTen = Phamda::subtract(Phamda::_(), 10);
-        $result      = $subtractTen(22);
+        $_           = P::_();
+        $subtractTen = P::subtract($_, 10);
+        $result      = $subtractTen(22); // => 12
 
         $this->assertSame(12, $result);
+    }
+
+    public function testNativePlaceholderExample()
+    {
+        $slashCount = P::curry('substr_count', P::_(), '/');
+        $result     = $slashCount('ab/c/de//f/'); // => 5
+
+        $this->assertSame(5, $result);
     }
 
     public function testProductList()
@@ -74,22 +76,24 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
             ['category' => 'KCF', 'price' => 581.85, 'weight' => 31.9, 'number' => 48160],
         ];
 
-        $formatPrice = Phamda::curry('number_format', Phamda::_(), 2);
-        $process     = Phamda::pipe(
-            Phamda::filter(
-                Phamda::pipe(
-                    Phamda::prop('weight'),
-                    Phamda::lt(Phamda::_(), 50.0)
+        $formatPrice = P::curry('number_format', P::_(), 2);
+        $process     = P::pipe(
+            P::filter( // Only include products that...
+                P::pipe(
+                    P::prop('weight'), // ... weigh...
+                    P::lt(P::_(), 50.0) // ... less than 50.0.
                 )
             ),
-            Phamda::map(
-                Phamda::pipe(
-                    Phamda::pick(['number', 'category', 'price']),
-                    Phamda::evolve(['price' => $formatPrice])
+            P::map( // For each product...
+                P::pipe(
+                    // ... drop the weight field and fix field order:
+                    P::pick(['number', 'category', 'price']),
+                    // ... and format the price:
+                    P::evolve(['price' => $formatPrice])
                 )
             ),
-            Phamda::sortBy(
-                Phamda::prop('number')
+            P::sortBy( // Sort the products by...
+                P::prop('number') // ... comparing product numbers.
             )
         );
 

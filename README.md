@@ -1,64 +1,86 @@
 # Phamda
 
-Phamda is a set of functional programming tools for PHP, heavily inspired by the Javascript library
+Phamda is a functional programming library for PHP, heavily inspired by the Javascript library
 [Ramda](http://ramdajs.com/). PHP 5.6+ or HHVM is required.
+
 
 ## Installation
 
 Using composer: `composer require phamda/phamda`
 
+
 ## Examples
 
-Phamda includes several typical functional programming tools, though the argument order may be atypical. For
-example `filter` and `map`:
+Here are a few examples highlighting the major features of Phamda. Basic usage examples can also be found on the
+[function list](docs/functions.rst).
+
+
+### Currying
+
+Nearly all of the functions use automatic partial application or **currying**. This means that you can call the
+`filter` function with only the predicate callback and get a new function:
 
 ```php
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 
-$list = [5, 7, -3, 19, 0, 2];
-
-$isPositive = function ($x) { return $x > 0; };
-$result     = Phamda::filter($isPositive, $list); // => [5, 7, 19, 2]
-
-$double = function ($x) { return $x * 2; };
-$result = Phamda::map($double, $list); // => [10, 14, -6, 38, 0, 4]
-```
-
-The argument order supports the main feature of Phamda: Nearly all of the functions use **automatic partial
-application** or currying. This means that you can call the `filter` function with only the predicate
-callback, resulting in a new function:
-
-```php
-$getPositives = Phamda::filter($isPositive);
+$isPositive   = function ($x) { return $x > 0; };
+$list         = [5, 7, -3, 19, 0, 2];
+$getPositives = P::filter($isPositive);
 $result       = $getPositives($list); // => [5, 7, 19, 2]
 ```
 
-The final result is the same as using two arguments directly. Of course this new function could now be used
-to filter other lists as well.
+The final result is the same as using two arguments directly. Of course this new function could now be used to filter
+other lists as well.
 
-Another major feature of Phamda is that the functions are **composable**. The basic functions can be used to
-create more complex ones. In addition there are several functions to help with function composition, for
-example the `compose` function that takes multiple argument functions and returns a new function. Calling
-this new function applies the argument functions in succession:
+It's also possible to create new curried functions, including from native PHP functions. The `curry` function
+takes a function and initial parameters and returns a new function:
 
 ```php
+$replaceBad = P::curry('str_replace', 'bad', 'good');
+$dayResult  = $replaceBad('bad day'); // => 'good day'
+$notResult  = $replaceBad('not bad'); // => 'not good'
+```
+
+
+### Composition
+
+Phamda functions are **composable**. The basic functions can be used to create new, more complex functions. There are
+also several functions to help with function composition. For example the `compose` function that takes multiple
+argument functions and returns a new function. Calling this new function applies the argument functions in succession:
+
+```php
+$double           = function ($x) { return $x * 2; };
 $addFive          = function ($x) { return $x + 5; };
-$addFiveAndDouble = Phamda::compose($double, $addFive);
+$addFiveAndDouble = P::compose($double, $addFive);
 $result           = $addFiveAndDouble(16); // => 42
 // Equivalent to calling $double($addFive(16));
 ```
 
-Phamda also supports **placeholder arguments**. A placeholder can be created by calling the `_` function.
-A placeholder can be used with all curried functions, for example:
+
+### Placeholders
+
+Phamda also supports **placeholder arguments**. A placeholder can be created by calling the `_` (underscore) function.
+A placeholder can be used with any curried function, for example:
 
 ```php
-$subtractTen = Phamda::subtract(Phamda::_(), 10);
+$_           = P::_();
+$subtractTen = P::subtract($_, 10);
 $result      = $subtractTen(22); // => 12
 ```
 
-In the next example these concepts are applied to processing a list of badly formatted product data.
-The `pipe` function is used here. It's similar to `compose` but the argument functions are applied in
-reverse order:
+Placeholders also work with manually curried functions:
+
+```php
+$slashCount = P::curry('substr_count', P::_(), '/');
+$result     = $slashCount('ab/c/de//f/'); // => 5
+```
+
+
+### Pipelines
+
+Combining these techniques allows the building of function pipelines. In this example they are applied to processing a
+list of badly formatted product data using the `pipe` function. It's similar to `compose` but the argument
+functions are applied in reverse order:
 
 ```php
 $products = [
@@ -72,26 +94,27 @@ $products = [
     ['category' => 'KCF', 'price' => 581.85, 'weight' => 31.9, 'number' => 48160],
 ];
 
-$formatPrice = Phamda::curry('number_format', Phamda::_(), 2);
-$process     = Phamda::pipe(
-    Phamda::filter( // Only include products that...
-        Phamda::pipe(
-            Phamda::prop('weight'), // ... weigh...
-            Phamda::lt(Phamda::_(), 50.0) // ... less than 50.0.
+$formatPrice = P::curry('number_format', P::_(), 2);
+$process     = P::pipe(
+    P::filter( // Only include products that...
+        P::pipe(
+            P::prop('weight'), // ... weigh...
+            P::lt(P::_(), 50.0) // ... less than 50.0.
         )
     ),
-    Phamda::map( // For each product...
-        Phamda::pipe(
-            Phamda::pick(['number', 'category', 'price']), // ... drop the weight field and fix field order.
-            Phamda::evolve(['price' => $formatPrice]) // ... and format the price.
+    P::map( // For each product...
+        P::pipe(
+            // ... drop the weight field and fix field order:
+            P::pick(['number', 'category', 'price']),
+            // ... and format the price:
+            P::evolve(['price' => $formatPrice])
         )
     ),
-    Phamda::sortBy( // Sort the products by...
-        Phamda::prop('number') // ... comparing product numbers.
+    P::sortBy( // Sort the products by...
+        P::prop('number') // ... comparing product numbers.
     )
 );
 
-// Note that the actual data is not used before the next row.
 $result = $process($products);
 /* =>
 [
@@ -104,7 +127,6 @@ $result = $process($products);
 */
 ```
 
-The [function list](docs/functions.rst) includes more examples.
 
 ## License
 
