@@ -9,7 +9,7 @@ Currently included functions (110):
 
 _
 -
-``Placeholder Phamda::_()``
+``Placeholder P::_()``
 
 Returns a placeholder to be used with curried functions.
 
@@ -23,21 +23,21 @@ Returns a placeholder to be used with curried functions.
 
 add
 ---
-``int|float Phamda::add(int|float $x, int|float $y)``
+``int|float P::add(int|float $x, int|float $y)``
 
 Adds two numbers.
 
 .. code-block:: php
 
-    Phamda::add(15, 27); // => 42
-    Phamda::add(36, -8); // => 28
+    P::add(15, 27); // => 42
+    P::add(36, -8); // => 28
 
 
 .. _all:
 
 all
 ---
-``bool Phamda::all(callable $predicate, array|\Traversable $collection)``
+``bool P::all(callable $predicate, array|\Traversable $collection)``
 
 Returns ``true`` if all elements of the collection match the predicate, ``false`` otherwise.
 
@@ -52,7 +52,7 @@ Returns ``true`` if all elements of the collection match the predicate, ``false`
 
 allPass
 -------
-``callable Phamda::allPass(callable[] $predicates)``
+``callable P::allPass(callable[] $predicates)``
 
 Creates a single predicate from a list of predicates that returns ``true`` when all the predicates match, ``false`` otherwise.
 
@@ -70,7 +70,7 @@ Creates a single predicate from a list of predicates that returns ``true`` when 
 
 always
 ------
-``callable Phamda::always(mixed $value)``
+``callable P::always(mixed $value)``
 
 Returns a function that always returns the passed value.
 
@@ -84,7 +84,7 @@ Returns a function that always returns the passed value.
 
 any
 ---
-``bool Phamda::any(callable $predicate, array|\Traversable $collection)``
+``bool P::any(callable $predicate, array|\Traversable $collection)``
 
 Returns ``true`` if any element of the collection matches the predicate, ``false`` otherwise.
 
@@ -99,7 +99,7 @@ Returns ``true`` if any element of the collection matches the predicate, ``false
 
 anyPass
 -------
-``callable Phamda::anyPass(callable[] $predicates)``
+``callable P::anyPass(callable[] $predicates)``
 
 Creates a single predicate from a list of predicates that returns ``true`` when any of the predicates matches, ``false`` otherwise.
 
@@ -117,22 +117,22 @@ Creates a single predicate from a list of predicates that returns ``true`` when 
 
 append
 ------
-``array|Collection Phamda::append(mixed $item, array|Collection $collection)``
+``array|Collection P::append(mixed $item, array|Collection $collection)``
 
 Return a new collection that contains all the items in the given collection and the given item last.
 
 .. code-block:: php
 
-    Phamda::append('c', ['a', 'b']); // => ['a', 'b', 'c']
-    Phamda::append('c', []); // => ['c']
-    Phamda::append(['d', 'e'], ['a', 'b']); // => ['a', 'b', ['d', 'e']]
+    P::append('c', ['a', 'b']); // => ['a', 'b', 'c']
+    P::append('c', []); // => ['c']
+    P::append(['d', 'e'], ['a', 'b']); // => ['a', 'b', ['d', 'e']]
 
 
 .. _apply:
 
 apply
 -----
-``mixed Phamda::apply(callable $function, array $arguments)``
+``mixed P::apply(callable $function, array $arguments)``
 
 Calls the ``function`` using the values of the given ``arguments`` list as positional arguments.
 
@@ -148,36 +148,36 @@ Effectively creates an unary function from a variadic function.
 
 assoc
 -----
-``array|object Phamda::assoc(string $property, mixed $value, array|object $object)``
+``array|object P::assoc(string $property, mixed $value, array|object $object)``
 
 Returns a new array or object, setting the given value to the specified property.
 
 .. code-block:: php
 
-    Phamda::assoc('bar', 3, ['foo' => 1]); // => ['foo' => 1, 'bar' => 3]
-    Phamda::assoc('bar', 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
-    Phamda::assoc('foo', null, ['foo' => 15, 'bar' => 7]); // => ['foo' => null, 'bar' => 7]
+    P::assoc('bar', 3, ['foo' => 1]); // => ['foo' => 1, 'bar' => 3]
+    P::assoc('bar', 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
+    P::assoc('foo', null, ['foo' => 15, 'bar' => 7]); // => ['foo' => null, 'bar' => 7]
 
 
 .. _assocPath:
 
 assocPath
 ---------
-``array|object Phamda::assocPath(array $path, mixed $value, array|object $object)``
+``array|object P::assocPath(array $path, mixed $value, array|object $object)``
 
 Returns a new array or object, setting the given value to the property specified by the path.
 
 .. code-block:: php
 
-    Phamda::assocPath(['bar'], 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
-    Phamda::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' => 1, 'bar' => ['baz' => 4]]
+    P::assocPath(['bar'], 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
+    P::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' => 1, 'bar' => ['baz' => 4]]
 
 
 .. _binary:
 
 binary
 ------
-``callable Phamda::binary(callable $function)``
+``callable P::binary(callable $function)``
 
 Wraps the given function in a function that accepts exactly two parameters.
 
@@ -192,7 +192,7 @@ Wraps the given function in a function that accepts exactly two parameters.
 
 both
 ----
-``callable Phamda::both(callable $a, callable $b)``
+``callable P::both(callable $a, callable $b)``
 
 Returns a function that returns ``true`` when both of the predicates match, ``false`` otherwise.
 
@@ -210,21 +210,21 @@ Returns a function that returns ``true`` when both of the predicates match, ``fa
 
 cast
 ----
-``mixed Phamda::cast(string $type, mixed $value)``
+``mixed P::cast(string $type, mixed $value)``
 
 Return the given ``value`` cast to the given ``type``.
 
 .. code-block:: php
 
-    Phamda::cast('string', 3); // => '3'
-    Phamda::cast('int', 4.55); // => 4
+    P::cast('string', 3); // => '3'
+    P::cast('int', 4.55); // => 4
 
 
 .. _clone_:
 
 clone_
 ------
-``mixed Phamda::clone_(object $object)``
+``mixed P::clone_(object $object)``
 
 Clones an object.
 
@@ -235,7 +235,7 @@ Clones an object.
 
 comparator
 ----------
-``callable Phamda::comparator(callable $predicate)``
+``callable P::comparator(callable $predicate)``
 
 Creates a comparator function from a function that returns whether the first argument is less than the second.
 
@@ -252,7 +252,7 @@ Creates a comparator function from a function that returns whether the first arg
 
 compose
 -------
-``callable Phamda::compose(callable ... $functions)``
+``callable P::compose(callable ... $functions)``
 
 Returns a new function that calls each supplied function in turn in reverse order and passes the result as a parameter to the next function.
 
@@ -273,21 +273,21 @@ Returns a new function that calls each supplied function in turn in reverse orde
 
 concat
 ------
-``string Phamda::concat(string $a, string $b)``
+``string P::concat(string $a, string $b)``
 
 Returns a string concatenated of ``a`` and ``b``.
 
 .. code-block:: php
 
-    Phamda::concat('ab', 'cd'); // => 'abcd'
-    Phamda::concat('abc', ''); // => 'abc'
+    P::concat('ab', 'cd'); // => 'abcd'
+    P::concat('abc', ''); // => 'abc'
 
 
 .. _construct:
 
 construct
 ---------
-``object Phamda::construct(string $class, mixed ... $initialArguments)``
+``object P::construct(string $class, mixed ... $initialArguments)``
 
 Wraps the constructor of the given class to a function.
 
@@ -301,7 +301,7 @@ Wraps the constructor of the given class to a function.
 
 constructN
 ----------
-``object Phamda::constructN(int $arity, string $class, mixed ... $initialArguments)``
+``object P::constructN(int $arity, string $class, mixed ... $initialArguments)``
 
 Wraps the constructor of the given class to a function of specified arity.
 
@@ -315,21 +315,21 @@ Wraps the constructor of the given class to a function of specified arity.
 
 contains
 --------
-``bool Phamda::contains(mixed $value, array|\Traversable $collection)``
+``bool P::contains(mixed $value, array|\Traversable $collection)``
 
 Returns ``true`` if the specified item is found in the collection, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::contains('a', ['a', 'b', 'c', 'e']); // => true
-    Phamda::contains('d', ['a', 'b', 'c', 'e']); // => false
+    P::contains('a', ['a', 'b', 'c', 'e']); // => true
+    P::contains('d', ['a', 'b', 'c', 'e']); // => false
 
 
 .. _curry:
 
 curry
 -----
-``callable Phamda::curry(callable $function, mixed ... $initialArguments)``
+``callable P::curry(callable $function, mixed ... $initialArguments)``
 
 Wraps the given function to a function that returns a new function until all required parameters are given.
 
@@ -344,7 +344,7 @@ Wraps the given function to a function that returns a new function until all req
 
 curryN
 ------
-``callable Phamda::curryN(int $length, callable $function, mixed ... $initialArguments)``
+``callable P::curryN(int $length, callable $function, mixed ... $initialArguments)``
 
 Wraps the given function to a function of specified arity that returns a new function until all required parameters are given.
 
@@ -361,50 +361,50 @@ Wraps the given function to a function of specified arity that returns a new fun
 
 dec
 ---
-``int|float Phamda::dec(int|float $number)``
+``int|float P::dec(int|float $number)``
 
 Decrements the given number.
 
 .. code-block:: php
 
-    Phamda::dec(43); // => 42
-    Phamda::dec(-14); // => -15
+    P::dec(43); // => 42
+    P::dec(-14); // => -15
 
 
 .. _defaultTo:
 
 defaultTo
 ---------
-``mixed Phamda::defaultTo(mixed $default, mixed $value)``
+``mixed P::defaultTo(mixed $default, mixed $value)``
 
 Returns the default argument if the value argument is ``null``.
 
 .. code-block:: php
 
-    Phamda::defaultTo(22, 15); // => 15
-    Phamda::defaultTo(42, null); // => 42
-    Phamda::defaultTo(15, false); // => false
+    P::defaultTo(22, 15); // => 15
+    P::defaultTo(42, null); // => 42
+    P::defaultTo(15, false); // => false
 
 
 .. _divide:
 
 divide
 ------
-``int|float Phamda::divide(int|float $x, int|float $y)``
+``int|float P::divide(int|float $x, int|float $y)``
 
 Divides two numbers.
 
 .. code-block:: php
 
-    Phamda::divide(55, 11); // => 5
-    Phamda::divide(48, -8); // => -6
+    P::divide(55, 11); // => 5
+    P::divide(48, -8); // => -6
 
 
 .. _each:
 
 each
 ----
-``array|\Traversable|Collection Phamda::each(callable $function, array|\Traversable|Collection $collection)``
+``array|\Traversable|Collection P::each(callable $function, array|\Traversable|Collection $collection)``
 
 Calls the given function for each element in the collection and returns the original collection.
 
@@ -422,7 +422,7 @@ The supplied ``function`` receives one argument: ``item``.
 
 eachIndexed
 -----------
-``array|\Traversable|Collection Phamda::eachIndexed(callable $function, array|\Traversable|Collection $collection)``
+``array|\Traversable|Collection P::eachIndexed(callable $function, array|\Traversable|Collection $collection)``
 
 Calls the given function for each element in the collection and returns the original collection.
 
@@ -440,7 +440,7 @@ Like ``each``, but the supplied ``function`` receives three arguments: ``item``,
 
 either
 ------
-``callable Phamda::either(callable $a, callable $b)``
+``callable P::either(callable $a, callable $b)``
 
 Returns a function that returns ``true`` when either of the predicates matches, ``false`` otherwise.
 
@@ -458,22 +458,22 @@ Returns a function that returns ``true`` when either of the predicates matches, 
 
 eq
 --
-``bool Phamda::eq(mixed $x, mixed $y)``
+``bool P::eq(mixed $x, mixed $y)``
 
 Return true when the arguments are strictly equal.
 
 .. code-block:: php
 
-    Phamda::eq('a', 'a'); // => true
-    Phamda::eq('a', 'b'); // => false
-    Phamda::eq(null, null); // => true
+    P::eq('a', 'a'); // => true
+    P::eq('a', 'b'); // => false
+    P::eq(null, null); // => true
 
 
 .. _evolve:
 
 evolve
 ------
-``array|object Phamda::evolve(callable[] $transformations, array|object|\ArrayAccess $object)``
+``array|object P::evolve(callable[] $transformations, array|object|\ArrayAccess $object)``
 
 Returns a new object or array containing all the fields of the original ``object``, using given ``transformations``.
 
@@ -487,22 +487,22 @@ Returns a new object or array containing all the fields of the original ``object
 
 explode
 -------
-``string[] Phamda::explode(string $delimiter, string $string)``
+``string[] P::explode(string $delimiter, string $string)``
 
 Returns an array containing the parts of a string split by the given delimiter.
 
 .. code-block:: php
 
-    Phamda::explode('/', 'f/o/o'); // => ['f', 'o', 'o']
-    Phamda::explode('.', 'a.b.cd.'); // => ['a', 'b', 'cd', '']
-    Phamda::explode('.', ''); // => ['']
+    P::explode('/', 'f/o/o'); // => ['f', 'o', 'o']
+    P::explode('.', 'a.b.cd.'); // => ['a', 'b', 'cd', '']
+    P::explode('.', ''); // => ['']
 
 
 .. _false:
 
 false
 -----
-``callable Phamda::false()``
+``callable P::false()``
 
 Returns a function that always returns ``false``.
 
@@ -516,7 +516,7 @@ Returns a function that always returns ``false``.
 
 filter
 ------
-``array|Collection Phamda::filter(callable $predicate, array|\Traversable|Collection $collection)``
+``array|Collection P::filter(callable $predicate, array|\Traversable|Collection $collection)``
 
 Returns a new collection containing the items that match the given predicate.
 
@@ -532,7 +532,7 @@ The supplied ``predicate`` receives one argument: ``item``.
 
 filterIndexed
 -------------
-``array|Collection Phamda::filterIndexed(callable $predicate, array|\Traversable|Collection $collection)``
+``array|Collection P::filterIndexed(callable $predicate, array|\Traversable|Collection $collection)``
 
 Returns a new collection containing the items that match the given predicate.
 
@@ -548,7 +548,7 @@ Like ``filter``, but the supplied ``predicate`` receives three arguments: ``item
 
 find
 ----
-``mixed|null Phamda::find(callable $predicate, array|\Traversable $collection)``
+``mixed|null P::find(callable $predicate, array|\Traversable $collection)``
 
 Returns the first item of a collection for which the given predicate matches, or null if no match is found.
 
@@ -562,7 +562,7 @@ Returns the first item of a collection for which the given predicate matches, or
 
 findIndex
 ---------
-``int|string|null Phamda::findIndex(callable $predicate, array|\Traversable $collection)``
+``int|string|null P::findIndex(callable $predicate, array|\Traversable $collection)``
 
 Returns the index of the first item of a collection for which the given predicate matches, or null if no match is found.
 
@@ -576,7 +576,7 @@ Returns the index of the first item of a collection for which the given predicat
 
 findLast
 --------
-``mixed|null Phamda::findLast(callable $predicate, array|\Traversable $collection)``
+``mixed|null P::findLast(callable $predicate, array|\Traversable $collection)``
 
 Returns the last item of a collection for which the given predicate matches, or null if no match is found.
 
@@ -590,7 +590,7 @@ Returns the last item of a collection for which the given predicate matches, or 
 
 findLastIndex
 -------------
-``int|string|null Phamda::findLastIndex(callable $predicate, array|\Traversable $collection)``
+``int|string|null P::findLastIndex(callable $predicate, array|\Traversable $collection)``
 
 Returns the index of the last item of a collection for which the given predicate matches, or null if no match is found.
 
@@ -604,21 +604,21 @@ Returns the index of the last item of a collection for which the given predicate
 
 first
 -----
-``mixed Phamda::first(array|\Traversable|Collection $collection)``
+``mixed P::first(array|\Traversable|Collection $collection)``
 
 Returns the first item of a collection, or false if the collection is empty.
 
 .. code-block:: php
 
-    Phamda::first([5, 8, 9, 13]); // => 5
-    Phamda::first([]); // => false
+    P::first([5, 8, 9, 13]); // => 5
+    P::first([]); // => false
 
 
 .. _flatMap:
 
 flatMap
 -------
-``array Phamda::flatMap(callable $function, array $list)``
+``array P::flatMap(callable $function, array $list)``
 
 Returns a list containing the flattened items created by applying the ``function`` to each item of the ``list``.
 
@@ -631,35 +631,35 @@ Returns a list containing the flattened items created by applying the ``function
 
 flatten
 -------
-``array Phamda::flatten(array $list)``
+``array P::flatten(array $list)``
 
 Returns an array that contains all the items on the ``list``, with all arrays flattened.
 
 .. code-block:: php
 
-    Phamda::flatten([1, [2, 3], [4]]); // => [1, 2, 3, 4]
-    Phamda::flatten([1, [2, [3]], [[4]]]); // => [1, 2, 3, 4]
+    P::flatten([1, [2, 3], [4]]); // => [1, 2, 3, 4]
+    P::flatten([1, [2, [3]], [[4]]]); // => [1, 2, 3, 4]
 
 
 .. _flattenLevel:
 
 flattenLevel
 ------------
-``array Phamda::flattenLevel(array $list)``
+``array P::flattenLevel(array $list)``
 
 Returns an array that contains all the items on the ``list``, with arrays on the first nesting level flattened.
 
 .. code-block:: php
 
-    Phamda::flattenLevel([1, [2, 3], [4]]); // => [1, 2, 3, 4]
-    Phamda::flattenLevel([1, [2, [3]], [[4]]]); // => [1, 2, [3], [4]]
+    P::flattenLevel([1, [2, 3], [4]]); // => [1, 2, 3, 4]
+    P::flattenLevel([1, [2, [3]], [[4]]]); // => [1, 2, [3], [4]]
 
 
 .. _flip:
 
 flip
 ----
-``callable Phamda::flip(callable $function)``
+``callable P::flip(callable $function)``
 
 Wraps the given function and returns a new function for which the order of the first two parameters is reversed.
 
@@ -674,7 +674,7 @@ Wraps the given function and returns a new function for which the order of the f
 
 groupBy
 -------
-``array[]|Collection[] Phamda::groupBy(callable $function, array|\Traversable|Collection $collection)``
+``array[]|Collection[] P::groupBy(callable $function, array|\Traversable|Collection $collection)``
 
 Returns an array of sub collections based on a function that returns the group keys for each item.
 
@@ -689,52 +689,52 @@ Returns an array of sub collections based on a function that returns the group k
 
 gt
 --
-``bool Phamda::gt(mixed $x, mixed $y)``
+``bool P::gt(mixed $x, mixed $y)``
 
 Returns ``true`` if the first parameter is greater than the second, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::gt(1, 2); // => false
-    Phamda::gt(1, 1); // => false
-    Phamda::gt(2, 1); // => true
+    P::gt(1, 2); // => false
+    P::gt(1, 1); // => false
+    P::gt(2, 1); // => true
 
 
 .. _gte:
 
 gte
 ---
-``bool Phamda::gte(mixed $x, mixed $y)``
+``bool P::gte(mixed $x, mixed $y)``
 
 Returns ``true`` if the first parameter is greater than or equal to the second, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::gte(1, 2); // => false
-    Phamda::gte(1, 1); // => true
-    Phamda::gte(2, 1); // => true
+    P::gte(1, 2); // => false
+    P::gte(1, 1); // => true
+    P::gte(2, 1); // => true
 
 
 .. _identity:
 
 identity
 --------
-``mixed Phamda::identity(mixed $x)``
+``mixed P::identity(mixed $x)``
 
 Returns the given parameter.
 
 .. code-block:: php
 
-    Phamda::identity(1); // => 1
-    Phamda::identity(null); // => null
-    Phamda::identity('abc'); // => 'abc'
+    P::identity(1); // => 1
+    P::identity(null); // => null
+    P::identity('abc'); // => 'abc'
 
 
 .. _ifElse:
 
 ifElse
 ------
-``callable Phamda::ifElse(callable $condition, callable $onTrue, callable $onFalse)``
+``callable P::ifElse(callable $condition, callable $onTrue, callable $onFalse)``
 
 Returns a function that applies either the ``onTrue`` or the ``onFalse`` function, depending on the result of the ``condition`` predicate.
 
@@ -749,50 +749,50 @@ Returns a function that applies either the ``onTrue`` or the ``onFalse`` functio
 
 implode
 -------
-``string Phamda::implode(string $glue, string[] $strings)``
+``string P::implode(string $glue, string[] $strings)``
 
 Returns a string formed by combining a list of strings using the given glue string.
 
 .. code-block:: php
 
-    Phamda::implode('/', ['f', 'o', 'o']); // => 'f/o/o'
-    Phamda::implode('.', ['a', 'b', 'cd', '']); // => 'a.b.cd.'
-    Phamda::implode('.', ['']); // => ''
+    P::implode('/', ['f', 'o', 'o']); // => 'f/o/o'
+    P::implode('.', ['a', 'b', 'cd', '']); // => 'a.b.cd.'
+    P::implode('.', ['']); // => ''
 
 
 .. _inc:
 
 inc
 ---
-``int|float Phamda::inc(int|float $number)``
+``int|float P::inc(int|float $number)``
 
 Increments the given number.
 
 .. code-block:: php
 
-    Phamda::inc(41); // => 42
-    Phamda::inc(-16); // => -15
+    P::inc(41); // => 42
+    P::inc(-16); // => -15
 
 
 .. _indexOf:
 
 indexOf
 -------
-``int|string|false Phamda::indexOf(mixed $item, array|\Traversable $collection)``
+``int|string|false P::indexOf(mixed $item, array|\Traversable $collection)``
 
 Returns the index of the given item in a collection, or ``false`` if the item is not found.
 
 .. code-block:: php
 
-    Phamda::indexOf(16, [1, 6, 44, 16, 52]); // => 3
-    Phamda::indexOf(15, [1, 6, 44, 16, 52]); // => false
+    P::indexOf(16, [1, 6, 44, 16, 52]); // => 3
+    P::indexOf(15, [1, 6, 44, 16, 52]); // => false
 
 
 .. _invoker:
 
 invoker
 -------
-``callable Phamda::invoker(int $arity, string $method, mixed ... $initialArguments)``
+``callable P::invoker(int $arity, string $method, mixed ... $initialArguments)``
 
 Returns a function that calls the specified method of a given object.
 
@@ -807,22 +807,22 @@ Returns a function that calls the specified method of a given object.
 
 isEmpty
 -------
-``bool Phamda::isEmpty(array|\Traversable|Collection $collection)``
+``bool P::isEmpty(array|\Traversable|Collection $collection)``
 
 Returns ``true`` if a collection has no elements, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::isEmpty([1, 2, 3]); // => false
-    Phamda::isEmpty([0]); // => false
-    Phamda::isEmpty([]); // => true
+    P::isEmpty([1, 2, 3]); // => false
+    P::isEmpty([0]); // => false
+    P::isEmpty([]); // => true
 
 
 .. _isInstance:
 
 isInstance
 ----------
-``bool Phamda::isInstance(string $class, object $object)``
+``bool P::isInstance(string $class, object $object)``
 
 Return ``true`` if an object is of the specified class, ``false`` otherwise.
 
@@ -837,51 +837,51 @@ Return ``true`` if an object is of the specified class, ``false`` otherwise.
 
 last
 ----
-``mixed Phamda::last(array|\Traversable|Collection $collection)``
+``mixed P::last(array|\Traversable|Collection $collection)``
 
 Returns the last item of a collection, or false if the collection is empty.
 
 .. code-block:: php
 
-    Phamda::last([5, 8, 9, 13]); // => 13
-    Phamda::last([]); // => false
+    P::last([5, 8, 9, 13]); // => 13
+    P::last([]); // => false
 
 
 .. _lt:
 
 lt
 --
-``bool Phamda::lt(mixed $x, mixed $y)``
+``bool P::lt(mixed $x, mixed $y)``
 
 Returns ``true`` if the first parameter is less than the second, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::lt(1, 2); // => true
-    Phamda::lt(1, 1); // => false
-    Phamda::lt(2, 1); // => false
+    P::lt(1, 2); // => true
+    P::lt(1, 1); // => false
+    P::lt(2, 1); // => false
 
 
 .. _lte:
 
 lte
 ---
-``bool Phamda::lte(mixed $x, mixed $y)``
+``bool P::lte(mixed $x, mixed $y)``
 
 Returns ``true`` if the first parameter is less than or equal to the second, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::lte(1, 2); // => true
-    Phamda::lte(1, 1); // => true
-    Phamda::lte(2, 1); // => false
+    P::lte(1, 2); // => true
+    P::lte(1, 1); // => true
+    P::lte(2, 1); // => false
 
 
 .. _map:
 
 map
 ---
-``array|Collection Phamda::map(callable $function, array|\Traversable|Collection $collection)``
+``array|Collection P::map(callable $function, array|\Traversable|Collection $collection)``
 
 Returns a new collection where values are created from the original collection by calling the supplied function.
 
@@ -897,7 +897,7 @@ The supplied ``function`` receives one argument: ``item``.
 
 mapIndexed
 ----------
-``array|Collection Phamda::mapIndexed(callable $function, array|\Traversable|Collection $collection)``
+``array|Collection P::mapIndexed(callable $function, array|\Traversable|Collection $collection)``
 
 Returns a new collection where values are created from the original collection by calling the supplied function.
 
@@ -913,21 +913,21 @@ Like ``map``, but the supplied ``function`` receives three arguments: ``item``, 
 
 max
 ---
-``mixed Phamda::max(array|\Traversable $collection)``
+``mixed P::max(array|\Traversable $collection)``
 
 Returns the largest value in the collection.
 
 .. code-block:: php
 
-    Phamda::max([6, 15, 8, 9, -2, -3]); // => 15
-    Phamda::max(['bar', 'foo', 'baz']); // => 'foo'
+    P::max([6, 15, 8, 9, -2, -3]); // => 15
+    P::max(['bar', 'foo', 'baz']); // => 'foo'
 
 
 .. _maxBy:
 
 maxBy
 -----
-``mixed Phamda::maxBy(callable $getValue, array|\Traversable $collection)``
+``mixed P::maxBy(callable $getValue, array|\Traversable $collection)``
 
 Returns the item from a collection for which the supplied function returns the largest value.
 
@@ -944,35 +944,35 @@ Returns the item from a collection for which the supplied function returns the l
 
 merge
 -----
-``array Phamda::merge(array $a, array $b)``
+``array P::merge(array $a, array $b)``
 
 Returns an array that contains all the values in arrays ``a`` and ``b``.
 
 .. code-block:: php
 
-    Phamda::merge([1, 2], [3, 4, 5]); // => [1, 2, 3, 4, 5]
-    Phamda::merge(['a', 'b'], ['a', 'b']); // => ['a', 'b', 'a', 'b']
+    P::merge([1, 2], [3, 4, 5]); // => [1, 2, 3, 4, 5]
+    P::merge(['a', 'b'], ['a', 'b']); // => ['a', 'b', 'a', 'b']
 
 
 .. _min:
 
 min
 ---
-``mixed Phamda::min(array|\Traversable $collection)``
+``mixed P::min(array|\Traversable $collection)``
 
 Returns the smallest value in the collection.
 
 .. code-block:: php
 
-    Phamda::min([6, 15, 8, 9, -2, -3]); // => -3
-    Phamda::min(['bar', 'foo', 'baz']); // => 'bar'
+    P::min([6, 15, 8, 9, -2, -3]); // => -3
+    P::min(['bar', 'foo', 'baz']); // => 'bar'
 
 
 .. _minBy:
 
 minBy
 -----
-``mixed Phamda::minBy(callable $getValue, array|\Traversable $collection)``
+``mixed P::minBy(callable $getValue, array|\Traversable $collection)``
 
 Returns the item from a collection for which the supplied function returns the smallest value.
 
@@ -989,36 +989,36 @@ Returns the item from a collection for which the supplied function returns the s
 
 modulo
 ------
-``int Phamda::modulo(int $x, int $y)``
+``int P::modulo(int $x, int $y)``
 
 Divides two integers and returns the modulo.
 
 .. code-block:: php
 
-    Phamda::modulo(15, 6); // => 3
-    Phamda::modulo(22, 11); // => 0
-    Phamda::modulo(-23, 6); // => -5
+    P::modulo(15, 6); // => 3
+    P::modulo(22, 11); // => 0
+    P::modulo(-23, 6); // => -5
 
 
 .. _multiply:
 
 multiply
 --------
-``int|float Phamda::multiply(int|float $x, int|float $y)``
+``int|float P::multiply(int|float $x, int|float $y)``
 
 Multiplies two numbers.
 
 .. code-block:: php
 
-    Phamda::multiply(15, 27); // => 405
-    Phamda::multiply(36, -8); // => -288
+    P::multiply(15, 27); // => 405
+    P::multiply(36, -8); // => -288
 
 
 .. _nAry:
 
 nAry
 ----
-``callable Phamda::nAry(int $arity, callable $function)``
+``callable P::nAry(int $arity, callable $function)``
 
 Wraps the given function in a function that accepts exactly the given amount of parameters.
 
@@ -1035,22 +1035,22 @@ Wraps the given function in a function that accepts exactly the given amount of 
 
 negate
 ------
-``int|float Phamda::negate(int|float $x)``
+``int|float P::negate(int|float $x)``
 
 Returns the negation of a number.
 
 .. code-block:: php
 
-    Phamda::negate(15); // => -15
-    Phamda::negate(-0.7); // => 0.7
-    Phamda::negate(0); // => 0
+    P::negate(15); // => -15
+    P::negate(-0.7); // => 0.7
+    P::negate(0); // => 0
 
 
 .. _none:
 
 none
 ----
-``bool Phamda::none(callable $predicate, array|\Traversable $collection)``
+``bool P::none(callable $predicate, array|\Traversable $collection)``
 
 Returns ``true`` if no element in the collection matches the predicate, ``false`` otherwise.
 
@@ -1065,7 +1065,7 @@ Returns ``true`` if no element in the collection matches the predicate, ``false`
 
 not
 ---
-``callable Phamda::not(callable $predicate)``
+``callable P::not(callable $predicate)``
 
 Wraps a predicate and returns a function that return ``true`` if the wrapped function returns a falsey value, ``false`` otherwise.
 
@@ -1081,7 +1081,7 @@ Wraps a predicate and returns a function that return ``true`` if the wrapped fun
 
 partial
 -------
-``callable Phamda::partial(callable $function, mixed ... $initialArguments)``
+``callable P::partial(callable $function, mixed ... $initialArguments)``
 
 Wraps the given function and returns a new function that can be called with the remaining parameters.
 
@@ -1098,7 +1098,7 @@ Wraps the given function and returns a new function that can be called with the 
 
 partialN
 --------
-``callable Phamda::partialN(int $arity, callable $function, mixed ... $initialArguments)``
+``callable P::partialN(int $arity, callable $function, mixed ... $initialArguments)``
 
 Wraps the given function and returns a new function of fixed arity that can be called with the remaining parameters.
 
@@ -1114,7 +1114,7 @@ Wraps the given function and returns a new function of fixed arity that can be c
 
 partition
 ---------
-``array[]|Collection[] Phamda::partition(callable $predicate, array|\Traversable|Collection $collection)``
+``array[]|Collection[] P::partition(callable $predicate, array|\Traversable|Collection $collection)``
 
 Returns the items of the original collection divided into two collections based on a predicate function.
 
@@ -1128,65 +1128,65 @@ Returns the items of the original collection divided into two collections based 
 
 path
 ----
-``mixed Phamda::path(array $path, array|object $object)``
+``mixed P::path(array $path, array|object $object)``
 
 Returns a value found at the given path.
 
 .. code-block:: php
 
-    Phamda::path(['foo', 'bar'], ['foo' => ['baz' => 26, 'bar' => 15]]); // => 15
-    Phamda::path(['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]); // => null
+    P::path(['foo', 'bar'], ['foo' => ['baz' => 26, 'bar' => 15]]); // => 15
+    P::path(['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]); // => null
 
 
 .. _pathEq:
 
 pathEq
 ------
-``boolean Phamda::pathEq(array $path, mixed $value, array|object $object)``
+``boolean P::pathEq(array $path, mixed $value, array|object $object)``
 
 Returns ``true`` if the given value is found at the specified path, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::pathEq(['foo', 'bar'], 44, ['foo' => ['baz' => 26, 'bar' => 15]]); // => false
-    Phamda::pathEq(['foo', 'baz'], 26, ['foo' => ['baz' => 26, 'bar' => 15]]); // => true
+    P::pathEq(['foo', 'bar'], 44, ['foo' => ['baz' => 26, 'bar' => 15]]); // => false
+    P::pathEq(['foo', 'baz'], 26, ['foo' => ['baz' => 26, 'bar' => 15]]); // => true
 
 
 .. _pick:
 
 pick
 ----
-``array Phamda::pick(array $names, array $item)``
+``array P::pick(array $names, array $item)``
 
 Returns a new array, containing only the values that have keys matching the given list.
 
 .. code-block:: php
 
-    Phamda::pick(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz']
-    Phamda::pick(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => []
-    Phamda::pick(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
+    P::pick(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz']
+    P::pick(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => []
+    P::pick(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
 
 
 .. _pickAll:
 
 pickAll
 -------
-``array Phamda::pickAll(array $names, array $item)``
+``array P::pickAll(array $names, array $item)``
 
 Returns a new array, containing the values that have keys matching the given list, including keys that are not found in the item.
 
 .. code-block:: php
 
-    Phamda::pickAll(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'fib' => null]
-    Phamda::pickAll(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['fob' => null, 'fib' => null]
-    Phamda::pickAll(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
+    P::pickAll(['bar', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'fib' => null]
+    P::pickAll(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['fob' => null, 'fib' => null]
+    P::pickAll(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
 
 
 .. _pipe:
 
 pipe
 ----
-``callable Phamda::pipe(callable ... $functions)``
+``callable P::pipe(callable ... $functions)``
 
 Returns a new function that calls each supplied function in turn and passes the result as a parameter to the next function.
 
@@ -1207,78 +1207,78 @@ Returns a new function that calls each supplied function in turn and passes the 
 
 pluck
 -----
-``array|Collection Phamda::pluck(string $name, array|\Traversable|Collection $collection)``
+``array|Collection P::pluck(string $name, array|\Traversable|Collection $collection)``
 
 Returns a new collection, where the items are single properties plucked from the given collection.
 
 .. code-block:: php
 
-    Phamda::pluck('foo', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => [null, 'fii']
-    Phamda::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => ['bob', 'pob']
+    P::pluck('foo', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => [null, 'fii']
+    P::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => ['bob', 'pob']
 
 
 .. _prepend:
 
 prepend
 -------
-``array|Collection Phamda::prepend(mixed $item, array|Collection $collection)``
+``array|Collection P::prepend(mixed $item, array|Collection $collection)``
 
 Return a new collection that contains the given item first and all the items in the given collection.
 
 .. code-block:: php
 
-    Phamda::prepend('c', ['a', 'b']); // => ['c', 'a', 'b']
-    Phamda::prepend('c', []); // => ['c']
-    Phamda::prepend(['d', 'e'], ['a', 'b']); // => [['d', 'e'], 'a', 'b']
+    P::prepend('c', ['a', 'b']); // => ['c', 'a', 'b']
+    P::prepend('c', []); // => ['c']
+    P::prepend(['d', 'e'], ['a', 'b']); // => [['d', 'e'], 'a', 'b']
 
 
 .. _product:
 
 product
 -------
-``int|float Phamda::product(int[]|float[] $values)``
+``int|float P::product(int[]|float[] $values)``
 
 Multiplies a list of numbers.
 
 .. code-block:: php
 
-    Phamda::product([11, -8, 3]); // => -264
-    Phamda::product([1, 2, 3, 4, 5, 6]); // => 720
+    P::product([11, -8, 3]); // => -264
+    P::product([1, 2, 3, 4, 5, 6]); // => 720
 
 
 .. _prop:
 
 prop
 ----
-``mixed Phamda::prop(string $name, array|object|\ArrayAccess $object)``
+``mixed P::prop(string $name, array|object|\ArrayAccess $object)``
 
 Returns the given element of an array or property of an object.
 
 .. code-block:: php
 
-    Phamda::prop('bar', ['bar' => 'fuz', 'baz' => null]); // => 'fuz'
-    Phamda::prop('baz', ['bar' => 'fuz', 'baz' => null]); // => null
+    P::prop('bar', ['bar' => 'fuz', 'baz' => null]); // => 'fuz'
+    P::prop('baz', ['bar' => 'fuz', 'baz' => null]); // => null
 
 
 .. _propEq:
 
 propEq
 ------
-``bool Phamda::propEq(string $name, mixed $value, array|object $object)``
+``bool P::propEq(string $name, mixed $value, array|object $object)``
 
 Returns ``true`` if the specified property has the given value, ``false`` otherwise.
 
 .. code-block:: php
 
-    Phamda::propEq('foo', 'bar', ['foo' => 'bar']); // => true
-    Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
+    P::propEq('foo', 'bar', ['foo' => 'bar']); // => true
+    P::propEq('foo', 'baz', ['foo' => 'bar']); // => false
 
 
 .. _reduce:
 
 reduce
 ------
-``mixed Phamda::reduce(callable $function, mixed $initial, array|\Traversable $collection)``
+``mixed P::reduce(callable $function, mixed $initial, array|\Traversable $collection)``
 
 Returns a value accumulated by calling the given function for each element of the collection.
 
@@ -1294,7 +1294,7 @@ The supplied ``function`` receives one argument: ``item``.
 
 reduceIndexed
 -------------
-``mixed Phamda::reduceIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
+``mixed P::reduceIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
 
 Returns a value accumulated by calling the given function for each element of the collection.
 
@@ -1310,7 +1310,7 @@ Like ``reduce``, but the supplied ``function`` receives three arguments: ``item`
 
 reduceRight
 -----------
-``mixed Phamda::reduceRight(callable $function, mixed $initial, array|\Traversable $collection)``
+``mixed P::reduceRight(callable $function, mixed $initial, array|\Traversable $collection)``
 
 Returns a value accumulated by calling the given function for each element of the collection in reverse order.
 
@@ -1326,7 +1326,7 @@ The supplied ``function`` receives one argument: ``item``.
 
 reduceRightIndexed
 ------------------
-``mixed Phamda::reduceRightIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
+``mixed P::reduceRightIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
 
 Returns a value accumulated by calling the given function for each element of the collection in reverse order.
 
@@ -1342,7 +1342,7 @@ Like ``reduceRight``, but the supplied ``function`` receives three arguments: ``
 
 reject
 ------
-``array|Collection Phamda::reject(callable $predicate, array|\Traversable|Collection $collection)``
+``array|Collection P::reject(callable $predicate, array|\Traversable|Collection $collection)``
 
 Returns a new collection containing the items that do not match the given predicate.
 
@@ -1358,7 +1358,7 @@ The supplied ``predicate`` receives one argument: ``item``.
 
 rejectIndexed
 -------------
-``array|Collection Phamda::rejectIndexed(callable $predicate, array|\Traversable|Collection $collection)``
+``array|Collection P::rejectIndexed(callable $predicate, array|\Traversable|Collection $collection)``
 
 Returns a new collection containing the items that do not match the given predicate.
 
@@ -1374,37 +1374,37 @@ Like ``reject``, but the supplied ``predicate`` receives three arguments: ``item
 
 reverse
 -------
-``array|Collection Phamda::reverse(array|\Traversable|Collection $collection)``
+``array|Collection P::reverse(array|\Traversable|Collection $collection)``
 
 Returns a new collection where the items are in a reverse order.
 
 .. code-block:: php
 
-    Phamda::reverse([3, 2, 1]); // => [2 => 1, 1 => 2, 0 => 3]
-    Phamda::reverse([22, 4, 16, 5]); // => [3 => 5, 2 => 16, 1 => 4, 0 => 22]
-    Phamda::reverse([]); // => []
+    P::reverse([3, 2, 1]); // => [2 => 1, 1 => 2, 0 => 3]
+    P::reverse([22, 4, 16, 5]); // => [3 => 5, 2 => 16, 1 => 4, 0 => 22]
+    P::reverse([]); // => []
 
 
 .. _slice:
 
 slice
 -----
-``array|Collection Phamda::slice(int $start, int $end, array|\Traversable|Collection $collection)``
+``array|Collection P::slice(int $start, int $end, array|\Traversable|Collection $collection)``
 
 Returns a new collection, containing the items of the original from index ``start`` (inclusive) to index ``end`` (exclusive).
 
 .. code-block:: php
 
-    Phamda::slice(2, 6, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [3, 4, 5, 6]
-    Phamda::slice(0, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [1, 2, 3]
-    Phamda::slice(7, 11, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [8, 9]
+    P::slice(2, 6, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [3, 4, 5, 6]
+    P::slice(0, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [1, 2, 3]
+    P::slice(7, 11, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [8, 9]
 
 
 .. _sort:
 
 sort
 ----
-``array|Collection Phamda::sort(callable $comparator, array|\Traversable|Collection $collection)``
+``array|Collection P::sort(callable $comparator, array|\Traversable|Collection $collection)``
 
 Returns a new collection sorted by the given comparator function.
 
@@ -1418,7 +1418,7 @@ Returns a new collection sorted by the given comparator function.
 
 sortBy
 ------
-``array|Collection Phamda::sortBy(callable $function, array|\Traversable|Collection $collection)``
+``array|Collection P::sortBy(callable $function, array|\Traversable|Collection $collection)``
 
 Returns a new collection sorted by comparing the values provided by calling the given function for each item.
 
@@ -1433,123 +1433,123 @@ Returns a new collection sorted by comparing the values provided by calling the 
 
 stringIndexOf
 -------------
-``int|false Phamda::stringIndexOf(string $substring, string $string)``
+``int|false P::stringIndexOf(string $substring, string $string)``
 
 Returns the first index of a substring in a string, or ``false`` if the substring is not found.
 
 .. code-block:: php
 
-    Phamda::stringIndexOf('def', 'abcdefdef'); // => 3
-    Phamda::stringIndexOf('a', 'abcdefgh'); // => 0
-    Phamda::stringIndexOf('ghi', 'abcdefgh'); // => false
+    P::stringIndexOf('def', 'abcdefdef'); // => 3
+    P::stringIndexOf('a', 'abcdefgh'); // => 0
+    P::stringIndexOf('ghi', 'abcdefgh'); // => false
 
 
 .. _stringLastIndexOf:
 
 stringLastIndexOf
 -----------------
-``int|false Phamda::stringLastIndexOf(string $substring, string $string)``
+``int|false P::stringLastIndexOf(string $substring, string $string)``
 
 Returns the last index of a substring in a string, or ``false`` if the substring is not found.
 
 .. code-block:: php
 
-    Phamda::stringLastIndexOf('def', 'abcdefdef'); // => 6
-    Phamda::stringLastIndexOf('a', 'abcdefgh'); // => 0
-    Phamda::stringLastIndexOf('ghi', 'abcdefgh'); // => false
+    P::stringLastIndexOf('def', 'abcdefdef'); // => 6
+    P::stringLastIndexOf('a', 'abcdefgh'); // => 0
+    P::stringLastIndexOf('ghi', 'abcdefgh'); // => false
 
 
 .. _substring:
 
 substring
 ---------
-``string Phamda::substring(int $start, int $end, string $string)``
+``string P::substring(int $start, int $end, string $string)``
 
 Returns a substring of the original string between given indexes.
 
 .. code-block:: php
 
-    Phamda::substring(2, 5, 'foobarbaz'); // => 'oba'
-    Phamda::substring(4, 8, 'foobarbaz'); // => 'arba'
-    Phamda::substring(3, -2, 'foobarbaz'); // => 'barb'
+    P::substring(2, 5, 'foobarbaz'); // => 'oba'
+    P::substring(4, 8, 'foobarbaz'); // => 'arba'
+    P::substring(3, -2, 'foobarbaz'); // => 'barb'
 
 
 .. _substringFrom:
 
 substringFrom
 -------------
-``string Phamda::substringFrom(int $start, string $string)``
+``string P::substringFrom(int $start, string $string)``
 
 Returns a substring of the original string starting from the given index.
 
 .. code-block:: php
 
-    Phamda::substringFrom(5, 'foobarbaz'); // => 'rbaz'
-    Phamda::substringFrom(1, 'foobarbaz'); // => 'oobarbaz'
-    Phamda::substringFrom(-2, 'foobarbaz'); // => 'az'
+    P::substringFrom(5, 'foobarbaz'); // => 'rbaz'
+    P::substringFrom(1, 'foobarbaz'); // => 'oobarbaz'
+    P::substringFrom(-2, 'foobarbaz'); // => 'az'
 
 
 .. _substringTo:
 
 substringTo
 -----------
-``string Phamda::substringTo(int $end, string $string)``
+``string P::substringTo(int $end, string $string)``
 
 Returns a substring of the original string ending before the given index.
 
 .. code-block:: php
 
-    Phamda::substringTo(5, 'foobarbaz'); // => 'fooba'
-    Phamda::substringTo(8, 'foobarbaz'); // => 'foobarba'
-    Phamda::substringTo(-3, 'foobarbaz'); // => 'foobar'
+    P::substringTo(5, 'foobarbaz'); // => 'fooba'
+    P::substringTo(8, 'foobarbaz'); // => 'foobarba'
+    P::substringTo(-3, 'foobarbaz'); // => 'foobar'
 
 
 .. _subtract:
 
 subtract
 --------
-``int|float Phamda::subtract(int|float $x, int|float $y)``
+``int|float P::subtract(int|float $x, int|float $y)``
 
 Subtracts two numbers.
 
 .. code-block:: php
 
-    Phamda::subtract(15, 27); // => -12
-    Phamda::subtract(36, -8); // => 44
+    P::subtract(15, 27); // => -12
+    P::subtract(36, -8); // => 44
 
 
 .. _sum:
 
 sum
 ---
-``int|float Phamda::sum(int[]|float[] $values)``
+``int|float P::sum(int[]|float[] $values)``
 
 Adds together a list of numbers.
 
 .. code-block:: php
 
-    Phamda::sum([1, 2, 3, 4, 5, 6]); // => 21
-    Phamda::sum([11, 0, 2, -4, 7]); // => 16
+    P::sum([1, 2, 3, 4, 5, 6]); // => 21
+    P::sum([11, 0, 2, -4, 7]); // => 16
 
 
 .. _tail:
 
 tail
 ----
-``array|Collection Phamda::tail(array|\Traversable|Collection $collection)``
+``array|Collection P::tail(array|\Traversable|Collection $collection)``
 
 Returns a new collection that contains all the items from the original ``collection`` except the first.
 
 .. code-block:: php
 
-    Phamda::tail([2, 4, 6, 3]); // => [4, 6, 3]
+    P::tail([2, 4, 6, 3]); // => [4, 6, 3]
 
 
 .. _tap:
 
 tap
 ---
-``mixed Phamda::tap(callable $function, mixed $object)``
+``mixed P::tap(callable $function, mixed $object)``
 
 Calls the provided function with the given value as a parameter and returns the value.
 
@@ -1565,7 +1565,7 @@ Calls the provided function with the given value as a parameter and returns the 
 
 times
 -----
-``array Phamda::times(callable $function, int $count)``
+``array P::times(callable $function, int $count)``
 
 Calls the provided function the specified number of times and returns the results in an array.
 
@@ -1579,7 +1579,7 @@ Calls the provided function the specified number of times and returns the result
 
 true
 ----
-``callable Phamda::true()``
+``callable P::true()``
 
 Returns a function that always returns ``true``.
 
@@ -1593,7 +1593,7 @@ Returns a function that always returns ``true``.
 
 unary
 -----
-``callable Phamda::unary(callable $function)``
+``callable P::unary(callable $function)``
 
 Wraps the given function in a function that accepts exactly one parameter.
 
@@ -1608,7 +1608,7 @@ Wraps the given function in a function that accepts exactly one parameter.
 
 unapply
 -------
-``mixed Phamda::unapply(callable $function, mixed ... $arguments)``
+``mixed P::unapply(callable $function, mixed ... $arguments)``
 
 Calls the ``function`` using the given ``arguments`` as a single array list argument.
 
@@ -1624,36 +1624,36 @@ Effectively creates an variadic function from a unary function.
 
 where
 -----
-``mixed Phamda::where(array $specification, array|object $object)``
+``mixed P::where(array $specification, array|object $object)``
 
 Returns true if the given object matches the specification.
 
 .. code-block:: php
 
-    Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 42, 'c' => 88, 'd' => -10]); // => false
-    Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 16, 'c' => -20, 'd' => 77]); // => true
+    P::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 42, 'c' => 88, 'd' => -10]); // => false
+    P::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 16, 'c' => -20, 'd' => 77]); // => true
 
 
 .. _zip:
 
 zip
 ---
-``array Phamda::zip(array $a, array $b)``
+``array P::zip(array $a, array $b)``
 
 Returns a new array of value pairs from the values of the given arrays with matching keys.
 
 .. code-block:: php
 
-    Phamda::zip([1, 2, 3], [4, 5, 6]); // => [[1, 4], [2, 5], [3, 6]]
-    Phamda::zip(['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4]); // => ['a' => [1, 3]]
-    Phamda::zip([1, 2, 3], []); // => []
+    P::zip([1, 2, 3], [4, 5, 6]); // => [[1, 4], [2, 5], [3, 6]]
+    P::zip(['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4]); // => ['a' => [1, 3]]
+    P::zip([1, 2, 3], []); // => []
 
 
 .. _zipWith:
 
 zipWith
 -------
-``array Phamda::zipWith(callable $function, array $a, array $b)``
+``array P::zipWith(callable $function, array $a, array $b)``
 
 Returns a new array of values created by calling the given function with the matching values of the given arrays.
 
