@@ -5,6 +5,8 @@ Currently included functions (110):
 
 
 
+.. __:
+
 _
 -
 ``Placeholder Phamda::_()``
@@ -16,6 +18,8 @@ Returns a placeholder to be used with curried functions.
     $sub10 = Phamda::subtract(Phamda::_(), 10);
     $sub10(52); // => 42
 
+
+.. _add:
 
 add
 ---
@@ -29,6 +33,8 @@ Adds two numbers.
     Phamda::add(36, -8); // => 28
 
 
+.. _all:
+
 all
 ---
 ``bool Phamda::all(callable $predicate, array|\Traversable $collection)``
@@ -41,6 +47,8 @@ Returns ``true`` if all elements of the collection match the predicate, ``false`
     Phamda::all($isPositive, [1, 2, 0, -5]); // => false
     Phamda::all($isPositive, [1, 2, 1, 11]); // => true
 
+
+.. _allPass:
 
 allPass
 -------
@@ -58,6 +66,8 @@ Creates a single predicate from a list of predicates that returns ``true`` when 
     $isEvenAndPositive(6); // => true
 
 
+.. _always:
+
 always
 ------
 ``callable Phamda::always(mixed $value)``
@@ -69,6 +79,8 @@ Returns a function that always returns the passed value.
     $alwaysFoo = Phamda::always('foo');
     $alwaysFoo(); // => 'foo'
 
+
+.. _any:
 
 any
 ---
@@ -82,6 +94,8 @@ Returns ``true`` if any element of the collection matches the predicate, ``false
     Phamda::any($isPositive, [1, 2, 0, -5]); // => true
     Phamda::any($isPositive, [-3, -7, -1, -5]); // => false
 
+
+.. _anyPass:
 
 anyPass
 -------
@@ -99,6 +113,8 @@ Creates a single predicate from a list of predicates that returns ``true`` when 
     $isEvenOrPositive(-3); // => false
 
 
+.. _append:
+
 append
 ------
 ``array|Collection Phamda::append(mixed $item, array|Collection $collection)``
@@ -111,6 +127,8 @@ Return a new collection that contains all the items in the given collection and 
     Phamda::append('c', []); // => ['c']
     Phamda::append(['d', 'e'], ['a', 'b']); // => ['a', 'b', ['d', 'e']]
 
+
+.. _apply:
 
 apply
 -----
@@ -126,6 +144,8 @@ Effectively creates an unary function from a variadic function.
     Phamda::apply($concat3, ['foo', 'ba', 'rba']); // => 'foobarba'
 
 
+.. _assoc:
+
 assoc
 -----
 ``array|object Phamda::assoc(string $property, mixed $value, array|object $object)``
@@ -139,6 +159,8 @@ Returns a new array or object, setting the given value to the specified property
     Phamda::assoc('foo', null, ['foo' => 15, 'bar' => 7]); // => ['foo' => null, 'bar' => 7]
 
 
+.. _assocPath:
+
 assocPath
 ---------
 ``array|object Phamda::assocPath(array $path, mixed $value, array|object $object)``
@@ -150,6 +172,8 @@ Returns a new array or object, setting the given value to the property specified
     Phamda::assocPath(['bar'], 3, ['foo' => 1, 'bar' => 2]); // => ['foo' => 1, 'bar' => 3]
     Phamda::assocPath(['bar', 'baz'], 4, ['foo' => 1, 'bar' => []]); // => ['foo' => 1, 'bar' => ['baz' => 4]]
 
+
+.. _binary:
 
 binary
 ------
@@ -163,6 +187,8 @@ Wraps the given function in a function that accepts exactly two parameters.
     $add2 = Phamda::binary($add3);
     $add2(27, 15, 33); // => 42
 
+
+.. _both:
 
 both
 ----
@@ -180,6 +206,8 @@ Returns a function that returns ``true`` when both of the predicates match, ``fa
     $test(5, 17); // => true
 
 
+.. _cast:
+
 cast
 ----
 ``mixed Phamda::cast(string $type, mixed $value)``
@@ -192,6 +220,8 @@ Return the given ``value`` cast to the given ``type``.
     Phamda::cast('int', 4.55); // => 4
 
 
+.. _clone_:
+
 clone_
 ------
 ``mixed Phamda::clone_(object $object)``
@@ -200,6 +230,8 @@ Clones an object.
 
 
 
+
+.. _comparator:
 
 comparator
 ----------
@@ -215,6 +247,8 @@ Creates a comparator function from a function that returns whether the first arg
     $compare(6, 5); // => 1
     $compare(5, 5); // => 0
 
+
+.. _compose:
 
 compose
 -------
@@ -235,6 +269,8 @@ Returns a new function that calls each supplied function in turn in reverse orde
     $upperHello('world'); // => 'HELLO WORLD'
 
 
+.. _concat:
+
 concat
 ------
 ``string Phamda::concat(string $a, string $b)``
@@ -246,6 +282,8 @@ Returns a string concatenated of ``a`` and ``b``.
     Phamda::concat('ab', 'cd'); // => 'abcd'
     Phamda::concat('abc', ''); // => 'abc'
 
+
+.. _construct:
 
 construct
 ---------
@@ -259,6 +297,8 @@ Wraps the constructor of the given class to a function.
     $date->format('Y-m-d'); // => '2015-03-15'
 
 
+.. _constructN:
+
 constructN
 ----------
 ``object Phamda::constructN(int $arity, string $class, mixed ... $initialArguments)``
@@ -270,6 +310,8 @@ Wraps the constructor of the given class to a function of specified arity.
     $construct = Phamda::constructN(1, \DateTime::class);
     $construct('2015-03-15')->format('Y-m-d'); // => '2015-03-15'
 
+
+.. _contains:
 
 contains
 --------
@@ -283,6 +325,8 @@ Returns ``true`` if the specified item is found in the collection, ``false`` oth
     Phamda::contains('d', ['a', 'b', 'c', 'e']); // => false
 
 
+.. _curry:
+
 curry
 -----
 ``callable Phamda::curry(callable $function, mixed ... $initialArguments)``
@@ -295,6 +339,8 @@ Wraps the given function to a function that returns a new function until all req
     $addHundred = Phamda::curry($add, 100);
     $addHundred(20, 3); // => 123
 
+
+.. _curryN:
 
 curryN
 ------
@@ -311,6 +357,8 @@ Wraps the given function to a function of specified arity that returns a new fun
     $addTwenty(5); // => 25
 
 
+.. _dec:
+
 dec
 ---
 ``int|float Phamda::dec(int|float $number)``
@@ -322,6 +370,8 @@ Decrements the given number.
     Phamda::dec(43); // => 42
     Phamda::dec(-14); // => -15
 
+
+.. _defaultTo:
 
 defaultTo
 ---------
@@ -336,6 +386,8 @@ Returns the default argument if the value argument is ``null``.
     Phamda::defaultTo(15, false); // => false
 
 
+.. _divide:
+
 divide
 ------
 ``int|float Phamda::divide(int|float $x, int|float $y)``
@@ -347,6 +399,8 @@ Divides two numbers.
     Phamda::divide(55, 11); // => 5
     Phamda::divide(48, -8); // => -6
 
+
+.. _each:
 
 each
 ----
@@ -364,6 +418,8 @@ The supplied ``function`` receives one argument: ``item``.
     $date->format('Y-m-d'); // => '2015-02-13'
 
 
+.. _eachIndexed:
+
 eachIndexed
 -----------
 ``array|\Traversable|Collection Phamda::eachIndexed(callable $function, array|\Traversable|Collection $collection)``
@@ -379,6 +435,8 @@ Like ``each``, but the supplied ``function`` receives three arguments: ``item``,
     Phamda::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
     $date->format('Y-m-d'); // => '2015-06-15'
 
+
+.. _either:
 
 either
 ------
@@ -396,6 +454,8 @@ Returns a function that returns ``true`` when either of the predicates matches, 
     $test(17, 3); // => true
 
 
+.. _eq:
+
 eq
 --
 ``bool Phamda::eq(mixed $x, mixed $y)``
@@ -409,6 +469,8 @@ Return true when the arguments are strictly equal.
     Phamda::eq(null, null); // => true
 
 
+.. _evolve:
+
 evolve
 ------
 ``array|object Phamda::evolve(callable[] $transformations, array|object|\ArrayAccess $object)``
@@ -420,6 +482,8 @@ Returns a new object or array containing all the fields of the original ``object
     $object = ['foo' => 'bar', 'fiz' => 'buz'];
     Phamda::evolve(['foo' => 'strtoupper'], $object); // => ['foo' => 'BAR', 'fiz' => 'buz']
 
+
+.. _explode:
 
 explode
 -------
@@ -434,6 +498,8 @@ Returns an array containing the parts of a string split by the given delimiter.
     Phamda::explode('.', ''); // => ['']
 
 
+.. _false:
+
 false
 -----
 ``callable Phamda::false()``
@@ -445,6 +511,8 @@ Returns a function that always returns ``false``.
     $false = Phamda::false();
     $false(); // => false
 
+
+.. _filter:
 
 filter
 ------
@@ -460,6 +528,8 @@ The supplied ``predicate`` receives one argument: ``item``.
     Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
 
 
+.. _filterIndexed:
+
 filterIndexed
 -------------
 ``array|Collection Phamda::filterIndexed(callable $predicate, array|\Traversable|Collection $collection)``
@@ -474,6 +544,8 @@ Like ``filter``, but the supplied ``predicate`` receives three arguments: ``item
     Phamda::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
 
 
+.. _find:
+
 find
 ----
 ``mixed|null Phamda::find(callable $predicate, array|\Traversable $collection)``
@@ -485,6 +557,8 @@ Returns the first item of a collection for which the given predicate matches, or
     $isPositive = function ($x) { return $x > 0; };
     Phamda::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
 
+
+.. _findIndex:
 
 findIndex
 ---------
@@ -498,6 +572,8 @@ Returns the index of the first item of a collection for which the given predicat
     Phamda::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
 
 
+.. _findLast:
+
 findLast
 --------
 ``mixed|null Phamda::findLast(callable $predicate, array|\Traversable $collection)``
@@ -509,6 +585,8 @@ Returns the last item of a collection for which the given predicate matches, or 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
 
+
+.. _findLastIndex:
 
 findLastIndex
 -------------
@@ -522,6 +600,8 @@ Returns the index of the last item of a collection for which the given predicate
     Phamda::findLastIndex($isPositive, [-5, 0, 15, 33, -2]); // => 3
 
 
+.. _first:
+
 first
 -----
 ``mixed Phamda::first(array|\Traversable|Collection $collection)``
@@ -534,6 +614,8 @@ Returns the first item of a collection, or false if the collection is empty.
     Phamda::first([]); // => false
 
 
+.. _flatMap:
+
 flatMap
 -------
 ``array Phamda::flatMap(callable $function, array $list)``
@@ -544,6 +626,8 @@ Returns a list containing the flattened items created by applying the ``function
 
     Phamda::flatMap('str_split', ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
 
+
+.. _flatten:
 
 flatten
 -------
@@ -557,6 +641,8 @@ Returns an array that contains all the items on the ``list``, with all arrays fl
     Phamda::flatten([1, [2, [3]], [[4]]]); // => [1, 2, 3, 4]
 
 
+.. _flattenLevel:
+
 flattenLevel
 ------------
 ``array Phamda::flattenLevel(array $list)``
@@ -568,6 +654,8 @@ Returns an array that contains all the items on the ``list``, with arrays on the
     Phamda::flattenLevel([1, [2, 3], [4]]); // => [1, 2, 3, 4]
     Phamda::flattenLevel([1, [2, [3]], [[4]]]); // => [1, 2, [3], [4]]
 
+
+.. _flip:
 
 flip
 ----
@@ -582,6 +670,8 @@ Wraps the given function and returns a new function for which the order of the f
     $flippedSub(20, 30); // => 10
 
 
+.. _groupBy:
+
 groupBy
 -------
 ``array[]|Collection[] Phamda::groupBy(callable $function, array|\Traversable|Collection $collection)``
@@ -594,6 +684,8 @@ Returns an array of sub collections based on a function that returns the group k
     $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
     Phamda::groupBy($firstChar, $collection); // => ['a' => [0 => 'abc', 4 => 'ayb'], 'c' => [1 => 'cbc', 2 => 'cab'], 'b' => [3 => 'baa']]
 
+
+.. _gt:
 
 gt
 --
@@ -608,6 +700,8 @@ Returns ``true`` if the first parameter is greater than the second, ``false`` ot
     Phamda::gt(2, 1); // => true
 
 
+.. _gte:
+
 gte
 ---
 ``bool Phamda::gte(mixed $x, mixed $y)``
@@ -620,6 +714,8 @@ Returns ``true`` if the first parameter is greater than or equal to the second, 
     Phamda::gte(1, 1); // => true
     Phamda::gte(2, 1); // => true
 
+
+.. _identity:
 
 identity
 --------
@@ -634,6 +730,8 @@ Returns the given parameter.
     Phamda::identity('abc'); // => 'abc'
 
 
+.. _ifElse:
+
 ifElse
 ------
 ``callable Phamda::ifElse(callable $condition, callable $onTrue, callable $onFalse)``
@@ -646,6 +744,8 @@ Returns a function that applies either the ``onTrue`` or the ``onFalse`` functio
     $addOrSub(25); // => 15
     $addOrSub(-3); // => 7
 
+
+.. _implode:
 
 implode
 -------
@@ -660,6 +760,8 @@ Returns a string formed by combining a list of strings using the given glue stri
     Phamda::implode('.', ['']); // => ''
 
 
+.. _inc:
+
 inc
 ---
 ``int|float Phamda::inc(int|float $number)``
@@ -672,6 +774,8 @@ Increments the given number.
     Phamda::inc(-16); // => -15
 
 
+.. _indexOf:
+
 indexOf
 -------
 ``int|string|false Phamda::indexOf(mixed $item, array|\Traversable $collection)``
@@ -683,6 +787,8 @@ Returns the index of the given item in a collection, or ``false`` if the item is
     Phamda::indexOf(16, [1, 6, 44, 16, 52]); // => 3
     Phamda::indexOf(15, [1, 6, 44, 16, 52]); // => false
 
+
+.. _invoker:
 
 invoker
 -------
@@ -697,6 +803,8 @@ Returns a function that calls the specified method of a given object.
     $addDay(new \DateTime('2015-03-12'))->format('Y-m-d'); // => '2015-03-13'
 
 
+.. _isEmpty:
+
 isEmpty
 -------
 ``bool Phamda::isEmpty(array|\Traversable|Collection $collection)``
@@ -709,6 +817,8 @@ Returns ``true`` if a collection has no elements, ``false`` otherwise.
     Phamda::isEmpty([0]); // => false
     Phamda::isEmpty([]); // => true
 
+
+.. _isInstance:
 
 isInstance
 ----------
@@ -723,6 +833,8 @@ Return ``true`` if an object is of the specified class, ``false`` otherwise.
     $isDate(new \DateTimeImmutable()); // => false
 
 
+.. _last:
+
 last
 ----
 ``mixed Phamda::last(array|\Traversable|Collection $collection)``
@@ -734,6 +846,8 @@ Returns the last item of a collection, or false if the collection is empty.
     Phamda::last([5, 8, 9, 13]); // => 13
     Phamda::last([]); // => false
 
+
+.. _lt:
 
 lt
 --
@@ -748,6 +862,8 @@ Returns ``true`` if the first parameter is less than the second, ``false`` other
     Phamda::lt(2, 1); // => false
 
 
+.. _lte:
+
 lte
 ---
 ``bool Phamda::lte(mixed $x, mixed $y)``
@@ -760,6 +876,8 @@ Returns ``true`` if the first parameter is less than or equal to the second, ``f
     Phamda::lte(1, 1); // => true
     Phamda::lte(2, 1); // => false
 
+
+.. _map:
 
 map
 ---
@@ -775,6 +893,8 @@ The supplied ``function`` receives one argument: ``item``.
     Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
 
 
+.. _mapIndexed:
+
 mapIndexed
 ----------
 ``array|Collection Phamda::mapIndexed(callable $function, array|\Traversable|Collection $collection)``
@@ -789,6 +909,8 @@ Like ``map``, but the supplied ``function`` receives three arguments: ``item``, 
     Phamda::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
 
 
+.. _max:
+
 max
 ---
 ``mixed Phamda::max(array|\Traversable $collection)``
@@ -800,6 +922,8 @@ Returns the largest value in the collection.
     Phamda::max([6, 15, 8, 9, -2, -3]); // => 15
     Phamda::max(['bar', 'foo', 'baz']); // => 'foo'
 
+
+.. _maxBy:
 
 maxBy
 -----
@@ -816,6 +940,8 @@ Returns the item from a collection for which the supplied function returns the l
     Phamda::maxBy($getFoo, [$a, $b, $c]); // => $b
 
 
+.. _merge:
+
 merge
 -----
 ``array Phamda::merge(array $a, array $b)``
@@ -828,6 +954,8 @@ Returns an array that contains all the values in arrays ``a`` and ``b``.
     Phamda::merge(['a', 'b'], ['a', 'b']); // => ['a', 'b', 'a', 'b']
 
 
+.. _min:
+
 min
 ---
 ``mixed Phamda::min(array|\Traversable $collection)``
@@ -839,6 +967,8 @@ Returns the smallest value in the collection.
     Phamda::min([6, 15, 8, 9, -2, -3]); // => -3
     Phamda::min(['bar', 'foo', 'baz']); // => 'bar'
 
+
+.. _minBy:
 
 minBy
 -----
@@ -855,6 +985,8 @@ Returns the item from a collection for which the supplied function returns the s
     Phamda::minBy($getFoo, [$a, $b, $c]); // => $c
 
 
+.. _modulo:
+
 modulo
 ------
 ``int Phamda::modulo(int $x, int $y)``
@@ -868,6 +1000,8 @@ Divides two integers and returns the modulo.
     Phamda::modulo(-23, 6); // => -5
 
 
+.. _multiply:
+
 multiply
 --------
 ``int|float Phamda::multiply(int|float $x, int|float $y)``
@@ -879,6 +1013,8 @@ Multiplies two numbers.
     Phamda::multiply(15, 27); // => 405
     Phamda::multiply(36, -8); // => -288
 
+
+.. _nAry:
 
 nAry
 ----
@@ -895,6 +1031,8 @@ Wraps the given function in a function that accepts exactly the given amount of 
     $add1(27, 15, 33); // => 27
 
 
+.. _negate:
+
 negate
 ------
 ``int|float Phamda::negate(int|float $x)``
@@ -907,6 +1045,8 @@ Returns the negation of a number.
     Phamda::negate(-0.7); // => 0.7
     Phamda::negate(0); // => 0
 
+
+.. _none:
 
 none
 ----
@@ -921,6 +1061,8 @@ Returns ``true`` if no element in the collection matches the predicate, ``false`
     Phamda::none($isPositive, [-3, -7, -1, -5]); // => true
 
 
+.. _not:
+
 not
 ---
 ``callable Phamda::not(callable $predicate)``
@@ -934,6 +1076,8 @@ Wraps a predicate and returns a function that return ``true`` if the wrapped fun
     $notEqual(15, 13); // => true
     $notEqual(7, 7); // => false
 
+
+.. _partial:
 
 partial
 -------
@@ -950,6 +1094,8 @@ Wraps the given function and returns a new function that can be called with the 
     $addTwenty(); // => 20
 
 
+.. _partialN:
+
 partialN
 --------
 ``callable Phamda::partialN(int $arity, callable $function, mixed ... $initialArguments)``
@@ -964,6 +1110,8 @@ Wraps the given function and returns a new function of fixed arity that can be c
     $addTwenty(5); // => 25
 
 
+.. _partition:
+
 partition
 ---------
 ``array[]|Collection[] Phamda::partition(callable $predicate, array|\Traversable|Collection $collection)``
@@ -975,6 +1123,8 @@ Returns the items of the original collection divided into two collections based 
     $isPositive = function ($x) { return $x > 0; };
     Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[0 => 4, 2 => 7, 4 => 2, 5 => 88], [1 => -16, 3 => -3]]
 
+
+.. _path:
 
 path
 ----
@@ -988,6 +1138,8 @@ Returns a value found at the given path.
     Phamda::path(['bar', 'baz'], ['bar' => ['baz' => null, 'foo' => 15]]); // => null
 
 
+.. _pathEq:
+
 pathEq
 ------
 ``boolean Phamda::pathEq(array $path, mixed $value, array|object $object)``
@@ -999,6 +1151,8 @@ Returns ``true`` if the given value is found at the specified path, ``false`` ot
     Phamda::pathEq(['foo', 'bar'], 44, ['foo' => ['baz' => 26, 'bar' => 15]]); // => false
     Phamda::pathEq(['foo', 'baz'], 26, ['foo' => ['baz' => 26, 'bar' => 15]]); // => true
 
+
+.. _pick:
 
 pick
 ----
@@ -1013,6 +1167,8 @@ Returns a new array, containing only the values that have keys matching the give
     Phamda::pick(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
 
 
+.. _pickAll:
+
 pickAll
 -------
 ``array Phamda::pickAll(array $names, array $item)``
@@ -1025,6 +1181,8 @@ Returns a new array, containing the values that have keys matching the given lis
     Phamda::pickAll(['fob', 'fib'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['fob' => null, 'fib' => null]
     Phamda::pickAll(['bar', 'foo'], ['foo' => null, 'bar' => 'bzz', 'baz' => 'bob']); // => ['bar' => 'bzz', 'foo' => null]
 
+
+.. _pipe:
 
 pipe
 ----
@@ -1045,6 +1203,8 @@ Returns a new function that calls each supplied function in turn and passes the 
     $upperHello('world'); // => 'HELLO WORLD'
 
 
+.. _pluck:
+
 pluck
 -----
 ``array|Collection Phamda::pluck(string $name, array|\Traversable|Collection $collection)``
@@ -1056,6 +1216,8 @@ Returns a new collection, where the items are single properties plucked from the
     Phamda::pluck('foo', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => [null, 'fii']
     Phamda::pluck('baz', [['foo' => null, 'bar' => 'bzz', 'baz' => 'bob'], ['foo' => 'fii', 'baz' => 'pob']]); // => ['bob', 'pob']
 
+
+.. _prepend:
 
 prepend
 -------
@@ -1070,6 +1232,8 @@ Return a new collection that contains the given item first and all the items in 
     Phamda::prepend(['d', 'e'], ['a', 'b']); // => [['d', 'e'], 'a', 'b']
 
 
+.. _product:
+
 product
 -------
 ``int|float Phamda::product(int[]|float[] $values)``
@@ -1081,6 +1245,8 @@ Multiplies a list of numbers.
     Phamda::product([11, -8, 3]); // => -264
     Phamda::product([1, 2, 3, 4, 5, 6]); // => 720
 
+
+.. _prop:
 
 prop
 ----
@@ -1094,6 +1260,8 @@ Returns the given element of an array or property of an object.
     Phamda::prop('baz', ['bar' => 'fuz', 'baz' => null]); // => null
 
 
+.. _propEq:
+
 propEq
 ------
 ``bool Phamda::propEq(string $name, mixed $value, array|object $object)``
@@ -1105,6 +1273,8 @@ Returns ``true`` if the specified property has the given value, ``false`` otherw
     Phamda::propEq('foo', 'bar', ['foo' => 'bar']); // => true
     Phamda::propEq('foo', 'baz', ['foo' => 'bar']); // => false
 
+
+.. _reduce:
 
 reduce
 ------
@@ -1120,6 +1290,8 @@ The supplied ``function`` receives one argument: ``item``.
     Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
 
 
+.. _reduceIndexed:
+
 reduceIndexed
 -------------
 ``mixed Phamda::reduceIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
@@ -1133,6 +1305,8 @@ Like ``reduce``, but the supplied ``function`` receives three arguments: ``item`
     $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
     Phamda::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
 
+
+.. _reduceRight:
 
 reduceRight
 -----------
@@ -1148,6 +1322,8 @@ The supplied ``function`` receives one argument: ``item``.
     Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
 
 
+.. _reduceRightIndexed:
+
 reduceRightIndexed
 ------------------
 ``mixed Phamda::reduceRightIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
@@ -1161,6 +1337,8 @@ Like ``reduceRight``, but the supplied ``function`` receives three arguments: ``
     $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
     Phamda::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
 
+
+.. _reject:
 
 reject
 ------
@@ -1176,6 +1354,8 @@ The supplied ``predicate`` receives one argument: ``item``.
     Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
 
 
+.. _rejectIndexed:
+
 rejectIndexed
 -------------
 ``array|Collection Phamda::rejectIndexed(callable $predicate, array|\Traversable|Collection $collection)``
@@ -1190,6 +1370,8 @@ Like ``reject``, but the supplied ``predicate`` receives three arguments: ``item
     Phamda::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
 
 
+.. _reverse:
+
 reverse
 -------
 ``array|Collection Phamda::reverse(array|\Traversable|Collection $collection)``
@@ -1202,6 +1384,8 @@ Returns a new collection where the items are in a reverse order.
     Phamda::reverse([22, 4, 16, 5]); // => [3 => 5, 2 => 16, 1 => 4, 0 => 22]
     Phamda::reverse([]); // => []
 
+
+.. _slice:
 
 slice
 -----
@@ -1216,6 +1400,8 @@ Returns a new collection, containing the items of the original from index ``star
     Phamda::slice(7, 11, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [8, 9]
 
 
+.. _sort:
+
 sort
 ----
 ``array|Collection Phamda::sort(callable $comparator, array|\Traversable|Collection $collection)``
@@ -1227,6 +1413,8 @@ Returns a new collection sorted by the given comparator function.
     $sub = function ($a, $b) { return $a - $b; };
     Phamda::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
 
+
+.. _sortBy:
 
 sortBy
 ------
@@ -1241,6 +1429,8 @@ Returns a new collection sorted by comparing the values provided by calling the 
     Phamda::sortBy($getFoo, $collection); // => [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]]
 
 
+.. _stringIndexOf:
+
 stringIndexOf
 -------------
 ``int|false Phamda::stringIndexOf(string $substring, string $string)``
@@ -1253,6 +1443,8 @@ Returns the first index of a substring in a string, or ``false`` if the substrin
     Phamda::stringIndexOf('a', 'abcdefgh'); // => 0
     Phamda::stringIndexOf('ghi', 'abcdefgh'); // => false
 
+
+.. _stringLastIndexOf:
 
 stringLastIndexOf
 -----------------
@@ -1267,6 +1459,8 @@ Returns the last index of a substring in a string, or ``false`` if the substring
     Phamda::stringLastIndexOf('ghi', 'abcdefgh'); // => false
 
 
+.. _substring:
+
 substring
 ---------
 ``string Phamda::substring(int $start, int $end, string $string)``
@@ -1279,6 +1473,8 @@ Returns a substring of the original string between given indexes.
     Phamda::substring(4, 8, 'foobarbaz'); // => 'arba'
     Phamda::substring(3, -2, 'foobarbaz'); // => 'barb'
 
+
+.. _substringFrom:
 
 substringFrom
 -------------
@@ -1293,6 +1489,8 @@ Returns a substring of the original string starting from the given index.
     Phamda::substringFrom(-2, 'foobarbaz'); // => 'az'
 
 
+.. _substringTo:
+
 substringTo
 -----------
 ``string Phamda::substringTo(int $end, string $string)``
@@ -1306,6 +1504,8 @@ Returns a substring of the original string ending before the given index.
     Phamda::substringTo(-3, 'foobarbaz'); // => 'foobar'
 
 
+.. _subtract:
+
 subtract
 --------
 ``int|float Phamda::subtract(int|float $x, int|float $y)``
@@ -1317,6 +1517,8 @@ Subtracts two numbers.
     Phamda::subtract(15, 27); // => -12
     Phamda::subtract(36, -8); // => 44
 
+
+.. _sum:
 
 sum
 ---
@@ -1330,6 +1532,8 @@ Adds together a list of numbers.
     Phamda::sum([11, 0, 2, -4, 7]); // => 16
 
 
+.. _tail:
+
 tail
 ----
 ``array|Collection Phamda::tail(array|\Traversable|Collection $collection)``
@@ -1340,6 +1544,8 @@ Returns a new collection that contains all the items from the original ``collect
 
     Phamda::tail([2, 4, 6, 3]); // => [4, 6, 3]
 
+
+.. _tap:
 
 tap
 ---
@@ -1355,6 +1561,8 @@ Calls the provided function with the given value as a parameter and returns the 
     $date->format('Y-m-d'); // => '2015-03-16'
 
 
+.. _times:
+
 times
 -----
 ``array Phamda::times(callable $function, int $count)``
@@ -1366,6 +1574,8 @@ Calls the provided function the specified number of times and returns the result
     $double = function ($number) { return $number * 2; };
     Phamda::times($double, 5); // => [0, 2, 4, 6, 8]
 
+
+.. _true:
 
 true
 ----
@@ -1379,6 +1589,8 @@ Returns a function that always returns ``true``.
     $true(); // => true
 
 
+.. _unary:
+
 unary
 -----
 ``callable Phamda::unary(callable $function)``
@@ -1391,6 +1603,8 @@ Wraps the given function in a function that accepts exactly one parameter.
     $add1 = Phamda::nAry(1, $add2);
     $add1(27, 15); // => 27
 
+
+.. _unapply:
 
 unapply
 -------
@@ -1406,6 +1620,8 @@ Effectively creates an variadic function from a unary function.
     Phamda::unapply($concat, 'foo', 'ba', 'rba'); // => 'foo ba rba'
 
 
+.. _where:
+
 where
 -----
 ``mixed Phamda::where(array $specification, array|object $object)``
@@ -1417,6 +1633,8 @@ Returns true if the given object matches the specification.
     Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 42, 'c' => 88, 'd' => -10]); // => false
     Phamda::where(['a' => 15, 'b' => 16], ['a' => 15, 'b' => 16, 'c' => -20, 'd' => 77]); // => true
 
+
+.. _zip:
 
 zip
 ---
@@ -1430,6 +1648,8 @@ Returns a new array of value pairs from the values of the given arrays with matc
     Phamda::zip(['a' => 1, 'b' => 2], ['a' => 3, 'c' => 4]); // => ['a' => [1, 3]]
     Phamda::zip([1, 2, 3], []); // => []
 
+
+.. _zipWith:
 
 zipWith
 -------
