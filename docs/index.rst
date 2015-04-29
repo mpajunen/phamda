@@ -1,8 +1,7 @@
 Welcome to Phamda documentation
 ===============================
 
-Phamda is a functional programming library for PHP. Phamda contains generic functions and almost all of them
-use **automatic partial application** or **currying**.
+Phamda is a functional programming library for PHP. **Automatically curried** functions are the main feature.
 
 .. toctree::
    :maxdepth: 1

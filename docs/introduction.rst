@@ -4,11 +4,11 @@ Introduction
 Phamda is a functional programming library for PHP. The main features are:
 
 * A set mostly familiar functions, including basic ones like :ref:`filter`, :ref:`map` and :ref:`reduce`.
-* Almost all of the functions are automatically curried. Calling a function with fewer parameters than are expected
+* Almost all of the functions are **automatically curried**. Calling a function with fewer parameters than are expected
   returns a new function.
-* Placeholder arguments can be used with all of these curried functions.
-* The functions are designed to be composable. Specific functions like :ref:`compose` and :ref:`pipe` enable different
-  composition patterns.
+* **Placeholder arguments** can be used with all the curried functions.
+* The functions are designed to be **composable**. Specific functions like :ref:`compose` and :ref:`pipe` enable
+  different composition patterns.
 
 
 Requirements

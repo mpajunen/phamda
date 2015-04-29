@@ -9,6 +9,11 @@ Phamda is a functional programming library for PHP, heavily inspired by the Java
 Using composer: `composer require phamda/phamda`
 
 
+## Documentation
+
+Documentation [is available here](http://phamda.readthedocs.org).
+
+
 ## Examples
 
 Here are a few examples highlighting the major features of Phamda. Basic usage examples can also be found on the
