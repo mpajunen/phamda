@@ -8,4 +8,5 @@ use **automatic partial application** or **currying**.
    :maxdepth: 1
 
    introduction
+   examples
    Function list <functions>
