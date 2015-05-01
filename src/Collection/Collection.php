@@ -12,7 +12,7 @@
 namespace Phamda\Collection;
 
 /**
- * Collection interface includes the collection object methods directly supported in Phamda
+ * Collection interface includes the collection object methods directly supported in Phamda.
  *
  * Mostly based on \Doctrine\Common\Collections\Collection
  *
@@ -92,8 +92,6 @@ interface Collection
     public function prepend($item);
 
     /**
-     * @param bool $preserveKeys
-     *
      * @return Collection
      */
     public function reverse();

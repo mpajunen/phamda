@@ -224,7 +224,7 @@ Return the given ``value`` cast to the given ``type``.
 
 clone_
 ------
-``mixed P::clone_(object $object)``
+``object P::clone_(object $object)``
 
 Clones an object.
 
@@ -329,7 +329,7 @@ Returns ``true`` if the specified item is found in the collection, ``false`` oth
 
 curry
 -----
-``callable P::curry(callable $function, mixed ... $initialArguments)``
+``callable|mixed P::curry(callable $function, mixed ... $initialArguments)``
 
 Wraps the given function to a function that returns a new function until all required parameters are given.
 
@@ -344,7 +344,7 @@ Wraps the given function to a function that returns a new function until all req
 
 curryN
 ------
-``callable P::curryN(int $length, callable $function, mixed ... $initialArguments)``
+``callable|mixed P::curryN(int $length, callable $function, mixed ... $initialArguments)``
 
 Wraps the given function to a function of specified arity that returns a new function until all required parameters are given.
 
@@ -1142,7 +1142,7 @@ Returns a value found at the given path.
 
 pathEq
 ------
-``boolean P::pathEq(array $path, mixed $value, array|object $object)``
+``bool P::pathEq(array $path, mixed $value, array|object $object)``
 
 Returns ``true`` if the given value is found at the specified path, ``false`` otherwise.
 

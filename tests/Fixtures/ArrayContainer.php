@@ -13,7 +13,7 @@ namespace Phamda\Tests\Fixtures;
 
 class ArrayContainer implements \ArrayAccess, \Countable, \IteratorAggregate
 {
-    /** @var mixed[] */
+    /** @var array */
     protected $values;
 
     public function __construct(array $values)
@@ -75,7 +75,7 @@ class ArrayContainer implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * @return \mixed[]
+     * @return array
      */
     public function toArray()
     {

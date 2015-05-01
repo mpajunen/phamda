@@ -287,7 +287,6 @@ trait CoreFunctionsTrait
 
     /**
      * @param array|\Traversable|Collection $collection
-     * @param bool                          $preserveKeys
      *
      * @return array|Collection
      */

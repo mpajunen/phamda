@@ -365,7 +365,7 @@ class Phamda
      *
      * @param object $object
      *
-     * @return callable|mixed
+     * @return callable|object
      */
     public static function clone_($object = null)
     {
@@ -523,7 +523,7 @@ class Phamda
      * @param callable $function
      * @param mixed    ...$initialArguments
      *
-     * @return callable
+     * @return callable|mixed
      */
     public static function curry($function = null, ... $initialArguments)
     {
@@ -547,7 +547,7 @@ class Phamda
      * @param callable $function
      * @param mixed    ...$initialArguments
      *
-     * @return callable
+     * @return callable|mixed
      */
     public static function curryN($length = null, $function = null, ... $initialArguments)
     {
@@ -1769,7 +1769,7 @@ class Phamda
      * @param mixed        $value
      * @param array|object $object
      *
-     * @return callable|boolean
+     * @return callable|bool
      */
     public static function pathEq($path = null, $value = null, $object = null)
     {
