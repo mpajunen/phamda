@@ -18,6 +18,14 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     use BasicProvidersTrait, CurryTestTrait;
 
     /**
+     * @dataProvider get_Data
+     */
+    public function test_($expected)
+    {
+        $this->assertSame($expected, Phamda::_(), '_ produces correct results.');
+    }
+
+    /**
      * @dataProvider getAddData
      */
     public function testAdd($expected, $x, $y)
@@ -551,6 +559,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getInvokerData
+     */
+    public function testInvoker($expected, $arity, $method, array $initialArguments, ... $arguments)
+    {
+        $main0 = Phamda::invoker($arity, $method, ...$initialArguments);
+        $this->assertSame($expected, $main0(...$arguments), 'invoker produces correct results.');
+        foreach ($this->getCurriedResults(Phamda::invoker(), $arity, $method, ...$initialArguments) as $result) {
+            $this->assertSame($expected, $result(...$arguments), 'invoker is curried correctly.');
+        }
+    }
+
+    /**
      * @dataProvider getIsEmptyData
      */
     public function testIsEmpty($expected, $collection)
@@ -747,6 +767,30 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $main0(...$arguments), 'not produces correct results.');
         foreach ($this->getCurriedResults(Phamda::not(), $predicate) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'not is curried correctly.');
+        }
+    }
+
+    /**
+     * @dataProvider getPartialData
+     */
+    public function testPartial($expected, callable $function, array $initialArguments, ... $arguments)
+    {
+        $main0 = Phamda::partial($function, ...$initialArguments);
+        $this->assertSame($expected, $main0(...$arguments), 'partial produces correct results.');
+        foreach ($this->getCurriedResults(Phamda::partial(), $function, ...$initialArguments) as $result) {
+            $this->assertSame($expected, $result(...$arguments), 'partial is curried correctly.');
+        }
+    }
+
+    /**
+     * @dataProvider getPartialNData
+     */
+    public function testPartialN($expected, $arity, callable $function, array $initialArguments, ... $arguments)
+    {
+        $main0 = Phamda::partialN($arity, $function, ...$initialArguments);
+        $this->assertSame($expected, $main0(...$arguments), 'partialN produces correct results.');
+        foreach ($this->getCurriedResults(Phamda::partialN(), $arity, $function, ...$initialArguments) as $result) {
+            $this->assertSame($expected, $result(...$arguments), 'partialN is curried correctly.');
         }
     }
 

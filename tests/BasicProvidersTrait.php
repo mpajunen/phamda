@@ -21,6 +21,13 @@ use Phamda\Tests\Fixtures\Test2;
 
 trait BasicProvidersTrait
 {
+    public function get_Data()
+    {
+        return [
+            [Phamda::_()],
+        ];
+    }
+
     public function getAddData()
     {
         return [
@@ -745,7 +752,6 @@ trait BasicProvidersTrait
         return [
             [42, $sum, [], 23, 18, 29, -28],
             [42, $sum, [29, -28], 23, 18, 15],
-            [42, $sum, [29, -28, 23, 18, 15]],
         ];
     }
 
@@ -756,7 +762,6 @@ trait BasicProvidersTrait
         return [
             [42, 4, $sum, [], 23, 18, 29, -28],
             [42, 4, $sum, [29, -28], 23, 18, 15],
-            [42, 4, $sum, [29, -28, 23, 18, 15]],
         ];
     }
 

@@ -15,55 +15,15 @@ use Phamda\Phamda;
 
 class PartialTest extends \PHPUnit_Framework_TestCase
 {
-    use BasicProvidersTrait, CurryTestTrait;
-
-    /**
-     * @dataProvider getCurryData
-     */
-    public function testCurry($expected, callable $function, ... $arguments)
-    {
-        $this->assertSame($expected, Phamda::curry($function, ...$arguments));
-
-        $curried = Phamda::curry($function);
-
-        foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {
-            $this->assertSame($expected, $result);
-        }
-    }
-
-    /**
-     * @dataProvider getCurryNData
-     */
-    public function testCurryN($expected, $count, callable $function, ... $arguments)
-    {
-        $this->assertSame($expected, Phamda::curryN($count, $function, ...$arguments));
-
-        $curried = Phamda::curryN($count, $function);
-
-        foreach ($this->getCurriedResults($curried, ...$arguments) as $result) {
-            $this->assertSame($expected, $result);
-        }
-    }
-
-    /**
-     * @dataProvider getInvokerData
-     */
-    public function testInvoker($expected, $arity, $method, array $initialArguments, ... $arguments)
-    {
-        $main0 = Phamda::invoker($arity, $method, ...$initialArguments);
-        $this->assertSame($expected, $main0(...$arguments));
-    }
+    use BasicProvidersTrait;
 
     /**
      * @dataProvider getPartialData
      */
     public function testPartial($expected, callable $function, array $initialArguments, ... $arguments)
     {
-        $partial = Phamda::partial($function, ...$initialArguments);
-
-        foreach ($this->getCurriedResults($partial, ...$arguments) as $result) {
-            $this->assertSame($expected, $result);
-        }
+        $partial = Phamda::partial($function, ...array_merge($initialArguments, $arguments));
+        $this->assertSame($expected, $partial(), 'partial returns a function even if all arguments have been given.');
     }
 
     /**
@@ -71,11 +31,8 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartialN($expected, $arity, callable $function, array $initialArguments, ... $arguments)
     {
-        $partial = Phamda::partialN($arity, $function, ...$initialArguments);
-
-        foreach ($this->getCurriedResults($partial, ...$arguments) as $result) {
-            $this->assertSame($expected, $result);
-        }
+        $partial = Phamda::partialN($arity, $function, ...array_merge($initialArguments, $arguments));
+        $this->assertSame($expected, $partial(), 'partialN returns a function even if all arguments have been given.');
     }
 
     /**
