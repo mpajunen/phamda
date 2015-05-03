@@ -1,7 +1,7 @@
 Examples
 ========
 
-Here are a few examples highlighting the major features of Phamda. Basic usage examples can also be found on the
+These examples highlight the major features of Phamda. Basic usage examples can also be found on the
 :doc:`function list</functions>`.
 
 
