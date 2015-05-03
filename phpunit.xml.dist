@@ -17,6 +17,9 @@
     <filter>
         <whitelist>
             <directory>./src/</directory>
+            <exclude>
+                <directory>./src/Builder/</directory>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>
