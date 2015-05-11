@@ -13,10 +13,11 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda;
 use Phamda\Tests\Fixtures\Counter;
+use Phamda\Tests\Fixtures\Test1;
 
 class ObjectTest extends \PHPUnit_Framework_TestCase
 {
-    use BasicProvidersTrait;
+    use BasicProvidersTrait, CurryTestTrait;
 
     /**
      * @dataProvider getAssocData
@@ -50,6 +51,41 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(\stdClass::class, $object);
     }
 
+    public function testClone()
+    {
+        $original = new Test1();
+        $clone    = Phamda::clone_($original);
+
+        $this->assertNotSame($original, $clone);
+        $this->assertSame(Test1::class, get_class($clone));
+
+        $curried  = Phamda::clone_();
+        $newClone = $curried($original);
+
+        $this->assertNotSame($original, $newClone);
+        $this->assertSame(Test1::class, get_class($newClone));
+    }
+
+    /**
+     * @dataProvider getConstructData
+     */
+    public function testConstruct($expected, $class, ...$arguments)
+    {
+        foreach ($this->getCurriedResults(Phamda::construct($class), ...$arguments) as $result) {
+            $this->checkConstructResult($expected, $class, $result);
+        }
+    }
+
+    /**
+     * @dataProvider getConstructNData
+     */
+    public function testConstructN($expected, $arity, $class, ...$arguments)
+    {
+        foreach ($this->getCurriedResults(Phamda::constructN($arity, $class), ...$arguments) as $result) {
+            $this->checkConstructResult($expected, $class, $result);
+        }
+    }
+
     /**
      * @dataProvider getEvolveData
      */
@@ -74,5 +110,11 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $addTap($counter);
         $addTap($counter);
         $this->assertSame(15, $counter->value);
+    }
+
+    private function checkConstructResult($expectedString, $expectedClass, $result)
+    {
+        $this->assertInstanceOf($expectedClass, $result);
+        $this->assertSame($expectedString, (string) $result);
     }
 }
