@@ -11,6 +11,9 @@
 
 namespace Phamda\Tests;
 
+/**
+ * A helper for testing curried functions.
+ */
 trait CurryTestTrait
 {
     public function getCurriedResults(callable $function, ...$arguments)

@@ -14,6 +14,9 @@ namespace Phamda\Tests;
 use Phamda\Tests\Fixtures\ArrayCollection;
 use Phamda\Tests\Fixtures\ArrayContainer;
 
+/**
+ * Helper for testing functions with object collections.
+ */
 trait CollectionTestTrait
 {
     /**

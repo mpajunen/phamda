@@ -13,6 +13,9 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda as P;
 
+/**
+ * Tests for the highlighted examples in the readme file and documentation.
+ */
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {
     public function testCurriedExample()

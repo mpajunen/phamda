@@ -19,6 +19,9 @@ use Phamda\Tests\Fixtures\Counter;
 use Phamda\Tests\Fixtures\Test1;
 use Phamda\Tests\Fixtures\Test2;
 
+/**
+ * Data providers for testing basic functionality.
+ */
 trait BasicProvidersTrait
 {
     public function get_Data()

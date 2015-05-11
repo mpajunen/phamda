@@ -13,6 +13,14 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda;
 
+/**
+ * Tests for function list doc examples.
+ *
+ * These tests are used to generate function doc comments and documentation. If a function is not tested here,
+ * tests cases from the `BasicTest` class are used instead.
+ *
+ * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
+ */
 class FunctionExampleTest extends \PHPUnit_Framework_TestCase
 {
     public function test_()

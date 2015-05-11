@@ -15,6 +15,9 @@ use Phamda\Phamda;
 use Phamda\Tests\Fixtures\Counter;
 use Phamda\Tests\Fixtures\Test1;
 
+/**
+ * Basic tests for functions with object return values.
+ */
 class ObjectTest extends \PHPUnit_Framework_TestCase
 {
     use BasicProvidersTrait, CurryTestTrait;

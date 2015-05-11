@@ -13,6 +13,9 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda;
 
+/**
+ * Test placeholder argument support.
+ */
 class PlaceholderTest extends \PHPUnit_Framework_TestCase
 {
     use BasicProvidersTrait;

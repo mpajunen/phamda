@@ -15,6 +15,13 @@ use Phamda\Phamda;
 use Phamda\Tests\Fixtures\ArrayCollection;
 use Phamda\Tests\Fixtures\ArrayContainer;
 
+/**
+ * Test cases for basic functionality with collection objects.
+ *
+ * This class is automatically generated using the `\Phamda\Builder\InnerFunctions` class.
+ *
+ * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
+ */
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     use BasicProvidersTrait, CollectionTestTrait;

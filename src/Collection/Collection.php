@@ -14,6 +14,10 @@ namespace Phamda\Collection;
 /**
  * Collection interface includes the collection object methods directly supported in Phamda.
  *
+ * The collection object does not need to implement this interface to be used with Phamda functions. To use a
+ * collection object with a function, it simply needs to implement the matching method. The existence of the collection
+ * method is checked with a `method_exists` call.
+ *
  * Mostly based on \Doctrine\Common\Collections\Collection
  *
  * @internal This interface is only intended for type hints and tests.

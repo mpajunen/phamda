@@ -14,6 +14,13 @@ namespace Phamda;
 use Phamda\Collection\Collection;
 use Phamda\Exception\InvalidFunctionCompositionException;
 
+/**
+ * The main API class of Phamda.
+ *
+ * This class is automatically generated using the `\Phamda\Builder\InnerFunctions` class.
+ *
+ * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
+ */
 class Phamda
 {
     use CoreFunctionsTrait;

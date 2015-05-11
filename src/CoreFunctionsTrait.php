@@ -13,6 +13,9 @@ namespace Phamda;
 
 use Phamda\Collection\Collection;
 
+/**
+ * Internal and helper functions for the public functions.
+ */
 trait CoreFunctionsTrait
 {
     private static $placeholder;

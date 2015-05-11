@@ -13,6 +13,9 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda;
 
+/**
+ * Test partial application edge cases.
+ */
 class PartialTest extends \PHPUnit_Framework_TestCase
 {
     use BasicProvidersTrait;

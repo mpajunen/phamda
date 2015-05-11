@@ -13,6 +13,9 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda;
 
+/**
+ * Test composition function edge cases.
+ */
 class ComposeTest extends \PHPUnit_Framework_TestCase
 {
     /**

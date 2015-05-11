@@ -13,6 +13,13 @@ namespace Phamda\Tests;
 
 use Phamda\Phamda;
 
+/**
+ * Test cases for basic functionality and currying.
+ *
+ * This class is automatically generated using the `\Phamda\Builder\InnerFunctions` class.
+ *
+ * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
+ */
 class BasicTest extends \PHPUnit_Framework_TestCase
 {
     use BasicProvidersTrait, CurryTestTrait;

@@ -11,6 +11,11 @@
 
 namespace Phamda;
 
+/**
+ * A unique placeholder class to be used with curried functions.
+ *
+ * A singleton instance can be created with the `_` function in the main class `Phamda`.
+ */
 class Placeholder
 {
 }

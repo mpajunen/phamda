@@ -17,6 +17,18 @@ use Phamda\Exception\InvalidFunctionCompositionException;
 use Phamda\Phamda;
 use Phamda\Placeholder;
 
+/**
+ * Inner function templates for the main functions.
+ *
+ * The functions and comments in this class are used to generate code, tests and documentation:
+ * - The functions in the main class `Phamda` are typically curried versions of these functions.
+ * - Basic test cases for the main functions are based on the structure of these template functions.
+ * - The function list in the documentation is based on these functions.
+ *
+ * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
+ *
+ * @internal Not intended to be used directly, only used for code generation.
+ */
 class InnerFunctions
 {
     use CoreFunctionsTrait;
