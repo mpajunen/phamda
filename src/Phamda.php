@@ -626,7 +626,7 @@ class Phamda
     /**
      * Calls the given function for each element in the collection and returns the original collection.
      *
-     * The supplied `function` receives one argument: `item`.
+     * The supplied `function` receives three arguments: `item`, `index`, `collection`.
      *
      * ```php
      * $date = new \DateTime('2015-02-02');
@@ -800,7 +800,7 @@ class Phamda
     /**
      * Returns a new collection containing the items that match the given predicate.
      *
-     * The supplied `predicate` receives one argument: `item`.
+     * The supplied `predicate` receives three arguments: `item`, `index`, `collection`.
      *
      * ```php
      * $gt2 = function ($x) { return $x > 2; };
@@ -837,7 +837,7 @@ class Phamda
     public static function filterIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
-            return static::_filterIndexed($predicate, $collection);
+            return static::_filter($predicate, $collection);
         }, func_get_args());
     }
 
@@ -978,7 +978,7 @@ class Phamda
      * Returns a list containing the flattened items created by applying the `function` to each item of the `list`.
      *
      * ```php
-     * Phamda::flatMap('str_split', ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
+     * Phamda::flatMap(Phamda::unary('str_split'), ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
      * ```
      *
      * @param callable $function
@@ -1074,7 +1074,7 @@ class Phamda
                 return $collection->groupBy($function);
             }
 
-            return static::_reduceIndexed(function (array $collections, $item, $key) use ($function) {
+            return static::_reduce(function (array $collections, $item, $key) use ($function) {
                 $collections[$function($item)][$key] = $item;
 
                 return $collections;
@@ -1387,7 +1387,7 @@ class Phamda
     /**
      * Returns a new collection where values are created from the original collection by calling the supplied function.
      *
-     * The supplied `function` receives one argument: `item`.
+     * The supplied `function` receives three arguments: `item`, `index`, `collection`.
      *
      * ```php
      * $square = function ($x) { return $x ** 2; };
@@ -1424,7 +1424,7 @@ class Phamda
     public static function mapIndexed($function = null, $collection = null)
     {
         return static::curry2(function (callable $function, $collection) {
-            return static::_mapIndexed($function, $collection);
+            return static::_map($function, $collection);
         }, func_get_args());
     }
 
@@ -1732,7 +1732,7 @@ class Phamda
                 return $collection->partition($predicate);
             }
 
-            return static::_reduceIndexed(function (array $collections, $item, $key) use ($predicate) {
+            return static::_reduce(function (array $collections, $item, $key) use ($predicate) {
                 $collections[$predicate($item) ? 0 : 1][$key] = $item;
 
                 return $collections;
@@ -1991,7 +1991,7 @@ class Phamda
     /**
      * Returns a value accumulated by calling the given function for each element of the collection.
      *
-     * The supplied `function` receives two arguments: `previousValue`, `item`.
+     * The supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
      *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
@@ -2030,14 +2030,14 @@ class Phamda
     public static function reduceIndexed($function = null, $initial = null, $collection = null)
     {
         return static::curry3(function (callable $function, $initial, $collection) {
-            return static::_reduceIndexed($function, $initial, $collection);
+            return static::_reduce($function, $initial, $collection);
         }, func_get_args());
     }
 
     /**
      * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
      *
-     * The supplied `function` receives two arguments: `previousValue`, `item`.
+     * The supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
      *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
@@ -2076,14 +2076,14 @@ class Phamda
     public static function reduceRightIndexed($function = null, $initial = null, $collection = null)
     {
         return static::curry3(function (callable $function, $initial, $collection) {
-            return static::_reduceIndexed($function, $initial, static::_reverse($collection));
+            return static::_reduce($function, $initial, static::_reverse($collection));
         }, func_get_args());
     }
 
     /**
      * Returns a new collection containing the items that do not match the given predicate.
      *
-     * The supplied `predicate` receives one argument: `item`.
+     * The supplied `predicate` receives three arguments: `item`, `index`, `collection`.
      *
      * ```php
      * $isEven = function ($x) { return $x % 2 === 0; };
@@ -2120,7 +2120,7 @@ class Phamda
     public static function rejectIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
-            return static::_filterIndexed(Phamda::not($predicate), $collection);
+            return static::_filter(Phamda::not($predicate), $collection);
         }, func_get_args());
     }
 
