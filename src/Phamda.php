@@ -29,7 +29,7 @@ class Phamda
      * Returns a placeholder to be used with curried functions.
      *
      * ```php
-     * $sub10 = Phamda::subtract(Phamda::_(), 10);
+     * $sub10 = P::subtract(P::_(), 10);
      * $sub10(52); // => 42
      * ```
      *
@@ -65,8 +65,8 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::all($isPositive, [1, 2, 0, -5]); // => false
-     * Phamda::all($isPositive, [1, 2, 1, 11]); // => true
+     * P::all($isPositive, [1, 2, 0, -5]); // => false
+     * P::all($isPositive, [1, 2, 1, 11]); // => true
      * ```
      *
      * @param callable           $predicate
@@ -93,7 +93,7 @@ class Phamda
      * ```php
      * $isEven = function ($x) { return $x % 2 === 0; };
      * $isPositive = function ($x) { return $x > 0; };
-     * $isEvenAndPositive = Phamda::allPass([$isEven, $isPositive]);
+     * $isEvenAndPositive = P::allPass([$isEven, $isPositive]);
      * $isEvenAndPositive(5); // => false
      * $isEvenAndPositive(-4); // => false
      * $isEvenAndPositive(6); // => true
@@ -122,7 +122,7 @@ class Phamda
      * Returns a function that always returns the passed value.
      *
      * ```php
-     * $alwaysFoo = Phamda::always('foo');
+     * $alwaysFoo = P::always('foo');
      * $alwaysFoo(); // => 'foo'
      * ```
      *
@@ -144,8 +144,8 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::any($isPositive, [1, 2, 0, -5]); // => true
-     * Phamda::any($isPositive, [-3, -7, -1, -5]); // => false
+     * P::any($isPositive, [1, 2, 0, -5]); // => true
+     * P::any($isPositive, [-3, -7, -1, -5]); // => false
      * ```
      *
      * @param callable           $predicate
@@ -172,7 +172,7 @@ class Phamda
      * ```php
      * $isEven = function ($x) { return $x % 2 === 0; };
      * $isPositive = function ($x) { return $x > 0; };
-     * $isEvenOrPositive = Phamda::anyPass([$isEven, $isPositive]);
+     * $isEvenOrPositive = P::anyPass([$isEven, $isPositive]);
      * $isEvenOrPositive(5); // => true
      * $isEvenOrPositive(-4); // => true
      * $isEvenOrPositive(-3); // => false
@@ -238,7 +238,7 @@ class Phamda
      *
      * ```php
      * $concat3 = function ($a, $b, $c) { return $a . $b . $c; };
-     * Phamda::apply($concat3, ['foo', 'ba', 'rba']); // => 'foobarba'
+     * P::apply($concat3, ['foo', 'ba', 'rba']); // => 'foobarba'
      * ```
      *
      * @param callable $function
@@ -301,7 +301,7 @@ class Phamda
      *
      * ```php
      * $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
-     * $add2 = Phamda::binary($add3);
+     * $add2 = P::binary($add3);
      * $add2(27, 15, 33); // => 42
      * ```
      *
@@ -324,7 +324,7 @@ class Phamda
      * ```php
      * $lt = function ($x, $y) { return $x < $y; };
      * $arePositive = function ($x, $y) { return $x > 0 && $y > 0; };
-     * $test = Phamda::both($lt, $arePositive);
+     * $test = P::both($lt, $arePositive);
      * $test(9, 4); // => false
      * $test(-3, 11); // => false
      * $test(5, 17); // => true
@@ -386,7 +386,7 @@ class Phamda
      *
      * ```php
      * $lt = function ($x, $y) { return $x < $y; };
-     * $compare = Phamda::comparator($lt);
+     * $compare = P::comparator($lt);
      * $compare(5, 6); // => -1
      * $compare(6, 5); // => 1
      * $compare(5, 5); // => 0
@@ -411,11 +411,11 @@ class Phamda
      * ```php
      * $add5 = function ($x) { return $x + 5; };
      * $square = function ($x) { return $x ** 2; };
-     * $addToSquared = Phamda::compose($add5, $square);
+     * $addToSquared = P::compose($add5, $square);
      * $addToSquared(4); // => 21
      * $hello = function ($target) { return 'Hello ' . $target; };
-     * $helloUpper = Phamda::compose($hello, 'strtoupper');
-     * $upperHello = Phamda::compose('strtoupper', $hello);
+     * $helloUpper = P::compose($hello, 'strtoupper');
+     * $upperHello = P::compose('strtoupper', $hello);
      * $helloUpper('world'); // => 'Hello WORLD'
      * $upperHello('world'); // => 'HELLO WORLD'
      * ```
@@ -453,7 +453,7 @@ class Phamda
      * Wraps the constructor of the given class to a function.
      *
      * ```php
-     * $date = Phamda::construct(\DateTime::class, '2015-03-15');
+     * $date = P::construct(\DateTime::class, '2015-03-15');
      * $date->format('Y-m-d'); // => '2015-03-15'
      * ```
      *
@@ -473,7 +473,7 @@ class Phamda
      * Wraps the constructor of the given class to a function of specified arity.
      *
      * ```php
-     * $construct = Phamda::constructN(1, \DateTime::class);
+     * $construct = P::constructN(1, \DateTime::class);
      * $construct('2015-03-15')->format('Y-m-d'); // => '2015-03-15'
      * ```
      *
@@ -523,7 +523,7 @@ class Phamda
      *
      * ```php
      * $add = function ($x, $y, $z) { return $x + $y + $z; };
-     * $addHundred = Phamda::curry($add, 100);
+     * $addHundred = P::curry($add, 100);
      * $addHundred(20, 3); // => 123
      * ```
      *
@@ -544,7 +544,7 @@ class Phamda
      *
      * ```php
      * $add = function ($x, $y, $z = 0) { return $x + $y + $z; };
-     * $addTen = Phamda::curryN(3, $add, 10);
+     * $addTen = P::curryN(3, $add, 10);
      * $addTen(10, 3); // => 23
      * $addTwenty = $addTen(10);
      * $addTwenty(5); // => 25
@@ -631,7 +631,7 @@ class Phamda
      * ```php
      * $date = new \DateTime('2015-02-02');
      * $addDays = function ($number) use ($date) { $date->modify("+{$number} days"); };
-     * Phamda::each($addDays, [3, 6, 2]);
+     * P::each($addDays, [3, 6, 2]);
      * $date->format('Y-m-d'); // => '2015-02-13'
      * ```
      *
@@ -659,7 +659,7 @@ class Phamda
      * ```php
      * $date = new \DateTime('2015-02-02');
      * $addCalendar = function ($number, $type) use ($date) { $date->modify("+{$number} {$type}"); };
-     * Phamda::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
+     * P::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
      * $date->format('Y-m-d'); // => '2015-06-15'
      * ```
      *
@@ -687,7 +687,7 @@ class Phamda
      * ```php
      * $lt = function ($x, $y) { return $x < $y; };
      * $arePositive = function ($x, $y) { return $x > 0 && $y > 0; };
-     * $test = Phamda::either($lt, $arePositive);
+     * $test = P::either($lt, $arePositive);
      * $test(-5, -16); // => false
      * $test(-3, 11); // => true
      * $test(17, 3); // => true
@@ -733,7 +733,7 @@ class Phamda
      *
      * ```php
      * $object = ['foo' => 'bar', 'fiz' => 'buz'];
-     * Phamda::evolve(['foo' => 'strtoupper'], $object); // => ['foo' => 'BAR', 'fiz' => 'buz']
+     * P::evolve(['foo' => 'strtoupper'], $object); // => ['foo' => 'BAR', 'fiz' => 'buz']
      * ```
      *
      * @param callable[]                $transformations
@@ -786,7 +786,7 @@ class Phamda
      * Returns a function that always returns `false`.
      *
      * ```php
-     * $false = Phamda::false();
+     * $false = P::false();
      * $false(); // => false
      * ```
      *
@@ -806,7 +806,7 @@ class Phamda
      *
      * ```php
      * $gt2 = function ($x) { return $x > 2; };
-     * Phamda::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
+     * P::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
      * ```
      *
      * @param callable                      $predicate
@@ -828,7 +828,7 @@ class Phamda
      *
      * ```php
      * $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-     * Phamda::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
+     * P::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
      * ```
      *
      * @param callable                      $predicate
@@ -850,7 +850,7 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
+     * P::find($isPositive, [-5, 0, 15, 33, -2]); // => 15
      * ```
      *
      * @param callable           $predicate
@@ -876,7 +876,7 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
+     * P::findIndex($isPositive, [-5, 0, 15, 33, -2]); // => 2
      * ```
      *
      * @param callable           $predicate
@@ -902,7 +902,7 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
+     * P::findLast($isPositive, [-5, 0, 15, 33, -2]); // => 33
      * ```
      *
      * @param callable           $predicate
@@ -928,7 +928,7 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::findLastIndex($isPositive, [-5, 0, 15, 33, -2]); // => 3
+     * P::findLastIndex($isPositive, [-5, 0, 15, 33, -2]); // => 3
      * ```
      *
      * @param callable           $predicate
@@ -982,7 +982,7 @@ class Phamda
      * Returns a list containing the flattened items created by applying the `function` to each item of the `list`.
      *
      * ```php
-     * Phamda::flatMap(Phamda::unary('str_split'), ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
+     * P::flatMap(P::unary('str_split'), ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
      * ```
      *
      * @param callable $function
@@ -1040,7 +1040,7 @@ class Phamda
      *
      * ```php
      * $sub = function ($x, $y) { return $x - $y; };
-     * $flippedSub = Phamda::flip($sub);
+     * $flippedSub = P::flip($sub);
      * $flippedSub(20, 30); // => 10
      * ```
      *
@@ -1063,7 +1063,7 @@ class Phamda
      * ```php
      * $firstChar = function ($string) { return $string[0]; };
      * $collection = ['abc', 'cbc', 'cab', 'baa', 'ayb'];
-     * Phamda::groupBy($firstChar, $collection); // => ['a' => [0 => 'abc', 4 => 'ayb'], 'c' => [1 => 'cbc', 2 => 'cab'], 'b' => [3 => 'baa']]
+     * P::groupBy($firstChar, $collection); // => ['a' => [0 => 'abc', 4 => 'ayb'], 'c' => [1 => 'cbc', 2 => 'cab'], 'b' => [3 => 'baa']]
      * ```
      *
      * @param callable                      $function
@@ -1152,7 +1152,7 @@ class Phamda
      * Returns a function that applies either the `onTrue` or the `onFalse` function, depending on the result of the `condition` predicate.
      *
      * ```php
-     * $addOrSub = Phamda::ifElse(Phamda::lt(0), Phamda::add(-10), Phamda::add(10));
+     * $addOrSub = P::ifElse(P::lt(0), P::add(-10), P::add(10));
      * $addOrSub(25); // => 15
      * $addOrSub(-3); // => 7
      * ```
@@ -1242,7 +1242,7 @@ class Phamda
      * Returns a function that calls the specified method of a given object.
      *
      * ```php
-     * $addDay = Phamda::invoker(1, 'add', new \DateInterval('P1D'));
+     * $addDay = P::invoker(1, 'add', new \DateInterval('P1D'));
      * $addDay(new \DateTime('2015-03-15'))->format('Y-m-d'); // => '2015-03-16'
      * $addDay(new \DateTime('2015-03-12'))->format('Y-m-d'); // => '2015-03-13'
      * ```
@@ -1300,7 +1300,7 @@ class Phamda
      * Return `true` if an object is of the specified class, `false` otherwise.
      *
      * ```php
-     * $isDate = Phamda::isInstance(\DateTime::class);
+     * $isDate = P::isInstance(\DateTime::class);
      * $isDate(new \DateTime()); // => true
      * $isDate(new \DateTimeImmutable()); // => false
      * ```
@@ -1395,7 +1395,7 @@ class Phamda
      *
      * ```php
      * $square = function ($x) { return $x ** 2; };
-     * Phamda::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
+     * P::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
      * ```
      *
      * @param callable                      $function
@@ -1417,7 +1417,7 @@ class Phamda
      *
      * ```php
      * $keyExp = function ($value, $key) { return $value ** $key; };
-     * Phamda::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
+     * P::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
      * ```
      *
      * @param callable                      $function
@@ -1461,7 +1461,7 @@ class Phamda
      * $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
      * $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
      * $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
-     * Phamda::maxBy($getFoo, [$a, $b, $c]); // => $b
+     * P::maxBy($getFoo, [$a, $b, $c]); // => $b
      * ```
      *
      * @param callable           $getValue
@@ -1527,7 +1527,7 @@ class Phamda
      * $a = (object) ['baz' => 3, 'bar' => 16, 'foo' => 5];
      * $b = (object) ['baz' => 1, 'bar' => 25, 'foo' => 8];
      * $c = (object) ['baz' => 14, 'bar' => 20, 'foo' => -2];
-     * Phamda::minBy($getFoo, [$a, $b, $c]); // => $c
+     * P::minBy($getFoo, [$a, $b, $c]); // => $c
      * ```
      *
      * @param callable           $getValue
@@ -1588,9 +1588,9 @@ class Phamda
      *
      * ```php
      * $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
-     * $add2 = Phamda::nAry(2, $add3);
+     * $add2 = P::nAry(2, $add3);
      * $add2(27, 15, 33); // => 42
-     * $add1 = Phamda::nAry(1, $add3);
+     * $add1 = P::nAry(1, $add3);
      * $add1(27, 15, 33); // => 27
      * ```
      *
@@ -1633,8 +1633,8 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::none($isPositive, [1, 2, 0, -5]); // => false
-     * Phamda::none($isPositive, [-3, -7, -1, -5]); // => true
+     * P::none($isPositive, [1, 2, 0, -5]); // => false
+     * P::none($isPositive, [-3, -7, -1, -5]); // => true
      * ```
      *
      * @param callable           $predicate
@@ -1654,7 +1654,7 @@ class Phamda
      *
      * ```php
      * $equal = function ($a, $b) { return $a === $b; };
-     * $notEqual = Phamda::not($equal);
+     * $notEqual = P::not($equal);
      * $notEqual(15, 13); // => true
      * $notEqual(7, 7); // => false
      * ```
@@ -1677,9 +1677,9 @@ class Phamda
      *
      * ```php
      * $add = function ($x, $y, $z) { return $x + $y + $z; };
-     * $addTen = Phamda::partial($add, 10);
+     * $addTen = P::partial($add, 10);
      * $addTen(3, 4); // => 17
-     * $addTwenty = Phamda::partial($add, 2, 3, 15);
+     * $addTwenty = P::partial($add, 2, 3, 15);
      * $addTwenty(); // => 20
      * ```
      *
@@ -1700,7 +1700,7 @@ class Phamda
      *
      * ```php
      * $add = function ($x, $y, $z = 0) { return $x + $y + $z; };
-     * $addTen = Phamda::partialN(3, $add, 10);
+     * $addTen = P::partialN(3, $add, 10);
      * $addTwenty = $addTen(10);
      * $addTwenty(5); // => 25
      * ```
@@ -1723,7 +1723,7 @@ class Phamda
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
-     * Phamda::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[0 => 4, 2 => 7, 4 => 2, 5 => 88], [1 => -16, 3 => -3]]
+     * P::partition($isPositive, [4, -16, 7, -3, 2, 88]); // => [[0 => 4, 2 => 7, 4 => 2, 5 => 88], [1 => -16, 3 => -3]]
      * ```
      *
      * @param callable                      $predicate
@@ -1851,11 +1851,11 @@ class Phamda
      * ```php
      * $add5 = function ($x) { return $x + 5; };
      * $square = function ($x) { return $x ** 2; };
-     * $squareAdded = Phamda::pipe($add5, $square);
+     * $squareAdded = P::pipe($add5, $square);
      * $squareAdded(4); // => 81
      * $hello = function ($target) { return 'Hello ' . $target; };
-     * $helloUpper = Phamda::pipe('strtoupper', $hello);
-     * $upperHello = Phamda::pipe($hello, 'strtoupper');
+     * $helloUpper = P::pipe('strtoupper', $hello);
+     * $upperHello = P::pipe($hello, 'strtoupper');
      * $helloUpper('world'); // => 'Hello WORLD'
      * $upperHello('world'); // => 'HELLO WORLD'
      * ```
@@ -2001,7 +2001,7 @@ class Phamda
      *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
-     * Phamda::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
+     * P::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
      * ```
      *
      * @param callable           $function
@@ -2024,7 +2024,7 @@ class Phamda
      *
      * ```php
      * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-     * Phamda::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
+     * P::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
      * ```
      *
      * @param callable           $function
@@ -2049,7 +2049,7 @@ class Phamda
      *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
-     * Phamda::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
+     * P::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
      * ```
      *
      * @param callable           $function
@@ -2072,7 +2072,7 @@ class Phamda
      *
      * ```php
      * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-     * Phamda::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
+     * P::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
      * ```
      *
      * @param callable           $function
@@ -2097,7 +2097,7 @@ class Phamda
      *
      * ```php
      * $isEven = function ($x) { return $x % 2 === 0; };
-     * Phamda::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
+     * P::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
      * ```
      *
      * @param callable                      $predicate
@@ -2119,7 +2119,7 @@ class Phamda
      *
      * ```php
      * $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-     * Phamda::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
+     * P::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
      * ```
      *
      * @param callable                      $predicate
@@ -2183,7 +2183,7 @@ class Phamda
      *
      * ```php
      * $sub = function ($a, $b) { return $a - $b; };
-     * Phamda::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
+     * P::sort($sub, [3, 2, 4, 1]); // => [1, 2, 3, 4]
      * ```
      *
      * @param callable                      $comparator
@@ -2204,7 +2204,7 @@ class Phamda
      * ```php
      * $getFoo = function ($a) { return $a['foo']; };
      * $collection = [['foo' => 16, 'bar' => 3], ['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7]];
-     * Phamda::sortBy($getFoo, $collection); // => [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]]
+     * P::sortBy($getFoo, $collection); // => [['foo' => 5, 'bar' => 42], ['foo' => 11, 'bar' => 7], ['foo' => 16, 'bar' => 3]]
      * ```
      *
      * @param callable                      $function
@@ -2395,7 +2395,7 @@ class Phamda
      * ```php
      * $addDay = function (\DateTime $date) { $date->add(new \DateInterval('P1D')); };
      * $date = new \DateTime('2015-03-15');
-     * Phamda::tap($addDay, $date); // => $date
+     * P::tap($addDay, $date); // => $date
      * $date->format('Y-m-d'); // => '2015-03-16'
      * ```
      *
@@ -2418,7 +2418,7 @@ class Phamda
      *
      * ```php
      * $double = function ($number) { return $number * 2; };
-     * Phamda::times($double, 5); // => [0, 2, 4, 6, 8]
+     * P::times($double, 5); // => [0, 2, 4, 6, 8]
      * ```
      *
      * @param callable $function
@@ -2437,7 +2437,7 @@ class Phamda
      * Returns a function that always returns `true`.
      *
      * ```php
-     * $true = Phamda::true();
+     * $true = P::true();
      * $true(); // => true
      * ```
      *
@@ -2455,7 +2455,7 @@ class Phamda
      *
      * ```php
      * $add2 = function ($a = 0, $b = 0) { return $a + $b; };
-     * $add1 = Phamda::nAry(1, $add2);
+     * $add1 = P::nAry(1, $add2);
      * $add1(27, 15); // => 27
      * ```
      *
@@ -2479,7 +2479,7 @@ class Phamda
      *
      * ```php
      * $concat = function (array $strings) { return implode(' ', $strings); };
-     * Phamda::unapply($concat, 'foo', 'ba', 'rba'); // => 'foo ba rba'
+     * P::unapply($concat, 'foo', 'ba', 'rba'); // => 'foo ba rba'
      * ```
      *
      * @param callable $function
@@ -2551,7 +2551,7 @@ class Phamda
      *
      * ```php
      * $sum = function ($x, $y) { return $x + $y; };
-     * Phamda::zipWith($sum, [1, 2, 3], [5, 6]); // => [6, 8]
+     * P::zipWith($sum, [1, 2, 3], [5, 6]); // => [6, 8]
      * ```
      *
      * @param callable $function

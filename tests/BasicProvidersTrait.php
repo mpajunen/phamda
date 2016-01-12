@@ -11,7 +11,7 @@
 
 namespace Phamda\Tests;
 
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 use Phamda\Tests\Fixtures\Adder;
 use Phamda\Tests\Fixtures\Calculator;
 use Phamda\Tests\Fixtures\ConstructableConcat;
@@ -27,7 +27,7 @@ trait BasicProvidersTrait
     public function get_Data()
     {
         return [
-            [Phamda::_()],
+            [P::_()],
         ];
     }
 
@@ -173,9 +173,9 @@ trait BasicProvidersTrait
     public function getComparatorData()
     {
         return [
-            [-1, Phamda::lt(), 1, 2],
-            [0, Phamda::lt(), 1, 1],
-            [1, Phamda::lt(), 2, 1],
+            [-1, P::lt(), 1, 2],
+            [0, P::lt(), 1, 1],
+            [1, P::lt(), 2, 1],
         ];
     }
 
@@ -235,9 +235,9 @@ trait BasicProvidersTrait
         return [
             [1234, $sum, 1000, 200, 30, 4],
             [1234, $sum, 1000, 200, 30, 4, 5],
-            [true, Phamda::eq(), 5, 5],
-            [false, Phamda::eq(), 5, 7],
-            [true, [Phamda::class, 'eq'], 5, 5],
+            [true, P::eq(), 5, 5],
+            [false, P::eq(), 5, 7],
+            [true, [P::class, 'eq'], 5, 5],
             [42, new Adder(), 23, 19],
         ];
     }
@@ -249,9 +249,9 @@ trait BasicProvidersTrait
         return [
             [1234, 4, $sum, 1000, 200, 30, 4],
             [1234, 4, $sum, 1000, 200, 30, 4, 5],
-            [true, 2, Phamda::eq(), 5, 5],
-            [false, 2, Phamda::eq(), 5, 7],
-            [true, 2, [Phamda::class, 'eq'], 5, 5],
+            [true, 2, P::eq(), 5, 5],
+            [false, 2, P::eq(), 5, 7],
+            [true, 2, [P::class, 'eq'], 5, 5],
             [42, 2, new Adder(), 23, 19],
         ];
     }
@@ -510,8 +510,8 @@ trait BasicProvidersTrait
     public function getIfElseData()
     {
         return [
-            [42, Phamda::lt(0), Phamda::add(27), Phamda::add(3), 15],
-            [0, Phamda::lt(0), Phamda::add(27), Phamda::add(3), -3],
+            [42, P::lt(0), P::add(27), P::add(3), 15],
+            [0, P::lt(0), P::add(27), P::add(3), -3],
         ];
     }
 
@@ -774,7 +774,7 @@ trait BasicProvidersTrait
 
         return [
             [[[1 => 16, 2 => 7, 5 => 88], [0 => 4, 3 => -3, 4 => 2]], $largerThanFive, [4, 16, 7, -3, 2, 88]],
-            [[[0 => 4, 3 => -3, 4 => 2], [1 => 16, 2 => 7, 5 => 88]], Phamda::not($largerThanFive), [4, 16, 7, -3, 2, 88]],
+            [[[0 => 4, 3 => -3, 4 => 2], [1 => 16, 2 => 7, 5 => 88]], P::not($largerThanFive), [4, 16, 7, -3, 2, 88]],
         ];
     }
 
@@ -1091,7 +1091,7 @@ trait BasicProvidersTrait
         $double = function ($number) { return $number * 2; };
 
         return [
-            [[0, 1, 2, 3, 4], Phamda::identity(), 5],
+            [[0, 1, 2, 3, 4], P::identity(), 5],
             [[0, 2, 4, 6, 8], $double, 5],
         ];
     }

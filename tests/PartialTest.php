@@ -11,7 +11,7 @@
 
 namespace Phamda\Tests;
 
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 
 /**
  * Test partial application edge cases.
@@ -25,7 +25,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartial($expected, callable $function, array $initialArguments, ... $arguments)
     {
-        $partial = Phamda::partial($function, ...array_merge($initialArguments, $arguments));
+        $partial = P::partial($function, ...array_merge($initialArguments, $arguments));
         $this->assertSame($expected, $partial(), 'partial returns a function even if all arguments have been given.');
     }
 
@@ -34,7 +34,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartialN($expected, $arity, callable $function, array $initialArguments, ... $arguments)
     {
-        $partial = Phamda::partialN($arity, $function, ...array_merge($initialArguments, $arguments));
+        $partial = P::partialN($arity, $function, ...array_merge($initialArguments, $arguments));
         $this->assertSame($expected, $partial(), 'partialN returns a function even if all arguments have been given.');
     }
 
@@ -43,7 +43,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testReduceRecurry($expected, callable $function, $initial, array $collection)
     {
-        $curried0 = Phamda::reduce();
+        $curried0 = P::reduce();
         $this->assertInstanceOf('\Closure', $curried0);
         $curried1 = $curried0($function);
         $this->assertInstanceOf('\Closure', $curried1);
@@ -55,7 +55,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
 
     public function testRecurryN()
     {
-        $curried = Phamda::curryN(5, function ($a, $b, $c, $d, $e) {
+        $curried = P::curryN(5, function ($a, $b, $c, $d, $e) {
             return $a + $b + $c + $d + $e;
         });
 

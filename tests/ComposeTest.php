@@ -11,7 +11,7 @@
 
 namespace Phamda\Tests;
 
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 
 /**
  * Test composition function edge cases.
@@ -24,7 +24,7 @@ class ComposeTest extends \PHPUnit_Framework_TestCase
      */
     public function testComposeThrowsWithTooFewParameters(... $functions)
     {
-        Phamda::compose(... $functions);
+        P::compose(... $functions);
     }
 
     /**
@@ -33,7 +33,7 @@ class ComposeTest extends \PHPUnit_Framework_TestCase
      */
     public function testPipeThrowsWithTooFewParameters(... $functions)
     {
-        Phamda::pipe(... $functions);
+        P::pipe(... $functions);
     }
 
     public function getTooFewParametersData()

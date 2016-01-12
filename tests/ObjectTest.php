@@ -11,7 +11,7 @@
 
 namespace Phamda\Tests;
 
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 use Phamda\Tests\Fixtures\Counter;
 use Phamda\Tests\Fixtures\Test1;
 
@@ -28,7 +28,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testAssoc($expected, $property, $value, $object)
     {
         $realObject = (object) $object;
-        $result     = Phamda::assoc($property, $value, $realObject);
+        $result     = P::assoc($property, $value, $realObject);
 
         $this->assertNotSame($realObject, $result);
         $this->assertSame($expected, (array) $result);
@@ -40,7 +40,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testAssocPath($expected, array $path, $value, $object)
     {
         $realObject = (object) $object;
-        $result     = Phamda::assocPath($path, $value, $realObject);
+        $result     = P::assocPath($path, $value, $realObject);
 
         $this->assertNotSame($realObject, $result);
         $this->assertSame($expected, (array) $result);
@@ -50,19 +50,19 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         $object = (object) ['foo', 'bar'];
 
-        $this->assertSame(['foo', 'bar'], Phamda::cast('array', $object));
+        $this->assertSame(['foo', 'bar'], P::cast('array', $object));
         $this->assertInstanceOf(\stdClass::class, $object);
     }
 
     public function testClone()
     {
         $original = new Test1();
-        $clone    = Phamda::clone_($original);
+        $clone    = P::clone_($original);
 
         $this->assertNotSame($original, $clone);
         $this->assertSame(Test1::class, get_class($clone));
 
-        $curried  = Phamda::clone_();
+        $curried  = P::clone_();
         $newClone = $curried($original);
 
         $this->assertNotSame($original, $newClone);
@@ -74,7 +74,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct($expected, $class, ...$arguments)
     {
-        foreach ($this->getCurriedResults(Phamda::construct($class), ...$arguments) as $result) {
+        foreach ($this->getCurriedResults(P::construct($class), ...$arguments) as $result) {
             $this->checkConstructResult($expected, $class, $result);
         }
     }
@@ -84,7 +84,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructN($expected, $arity, $class, ...$arguments)
     {
-        foreach ($this->getCurriedResults(Phamda::constructN($arity, $class), ...$arguments) as $result) {
+        foreach ($this->getCurriedResults(P::constructN($arity, $class), ...$arguments) as $result) {
             $this->checkConstructResult($expected, $class, $result);
         }
     }
@@ -95,7 +95,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testEvolve($expected, array $transformations, $object)
     {
         $realObject = (object) $object;
-        $result     = Phamda::evolve($transformations, $realObject);
+        $result     = P::evolve($transformations, $realObject);
 
         $this->assertNotSame($realObject, $result);
         $this->assertSame($expected, (array) $result);
@@ -106,10 +106,10 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $counter = new Counter();
         $addFive = function ($object) { $object->value += 5; };
 
-        Phamda::tap($addFive, $counter);
+        P::tap($addFive, $counter);
         $this->assertSame(5, $counter->value);
 
-        $addTap = Phamda::tap($addFive);
+        $addTap = P::tap($addFive);
         $addTap($counter);
         $addTap($counter);
         $this->assertSame(15, $counter->value);

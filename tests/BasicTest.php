@@ -11,7 +11,7 @@
 
 namespace Phamda\Tests;
 
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 
 /**
  * Test cases for basic functionality and currying.
@@ -29,7 +29,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function test_($expected)
     {
-        $this->assertSame($expected, Phamda::_(), '_ produces correct results.');
+        $this->assertSame($expected, P::_(), '_ produces correct results.');
     }
 
     /**
@@ -37,8 +37,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdd($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::add($x, $y), 'add produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::add(), $x, $y) as $result) {
+        $this->assertSame($expected, P::add($x, $y), 'add produces correct results.');
+        foreach ($this->getCurriedResults(P::add(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'add is curried correctly.');
         }
     }
@@ -48,8 +48,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAll($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::all($predicate, $collection), 'all produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::all(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::all($predicate, $collection), 'all produces correct results.');
+        foreach ($this->getCurriedResults(P::all(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'all is curried correctly.');
         }
     }
@@ -59,9 +59,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllPass($expected, array $predicates, ... $arguments)
     {
-        $main0 = Phamda::allPass($predicates);
+        $main0 = P::allPass($predicates);
         $this->assertSame($expected, $main0(...$arguments), 'allPass produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::allPass(), $predicates) as $result) {
+        foreach ($this->getCurriedResults(P::allPass(), $predicates) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'allPass is curried correctly.');
         }
     }
@@ -71,9 +71,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAlways($expected, $value)
     {
-        $main0 = Phamda::always($value);
+        $main0 = P::always($value);
         $this->assertSame($expected, $main0(), 'always produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::always(), $value) as $result) {
+        foreach ($this->getCurriedResults(P::always(), $value) as $result) {
             $this->assertSame($expected, $result(), 'always is curried correctly.');
         }
     }
@@ -83,8 +83,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAny($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::any($predicate, $collection), 'any produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::any(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::any($predicate, $collection), 'any produces correct results.');
+        foreach ($this->getCurriedResults(P::any(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'any is curried correctly.');
         }
     }
@@ -94,9 +94,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAnyPass($expected, array $predicates, ... $arguments)
     {
-        $main0 = Phamda::anyPass($predicates);
+        $main0 = P::anyPass($predicates);
         $this->assertSame($expected, $main0(...$arguments), 'anyPass produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::anyPass(), $predicates) as $result) {
+        foreach ($this->getCurriedResults(P::anyPass(), $predicates) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'anyPass is curried correctly.');
         }
     }
@@ -106,8 +106,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppend($expected, $item, $collection)
     {
-        $this->assertSame($expected, Phamda::append($item, $collection), 'append produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::append(), $item, $collection) as $result) {
+        $this->assertSame($expected, P::append($item, $collection), 'append produces correct results.');
+        foreach ($this->getCurriedResults(P::append(), $item, $collection) as $result) {
             $this->assertSame($expected, $result, 'append is curried correctly.');
         }
     }
@@ -117,8 +117,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testApply($expected, callable $function, array $arguments)
     {
-        $this->assertSame($expected, Phamda::apply($function, $arguments), 'apply produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::apply(), $function, $arguments) as $result) {
+        $this->assertSame($expected, P::apply($function, $arguments), 'apply produces correct results.');
+        foreach ($this->getCurriedResults(P::apply(), $function, $arguments) as $result) {
             $this->assertSame($expected, $result, 'apply is curried correctly.');
         }
     }
@@ -128,8 +128,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAssoc($expected, $property, $value, $object)
     {
-        $this->assertSame($expected, Phamda::assoc($property, $value, $object), 'assoc produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::assoc(), $property, $value, $object) as $result) {
+        $this->assertSame($expected, P::assoc($property, $value, $object), 'assoc produces correct results.');
+        foreach ($this->getCurriedResults(P::assoc(), $property, $value, $object) as $result) {
             $this->assertSame($expected, $result, 'assoc is curried correctly.');
         }
     }
@@ -139,8 +139,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testAssocPath($expected, array $path, $value, $object)
     {
-        $this->assertSame($expected, Phamda::assocPath($path, $value, $object), 'assocPath produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::assocPath(), $path, $value, $object) as $result) {
+        $this->assertSame($expected, P::assocPath($path, $value, $object), 'assocPath produces correct results.');
+        foreach ($this->getCurriedResults(P::assocPath(), $path, $value, $object) as $result) {
             $this->assertSame($expected, $result, 'assocPath is curried correctly.');
         }
     }
@@ -150,9 +150,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testBinary($expected, callable $function, $a, $b)
     {
-        $main0 = Phamda::binary($function);
+        $main0 = P::binary($function);
         $this->assertSame($expected, $main0($a, $b), 'binary produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::binary(), $function) as $result) {
+        foreach ($this->getCurriedResults(P::binary(), $function) as $result) {
             $this->assertSame($expected, $result($a, $b), 'binary is curried correctly.');
         }
     }
@@ -162,9 +162,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testBoth($expected, callable $a, callable $b, ... $arguments)
     {
-        $main0 = Phamda::both($a, $b);
+        $main0 = P::both($a, $b);
         $this->assertSame($expected, $main0(...$arguments), 'both produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::both(), $a, $b) as $result) {
+        foreach ($this->getCurriedResults(P::both(), $a, $b) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'both is curried correctly.');
         }
     }
@@ -174,8 +174,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testCast($expected, $type, $value)
     {
-        $this->assertSame($expected, Phamda::cast($type, $value), 'cast produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::cast(), $type, $value) as $result) {
+        $this->assertSame($expected, P::cast($type, $value), 'cast produces correct results.');
+        foreach ($this->getCurriedResults(P::cast(), $type, $value) as $result) {
             $this->assertSame($expected, $result, 'cast is curried correctly.');
         }
     }
@@ -185,9 +185,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testComparator($expected, callable $predicate, $x, $y)
     {
-        $main0 = Phamda::comparator($predicate);
+        $main0 = P::comparator($predicate);
         $this->assertSame($expected, $main0($x, $y), 'comparator produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::comparator(), $predicate) as $result) {
+        foreach ($this->getCurriedResults(P::comparator(), $predicate) as $result) {
             $this->assertSame($expected, $result($x, $y), 'comparator is curried correctly.');
         }
     }
@@ -197,7 +197,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testCompose($expected, array $functions, ... $arguments)
     {
-        $main0 = Phamda::compose(...$functions);
+        $main0 = P::compose(...$functions);
         $this->assertSame($expected, $main0(...$arguments), 'compose produces correct results.');
     }
 
@@ -206,8 +206,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testConcat($expected, $a, $b)
     {
-        $this->assertSame($expected, Phamda::concat($a, $b), 'concat produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::concat(), $a, $b) as $result) {
+        $this->assertSame($expected, P::concat($a, $b), 'concat produces correct results.');
+        foreach ($this->getCurriedResults(P::concat(), $a, $b) as $result) {
             $this->assertSame($expected, $result, 'concat is curried correctly.');
         }
     }
@@ -217,8 +217,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testContains($expected, $value, $collection)
     {
-        $this->assertSame($expected, Phamda::contains($value, $collection), 'contains produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::contains(), $value, $collection) as $result) {
+        $this->assertSame($expected, P::contains($value, $collection), 'contains produces correct results.');
+        foreach ($this->getCurriedResults(P::contains(), $value, $collection) as $result) {
             $this->assertSame($expected, $result, 'contains is curried correctly.');
         }
     }
@@ -228,8 +228,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurry($expected, callable $function, ... $initialArguments)
     {
-        $this->assertSame($expected, Phamda::curry($function, ...$initialArguments), 'curry produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::curry(), $function) as $result) {
+        $this->assertSame($expected, P::curry($function, ...$initialArguments), 'curry produces correct results.');
+        foreach ($this->getCurriedResults(P::curry(), $function) as $result) {
             $this->assertSame($expected, $result(...$initialArguments), 'curry is curried correctly.');
         }
     }
@@ -239,8 +239,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurryN($expected, $length, callable $function, ... $initialArguments)
     {
-        $this->assertSame($expected, Phamda::curryN($length, $function, ...$initialArguments), 'curryN produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::curryN(), $length, $function) as $result) {
+        $this->assertSame($expected, P::curryN($length, $function, ...$initialArguments), 'curryN produces correct results.');
+        foreach ($this->getCurriedResults(P::curryN(), $length, $function) as $result) {
             $this->assertSame($expected, $result(...$initialArguments), 'curryN is curried correctly.');
         }
     }
@@ -250,8 +250,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testDec($expected, $number)
     {
-        $this->assertSame($expected, Phamda::dec($number), 'dec produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::dec(), $number) as $result) {
+        $this->assertSame($expected, P::dec($number), 'dec produces correct results.');
+        foreach ($this->getCurriedResults(P::dec(), $number) as $result) {
             $this->assertSame($expected, $result, 'dec is curried correctly.');
         }
     }
@@ -261,8 +261,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultTo($expected, $default, $value)
     {
-        $this->assertSame($expected, Phamda::defaultTo($default, $value), 'defaultTo produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::defaultTo(), $default, $value) as $result) {
+        $this->assertSame($expected, P::defaultTo($default, $value), 'defaultTo produces correct results.');
+        foreach ($this->getCurriedResults(P::defaultTo(), $default, $value) as $result) {
             $this->assertSame($expected, $result, 'defaultTo is curried correctly.');
         }
     }
@@ -272,8 +272,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testDivide($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::divide($x, $y), 'divide produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::divide(), $x, $y) as $result) {
+        $this->assertSame($expected, P::divide($x, $y), 'divide produces correct results.');
+        foreach ($this->getCurriedResults(P::divide(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'divide is curried correctly.');
         }
     }
@@ -283,8 +283,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testEach($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, Phamda::each($function, $collection), 'each produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::each(), $function, $collection) as $result) {
+        $this->assertSame($expected, P::each($function, $collection), 'each produces correct results.');
+        foreach ($this->getCurriedResults(P::each(), $function, $collection) as $result) {
             $this->assertSame($expected, $result, 'each is curried correctly.');
         }
     }
@@ -294,8 +294,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testEachIndexed($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, Phamda::eachIndexed($function, $collection), 'eachIndexed produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::eachIndexed(), $function, $collection) as $result) {
+        $this->assertSame($expected, P::eachIndexed($function, $collection), 'eachIndexed produces correct results.');
+        foreach ($this->getCurriedResults(P::eachIndexed(), $function, $collection) as $result) {
             $this->assertSame($expected, $result, 'eachIndexed is curried correctly.');
         }
     }
@@ -305,9 +305,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testEither($expected, callable $a, callable $b, ... $arguments)
     {
-        $main0 = Phamda::either($a, $b);
+        $main0 = P::either($a, $b);
         $this->assertSame($expected, $main0(...$arguments), 'either produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::either(), $a, $b) as $result) {
+        foreach ($this->getCurriedResults(P::either(), $a, $b) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'either is curried correctly.');
         }
     }
@@ -317,8 +317,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testEq($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::eq($x, $y), 'eq produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::eq(), $x, $y) as $result) {
+        $this->assertSame($expected, P::eq($x, $y), 'eq produces correct results.');
+        foreach ($this->getCurriedResults(P::eq(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'eq is curried correctly.');
         }
     }
@@ -328,8 +328,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testEvolve($expected, array $transformations, $object)
     {
-        $this->assertSame($expected, Phamda::evolve($transformations, $object), 'evolve produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::evolve(), $transformations, $object) as $result) {
+        $this->assertSame($expected, P::evolve($transformations, $object), 'evolve produces correct results.');
+        foreach ($this->getCurriedResults(P::evolve(), $transformations, $object) as $result) {
             $this->assertSame($expected, $result, 'evolve is curried correctly.');
         }
     }
@@ -339,8 +339,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testExplode($expected, $delimiter, $string)
     {
-        $this->assertSame($expected, Phamda::explode($delimiter, $string), 'explode produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::explode(), $delimiter, $string) as $result) {
+        $this->assertSame($expected, P::explode($delimiter, $string), 'explode produces correct results.');
+        foreach ($this->getCurriedResults(P::explode(), $delimiter, $string) as $result) {
             $this->assertSame($expected, $result, 'explode is curried correctly.');
         }
     }
@@ -350,7 +350,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFalse($expected)
     {
-        $main0 = Phamda::false();
+        $main0 = P::false();
         $this->assertSame($expected, $main0(), 'false produces correct results.');
     }
 
@@ -359,8 +359,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFilter($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::filter($predicate, $collection), 'filter produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::filter(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::filter($predicate, $collection), 'filter produces correct results.');
+        foreach ($this->getCurriedResults(P::filter(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'filter is curried correctly.');
         }
     }
@@ -370,8 +370,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFilterIndexed($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::filterIndexed($predicate, $collection), 'filterIndexed produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::filterIndexed(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::filterIndexed($predicate, $collection), 'filterIndexed produces correct results.');
+        foreach ($this->getCurriedResults(P::filterIndexed(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'filterIndexed is curried correctly.');
         }
     }
@@ -381,8 +381,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFind($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::find($predicate, $collection), 'find produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::find(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::find($predicate, $collection), 'find produces correct results.');
+        foreach ($this->getCurriedResults(P::find(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'find is curried correctly.');
         }
     }
@@ -392,8 +392,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindIndex($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::findIndex($predicate, $collection), 'findIndex produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::findIndex(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::findIndex($predicate, $collection), 'findIndex produces correct results.');
+        foreach ($this->getCurriedResults(P::findIndex(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'findIndex is curried correctly.');
         }
     }
@@ -403,8 +403,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindLast($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::findLast($predicate, $collection), 'findLast produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::findLast(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::findLast($predicate, $collection), 'findLast produces correct results.');
+        foreach ($this->getCurriedResults(P::findLast(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'findLast is curried correctly.');
         }
     }
@@ -414,8 +414,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindLastIndex($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::findLastIndex($predicate, $collection), 'findLastIndex produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::findLastIndex(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::findLastIndex($predicate, $collection), 'findLastIndex produces correct results.');
+        foreach ($this->getCurriedResults(P::findLastIndex(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'findLastIndex is curried correctly.');
         }
     }
@@ -425,8 +425,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFirst($expected, $collection)
     {
-        $this->assertSame($expected, Phamda::first($collection), 'first produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::first(), $collection) as $result) {
+        $this->assertSame($expected, P::first($collection), 'first produces correct results.');
+        foreach ($this->getCurriedResults(P::first(), $collection) as $result) {
             $this->assertSame($expected, $result, 'first is curried correctly.');
         }
     }
@@ -436,8 +436,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFlatMap($expected, callable $function, array $list)
     {
-        $this->assertSame($expected, Phamda::flatMap($function, $list), 'flatMap produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::flatMap(), $function, $list) as $result) {
+        $this->assertSame($expected, P::flatMap($function, $list), 'flatMap produces correct results.');
+        foreach ($this->getCurriedResults(P::flatMap(), $function, $list) as $result) {
             $this->assertSame($expected, $result, 'flatMap is curried correctly.');
         }
     }
@@ -447,8 +447,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFlatten($expected, array $list)
     {
-        $this->assertSame($expected, Phamda::flatten($list), 'flatten produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::flatten(), $list) as $result) {
+        $this->assertSame($expected, P::flatten($list), 'flatten produces correct results.');
+        foreach ($this->getCurriedResults(P::flatten(), $list) as $result) {
             $this->assertSame($expected, $result, 'flatten is curried correctly.');
         }
     }
@@ -458,8 +458,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFlattenLevel($expected, array $list)
     {
-        $this->assertSame($expected, Phamda::flattenLevel($list), 'flattenLevel produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::flattenLevel(), $list) as $result) {
+        $this->assertSame($expected, P::flattenLevel($list), 'flattenLevel produces correct results.');
+        foreach ($this->getCurriedResults(P::flattenLevel(), $list) as $result) {
             $this->assertSame($expected, $result, 'flattenLevel is curried correctly.');
         }
     }
@@ -469,9 +469,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testFlip($expected, callable $function, $a, $b, ... $arguments)
     {
-        $main0 = Phamda::flip($function);
+        $main0 = P::flip($function);
         $this->assertSame($expected, $main0($a, $b, ...$arguments), 'flip produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::flip(), $function) as $result) {
+        foreach ($this->getCurriedResults(P::flip(), $function) as $result) {
             $this->assertSame($expected, $result($a, $b, ...$arguments), 'flip is curried correctly.');
         }
     }
@@ -481,8 +481,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupBy($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, Phamda::groupBy($function, $collection), 'groupBy produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::groupBy(), $function, $collection) as $result) {
+        $this->assertSame($expected, P::groupBy($function, $collection), 'groupBy produces correct results.');
+        foreach ($this->getCurriedResults(P::groupBy(), $function, $collection) as $result) {
             $this->assertSame($expected, $result, 'groupBy is curried correctly.');
         }
     }
@@ -492,8 +492,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testGt($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::gt($x, $y), 'gt produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::gt(), $x, $y) as $result) {
+        $this->assertSame($expected, P::gt($x, $y), 'gt produces correct results.');
+        foreach ($this->getCurriedResults(P::gt(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'gt is curried correctly.');
         }
     }
@@ -503,8 +503,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testGte($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::gte($x, $y), 'gte produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::gte(), $x, $y) as $result) {
+        $this->assertSame($expected, P::gte($x, $y), 'gte produces correct results.');
+        foreach ($this->getCurriedResults(P::gte(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'gte is curried correctly.');
         }
     }
@@ -514,8 +514,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testIdentity($expected, $x)
     {
-        $this->assertSame($expected, Phamda::identity($x), 'identity produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::identity(), $x) as $result) {
+        $this->assertSame($expected, P::identity($x), 'identity produces correct results.');
+        foreach ($this->getCurriedResults(P::identity(), $x) as $result) {
             $this->assertSame($expected, $result, 'identity is curried correctly.');
         }
     }
@@ -525,9 +525,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, ... $arguments)
     {
-        $main0 = Phamda::ifElse($condition, $onTrue, $onFalse);
+        $main0 = P::ifElse($condition, $onTrue, $onFalse);
         $this->assertSame($expected, $main0(...$arguments), 'ifElse produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::ifElse(), $condition, $onTrue, $onFalse) as $result) {
+        foreach ($this->getCurriedResults(P::ifElse(), $condition, $onTrue, $onFalse) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'ifElse is curried correctly.');
         }
     }
@@ -537,8 +537,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testImplode($expected, $glue, $strings)
     {
-        $this->assertSame($expected, Phamda::implode($glue, $strings), 'implode produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::implode(), $glue, $strings) as $result) {
+        $this->assertSame($expected, P::implode($glue, $strings), 'implode produces correct results.');
+        foreach ($this->getCurriedResults(P::implode(), $glue, $strings) as $result) {
             $this->assertSame($expected, $result, 'implode is curried correctly.');
         }
     }
@@ -548,8 +548,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testInc($expected, $number)
     {
-        $this->assertSame($expected, Phamda::inc($number), 'inc produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::inc(), $number) as $result) {
+        $this->assertSame($expected, P::inc($number), 'inc produces correct results.');
+        foreach ($this->getCurriedResults(P::inc(), $number) as $result) {
             $this->assertSame($expected, $result, 'inc is curried correctly.');
         }
     }
@@ -559,8 +559,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testIndexOf($expected, $item, $collection)
     {
-        $this->assertSame($expected, Phamda::indexOf($item, $collection), 'indexOf produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::indexOf(), $item, $collection) as $result) {
+        $this->assertSame($expected, P::indexOf($item, $collection), 'indexOf produces correct results.');
+        foreach ($this->getCurriedResults(P::indexOf(), $item, $collection) as $result) {
             $this->assertSame($expected, $result, 'indexOf is curried correctly.');
         }
     }
@@ -570,9 +570,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvoker($expected, $arity, $method, array $initialArguments, ... $arguments)
     {
-        $main0 = Phamda::invoker($arity, $method, ...$initialArguments);
+        $main0 = P::invoker($arity, $method, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'invoker produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::invoker(), $arity, $method, ...$initialArguments) as $result) {
+        foreach ($this->getCurriedResults(P::invoker(), $arity, $method, ...$initialArguments) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'invoker is curried correctly.');
         }
     }
@@ -582,8 +582,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsEmpty($expected, $collection)
     {
-        $this->assertSame($expected, Phamda::isEmpty($collection), 'isEmpty produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::isEmpty(), $collection) as $result) {
+        $this->assertSame($expected, P::isEmpty($collection), 'isEmpty produces correct results.');
+        foreach ($this->getCurriedResults(P::isEmpty(), $collection) as $result) {
             $this->assertSame($expected, $result, 'isEmpty is curried correctly.');
         }
     }
@@ -593,8 +593,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsInstance($expected, $class, $object)
     {
-        $this->assertSame($expected, Phamda::isInstance($class, $object), 'isInstance produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::isInstance(), $class, $object) as $result) {
+        $this->assertSame($expected, P::isInstance($class, $object), 'isInstance produces correct results.');
+        foreach ($this->getCurriedResults(P::isInstance(), $class, $object) as $result) {
             $this->assertSame($expected, $result, 'isInstance is curried correctly.');
         }
     }
@@ -604,8 +604,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testLast($expected, $collection)
     {
-        $this->assertSame($expected, Phamda::last($collection), 'last produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::last(), $collection) as $result) {
+        $this->assertSame($expected, P::last($collection), 'last produces correct results.');
+        foreach ($this->getCurriedResults(P::last(), $collection) as $result) {
             $this->assertSame($expected, $result, 'last is curried correctly.');
         }
     }
@@ -615,8 +615,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testLt($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::lt($x, $y), 'lt produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::lt(), $x, $y) as $result) {
+        $this->assertSame($expected, P::lt($x, $y), 'lt produces correct results.');
+        foreach ($this->getCurriedResults(P::lt(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'lt is curried correctly.');
         }
     }
@@ -626,8 +626,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testLte($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::lte($x, $y), 'lte produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::lte(), $x, $y) as $result) {
+        $this->assertSame($expected, P::lte($x, $y), 'lte produces correct results.');
+        foreach ($this->getCurriedResults(P::lte(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'lte is curried correctly.');
         }
     }
@@ -637,8 +637,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMap($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, Phamda::map($function, $collection), 'map produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::map(), $function, $collection) as $result) {
+        $this->assertSame($expected, P::map($function, $collection), 'map produces correct results.');
+        foreach ($this->getCurriedResults(P::map(), $function, $collection) as $result) {
             $this->assertSame($expected, $result, 'map is curried correctly.');
         }
     }
@@ -648,8 +648,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMapIndexed($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, Phamda::mapIndexed($function, $collection), 'mapIndexed produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::mapIndexed(), $function, $collection) as $result) {
+        $this->assertSame($expected, P::mapIndexed($function, $collection), 'mapIndexed produces correct results.');
+        foreach ($this->getCurriedResults(P::mapIndexed(), $function, $collection) as $result) {
             $this->assertSame($expected, $result, 'mapIndexed is curried correctly.');
         }
     }
@@ -659,8 +659,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMax($expected, $collection)
     {
-        $this->assertSame($expected, Phamda::max($collection), 'max produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::max(), $collection) as $result) {
+        $this->assertSame($expected, P::max($collection), 'max produces correct results.');
+        foreach ($this->getCurriedResults(P::max(), $collection) as $result) {
             $this->assertSame($expected, $result, 'max is curried correctly.');
         }
     }
@@ -670,8 +670,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMaxBy($expected, callable $getValue, $collection)
     {
-        $this->assertSame($expected, Phamda::maxBy($getValue, $collection), 'maxBy produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::maxBy(), $getValue, $collection) as $result) {
+        $this->assertSame($expected, P::maxBy($getValue, $collection), 'maxBy produces correct results.');
+        foreach ($this->getCurriedResults(P::maxBy(), $getValue, $collection) as $result) {
             $this->assertSame($expected, $result, 'maxBy is curried correctly.');
         }
     }
@@ -681,8 +681,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMerge($expected, array $a, array $b)
     {
-        $this->assertSame($expected, Phamda::merge($a, $b), 'merge produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::merge(), $a, $b) as $result) {
+        $this->assertSame($expected, P::merge($a, $b), 'merge produces correct results.');
+        foreach ($this->getCurriedResults(P::merge(), $a, $b) as $result) {
             $this->assertSame($expected, $result, 'merge is curried correctly.');
         }
     }
@@ -692,8 +692,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMin($expected, $collection)
     {
-        $this->assertSame($expected, Phamda::min($collection), 'min produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::min(), $collection) as $result) {
+        $this->assertSame($expected, P::min($collection), 'min produces correct results.');
+        foreach ($this->getCurriedResults(P::min(), $collection) as $result) {
             $this->assertSame($expected, $result, 'min is curried correctly.');
         }
     }
@@ -703,8 +703,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMinBy($expected, callable $getValue, $collection)
     {
-        $this->assertSame($expected, Phamda::minBy($getValue, $collection), 'minBy produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::minBy(), $getValue, $collection) as $result) {
+        $this->assertSame($expected, P::minBy($getValue, $collection), 'minBy produces correct results.');
+        foreach ($this->getCurriedResults(P::minBy(), $getValue, $collection) as $result) {
             $this->assertSame($expected, $result, 'minBy is curried correctly.');
         }
     }
@@ -714,8 +714,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testModulo($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::modulo($x, $y), 'modulo produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::modulo(), $x, $y) as $result) {
+        $this->assertSame($expected, P::modulo($x, $y), 'modulo produces correct results.');
+        foreach ($this->getCurriedResults(P::modulo(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'modulo is curried correctly.');
         }
     }
@@ -725,8 +725,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultiply($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::multiply($x, $y), 'multiply produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::multiply(), $x, $y) as $result) {
+        $this->assertSame($expected, P::multiply($x, $y), 'multiply produces correct results.');
+        foreach ($this->getCurriedResults(P::multiply(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'multiply is curried correctly.');
         }
     }
@@ -736,9 +736,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testNAry($expected, $arity, callable $function, ... $arguments)
     {
-        $main0 = Phamda::nAry($arity, $function);
+        $main0 = P::nAry($arity, $function);
         $this->assertSame($expected, $main0(...$arguments), 'nAry produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::nAry(), $arity, $function) as $result) {
+        foreach ($this->getCurriedResults(P::nAry(), $arity, $function) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'nAry is curried correctly.');
         }
     }
@@ -748,8 +748,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testNegate($expected, $x)
     {
-        $this->assertSame($expected, Phamda::negate($x), 'negate produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::negate(), $x) as $result) {
+        $this->assertSame($expected, P::negate($x), 'negate produces correct results.');
+        foreach ($this->getCurriedResults(P::negate(), $x) as $result) {
             $this->assertSame($expected, $result, 'negate is curried correctly.');
         }
     }
@@ -759,8 +759,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testNone($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::none($predicate, $collection), 'none produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::none(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::none($predicate, $collection), 'none produces correct results.');
+        foreach ($this->getCurriedResults(P::none(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'none is curried correctly.');
         }
     }
@@ -770,9 +770,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testNot($expected, callable $predicate, ... $arguments)
     {
-        $main0 = Phamda::not($predicate);
+        $main0 = P::not($predicate);
         $this->assertSame($expected, $main0(...$arguments), 'not produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::not(), $predicate) as $result) {
+        foreach ($this->getCurriedResults(P::not(), $predicate) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'not is curried correctly.');
         }
     }
@@ -782,9 +782,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartial($expected, callable $function, array $initialArguments, ... $arguments)
     {
-        $main0 = Phamda::partial($function, ...$initialArguments);
+        $main0 = P::partial($function, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'partial produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::partial(), $function, ...$initialArguments) as $result) {
+        foreach ($this->getCurriedResults(P::partial(), $function, ...$initialArguments) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'partial is curried correctly.');
         }
     }
@@ -794,9 +794,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartialN($expected, $arity, callable $function, array $initialArguments, ... $arguments)
     {
-        $main0 = Phamda::partialN($arity, $function, ...$initialArguments);
+        $main0 = P::partialN($arity, $function, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'partialN produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::partialN(), $arity, $function, ...$initialArguments) as $result) {
+        foreach ($this->getCurriedResults(P::partialN(), $arity, $function, ...$initialArguments) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'partialN is curried correctly.');
         }
     }
@@ -806,8 +806,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartition($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::partition($predicate, $collection), 'partition produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::partition(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::partition($predicate, $collection), 'partition produces correct results.');
+        foreach ($this->getCurriedResults(P::partition(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'partition is curried correctly.');
         }
     }
@@ -817,8 +817,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPath($expected, array $path, $object)
     {
-        $this->assertSame($expected, Phamda::path($path, $object), 'path produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::path(), $path, $object) as $result) {
+        $this->assertSame($expected, P::path($path, $object), 'path produces correct results.');
+        foreach ($this->getCurriedResults(P::path(), $path, $object) as $result) {
             $this->assertSame($expected, $result, 'path is curried correctly.');
         }
     }
@@ -828,8 +828,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPathEq($expected, array $path, $value, $object)
     {
-        $this->assertSame($expected, Phamda::pathEq($path, $value, $object), 'pathEq produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::pathEq(), $path, $value, $object) as $result) {
+        $this->assertSame($expected, P::pathEq($path, $value, $object), 'pathEq produces correct results.');
+        foreach ($this->getCurriedResults(P::pathEq(), $path, $value, $object) as $result) {
             $this->assertSame($expected, $result, 'pathEq is curried correctly.');
         }
     }
@@ -839,8 +839,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPick($expected, array $names, array $item)
     {
-        $this->assertSame($expected, Phamda::pick($names, $item), 'pick produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::pick(), $names, $item) as $result) {
+        $this->assertSame($expected, P::pick($names, $item), 'pick produces correct results.');
+        foreach ($this->getCurriedResults(P::pick(), $names, $item) as $result) {
             $this->assertSame($expected, $result, 'pick is curried correctly.');
         }
     }
@@ -850,8 +850,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPickAll($expected, array $names, array $item)
     {
-        $this->assertSame($expected, Phamda::pickAll($names, $item), 'pickAll produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::pickAll(), $names, $item) as $result) {
+        $this->assertSame($expected, P::pickAll($names, $item), 'pickAll produces correct results.');
+        foreach ($this->getCurriedResults(P::pickAll(), $names, $item) as $result) {
             $this->assertSame($expected, $result, 'pickAll is curried correctly.');
         }
     }
@@ -861,7 +861,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPipe($expected, array $functions, ... $arguments)
     {
-        $main0 = Phamda::pipe(...$functions);
+        $main0 = P::pipe(...$functions);
         $this->assertSame($expected, $main0(...$arguments), 'pipe produces correct results.');
     }
 
@@ -870,8 +870,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPluck($expected, $name, $collection)
     {
-        $this->assertSame($expected, Phamda::pluck($name, $collection), 'pluck produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::pluck(), $name, $collection) as $result) {
+        $this->assertSame($expected, P::pluck($name, $collection), 'pluck produces correct results.');
+        foreach ($this->getCurriedResults(P::pluck(), $name, $collection) as $result) {
             $this->assertSame($expected, $result, 'pluck is curried correctly.');
         }
     }
@@ -881,8 +881,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrepend($expected, $item, $collection)
     {
-        $this->assertSame($expected, Phamda::prepend($item, $collection), 'prepend produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::prepend(), $item, $collection) as $result) {
+        $this->assertSame($expected, P::prepend($item, $collection), 'prepend produces correct results.');
+        foreach ($this->getCurriedResults(P::prepend(), $item, $collection) as $result) {
             $this->assertSame($expected, $result, 'prepend is curried correctly.');
         }
     }
@@ -892,8 +892,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testProduct($expected, $values)
     {
-        $this->assertSame($expected, Phamda::product($values), 'product produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::product(), $values) as $result) {
+        $this->assertSame($expected, P::product($values), 'product produces correct results.');
+        foreach ($this->getCurriedResults(P::product(), $values) as $result) {
             $this->assertSame($expected, $result, 'product is curried correctly.');
         }
     }
@@ -903,8 +903,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testProp($expected, $name, $object)
     {
-        $this->assertSame($expected, Phamda::prop($name, $object), 'prop produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::prop(), $name, $object) as $result) {
+        $this->assertSame($expected, P::prop($name, $object), 'prop produces correct results.');
+        foreach ($this->getCurriedResults(P::prop(), $name, $object) as $result) {
             $this->assertSame($expected, $result, 'prop is curried correctly.');
         }
     }
@@ -914,8 +914,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropEq($expected, $name, $value, $object)
     {
-        $this->assertSame($expected, Phamda::propEq($name, $value, $object), 'propEq produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::propEq(), $name, $value, $object) as $result) {
+        $this->assertSame($expected, P::propEq($name, $value, $object), 'propEq produces correct results.');
+        foreach ($this->getCurriedResults(P::propEq(), $name, $value, $object) as $result) {
             $this->assertSame($expected, $result, 'propEq is curried correctly.');
         }
     }
@@ -925,8 +925,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testReduce($expected, callable $function, $initial, $collection)
     {
-        $this->assertSame($expected, Phamda::reduce($function, $initial, $collection), 'reduce produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::reduce(), $function, $initial, $collection) as $result) {
+        $this->assertSame($expected, P::reduce($function, $initial, $collection), 'reduce produces correct results.');
+        foreach ($this->getCurriedResults(P::reduce(), $function, $initial, $collection) as $result) {
             $this->assertSame($expected, $result, 'reduce is curried correctly.');
         }
     }
@@ -936,8 +936,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testReduceIndexed($expected, callable $function, $initial, $collection)
     {
-        $this->assertSame($expected, Phamda::reduceIndexed($function, $initial, $collection), 'reduceIndexed produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::reduceIndexed(), $function, $initial, $collection) as $result) {
+        $this->assertSame($expected, P::reduceIndexed($function, $initial, $collection), 'reduceIndexed produces correct results.');
+        foreach ($this->getCurriedResults(P::reduceIndexed(), $function, $initial, $collection) as $result) {
             $this->assertSame($expected, $result, 'reduceIndexed is curried correctly.');
         }
     }
@@ -947,8 +947,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testReduceRight($expected, callable $function, $initial, $collection)
     {
-        $this->assertSame($expected, Phamda::reduceRight($function, $initial, $collection), 'reduceRight produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::reduceRight(), $function, $initial, $collection) as $result) {
+        $this->assertSame($expected, P::reduceRight($function, $initial, $collection), 'reduceRight produces correct results.');
+        foreach ($this->getCurriedResults(P::reduceRight(), $function, $initial, $collection) as $result) {
             $this->assertSame($expected, $result, 'reduceRight is curried correctly.');
         }
     }
@@ -958,8 +958,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testReduceRightIndexed($expected, callable $function, $initial, $collection)
     {
-        $this->assertSame($expected, Phamda::reduceRightIndexed($function, $initial, $collection), 'reduceRightIndexed produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::reduceRightIndexed(), $function, $initial, $collection) as $result) {
+        $this->assertSame($expected, P::reduceRightIndexed($function, $initial, $collection), 'reduceRightIndexed produces correct results.');
+        foreach ($this->getCurriedResults(P::reduceRightIndexed(), $function, $initial, $collection) as $result) {
             $this->assertSame($expected, $result, 'reduceRightIndexed is curried correctly.');
         }
     }
@@ -969,8 +969,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testReject($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::reject($predicate, $collection), 'reject produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::reject(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::reject($predicate, $collection), 'reject produces correct results.');
+        foreach ($this->getCurriedResults(P::reject(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'reject is curried correctly.');
         }
     }
@@ -980,8 +980,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testRejectIndexed($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, Phamda::rejectIndexed($predicate, $collection), 'rejectIndexed produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::rejectIndexed(), $predicate, $collection) as $result) {
+        $this->assertSame($expected, P::rejectIndexed($predicate, $collection), 'rejectIndexed produces correct results.');
+        foreach ($this->getCurriedResults(P::rejectIndexed(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'rejectIndexed is curried correctly.');
         }
     }
@@ -991,8 +991,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testReverse($expected, $collection)
     {
-        $this->assertSame($expected, Phamda::reverse($collection), 'reverse produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::reverse(), $collection) as $result) {
+        $this->assertSame($expected, P::reverse($collection), 'reverse produces correct results.');
+        foreach ($this->getCurriedResults(P::reverse(), $collection) as $result) {
             $this->assertSame($expected, $result, 'reverse is curried correctly.');
         }
     }
@@ -1002,8 +1002,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSlice($expected, $start, $end, $collection)
     {
-        $this->assertSame($expected, Phamda::slice($start, $end, $collection), 'slice produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::slice(), $start, $end, $collection) as $result) {
+        $this->assertSame($expected, P::slice($start, $end, $collection), 'slice produces correct results.');
+        foreach ($this->getCurriedResults(P::slice(), $start, $end, $collection) as $result) {
             $this->assertSame($expected, $result, 'slice is curried correctly.');
         }
     }
@@ -1013,8 +1013,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSort($expected, callable $comparator, $collection)
     {
-        $this->assertSame($expected, Phamda::sort($comparator, $collection), 'sort produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::sort(), $comparator, $collection) as $result) {
+        $this->assertSame($expected, P::sort($comparator, $collection), 'sort produces correct results.');
+        foreach ($this->getCurriedResults(P::sort(), $comparator, $collection) as $result) {
             $this->assertSame($expected, $result, 'sort is curried correctly.');
         }
     }
@@ -1024,8 +1024,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSortBy($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, Phamda::sortBy($function, $collection), 'sortBy produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::sortBy(), $function, $collection) as $result) {
+        $this->assertSame($expected, P::sortBy($function, $collection), 'sortBy produces correct results.');
+        foreach ($this->getCurriedResults(P::sortBy(), $function, $collection) as $result) {
             $this->assertSame($expected, $result, 'sortBy is curried correctly.');
         }
     }
@@ -1035,8 +1035,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringIndexOf($expected, $substring, $string)
     {
-        $this->assertSame($expected, Phamda::stringIndexOf($substring, $string), 'stringIndexOf produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::stringIndexOf(), $substring, $string) as $result) {
+        $this->assertSame($expected, P::stringIndexOf($substring, $string), 'stringIndexOf produces correct results.');
+        foreach ($this->getCurriedResults(P::stringIndexOf(), $substring, $string) as $result) {
             $this->assertSame($expected, $result, 'stringIndexOf is curried correctly.');
         }
     }
@@ -1046,8 +1046,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringLastIndexOf($expected, $substring, $string)
     {
-        $this->assertSame($expected, Phamda::stringLastIndexOf($substring, $string), 'stringLastIndexOf produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::stringLastIndexOf(), $substring, $string) as $result) {
+        $this->assertSame($expected, P::stringLastIndexOf($substring, $string), 'stringLastIndexOf produces correct results.');
+        foreach ($this->getCurriedResults(P::stringLastIndexOf(), $substring, $string) as $result) {
             $this->assertSame($expected, $result, 'stringLastIndexOf is curried correctly.');
         }
     }
@@ -1057,8 +1057,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSubstring($expected, $start, $end, $string)
     {
-        $this->assertSame($expected, Phamda::substring($start, $end, $string), 'substring produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::substring(), $start, $end, $string) as $result) {
+        $this->assertSame($expected, P::substring($start, $end, $string), 'substring produces correct results.');
+        foreach ($this->getCurriedResults(P::substring(), $start, $end, $string) as $result) {
             $this->assertSame($expected, $result, 'substring is curried correctly.');
         }
     }
@@ -1068,8 +1068,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSubstringFrom($expected, $start, $string)
     {
-        $this->assertSame($expected, Phamda::substringFrom($start, $string), 'substringFrom produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::substringFrom(), $start, $string) as $result) {
+        $this->assertSame($expected, P::substringFrom($start, $string), 'substringFrom produces correct results.');
+        foreach ($this->getCurriedResults(P::substringFrom(), $start, $string) as $result) {
             $this->assertSame($expected, $result, 'substringFrom is curried correctly.');
         }
     }
@@ -1079,8 +1079,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSubstringTo($expected, $end, $string)
     {
-        $this->assertSame($expected, Phamda::substringTo($end, $string), 'substringTo produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::substringTo(), $end, $string) as $result) {
+        $this->assertSame($expected, P::substringTo($end, $string), 'substringTo produces correct results.');
+        foreach ($this->getCurriedResults(P::substringTo(), $end, $string) as $result) {
             $this->assertSame($expected, $result, 'substringTo is curried correctly.');
         }
     }
@@ -1090,8 +1090,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSubtract($expected, $x, $y)
     {
-        $this->assertSame($expected, Phamda::subtract($x, $y), 'subtract produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::subtract(), $x, $y) as $result) {
+        $this->assertSame($expected, P::subtract($x, $y), 'subtract produces correct results.');
+        foreach ($this->getCurriedResults(P::subtract(), $x, $y) as $result) {
             $this->assertSame($expected, $result, 'subtract is curried correctly.');
         }
     }
@@ -1101,8 +1101,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testSum($expected, $values)
     {
-        $this->assertSame($expected, Phamda::sum($values), 'sum produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::sum(), $values) as $result) {
+        $this->assertSame($expected, P::sum($values), 'sum produces correct results.');
+        foreach ($this->getCurriedResults(P::sum(), $values) as $result) {
             $this->assertSame($expected, $result, 'sum is curried correctly.');
         }
     }
@@ -1112,8 +1112,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testTail($expected, $collection)
     {
-        $this->assertSame($expected, Phamda::tail($collection), 'tail produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::tail(), $collection) as $result) {
+        $this->assertSame($expected, P::tail($collection), 'tail produces correct results.');
+        foreach ($this->getCurriedResults(P::tail(), $collection) as $result) {
             $this->assertSame($expected, $result, 'tail is curried correctly.');
         }
     }
@@ -1123,8 +1123,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testTap($expected, callable $function, $object)
     {
-        $this->assertSame($expected, Phamda::tap($function, $object), 'tap produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::tap(), $function, $object) as $result) {
+        $this->assertSame($expected, P::tap($function, $object), 'tap produces correct results.');
+        foreach ($this->getCurriedResults(P::tap(), $function, $object) as $result) {
             $this->assertSame($expected, $result, 'tap is curried correctly.');
         }
     }
@@ -1134,8 +1134,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testTimes($expected, callable $function, $count)
     {
-        $this->assertSame($expected, Phamda::times($function, $count), 'times produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::times(), $function, $count) as $result) {
+        $this->assertSame($expected, P::times($function, $count), 'times produces correct results.');
+        foreach ($this->getCurriedResults(P::times(), $function, $count) as $result) {
             $this->assertSame($expected, $result, 'times is curried correctly.');
         }
     }
@@ -1145,7 +1145,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testTrue($expected)
     {
-        $main0 = Phamda::true();
+        $main0 = P::true();
         $this->assertSame($expected, $main0(), 'true produces correct results.');
     }
 
@@ -1154,9 +1154,9 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnary($expected, callable $function, $a)
     {
-        $main0 = Phamda::unary($function);
+        $main0 = P::unary($function);
         $this->assertSame($expected, $main0($a), 'unary produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::unary(), $function) as $result) {
+        foreach ($this->getCurriedResults(P::unary(), $function) as $result) {
             $this->assertSame($expected, $result($a), 'unary is curried correctly.');
         }
     }
@@ -1166,8 +1166,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnapply($expected, callable $function, ... $arguments)
     {
-        $this->assertSame($expected, Phamda::unapply($function, ...$arguments), 'unapply produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::unapply(), $function) as $result) {
+        $this->assertSame($expected, P::unapply($function, ...$arguments), 'unapply produces correct results.');
+        foreach ($this->getCurriedResults(P::unapply(), $function) as $result) {
             $this->assertSame($expected, $result(...$arguments), 'unapply is curried correctly.');
         }
     }
@@ -1177,8 +1177,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testWhere($expected, array $specification, $object)
     {
-        $this->assertSame($expected, Phamda::where($specification, $object), 'where produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::where(), $specification, $object) as $result) {
+        $this->assertSame($expected, P::where($specification, $object), 'where produces correct results.');
+        foreach ($this->getCurriedResults(P::where(), $specification, $object) as $result) {
             $this->assertSame($expected, $result, 'where is curried correctly.');
         }
     }
@@ -1188,8 +1188,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testZip($expected, array $a, array $b)
     {
-        $this->assertSame($expected, Phamda::zip($a, $b), 'zip produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::zip(), $a, $b) as $result) {
+        $this->assertSame($expected, P::zip($a, $b), 'zip produces correct results.');
+        foreach ($this->getCurriedResults(P::zip(), $a, $b) as $result) {
             $this->assertSame($expected, $result, 'zip is curried correctly.');
         }
     }
@@ -1199,8 +1199,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      */
     public function testZipWith($expected, callable $function, array $a, array $b)
     {
-        $this->assertSame($expected, Phamda::zipWith($function, $a, $b), 'zipWith produces correct results.');
-        foreach ($this->getCurriedResults(Phamda::zipWith(), $function, $a, $b) as $result) {
+        $this->assertSame($expected, P::zipWith($function, $a, $b), 'zipWith produces correct results.');
+        foreach ($this->getCurriedResults(P::zipWith(), $function, $a, $b) as $result) {
             $this->assertSame($expected, $result, 'zipWith is curried correctly.');
         }
     }

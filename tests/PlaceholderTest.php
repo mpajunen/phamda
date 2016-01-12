@@ -11,7 +11,7 @@
 
 namespace Phamda\Tests;
 
-use Phamda\Phamda;
+use Phamda\Phamda as P;
 
 /**
  * Test placeholder argument support.
@@ -25,33 +25,33 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
      */
     public function testMap($expected, callable $function, $collection)
     {
-        $curried = Phamda::map(Phamda::_(), $collection);
+        $curried = P::map(P::_(), $collection);
         $this->assertSame($expected, $curried($function));
     }
 
     public function testSubtract()
     {
-        $sub10 = Phamda::subtract(Phamda::_(), 10);
+        $sub10 = P::subtract(P::_(), 10);
         $this->assertSame(42, $sub10(52));
     }
 
     public function testReduce()
     {
-        $add15 = Phamda::reduce(Phamda::add(), Phamda::_(), [1, 2, 3, 4, 5]);
+        $add15 = P::reduce(P::add(), P::_(), [1, 2, 3, 4, 5]);
         $this->assertSame(25, $add15(10));
         $this->assertSame(42, $add15(27));
     }
 
     public function testSubstring()
     {
-        $subFiveFive = Phamda::curryN(3, 'substr', Phamda::_(), 5, 5);
+        $subFiveFive = P::curryN(3, 'substr', P::_(), 5, 5);
         $this->assertSame('fghij', $subFiveFive('abcdefghijklmn'));
 
-        $sub         = Phamda::curryN(3, 'substr');
-        $subFourFour = $sub(Phamda::_(), 4, 4);
+        $sub         = P::curryN(3, 'substr');
+        $subFourFour = $sub(P::_(), 4, 4);
         $this->assertSame('efgh', $subFourFour('abcdefghijklmn'));
 
-        $subFour = $sub(Phamda::_(), Phamda::_(), 4);
+        $subFour = $sub(P::_(), P::_(), 4);
         $this->assertSame('defg', $subFour('abcdefghijklmn', 3));
 
         $subFourAlpha = $subFour('abcdefghijklmn');
