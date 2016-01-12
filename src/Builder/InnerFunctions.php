@@ -453,6 +453,8 @@ class InnerFunctions
      * @param array|\Traversable|Collection $collection
      *
      * @return array|\Traversable|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `each` now receives three arguments as well.
      */
     public static function eachIndexed(callable $function, $collection)
     {
@@ -569,6 +571,8 @@ class InnerFunctions
      * @param array|\Traversable|Collection $collection
      *
      * @return array|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `filter` now receives three arguments as well.
      */
     public static function filterIndexed(callable $predicate, $collection)
     {
@@ -970,6 +974,8 @@ class InnerFunctions
      * @param array|\Traversable|Collection $collection
      *
      * @return array|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `map` now receives three arguments as well.
      */
     public static function mapIndexed(callable $function, $collection)
     {
@@ -1367,6 +1373,8 @@ class InnerFunctions
      * @param array|\Traversable $collection
      *
      * @return mixed
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduce` now receives four arguments as well.
      */
     public static function reduceIndexed(callable $function, $initial, $collection)
     {
@@ -1399,6 +1407,8 @@ class InnerFunctions
      * @param array|\Traversable $collection
      *
      * @return mixed
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduceRight` now receives four arguments as well.
      */
     public static function reduceRightIndexed(callable $function, $initial, $collection)
     {
@@ -1429,6 +1439,8 @@ class InnerFunctions
      * @param array|\Traversable|Collection $collection
      *
      * @return array|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reject` now receives three arguments as well.
      */
     public static function rejectIndexed(callable $predicate, $collection)
     {

@@ -667,6 +667,8 @@ class Phamda
      * @param array|\Traversable|Collection $collection
      *
      * @return callable|array|\Traversable|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `each` now receives three arguments as well.
      */
     public static function eachIndexed($function = null, $collection = null)
     {
@@ -833,6 +835,8 @@ class Phamda
      * @param array|\Traversable|Collection $collection
      *
      * @return callable|array|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `filter` now receives three arguments as well.
      */
     public static function filterIndexed($predicate = null, $collection = null)
     {
@@ -1420,6 +1424,8 @@ class Phamda
      * @param array|\Traversable|Collection $collection
      *
      * @return callable|array|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `map` now receives three arguments as well.
      */
     public static function mapIndexed($function = null, $collection = null)
     {
@@ -2026,6 +2032,8 @@ class Phamda
      * @param array|\Traversable $collection
      *
      * @return callable|mixed
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduce` now receives four arguments as well.
      */
     public static function reduceIndexed($function = null, $initial = null, $collection = null)
     {
@@ -2072,6 +2080,8 @@ class Phamda
      * @param array|\Traversable $collection
      *
      * @return callable|mixed
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduceRight` now receives four arguments as well.
      */
     public static function reduceRightIndexed($function = null, $initial = null, $collection = null)
     {
@@ -2116,6 +2126,8 @@ class Phamda
      * @param array|\Traversable|Collection $collection
      *
      * @return callable|array|Collection
+     *
+     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reject` now receives three arguments as well.
      */
     public static function rejectIndexed($predicate = null, $collection = null)
     {
