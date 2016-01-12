@@ -218,7 +218,10 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
 
     public function testFlatMap()
     {
-        $this->assertSame(['a', 'b', 'c', 'd', 'e'], P::flatMap(P::unary('str_split'), ['abc', 'de']));
+        $split = P::unary('str_split');
+        $this->assertSame(['a', 'b', 'c', 'd', 'e'], P::flatMap($split, ['abc', 'de']));
+        $getNeighbors = function ($x) { return [$x - 1, $x, $x + 1]; };
+        $this->assertSame([0, 1, 2, 1, 2, 3, 2, 3, 4], P::flatMap($getNeighbors, [1 ,2, 3]));
     }
 
     public function testFlip()

@@ -982,7 +982,10 @@ class Phamda
      * Returns a list containing the flattened items created by applying the `function` to each item of the `list`.
      *
      * ```php
-     * P::flatMap(P::unary('str_split'), ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
+     * $split = P::unary('str_split');
+     * P::flatMap($split, ['abc', 'de']); // => ['a', 'b', 'c', 'd', 'e']
+     * $getNeighbors = function ($x) { return [$x - 1, $x, $x + 1]; };
+     * P::flatMap($getNeighbors, [1, 2, 3]); // => [0, 1, 2, 1, 2, 3, 2, 3, 4]
      * ```
      *
      * @param callable $function
