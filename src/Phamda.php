@@ -1991,7 +1991,7 @@ class Phamda
     /**
      * Returns a value accumulated by calling the given function for each element of the collection.
      *
-     * The supplied `function` receives one argument: `item`.
+     * The supplied `function` receives two arguments: `previousValue`, `item`.
      *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
@@ -2014,7 +2014,7 @@ class Phamda
     /**
      * Returns a value accumulated by calling the given function for each element of the collection.
      *
-     * Like `reduce`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+     * Like `reduce`, but the supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
      *
      * ```php
      * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
@@ -2037,7 +2037,7 @@ class Phamda
     /**
      * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
      *
-     * The supplied `function` receives one argument: `item`.
+     * The supplied `function` receives two arguments: `previousValue`, `item`.
      *
      * ```php
      * $concat = function ($x, $y) { return $x . $y; };
@@ -2060,7 +2060,7 @@ class Phamda
     /**
      * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
      *
-     * Like `reduceRight`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
+     * Like `reduceRight`, but the supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
      *
      * ```php
      * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
