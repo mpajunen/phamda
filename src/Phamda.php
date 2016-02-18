@@ -630,9 +630,9 @@ class Phamda
      *
      * ```php
      * $date = new \DateTime('2015-02-02');
-     * $addDays = function ($number) use ($date) { $date->modify("+{$number} days"); };
-     * P::each($addDays, [3, 6, 2]);
-     * $date->format('Y-m-d'); // => '2015-02-13'
+     * $addCalendar = function ($number, $type) use ($date) { $date->modify("+{$number} {$type}"); };
+     * P::each($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
+     * $date->format('Y-m-d'); // => '2015-06-15'
      * ```
      *
      * @param callable                      $function
@@ -641,36 +641,6 @@ class Phamda
      * @return callable|array|\Traversable|Collection
      */
     public static function each($function = null, $collection = null)
-    {
-        return static::curry2(function (callable $function, $collection) {
-            foreach ($collection as $key => $item) {
-                $function($item, $key, $collection);
-            }
-
-            return $collection;
-        }, func_get_args());
-    }
-
-    /**
-     * Calls the given function for each element in the collection and returns the original collection.
-     *
-     * Like `each`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
-     *
-     * ```php
-     * $date = new \DateTime('2015-02-02');
-     * $addCalendar = function ($number, $type) use ($date) { $date->modify("+{$number} {$type}"); };
-     * P::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
-     * $date->format('Y-m-d'); // => '2015-06-15'
-     * ```
-     *
-     * @param callable                      $function
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return callable|array|\Traversable|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `each` now receives three arguments as well.
-     */
-    public static function eachIndexed($function = null, $collection = null)
     {
         return static::curry2(function (callable $function, $collection) {
             foreach ($collection as $key => $item) {
@@ -815,30 +785,6 @@ class Phamda
      * @return callable|array|Collection
      */
     public static function filter($predicate = null, $collection = null)
-    {
-        return static::curry2(function (callable $predicate, $collection) {
-            return static::_filter($predicate, $collection);
-        }, func_get_args());
-    }
-
-    /**
-     * Returns a new collection containing the items that match the given predicate.
-     *
-     * Like `filter`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
-     *
-     * ```php
-     * $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-     * P::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
-     * ```
-     *
-     * @param callable                      $predicate
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return callable|array|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `filter` now receives three arguments as well.
-     */
-    public static function filterIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
             return static::_filter($predicate, $collection);
@@ -1399,6 +1345,8 @@ class Phamda
      * ```php
      * $square = function ($x) { return $x ** 2; };
      * P::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
+     * $keyExp = function ($value, $key) { return $value ** $key; };
+     * P::map($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
      * ```
      *
      * @param callable                      $function
@@ -1407,30 +1355,6 @@ class Phamda
      * @return callable|array|Collection
      */
     public static function map($function = null, $collection = null)
-    {
-        return static::curry2(function (callable $function, $collection) {
-            return static::_map($function, $collection);
-        }, func_get_args());
-    }
-
-    /**
-     * Returns a new collection where values are created from the original collection by calling the supplied function.
-     *
-     * Like `map`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
-     *
-     * ```php
-     * $keyExp = function ($value, $key) { return $value ** $key; };
-     * P::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
-     * ```
-     *
-     * @param callable                      $function
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return callable|array|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `map` now receives three arguments as well.
-     */
-    public static function mapIndexed($function = null, $collection = null)
     {
         return static::curry2(function (callable $function, $collection) {
             return static::_map($function, $collection);
@@ -2021,38 +1945,13 @@ class Phamda
     }
 
     /**
-     * Returns a value accumulated by calling the given function for each element of the collection.
-     *
-     * Like `reduce`, but the supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
-     *
-     * ```php
-     * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-     * P::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
-     * ```
-     *
-     * @param callable           $function
-     * @param mixed              $initial
-     * @param array|\Traversable $collection
-     *
-     * @return callable|mixed
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduce` now receives four arguments as well.
-     */
-    public static function reduceIndexed($function = null, $initial = null, $collection = null)
-    {
-        return static::curry3(function (callable $function, $initial, $collection) {
-            return static::_reduce($function, $initial, $collection);
-        }, func_get_args());
-    }
-
-    /**
      * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
      *
      * The supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
      *
      * ```php
-     * $concat = function ($x, $y) { return $x . $y; };
-     * P::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
+     * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
+     * P::reduceRight($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
      * ```
      *
      * @param callable           $function
@@ -2062,31 +1961,6 @@ class Phamda
      * @return callable|mixed
      */
     public static function reduceRight($function = null, $initial = null, $collection = null)
-    {
-        return static::curry3(function (callable $function, $initial, $collection) {
-            return static::_reduce($function, $initial, static::_reverse($collection));
-        }, func_get_args());
-    }
-
-    /**
-     * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
-     *
-     * Like `reduceRight`, but the supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
-     *
-     * ```php
-     * $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-     * P::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
-     * ```
-     *
-     * @param callable           $function
-     * @param mixed              $initial
-     * @param array|\Traversable $collection
-     *
-     * @return callable|mixed
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduceRight` now receives four arguments as well.
-     */
-    public static function reduceRightIndexed($function = null, $initial = null, $collection = null)
     {
         return static::curry3(function (callable $function, $initial, $collection) {
             return static::_reduce($function, $initial, static::_reverse($collection));
@@ -2109,30 +1983,6 @@ class Phamda
      * @return callable|array|Collection
      */
     public static function reject($predicate = null, $collection = null)
-    {
-        return static::curry2(function (callable $predicate, $collection) {
-            return static::_filter(Phamda::not($predicate), $collection);
-        }, func_get_args());
-    }
-
-    /**
-     * Returns a new collection containing the items that do not match the given predicate.
-     *
-     * Like `reject`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
-     *
-     * ```php
-     * $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-     * P::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
-     * ```
-     *
-     * @param callable                      $predicate
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return callable|array|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reject` now receives three arguments as well.
-     */
-    public static function rejectIndexed($predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
             return static::_filter(Phamda::not($predicate), $collection);

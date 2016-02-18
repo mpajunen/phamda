@@ -290,17 +290,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getEachIndexedData
-     */
-    public function testEachIndexed($expected, callable $function, $collection)
-    {
-        $this->assertSame($expected, P::eachIndexed($function, $collection), 'eachIndexed produces correct results.');
-        foreach ($this->getCurriedResults(P::eachIndexed(), $function, $collection) as $result) {
-            $this->assertSame($expected, $result, 'eachIndexed is curried correctly.');
-        }
-    }
-
-    /**
      * @dataProvider getEitherData
      */
     public function testEither($expected, callable $a, callable $b, ... $arguments)
@@ -362,17 +351,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, P::filter($predicate, $collection), 'filter produces correct results.');
         foreach ($this->getCurriedResults(P::filter(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'filter is curried correctly.');
-        }
-    }
-
-    /**
-     * @dataProvider getFilterIndexedData
-     */
-    public function testFilterIndexed($expected, callable $predicate, $collection)
-    {
-        $this->assertSame($expected, P::filterIndexed($predicate, $collection), 'filterIndexed produces correct results.');
-        foreach ($this->getCurriedResults(P::filterIndexed(), $predicate, $collection) as $result) {
-            $this->assertSame($expected, $result, 'filterIndexed is curried correctly.');
         }
     }
 
@@ -640,17 +618,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, P::map($function, $collection), 'map produces correct results.');
         foreach ($this->getCurriedResults(P::map(), $function, $collection) as $result) {
             $this->assertSame($expected, $result, 'map is curried correctly.');
-        }
-    }
-
-    /**
-     * @dataProvider getMapIndexedData
-     */
-    public function testMapIndexed($expected, callable $function, $collection)
-    {
-        $this->assertSame($expected, P::mapIndexed($function, $collection), 'mapIndexed produces correct results.');
-        foreach ($this->getCurriedResults(P::mapIndexed(), $function, $collection) as $result) {
-            $this->assertSame($expected, $result, 'mapIndexed is curried correctly.');
         }
     }
 
@@ -932,17 +899,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getReduceIndexedData
-     */
-    public function testReduceIndexed($expected, callable $function, $initial, $collection)
-    {
-        $this->assertSame($expected, P::reduceIndexed($function, $initial, $collection), 'reduceIndexed produces correct results.');
-        foreach ($this->getCurriedResults(P::reduceIndexed(), $function, $initial, $collection) as $result) {
-            $this->assertSame($expected, $result, 'reduceIndexed is curried correctly.');
-        }
-    }
-
-    /**
      * @dataProvider getReduceRightData
      */
     public function testReduceRight($expected, callable $function, $initial, $collection)
@@ -954,17 +910,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getReduceRightIndexedData
-     */
-    public function testReduceRightIndexed($expected, callable $function, $initial, $collection)
-    {
-        $this->assertSame($expected, P::reduceRightIndexed($function, $initial, $collection), 'reduceRightIndexed produces correct results.');
-        foreach ($this->getCurriedResults(P::reduceRightIndexed(), $function, $initial, $collection) as $result) {
-            $this->assertSame($expected, $result, 'reduceRightIndexed is curried correctly.');
-        }
-    }
-
-    /**
      * @dataProvider getRejectData
      */
     public function testReject($expected, callable $predicate, $collection)
@@ -972,17 +917,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, P::reject($predicate, $collection), 'reject produces correct results.');
         foreach ($this->getCurriedResults(P::reject(), $predicate, $collection) as $result) {
             $this->assertSame($expected, $result, 'reject is curried correctly.');
-        }
-    }
-
-    /**
-     * @dataProvider getRejectIndexedData
-     */
-    public function testRejectIndexed($expected, callable $predicate, $collection)
-    {
-        $this->assertSame($expected, P::rejectIndexed($predicate, $collection), 'rejectIndexed produces correct results.');
-        foreach ($this->getCurriedResults(P::rejectIndexed(), $predicate, $collection) as $result) {
-            $this->assertSame($expected, $result, 'rejectIndexed is curried correctly.');
         }
     }
 

@@ -144,17 +144,9 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
 
     public function testEach()
     {
-        $date    = new \DateTime('2015-02-02');
-        $addDays = function ($number) use ($date) { $date->modify("+$number days"); };
-        P::each($addDays, [3, 6, 2]);
-        $this->assertSame('2015-02-13', $date->format('Y-m-d'));
-    }
-
-    public function testEachIndexed()
-    {
         $date        = new \DateTime('2015-02-02');
         $addCalendar = function ($number, $type) use ($date) { $date->modify("+$number $type"); };
-        P::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
+        P::each($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
         $this->assertSame('2015-06-15', $date->format('Y-m-d'));
     }
 
@@ -184,12 +176,6 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
     {
         $gt2 = function ($x) { return $x > 2; };
         $this->assertSame(['bar' => 3, 'baz' => 4], P::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]));
-    }
-
-    public function testFilterIndexed()
-    {
-        $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-        $this->assertSame([0 => 3, 2 => 2], P::filterIndexed($smallerThanNext, [3, 6, 2, 19]));
     }
 
     public function testFind()
@@ -266,12 +252,8 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
     {
         $square = function ($x) { return $x ** 2; };
         $this->assertSame([1, 4, 9, 16], P::map($square, [1, 2, 3, 4]));
-    }
-
-    public function testMapIndexed()
-    {
         $keyExp = function ($value, $key) { return $value ** $key; };
-        $this->assertSame([1, 2, 9, 64], P::mapIndexed($keyExp, [1, 2, 3, 4]));
+        $this->assertSame([1, 2, 9, 64], P::map($keyExp, [1, 2, 3, 4]));
     }
 
     public function testMaxBy()
@@ -358,34 +340,16 @@ class FunctionExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foobarbaz', P::reduce($concat, 'foo', ['bar', 'baz']));
     }
 
-    public function testReduceIndexed()
-    {
-        $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-        $this->assertSame('nofoobarfizbuz', P::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']));
-    }
-
     public function testReduceRight()
     {
-        $concat = function ($x, $y) { return $x . $y; };
-        $this->assertSame('foobazbar', P::reduceRight($concat, 'foo', ['bar', 'baz']));
-    }
-
-    public function testReduceRightIndexed()
-    {
         $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-        $this->assertSame('nofizbuzfoobar', P::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']));
+        $this->assertSame('nofizbuzfoobar', P::reduceRight($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']));
     }
 
     public function testReject()
     {
         $isEven = function ($x) { return $x % 2 === 0; };
         $this->assertSame([0 => 1, 2 => 3], P::reject($isEven, [1, 2, 3, 4]));
-    }
-
-    public function testRejectIndexed()
-    {
-        $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-        $this->assertSame([1 => 6, 3 => 19], P::rejectIndexed($smallerThanNext, [3, 6, 2, 19]));
     }
 
     public function testSort()

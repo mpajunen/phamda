@@ -445,27 +445,6 @@ class InnerFunctions
     }
 
     /**
-     * Calls the given function for each element in the collection and returns the original collection.
-     *
-     * Like `each`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
-     *
-     * @param callable                      $function
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return array|\Traversable|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `each` now receives three arguments as well.
-     */
-    public static function eachIndexed(callable $function, $collection)
-    {
-        foreach ($collection as $key => $item) {
-            $function($item, $key, $collection);
-        }
-
-        return $collection;
-    }
-
-    /**
      * Returns a function that returns `true` when either of the predicates matches, `false` otherwise.
      *
      * @param callable $a
@@ -558,23 +537,6 @@ class InnerFunctions
      * @return array|Collection
      */
     public static function filter(callable $predicate, $collection)
-    {
-        return static::_filter($predicate, $collection);
-    }
-
-    /**
-     * Returns a new collection containing the items that match the given predicate.
-     *
-     * Like `filter`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
-     *
-     * @param callable                      $predicate
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return array|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `filter` now receives three arguments as well.
-     */
-    public static function filterIndexed(callable $predicate, $collection)
     {
         return static::_filter($predicate, $collection);
     }
@@ -966,23 +928,6 @@ class InnerFunctions
     }
 
     /**
-     * Returns a new collection where values are created from the original collection by calling the supplied function.
-     *
-     * Like `map`, but the supplied `function` receives three arguments: `item`, `index`, `collection`.
-     *
-     * @param callable                      $function
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return array|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `map` now receives three arguments as well.
-     */
-    public static function mapIndexed(callable $function, $collection)
-    {
-        return static::_map($function, $collection);
-    }
-
-    /**
      * Returns the largest value in the collection.
      *
      * @param array|\Traversable $collection
@@ -1364,24 +1309,6 @@ class InnerFunctions
     }
 
     /**
-     * Returns a value accumulated by calling the given function for each element of the collection.
-     *
-     * Like `reduce`, but the supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
-     *
-     * @param callable           $function
-     * @param mixed              $initial
-     * @param array|\Traversable $collection
-     *
-     * @return mixed
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduce` now receives four arguments as well.
-     */
-    public static function reduceIndexed(callable $function, $initial, $collection)
-    {
-        return static::_reduce($function, $initial, $collection);
-    }
-
-    /**
      * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
      *
      * The supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
@@ -1398,24 +1325,6 @@ class InnerFunctions
     }
 
     /**
-     * Returns a value accumulated by calling the given function for each element of the collection in reverse order.
-     *
-     * Like `reduceRight`, but the supplied `function` receives four arguments: `previousValue`, `item`, `index`, `collection`.
-     *
-     * @param callable           $function
-     * @param mixed              $initial
-     * @param array|\Traversable $collection
-     *
-     * @return mixed
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reduceRight` now receives four arguments as well.
-     */
-    public static function reduceRightIndexed(callable $function, $initial, $collection)
-    {
-        return static::_reduce($function, $initial, static::_reverse($collection));
-    }
-
-    /**
      * Returns a new collection containing the items that do not match the given predicate.
      *
      * The supplied `predicate` receives three arguments: `item`, `index`, `collection`.
@@ -1426,23 +1335,6 @@ class InnerFunctions
      * @return array|Collection
      */
     public static function reject(callable $predicate, $collection)
-    {
-        return static::_filter(Phamda::not($predicate), $collection);
-    }
-
-    /**
-     * Returns a new collection containing the items that do not match the given predicate.
-     *
-     * Like `reject`, but the supplied `predicate` receives three arguments: `item`, `index`, `collection`.
-     *
-     * @param callable                      $predicate
-     * @param array|\Traversable|Collection $collection
-     *
-     * @return array|Collection
-     *
-     * @deprecated Since version 0.4, to be removed in 0.5. The callback of `reject` now receives three arguments as well.
-     */
-    public static function rejectIndexed(callable $predicate, $collection)
     {
         return static::_filter(Phamda::not($predicate), $collection);
     }

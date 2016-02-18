@@ -137,28 +137,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getEachIndexedData
-     */
-    public function testEachIndexed($expected, callable $function, $collection)
-    {
-        $_collection = new ArrayCollection($collection);
-        $result      = P::eachIndexed($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'eachIndexed works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'eachIndexed does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getEachIndexedData
-     */
-    public function testEachIndexedSimple($expected, callable $function, $collection)
-    {
-        $_collection = new ArrayContainer($collection);
-        $result      = P::eachIndexed($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'eachIndexed works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'eachIndexed does not modify original collection values.');
-    }
-
-    /**
      * @dataProvider getFilterData
      */
     public function testFilter($expected, callable $predicate, $collection)
@@ -178,28 +156,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result      = P::filter($predicate, $_collection);
         $this->assertSame($expected, $result, 'filter works for simple collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'filter does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getFilterIndexedData
-     */
-    public function testFilterIndexed($expected, callable $predicate, $collection)
-    {
-        $_collection = new ArrayCollection($collection);
-        $result      = P::filterIndexed($predicate, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'filterIndexed works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'filterIndexed does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getFilterIndexedData
-     */
-    public function testFilterIndexedSimple($expected, callable $predicate, $collection)
-    {
-        $_collection = new ArrayContainer($collection);
-        $result      = P::filterIndexed($predicate, $_collection);
-        $this->assertSame($expected, $result, 'filterIndexed works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'filterIndexed does not modify original collection values.');
     }
 
     /**
@@ -423,28 +379,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getMapIndexedData
-     */
-    public function testMapIndexed($expected, callable $function, $collection)
-    {
-        $_collection = new ArrayCollection($collection);
-        $result      = P::mapIndexed($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'mapIndexed works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'mapIndexed does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getMapIndexedData
-     */
-    public function testMapIndexedSimple($expected, callable $function, $collection)
-    {
-        $_collection = new ArrayContainer($collection);
-        $result      = P::mapIndexed($function, $_collection);
-        $this->assertSame($expected, $result, 'mapIndexed works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'mapIndexed does not modify original collection values.');
-    }
-
-    /**
      * @dataProvider getMaxData
      */
     public function testMax($expected, $collection)
@@ -665,28 +599,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getReduceIndexedData
-     */
-    public function testReduceIndexed($expected, callable $function, $initial, $collection)
-    {
-        $_collection = new ArrayCollection($collection);
-        $result      = P::reduceIndexed($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduceIndexed works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduceIndexed does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getReduceIndexedData
-     */
-    public function testReduceIndexedSimple($expected, callable $function, $initial, $collection)
-    {
-        $_collection = new ArrayContainer($collection);
-        $result      = P::reduceIndexed($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduceIndexed works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduceIndexed does not modify original collection values.');
-    }
-
-    /**
      * @dataProvider getReduceRightData
      */
     public function testReduceRight($expected, callable $function, $initial, $collection)
@@ -709,28 +621,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getReduceRightIndexedData
-     */
-    public function testReduceRightIndexed($expected, callable $function, $initial, $collection)
-    {
-        $_collection = new ArrayCollection($collection);
-        $result      = P::reduceRightIndexed($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduceRightIndexed works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduceRightIndexed does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getReduceRightIndexedData
-     */
-    public function testReduceRightIndexedSimple($expected, callable $function, $initial, $collection)
-    {
-        $_collection = new ArrayContainer($collection);
-        $result      = P::reduceRightIndexed($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduceRightIndexed works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduceRightIndexed does not modify original collection values.');
-    }
-
-    /**
      * @dataProvider getRejectData
      */
     public function testReject($expected, callable $predicate, $collection)
@@ -750,28 +640,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result      = P::reject($predicate, $_collection);
         $this->assertSame($expected, $result, 'reject works for simple collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'reject does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getRejectIndexedData
-     */
-    public function testRejectIndexed($expected, callable $predicate, $collection)
-    {
-        $_collection = new ArrayCollection($collection);
-        $result      = P::rejectIndexed($predicate, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'rejectIndexed works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'rejectIndexed does not modify original collection values.');
-    }
-
-    /**
-     * @dataProvider getRejectIndexedData
-     */
-    public function testRejectIndexedSimple($expected, callable $predicate, $collection)
-    {
-        $_collection = new ArrayContainer($collection);
-        $result      = P::rejectIndexed($predicate, $_collection);
-        $this->assertSame($expected, $result, 'rejectIndexed works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'rejectIndexed does not modify original collection values.');
     }
 
     /**
