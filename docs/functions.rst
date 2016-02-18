@@ -1,7 +1,7 @@
 Phamda functions
 ================
 
-Currently included functions (110):
+Currently included functions (104):
 
 
 
@@ -411,28 +411,8 @@ The supplied ``function`` receives three arguments: ``item``, ``index``, ``colle
 .. code-block:: php
 
     $date = new \DateTime('2015-02-02');
-    $addDays = function ($number) use ($date) { $date->modify("+{$number} days"); };
-    P::each($addDays, [3, 6, 2]);
-    $date->format('Y-m-d'); // => '2015-02-13'
-
-
-.. _eachIndexed:
-
-eachIndexed
------------
-``array|\Traversable|Collection P::eachIndexed(callable $function, array|\Traversable|Collection $collection)``
-
-Deprecated since version 0.4, to be removed in 0.5. The callback of ``each`` now receives three arguments as well.
-
-Calls the given function for each element in the collection and returns the original collection.
-
-Like ``each``, but the supplied ``function`` receives three arguments: ``item``, ``index``, ``collection``.
-
-.. code-block:: php
-
-    $date = new \DateTime('2015-02-02');
     $addCalendar = function ($number, $type) use ($date) { $date->modify("+{$number} {$type}"); };
-    P::eachIndexed($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
+    P::each($addCalendar, ['months' => 3, 'weeks' => 6, 'days' => 2]);
     $date->format('Y-m-d'); // => '2015-06-15'
 
 
@@ -526,24 +506,6 @@ The supplied ``predicate`` receives three arguments: ``item``, ``index``, ``coll
 
     $gt2 = function ($x) { return $x > 2; };
     P::filter($gt2, ['foo' => 2, 'bar' => 3, 'baz' => 4]); // => ['bar' => 3, 'baz' => 4]
-
-
-.. _filterIndexed:
-
-filterIndexed
--------------
-``array|Collection P::filterIndexed(callable $predicate, array|\Traversable|Collection $collection)``
-
-Deprecated since version 0.4, to be removed in 0.5. The callback of ``filter`` now receives three arguments as well.
-
-Returns a new collection containing the items that match the given predicate.
-
-Like ``filter``, but the supplied ``predicate`` receives three arguments: ``item``, ``index``, ``collection``.
-
-.. code-block:: php
-
-    $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-    P::filterIndexed($smallerThanNext, [3, 6, 2, 19]); // => [0 => 3, 2 => 2]
 
 
 .. _find:
@@ -896,24 +858,8 @@ The supplied ``function`` receives three arguments: ``item``, ``index``, ``colle
 
     $square = function ($x) { return $x ** 2; };
     P::map($square, [1, 2, 3, 4]); // => [1, 4, 9, 16]
-
-
-.. _mapIndexed:
-
-mapIndexed
-----------
-``array|Collection P::mapIndexed(callable $function, array|\Traversable|Collection $collection)``
-
-Deprecated since version 0.4, to be removed in 0.5. The callback of ``map`` now receives three arguments as well.
-
-Returns a new collection where values are created from the original collection by calling the supplied function.
-
-Like ``map``, but the supplied ``function`` receives three arguments: ``item``, ``index``, ``collection``.
-
-.. code-block:: php
-
     $keyExp = function ($value, $key) { return $value ** $key; };
-    P::mapIndexed($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
+    P::map($keyExp, [1, 2, 3, 4]); // => [1, 2, 9, 64]
 
 
 .. _max:
@@ -1297,24 +1243,6 @@ The supplied ``function`` receives four arguments: ``previousValue``, ``item``, 
     P::reduce($concat, 'foo', ['bar', 'baz']); // => 'foobarbaz'
 
 
-.. _reduceIndexed:
-
-reduceIndexed
--------------
-``mixed P::reduceIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
-
-Deprecated since version 0.4, to be removed in 0.5. The callback of ``reduce`` now receives four arguments as well.
-
-Returns a value accumulated by calling the given function for each element of the collection.
-
-Like ``reduce``, but the supplied ``function`` receives four arguments: ``previousValue``, ``item``, ``index``, ``collection``.
-
-.. code-block:: php
-
-    $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-    P::reduceIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofoobarfizbuz'
-
-
 .. _reduceRight:
 
 reduceRight
@@ -1327,26 +1255,8 @@ The supplied ``function`` receives four arguments: ``previousValue``, ``item``, 
 
 .. code-block:: php
 
-    $concat = function ($x, $y) { return $x . $y; };
-    P::reduceRight($concat, 'foo', ['bar', 'baz']); // => 'foobazbar'
-
-
-.. _reduceRightIndexed:
-
-reduceRightIndexed
-------------------
-``mixed P::reduceRightIndexed(callable $function, mixed $initial, array|\Traversable $collection)``
-
-Deprecated since version 0.4, to be removed in 0.5. The callback of ``reduceRight`` now receives four arguments as well.
-
-Returns a value accumulated by calling the given function for each element of the collection in reverse order.
-
-Like ``reduceRight``, but the supplied ``function`` receives four arguments: ``previousValue``, ``item``, ``index``, ``collection``.
-
-.. code-block:: php
-
     $concat = function ($accumulator, $value, $key) { return $accumulator . $key . $value; };
-    P::reduceRightIndexed($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
+    P::reduceRight($concat, 'no', ['foo' => 'bar', 'fiz' => 'buz']); // => 'nofizbuzfoobar'
 
 
 .. _reject:
@@ -1363,24 +1273,6 @@ The supplied ``predicate`` receives three arguments: ``item``, ``index``, ``coll
 
     $isEven = function ($x) { return $x % 2 === 0; };
     P::reject($isEven, [1, 2, 3, 4]); // => [0 => 1, 2 => 3]
-
-
-.. _rejectIndexed:
-
-rejectIndexed
--------------
-``array|Collection P::rejectIndexed(callable $predicate, array|\Traversable|Collection $collection)``
-
-Deprecated since version 0.4, to be removed in 0.5. The callback of ``reject`` now receives three arguments as well.
-
-Returns a new collection containing the items that do not match the given predicate.
-
-Like ``reject``, but the supplied ``predicate`` receives three arguments: ``item``, ``index``, ``collection``.
-
-.. code-block:: php
-
-    $smallerThanNext = function ($value, $key, $list) { return isset($list[$key + 1]) ? $value < $list[$key + 1] : false; };
-    P::rejectIndexed($smallerThanNext, [3, 6, 2, 19]); // => [1 => 6, 3 => 19]
 
 
 .. _reverse:
