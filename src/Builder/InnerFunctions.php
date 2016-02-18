@@ -438,7 +438,7 @@ class InnerFunctions
     public static function each(callable $function, $collection)
     {
         foreach ($collection as $key => $item) {
-            $function($item);
+            $function($item, $key, $collection);
         }
 
         return $collection;

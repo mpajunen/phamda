@@ -644,7 +644,7 @@ class Phamda
     {
         return static::curry2(function (callable $function, $collection) {
             foreach ($collection as $key => $item) {
-                $function($item);
+                $function($item, $key, $collection);
             }
 
             return $collection;
