@@ -58,6 +58,11 @@ interface Collection
     public function first();
 
     /**
+     * @return Collection
+     */
+    public function fromPairs();
+
+    /**
      * @param callable $function
      *
      * @return Collection[]
@@ -114,4 +119,9 @@ interface Collection
      * @return Collection
      */
     public function sort(callable $comparator);
+
+    /**
+     * @return Collection
+     */
+    public function toPairs();
 }

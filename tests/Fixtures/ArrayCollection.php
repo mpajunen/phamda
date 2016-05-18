@@ -65,6 +65,19 @@ class ArrayCollection extends ArrayContainer implements Collection
     }
 
     /**
+     * @return static
+     */
+    public function fromPairs()
+    {
+        $values = [];
+        foreach ($this->values as list($key, $value)) {
+            $values[$key] = $value;
+        }
+
+        return new static($values);
+    }
+
+    /**
      * @param callable $function
      *
      * @return static[]
@@ -181,6 +194,19 @@ class ArrayCollection extends ArrayContainer implements Collection
     {
         $values = $this->values;
         usort($values, $comparator);
+
+        return new static($values);
+    }
+
+    /**
+     * @return static
+     */
+    public function toPairs()
+    {
+        $values = [];
+        foreach ($this->values as $key => $value) {
+            $values[] = [$key, $value];
+        }
 
         return new static($values);
     }

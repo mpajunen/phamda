@@ -269,6 +269,28 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFromPairsData
+     */
+    public function testFromPairs($expected, $list = null)
+    {
+        $_list  = new ArrayCollection($list);
+        $result = P::fromPairs($_list);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'fromPairs works for collection objects.');
+        $this->assertSame($list, $_list->toArray(), 'fromPairs does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getFromPairsData
+     */
+    public function testFromPairsSimple($expected, $list = null)
+    {
+        $_list  = new ArrayContainer($list);
+        $result = P::fromPairs($_list);
+        $this->assertSame($expected, $result, 'fromPairs works for simple collection objects.');
+        $this->assertSame($list, $_list->toArray(), 'fromPairs does not modify original collection values.');
+    }
+
+    /**
      * @dataProvider getGroupByData
      */
     public function testGroupBy($expected, callable $function, $collection)
@@ -772,5 +794,27 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result      = P::tail($_collection);
         $this->assertSame($expected, $result, 'tail works for simple collection objects.');
         $this->assertSame($collection, $_collection->toArray(), 'tail does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getToPairsData
+     */
+    public function testToPairs($expected, $map = null)
+    {
+        $_map   = new ArrayCollection($map);
+        $result = P::toPairs($_map);
+        $this->assertSame($expected, $this->getCollectionArray($result), 'toPairs works for collection objects.');
+        $this->assertSame($map, $_map->toArray(), 'toPairs does not modify original collection values.');
+    }
+
+    /**
+     * @dataProvider getToPairsData
+     */
+    public function testToPairsSimple($expected, $map = null)
+    {
+        $_map   = new ArrayContainer($map);
+        $result = P::toPairs($_map);
+        $this->assertSame($expected, $result, 'toPairs works for simple collection objects.');
+        $this->assertSame($map, $_map->toArray(), 'toPairs does not modify original collection values.');
     }
 }
