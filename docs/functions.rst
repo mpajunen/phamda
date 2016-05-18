@@ -250,7 +250,7 @@ Creates a comparator function from a function that returns whether the first arg
 
 compose
 -------
-``callable P::compose(callable ... $functions)``
+``callable P::compose(callable ...$functions)``
 
 Returns a new function that calls each supplied function in turn in reverse order and passes the result as a parameter to the next function.
 
@@ -285,7 +285,7 @@ Returns a string concatenated of ``a`` and ``b``.
 
 construct
 ---------
-``object P::construct(string $class, mixed ... $initialArguments)``
+``object P::construct(string $class, mixed ...$initialArguments)``
 
 Wraps the constructor of the given class to a function.
 
@@ -299,7 +299,7 @@ Wraps the constructor of the given class to a function.
 
 constructN
 ----------
-``object P::constructN(int $arity, string $class, mixed ... $initialArguments)``
+``object P::constructN(int $arity, string $class, mixed ...$initialArguments)``
 
 Wraps the constructor of the given class to a function of specified arity.
 
@@ -327,7 +327,7 @@ Returns ``true`` if the specified item is found in the collection, ``false`` oth
 
 curry
 -----
-``callable|mixed P::curry(callable $function, mixed ... $initialArguments)``
+``callable|mixed P::curry(callable $function, mixed ...$initialArguments)``
 
 Wraps the given function to a function that returns a new function until all required parameters are given.
 
@@ -342,7 +342,7 @@ Wraps the given function to a function that returns a new function until all req
 
 curryN
 ------
-``callable|mixed P::curryN(int $length, callable $function, mixed ... $initialArguments)``
+``callable|mixed P::curryN(int $length, callable $function, mixed ...$initialArguments)``
 
 Wraps the given function to a function of specified arity that returns a new function until all required parameters are given.
 
@@ -759,7 +759,7 @@ Returns the index of the given item in a collection, or ``false`` if the item is
 
 invoker
 -------
-``callable P::invoker(int $arity, string $method, mixed ... $initialArguments)``
+``callable P::invoker(int $arity, string $method, mixed ...$initialArguments)``
 
 Returns a function that calls the specified method of a given object.
 
@@ -1034,7 +1034,7 @@ Wraps a predicate and returns a function that return ``true`` if the wrapped fun
 
 partial
 -------
-``callable P::partial(callable $function, mixed ... $initialArguments)``
+``callable P::partial(callable $function, mixed ...$initialArguments)``
 
 Wraps the given function and returns a new function that can be called with the remaining parameters.
 
@@ -1051,7 +1051,7 @@ Wraps the given function and returns a new function that can be called with the 
 
 partialN
 --------
-``callable P::partialN(int $arity, callable $function, mixed ... $initialArguments)``
+``callable P::partialN(int $arity, callable $function, mixed ...$initialArguments)``
 
 Wraps the given function and returns a new function of fixed arity that can be called with the remaining parameters.
 
@@ -1139,7 +1139,7 @@ Returns a new array, containing the values that have keys matching the given lis
 
 pipe
 ----
-``callable P::pipe(callable ... $functions)``
+``callable P::pipe(callable ...$functions)``
 
 Returns a new function that calls each supplied function in turn and passes the result as a parameter to the next function.
 
@@ -1513,7 +1513,7 @@ Wraps the given function in a function that accepts exactly one parameter.
 
 unapply
 -------
-``mixed P::unapply(callable $function, mixed ... $arguments)``
+``mixed P::unapply(callable $function, mixed ...$arguments)``
 
 Calls the ``function`` using the given ``arguments`` as a single array list argument.
 

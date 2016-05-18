@@ -57,7 +57,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAllPassData
      */
-    public function testAllPass($expected, array $predicates, ... $arguments)
+    public function testAllPass($expected, array $predicates, ...$arguments)
     {
         $main0 = P::allPass($predicates);
         $this->assertSame($expected, $main0(...$arguments), 'allPass produces correct results.');
@@ -92,7 +92,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getAnyPassData
      */
-    public function testAnyPass($expected, array $predicates, ... $arguments)
+    public function testAnyPass($expected, array $predicates, ...$arguments)
     {
         $main0 = P::anyPass($predicates);
         $this->assertSame($expected, $main0(...$arguments), 'anyPass produces correct results.');
@@ -160,7 +160,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getBothData
      */
-    public function testBoth($expected, callable $a, callable $b, ... $arguments)
+    public function testBoth($expected, callable $a, callable $b, ...$arguments)
     {
         $main0 = P::both($a, $b);
         $this->assertSame($expected, $main0(...$arguments), 'both produces correct results.');
@@ -195,7 +195,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getComposeData
      */
-    public function testCompose($expected, array $functions, ... $arguments)
+    public function testCompose($expected, array $functions, ...$arguments)
     {
         $main0 = P::compose(...$functions);
         $this->assertSame($expected, $main0(...$arguments), 'compose produces correct results.');
@@ -226,7 +226,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getCurryData
      */
-    public function testCurry($expected, callable $function, ... $initialArguments)
+    public function testCurry($expected, callable $function, ...$initialArguments)
     {
         $this->assertSame($expected, P::curry($function, ...$initialArguments), 'curry produces correct results.');
         foreach ($this->getCurriedResults(P::curry(), $function) as $result) {
@@ -237,7 +237,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getCurryNData
      */
-    public function testCurryN($expected, $length, callable $function, ... $initialArguments)
+    public function testCurryN($expected, $length, callable $function, ...$initialArguments)
     {
         $this->assertSame($expected, P::curryN($length, $function, ...$initialArguments), 'curryN produces correct results.');
         foreach ($this->getCurriedResults(P::curryN(), $length, $function) as $result) {
@@ -292,7 +292,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getEitherData
      */
-    public function testEither($expected, callable $a, callable $b, ... $arguments)
+    public function testEither($expected, callable $a, callable $b, ...$arguments)
     {
         $main0 = P::either($a, $b);
         $this->assertSame($expected, $main0(...$arguments), 'either produces correct results.');
@@ -445,7 +445,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getFlipData
      */
-    public function testFlip($expected, callable $function, $a, $b, ... $arguments)
+    public function testFlip($expected, callable $function, $a, $b, ...$arguments)
     {
         $main0 = P::flip($function);
         $this->assertSame($expected, $main0($a, $b, ...$arguments), 'flip produces correct results.');
@@ -501,7 +501,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getIfElseData
      */
-    public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, ... $arguments)
+    public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, ...$arguments)
     {
         $main0 = P::ifElse($condition, $onTrue, $onFalse);
         $this->assertSame($expected, $main0(...$arguments), 'ifElse produces correct results.');
@@ -546,7 +546,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getInvokerData
      */
-    public function testInvoker($expected, $arity, $method, array $initialArguments, ... $arguments)
+    public function testInvoker($expected, $arity, $method, array $initialArguments, ...$arguments)
     {
         $main0 = P::invoker($arity, $method, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'invoker produces correct results.');
@@ -701,7 +701,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getNAryData
      */
-    public function testNAry($expected, $arity, callable $function, ... $arguments)
+    public function testNAry($expected, $arity, callable $function, ...$arguments)
     {
         $main0 = P::nAry($arity, $function);
         $this->assertSame($expected, $main0(...$arguments), 'nAry produces correct results.');
@@ -735,7 +735,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getNotData
      */
-    public function testNot($expected, callable $predicate, ... $arguments)
+    public function testNot($expected, callable $predicate, ...$arguments)
     {
         $main0 = P::not($predicate);
         $this->assertSame($expected, $main0(...$arguments), 'not produces correct results.');
@@ -747,7 +747,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPartialData
      */
-    public function testPartial($expected, callable $function, array $initialArguments, ... $arguments)
+    public function testPartial($expected, callable $function, array $initialArguments, ...$arguments)
     {
         $main0 = P::partial($function, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'partial produces correct results.');
@@ -759,7 +759,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPartialNData
      */
-    public function testPartialN($expected, $arity, callable $function, array $initialArguments, ... $arguments)
+    public function testPartialN($expected, $arity, callable $function, array $initialArguments, ...$arguments)
     {
         $main0 = P::partialN($arity, $function, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'partialN produces correct results.');
@@ -826,7 +826,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getPipeData
      */
-    public function testPipe($expected, array $functions, ... $arguments)
+    public function testPipe($expected, array $functions, ...$arguments)
     {
         $main0 = P::pipe(...$functions);
         $this->assertSame($expected, $main0(...$arguments), 'pipe produces correct results.');
@@ -1098,7 +1098,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getUnapplyData
      */
-    public function testUnapply($expected, callable $function, ... $arguments)
+    public function testUnapply($expected, callable $function, ...$arguments)
     {
         $this->assertSame($expected, P::unapply($function, ...$arguments), 'unapply produces correct results.');
         foreach ($this->getCurriedResults(P::unapply(), $function) as $result) {

@@ -106,7 +106,7 @@ class Phamda
     public static function allPass($predicates = null)
     {
         return static::curry1(function (array $predicates) {
-            return function (... $arguments) use ($predicates) {
+            return function (...$arguments) use ($predicates) {
                 foreach ($predicates as $predicate) {
                     if (! $predicate(...$arguments)) {
                         return false;
@@ -185,7 +185,7 @@ class Phamda
     public static function anyPass($predicates = null)
     {
         return static::curry1(function (array $predicates) {
-            return function (... $arguments) use ($predicates) {
+            return function (...$arguments) use ($predicates) {
                 foreach ($predicates as $predicate) {
                     if ($predicate(...$arguments)) {
                         return true;
@@ -338,7 +338,7 @@ class Phamda
     public static function both($a = null, $b = null)
     {
         return static::curry2(function (callable $a, callable $b) {
-            return function (... $arguments) use ($a, $b) {
+            return function (...$arguments) use ($a, $b) {
                 return $a(...$arguments) && $b(...$arguments);
             };
         }, func_get_args());
@@ -424,7 +424,7 @@ class Phamda
      *
      * @return callable
      */
-    public static function compose(... $functions)
+    public static function compose(...$functions)
     {
         return Phamda::pipe(...array_reverse($functions));
     }
@@ -462,9 +462,9 @@ class Phamda
      *
      * @return callable|object
      */
-    public static function construct($class = null, ... $initialArguments)
+    public static function construct($class = null, ...$initialArguments)
     {
-        return static::curry1(function ($class, ... $initialArguments) {
+        return static::curry1(function ($class, ...$initialArguments) {
             return Phamda::constructN(static::getConstructorArity($class), $class, ...$initialArguments);
         }, func_get_args());
     }
@@ -483,10 +483,10 @@ class Phamda
      *
      * @return callable|object
      */
-    public static function constructN($arity = null, $class = null, ... $initialArguments)
+    public static function constructN($arity = null, $class = null, ...$initialArguments)
     {
-        return static::curry2(function ($arity, $class, ... $initialArguments) {
-            return static::_curryN($arity, function (... $arguments) use ($class) {
+        return static::curry2(function ($arity, $class, ...$initialArguments) {
+            return static::_curryN($arity, function (...$arguments) use ($class) {
                 return new $class(...array_merge($arguments));
             }, ...$initialArguments);
         }, func_get_args());
@@ -532,9 +532,9 @@ class Phamda
      *
      * @return callable|mixed
      */
-    public static function curry($function = null, ... $initialArguments)
+    public static function curry($function = null, ...$initialArguments)
     {
-        return static::curry1(function (callable $function, ... $initialArguments) {
+        return static::curry1(function (callable $function, ...$initialArguments) {
             return static::_curryN(static::getArity($function), $function, ...$initialArguments);
         }, func_get_args());
     }
@@ -556,9 +556,9 @@ class Phamda
      *
      * @return callable|mixed
      */
-    public static function curryN($length = null, $function = null, ... $initialArguments)
+    public static function curryN($length = null, $function = null, ...$initialArguments)
     {
-        return static::curry2(function ($length, callable $function, ... $initialArguments) {
+        return static::curry2(function ($length, callable $function, ...$initialArguments) {
             return static::_curryN($length, $function, ...$initialArguments);
         }, func_get_args());
     }
@@ -671,7 +671,7 @@ class Phamda
     public static function either($a = null, $b = null)
     {
         return static::curry2(function (callable $a, callable $b) {
-            return function (... $arguments) use ($a, $b) {
+            return function (...$arguments) use ($a, $b) {
                 return $a(...$arguments) || $b(...$arguments);
             };
         }, func_get_args());
@@ -1000,7 +1000,7 @@ class Phamda
     public static function flip($function = null)
     {
         return static::curry1(function (callable $function) {
-            return function ($a, $b, ... $arguments) use ($function) {
+            return function ($a, $b, ...$arguments) use ($function) {
                 return $function($b, $a, ...$arguments);
             };
         }, func_get_args());
@@ -1115,7 +1115,7 @@ class Phamda
     public static function ifElse($condition = null, $onTrue = null, $onFalse = null)
     {
         return static::curry3(function (callable $condition, callable $onTrue, callable $onFalse) {
-            return function (... $arguments) use ($condition, $onTrue, $onFalse) {
+            return function (...$arguments) use ($condition, $onTrue, $onFalse) {
                 return $condition(...$arguments) ? $onTrue(...$arguments) : $onFalse(...$arguments);
             };
         }, func_get_args());
@@ -1202,12 +1202,12 @@ class Phamda
      *
      * @return callable
      */
-    public static function invoker($arity = null, $method = null, ... $initialArguments)
+    public static function invoker($arity = null, $method = null, ...$initialArguments)
     {
-        return static::curry2(function ($arity, $method, ... $initialArguments) {
+        return static::curry2(function ($arity, $method, ...$initialArguments) {
             $remainingCount = $arity - count($initialArguments) + 1;
 
-            return static::_curryN($remainingCount, function (... $arguments) use ($method, $initialArguments) {
+            return static::_curryN($remainingCount, function (...$arguments) use ($method, $initialArguments) {
                 $object = array_pop($arguments);
 
                 return $object->{$method}(...array_merge($initialArguments, $arguments));
@@ -1529,7 +1529,7 @@ class Phamda
     public static function nAry($arity = null, $function = null)
     {
         return static::curry2(function ($arity, callable $function) {
-            return function (... $arguments) use ($arity, $function) {
+            return function (...$arguments) use ($arity, $function) {
                 return $function(...array_slice($arguments, 0, $arity));
             };
         }, func_get_args());
@@ -1593,7 +1593,7 @@ class Phamda
     public static function not($predicate = null)
     {
         return static::curry1(function (callable $predicate) {
-            return function (... $arguments) use ($predicate) {
+            return function (...$arguments) use ($predicate) {
                 return ! $predicate(...$arguments);
             };
         }, func_get_args());
@@ -1615,9 +1615,9 @@ class Phamda
      *
      * @return callable
      */
-    public static function partial($function = null, ... $initialArguments)
+    public static function partial($function = null, ...$initialArguments)
     {
-        return static::curry1(function (callable $function, ... $initialArguments) {
+        return static::curry1(function (callable $function, ...$initialArguments) {
             return static::_partialN(static::getArity($function), $function, ...$initialArguments);
         }, func_get_args());
     }
@@ -1638,9 +1638,9 @@ class Phamda
      *
      * @return callable
      */
-    public static function partialN($arity = null, $function = null, ... $initialArguments)
+    public static function partialN($arity = null, $function = null, ...$initialArguments)
     {
-        return static::curry2(function ($arity, callable $function, ... $initialArguments) {
+        return static::curry2(function ($arity, callable $function, ...$initialArguments) {
             return static::_partialN($arity, $function, ...$initialArguments);
         }, func_get_args());
     }
@@ -1791,13 +1791,13 @@ class Phamda
      *
      * @return callable
      */
-    public static function pipe(... $functions)
+    public static function pipe(...$functions)
     {
         if (count($functions) < 2) {
             throw InvalidFunctionCompositionException::create();
         }
 
-        return function (... $arguments) use ($functions) {
+        return function (...$arguments) use ($functions) {
             $result = null;
             foreach ($functions as $function) {
                 $result = $result !== null ? $function($result) : $function(...$arguments);
@@ -2340,9 +2340,9 @@ class Phamda
      *
      * @return callable|mixed
      */
-    public static function unapply($function = null, ... $arguments)
+    public static function unapply($function = null, ...$arguments)
     {
-        return static::curry2(function (callable $function, ... $arguments) {
+        return static::curry2(function (callable $function, ...$arguments) {
             return $function($arguments);
         }, func_get_args());
     }
