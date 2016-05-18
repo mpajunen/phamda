@@ -691,6 +691,27 @@ class InnerFunctions
     }
 
     /**
+     * Creates a new map from a list of key-value pairs.
+     *
+     * @param array|\Traversable|Collection $list
+     *
+     * @return array|Collection
+     */
+    public static function fromPairs($list = null)
+    {
+        if (method_exists($list, 'fromPairs')) {
+            return $list->fromPairs();
+        }
+
+        $map = [];
+        foreach ($list as list($key, $value)) {
+            $map[$key] = $value;
+        }
+
+        return $map;
+    }
+
+    /**
      * Returns an array of sub collections based on a function that returns the group keys for each item.
      *
      * @param callable                      $function
@@ -1527,6 +1548,27 @@ class InnerFunctions
     public static function times(callable $function, $count)
     {
         return static::_map($function, range(0, $count - 1));
+    }
+
+    /**
+     * Creates a new list of pairs from  from a list of key-value pairs.
+     *
+     * @param array|\Traversable|Collection $map
+     *
+     * @return array|Collection
+     */
+    public static function toPairs($map = null)
+    {
+        if (method_exists($map, 'toPairs')) {
+            return $map->toPairs();
+        }
+
+        $list = [];
+        foreach ($map as $key => $value) {
+            $list[] = [$key, $value];
+        }
+
+        return $list;
     }
 
     /**

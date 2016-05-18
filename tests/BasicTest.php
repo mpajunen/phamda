@@ -455,6 +455,17 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getFromPairsData
+     */
+    public function testFromPairs($expected, $list = null)
+    {
+        $this->assertSame($expected, P::fromPairs($list), 'fromPairs produces correct results.');
+        foreach ($this->getCurriedResults(P::fromPairs(), $list) as $result) {
+            $this->assertSame($expected, $result, 'fromPairs is curried correctly.');
+        }
+    }
+
+    /**
      * @dataProvider getGroupByData
      */
     public function testGroupBy($expected, callable $function, $collection)
@@ -1071,6 +1082,17 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, P::times($function, $count), 'times produces correct results.');
         foreach ($this->getCurriedResults(P::times(), $function, $count) as $result) {
             $this->assertSame($expected, $result, 'times is curried correctly.');
+        }
+    }
+
+    /**
+     * @dataProvider getToPairsData
+     */
+    public function testToPairs($expected, $map = null)
+    {
+        $this->assertSame($expected, P::toPairs($map), 'toPairs produces correct results.');
+        foreach ($this->getCurriedResults(P::toPairs(), $map) as $result) {
+            $this->assertSame($expected, $result, 'toPairs is curried correctly.');
         }
     }
 

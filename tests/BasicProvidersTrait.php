@@ -459,6 +459,14 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getFromPairsData()
+    {
+        return [
+            [['a' => 'b', 'c' => 'd'], [['a', 'b'], ['c', 'd']]],
+            [[3 => 'b', 5 => null], [[3, 'b'], [5, null]]],
+        ];
+    }
+
     public function getGroupByData()
     {
         $firstChar = function ($string) { return $string[0]; };
@@ -1048,6 +1056,14 @@ trait BasicProvidersTrait
         return [
             [[0, 1, 2, 3, 4], P::identity(), 5],
             [[0, 2, 4, 6, 8], $double, 5],
+        ];
+    }
+
+    public function getToPairsData()
+    {
+        return [
+            [[['a', 'b'], ['c', 'd']], ['a' => 'b', 'c' => 'd']],
+            [[[3, 'b'], [5, null]], [3 => 'b', 5 => null]],
         ];
     }
 

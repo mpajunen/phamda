@@ -1,7 +1,7 @@
 Phamda functions
 ================
 
-Currently included functions (104):
+Currently included functions (106):
 
 
 
@@ -635,6 +635,20 @@ Wraps the given function and returns a new function for which the order of the f
     $sub = function ($x, $y) { return $x - $y; };
     $flippedSub = P::flip($sub);
     $flippedSub(20, 30); // => 10
+
+
+.. _fromPairs:
+
+fromPairs
+---------
+``array|Collection P::fromPairs(array|\Traversable|Collection $list = null)``
+
+Creates a new map from a list of key-value pairs.
+
+.. code-block:: php
+
+    P::fromPairs([['a', 'b'], ['c', 'd']]); // => ['a' => 'b', 'c' => 'd']
+    P::fromPairs([[3, 'b'], [5, null]]); // => [3 => 'b', 5 => null]
 
 
 .. _groupBy:
@@ -1478,6 +1492,20 @@ Calls the provided function the specified number of times and returns the result
 
     $double = function ($number) { return $number * 2; };
     P::times($double, 5); // => [0, 2, 4, 6, 8]
+
+
+.. _toPairs:
+
+toPairs
+-------
+``array|Collection P::toPairs(array|\Traversable|Collection $map = null)``
+
+Creates a new list of pairs from  from a list of key-value pairs.
+
+.. code-block:: php
+
+    P::toPairs(['a' => 'b', 'c' => 'd']); // => [['a', 'b'], ['c', 'd']]
+    P::toPairs([3 => 'b', 5 => null]); // => [[3, 'b'], [5, null]]
 
 
 .. _true:

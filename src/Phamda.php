@@ -1007,6 +1007,33 @@ class Phamda
     }
 
     /**
+     * Creates a new map from a list of key-value pairs.
+     *
+     * ```php
+     * P::fromPairs([['a', 'b'], ['c', 'd']]); // => ['a' => 'b', 'c' => 'd']
+     * P::fromPairs([[3, 'b'], [5, null]]); // => [3 => 'b', 5 => null]
+     * ```
+     *
+     * @param array|\Traversable|Collection $list
+     *
+     * @return callable|array|Collection
+     */
+    public static function fromPairs($list = null)
+    {
+        return static::curry1(function ($list = null) {
+            if (method_exists($list, 'fromPairs')) {
+                return $list->fromPairs();
+            }
+            $map = [];
+            foreach ($list as list($key, $value)) {
+                $map[$key] = $value;
+            }
+
+            return $map;
+        }, func_get_args());
+    }
+
+    /**
      * Returns an array of sub collections based on a function that returns the group keys for each item.
      *
      * ```php
@@ -2283,6 +2310,33 @@ class Phamda
     {
         return static::curry2(function (callable $function, $count) {
             return static::_map($function, range(0, $count - 1));
+        }, func_get_args());
+    }
+
+    /**
+     * Creates a new list of pairs from  from a list of key-value pairs.
+     *
+     * ```php
+     * P::toPairs(['a' => 'b', 'c' => 'd']); // => [['a', 'b'], ['c', 'd']]
+     * P::toPairs([3 => 'b', 5 => null]); // => [[3, 'b'], [5, null]]
+     * ```
+     *
+     * @param array|\Traversable|Collection $map
+     *
+     * @return callable|array|Collection
+     */
+    public static function toPairs($map = null)
+    {
+        return static::curry1(function ($map = null) {
+            if (method_exists($map, 'toPairs')) {
+                return $map->toPairs();
+            }
+            $list = [];
+            foreach ($map as $key => $value) {
+                $list[] = [$key, $value];
+            }
+
+            return $list;
         }, func_get_args());
     }
 
