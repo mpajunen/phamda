@@ -11,13 +11,13 @@ Using composer: `composer require phamda/phamda`
 
 ## Documentation
 
-Documentation [is available on Read the Docs](https://phamda.readthedocs.org).
+Documentation [is available on Read the Docs](https://phamda.readthedocs.io).
 
 
 ## Examples
 
 These examples highlight the major features of Phamda. Basic usage examples can also be found on the
-[function list](https://phamda.readthedocs.org/en/latest/functions.html).
+[function list](https://phamda.readthedocs.io/en/latest/functions.html).
 
 
 ### Currying
