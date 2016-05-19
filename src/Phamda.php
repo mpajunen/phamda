@@ -734,9 +734,11 @@ class Phamda
     /**
      * Returns an array containing the parts of a string split by the given delimiter.
      *
+     * If the delimiter is an empty string, returns a char array.
+     *
      * ```php
      * P::explode('/', 'f/o/o'); // => ['f', 'o', 'o']
-     * P::explode('.', 'a.b.cd.'); // => ['a', 'b', 'cd', '']
+     * P::explode('', 'b/a/z'); // => ['b', '/', 'a', '/', 'z']
      * P::explode('.', ''); // => ['']
      * ```
      *
@@ -748,7 +750,7 @@ class Phamda
     public static function explode($delimiter = null, $string = null)
     {
         return static::curry2(function ($delimiter, $string) {
-            return explode($delimiter, $string);
+            return $delimiter === '' ? str_split($string) : explode($delimiter, $string);
         }, func_get_args());
     }
 

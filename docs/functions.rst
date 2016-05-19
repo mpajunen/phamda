@@ -471,10 +471,12 @@ explode
 
 Returns an array containing the parts of a string split by the given delimiter.
 
+If the delimiter is an empty string, returns a char array.
+
 .. code-block:: php
 
     P::explode('/', 'f/o/o'); // => ['f', 'o', 'o']
-    P::explode('.', 'a.b.cd.'); // => ['a', 'b', 'cd', '']
+    P::explode('', 'b/a/z'); // => ['b', '/', 'a', '/', 'z']
     P::explode('.', ''); // => ['']
 
 

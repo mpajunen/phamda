@@ -504,6 +504,8 @@ class InnerFunctions
     /**
      * Returns an array containing the parts of a string split by the given delimiter.
      *
+     * If the delimiter is an empty string, returns a char array.
+     *
      * @param string $delimiter
      * @param string $string
      *
@@ -511,7 +513,7 @@ class InnerFunctions
      */
     public static function explode($delimiter, $string)
     {
-        return explode($delimiter, $string);
+        return $delimiter === '' ? str_split($string) : explode($delimiter, $string);
     }
 
     /**
