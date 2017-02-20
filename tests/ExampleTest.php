@@ -82,13 +82,13 @@ class ExampleTest extends TestCase
 
         $formatPrice = P::curry('number_format', P::_(), 2);
         $process     = P::pipe(
-            P::filter( // Only include products that...
+            P::filter(// Only include products that...
                 P::pipe(
                     P::prop('weight'), // ... weigh...
                     P::lt(P::_(), 50.0) // ... less than 50.0.
                 )
             ),
-            P::map( // For each product...
+            P::map(// For each product...
                 P::pipe(
                     // ... drop the weight field and fix field order:
                     P::pick(['number', 'category', 'price']),
@@ -96,7 +96,7 @@ class ExampleTest extends TestCase
                     P::evolve(['price' => $formatPrice])
                 )
             ),
-            P::sortBy( // Sort the products by...
+            P::sortBy(// Sort the products by...
                 P::prop('number') // ... comparing product numbers.
             )
         );

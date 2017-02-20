@@ -119,7 +119,7 @@ trait CoreFunctionsTrait
     {
         return count($initialArguments) >= $length && (self::$placeholder === null || ! in_array(self::$placeholder, $initialArguments, true))
             ? $function(...$initialArguments)
-            : function (... $arguments) use ($length, $function, $initialArguments) {
+            : function (...$arguments) use ($length, $function, $initialArguments) {
                 return self::_curryN($length, $function, ...self::resolveArguments($arguments, $initialArguments));
             };
     }
@@ -193,10 +193,10 @@ trait CoreFunctionsTrait
      *
      * @return callable
      */
-    protected static function _partialN($arity, callable $function, ... $initialArguments)
+    protected static function _partialN($arity, callable $function, ...$initialArguments)
     {
         $remainingCount = $arity - count($initialArguments);
-        $partial        = function (... $arguments) use ($function, $initialArguments) {
+        $partial        = function (...$arguments) use ($function, $initialArguments) {
             return $function(...array_merge($initialArguments, $arguments));
         };
 
@@ -270,7 +270,7 @@ trait CoreFunctionsTrait
                     $result[] = $item;
                 }
 
-                $i++;
+                ++$i;
             }
 
             return array_slice($result, $start < 0 ? $start : 0, $end !== null && $end < 0 ? $end : null);

@@ -13,7 +13,7 @@ namespace Phamda\Tests\Fixtures;
 
 class Calculator
 {
-    public function addMany(... $arguments)
+    public function addMany(...$arguments)
     {
         $result = 0;
 

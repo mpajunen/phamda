@@ -24,7 +24,7 @@ class PartialTest extends TestCase
     /**
      * @dataProvider getPartialData
      */
-    public function testPartial($expected, callable $function, array $initialArguments, ... $arguments)
+    public function testPartial($expected, callable $function, array $initialArguments, ...$arguments)
     {
         $partial = P::partial($function, ...array_merge($initialArguments, $arguments));
         $this->assertSame($expected, $partial(), 'partial returns a function even if all arguments have been given.');
@@ -33,7 +33,7 @@ class PartialTest extends TestCase
     /**
      * @dataProvider getPartialNData
      */
-    public function testPartialN($expected, $arity, callable $function, array $initialArguments, ... $arguments)
+    public function testPartialN($expected, $arity, callable $function, array $initialArguments, ...$arguments)
     {
         $partial = P::partialN($arity, $function, ...array_merge($initialArguments, $arguments));
         $this->assertSame($expected, $partial(), 'partialN returns a function even if all arguments have been given.');

@@ -23,18 +23,18 @@ class ComposeTest extends TestCase
      * @dataProvider getTooFewParametersData
      * @expectedException \Phamda\Exception\InvalidFunctionCompositionException
      */
-    public function testComposeThrowsWithTooFewParameters(... $functions)
+    public function testComposeThrowsWithTooFewParameters(...$functions)
     {
-        P::compose(... $functions);
+        P::compose(...$functions);
     }
 
     /**
      * @dataProvider getTooFewParametersData
      * @expectedException \Phamda\Exception\InvalidFunctionCompositionException
      */
-    public function testPipeThrowsWithTooFewParameters(... $functions)
+    public function testPipeThrowsWithTooFewParameters(...$functions)
     {
-        P::pipe(... $functions);
+        P::pipe(...$functions);
     }
 
     public function getTooFewParametersData()

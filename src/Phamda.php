@@ -426,7 +426,7 @@ class Phamda
      */
     public static function compose(...$functions)
     {
-        return Phamda::pipe(...array_reverse($functions));
+        return self::pipe(...array_reverse($functions));
     }
 
     /**
