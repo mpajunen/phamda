@@ -1,7 +1,7 @@
 # Phamda
 
 Phamda is a functional programming library for PHP, heavily inspired by the Javascript library
-[Ramda](http://ramdajs.com/). PHP 5.6+ or HHVM is required.
+[Ramda](http://ramdajs.com/). PHP 7.0+ or HHVM is required.
 
 
 ## Installation

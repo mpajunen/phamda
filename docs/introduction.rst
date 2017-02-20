@@ -14,7 +14,7 @@ Phamda is a functional programming library for PHP. The main features are:
 Requirements
 ------------
 
-* PHP 5.6+ or HHVM
+* PHP 7.0+ or HHVM
 
 
 Installation
