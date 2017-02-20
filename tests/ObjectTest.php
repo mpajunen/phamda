@@ -14,11 +14,12 @@ namespace Phamda\Tests;
 use Phamda\Phamda as P;
 use Phamda\Tests\Fixtures\Counter;
 use Phamda\Tests\Fixtures\Test1;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Basic tests for functions with object return values.
  */
-class ObjectTest extends \PHPUnit_Framework_TestCase
+class ObjectTest extends TestCase
 {
     use BasicProvidersTrait, CurryTestTrait;
 

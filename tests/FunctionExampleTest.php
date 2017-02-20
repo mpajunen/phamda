@@ -12,6 +12,7 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda as P;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for function list doc examples.
@@ -21,7 +22,7 @@ use Phamda\Phamda as P;
  *
  * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
  */
-class FunctionExampleTest extends \PHPUnit_Framework_TestCase
+class FunctionExampleTest extends TestCase
 {
     public function test_()
     {

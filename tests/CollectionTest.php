@@ -14,6 +14,7 @@ namespace Phamda\Tests;
 use Phamda\Phamda as P;
 use Phamda\Tests\Fixtures\ArrayCollection;
 use Phamda\Tests\Fixtures\ArrayContainer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test cases for basic functionality with collection objects.
@@ -22,7 +23,7 @@ use Phamda\Tests\Fixtures\ArrayContainer;
  *
  * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
  */
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     use BasicProvidersTrait, CollectionTestTrait;
 

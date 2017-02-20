@@ -12,11 +12,12 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda as P;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test placeholder argument support.
  */
-class PlaceholderTest extends \PHPUnit_Framework_TestCase
+class PlaceholderTest extends TestCase
 {
     use BasicProvidersTrait;
 

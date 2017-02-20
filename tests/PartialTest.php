@@ -12,11 +12,12 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda as P;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test partial application edge cases.
  */
-class PartialTest extends \PHPUnit_Framework_TestCase
+class PartialTest extends TestCase
 {
     use BasicProvidersTrait;
 

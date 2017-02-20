@@ -12,6 +12,7 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda as P;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test cases for basic functionality and currying.
@@ -20,7 +21,7 @@ use Phamda\Phamda as P;
  *
  * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
  */
-class BasicTest extends \PHPUnit_Framework_TestCase
+class BasicTest extends TestCase
 {
     use BasicProvidersTrait, CurryTestTrait;
 

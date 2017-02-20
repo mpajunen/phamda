@@ -12,11 +12,12 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda as P;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test composition function edge cases.
  */
-class ComposeTest extends \PHPUnit_Framework_TestCase
+class ComposeTest extends TestCase
 {
     /**
      * @dataProvider getTooFewParametersData

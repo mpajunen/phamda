@@ -12,11 +12,12 @@
 namespace Phamda\Tests;
 
 use Phamda\Phamda as P;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the highlighted examples in the readme file and documentation.
  */
-class ExampleTest extends \PHPUnit_Framework_TestCase
+class ExampleTest extends TestCase
 {
     public function testCurriedExample()
     {
