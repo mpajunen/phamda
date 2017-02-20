@@ -17,9 +17,9 @@ use Phamda\Exception\InvalidFunctionCompositionException;
 /**
  * The main API class of Phamda.
  *
- * This class is automatically generated using the `\Phamda\Builder\InnerFunctions` class.
+ * This class is automatically generated using the `\Phamda\CodeGen\Builder\InnerFunctions` class.
  *
- * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
+ * For details about the code generation, please see the build directory.
  */
 class Phamda
 {

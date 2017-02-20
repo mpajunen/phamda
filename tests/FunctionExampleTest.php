@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  * These tests are used to generate function doc comments and documentation. If a function is not tested here,
  * tests cases from the `BasicTest` class are used instead.
  *
- * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
+ * For details about the code generation, please see the build directory.
  */
 class FunctionExampleTest extends TestCase
 {

@@ -13,12 +13,16 @@
         "php": ">=7.0"
     },
     "require-dev": {
+        "nikic/php-parser": "^1.4",
         "phpunit/phpunit": "^6.0"
     },
     "autoload": {
         "psr-4": {"Phamda\\": "src/"}
     },
     "autoload-dev": {
-        "psr-4": {"Phamda\\Tests\\": "tests/"}
+        "psr-4": {
+            "Phamda\\CodeGen\\": "build/",
+            "Phamda\\Tests\\": "tests/"
+        }
     }
 }

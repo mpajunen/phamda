@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Phamda\Builder;
+namespace Phamda\CodeGen\Builder;
 
 use Phamda\Collection\Collection;
 use Phamda\CoreFunctionsTrait;
@@ -24,8 +24,6 @@ use Phamda\Placeholder;
  * - The functions in the main class `Phamda` are typically curried versions of these functions.
  * - Basic test cases for the main functions are based on the structure of these template functions.
  * - The function list in the documentation is based on these functions.
- *
- * For details about the code generation, please see: https://github.com/mpajunen/phamda-codegen
  *
  * @internal Not intended to be used directly, only used for code generation.
  */
