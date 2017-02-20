@@ -1553,7 +1553,7 @@ class InnerFunctions
     }
 
     /**
-     * Creates a new list of pairs from  from a list of key-value pairs.
+     * Creates a new list of key-value pairs from a map.
      *
      * @param array|\Traversable|Collection $map
      *

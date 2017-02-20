@@ -1502,7 +1502,7 @@ toPairs
 -------
 ``array|Collection P::toPairs(array|\Traversable|Collection $map = null)``
 
-Creates a new list of pairs from  from a list of key-value pairs.
+Creates a new list of key-value pairs from a map.
 
 .. code-block:: php
 

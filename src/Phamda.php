@@ -2316,7 +2316,7 @@ class Phamda
     }
 
     /**
-     * Creates a new list of pairs from  from a list of key-value pairs.
+     * Creates a new list of key-value pairs from a map.
      *
      * ```php
      * P::toPairs(['a' => 'b', 'c' => 'd']); // => [['a', 'b'], ['c', 'd']]
