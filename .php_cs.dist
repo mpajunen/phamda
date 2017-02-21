@@ -1,0 +1,38 @@
+<?php
+
+$header = <<<EOT
+This file is part of the Phamda library
+
+(c) Mikael Pajunen <mikael.pajunen@gmail.com>
+
+For the full copyright and license information, please see the LICENSE
+file that was distributed with this source code.
+EOT;
+
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__);
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+
+        'array_syntax'                      => [
+            'syntax' => 'short',
+        ],
+        'binary_operator_spaces'            => [
+            'align_equals' => true,
+        ],
+        'braces'                            => [
+            'allow_single_line_closure' => true,
+        ],
+        'concat_space'                      => [
+            'spacing' => 'one',
+        ],
+        'header_comment'                    => [
+            'header' => $header,
+        ],
+        'not_operator_with_successor_space' => true,
+        'ordered_imports'                   => true,
+        'phpdoc_annotation_without_dot'     => false,
+    ])
+    ->setFinder($finder);

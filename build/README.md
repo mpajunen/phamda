@@ -1,9 +1,10 @@
 # Phamda Code Generator
 
-Code generator for the [Phamda](https://github.com/mpajunen/phamda) library.
+Code generator for the [Phamda](https://github.com/mpajunen/phamda) library. It generates:
 
-- Generates curried functions from inner functions.
-- Generates basic test cases based on the same inner functions.
+- Auto-curried functions from inner functions.
+- Basic test cases based on the same inner functions.
+- A function list for documentation.
 
 ## Usage
 
@@ -11,8 +12,9 @@ To add or modify a function in Phamda:
 
 - Fork and clone the repository.
 - Install dependencies: `composer install`.
-- Make changes to the `build/Builder/InnerFunctions.php` file.
-- Execute the builder: `php build/build.php`.
-- Add a test data provider to `tests/BasicProvidersTrait.php` file if adding a new function.
+- Make changes, typically to the `build/Builder/InnerFunctions.php` file.
+- Build generated files: `composer build`.
+- Add a test data provider to the `tests/BasicProvidersTrait.php` file if adding a new function.
 
-[PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) is also required.
+The code generator uses [PHP Parser](https://github.com/nikic/PHP-Parser) for manipulating the code and
+[PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to fix some style issues in the output.

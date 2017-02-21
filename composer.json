@@ -13,6 +13,7 @@
         "php": ">=7.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.1",
         "nikic/php-parser": "^1.4",
         "phpunit/phpunit": "^6.0"
     },
@@ -24,5 +25,13 @@
             "Phamda\\CodeGen\\": "build/",
             "Phamda\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "build": [
+            "@php build/build.php",
+            "@fix-cs"
+        ],
+        "fix-cs": "php-cs-fixer fix",
+        "test": "phpunit"
     }
 }
