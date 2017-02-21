@@ -272,7 +272,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getFromPairsData
      */
-    public function testFromPairs($expected, $list = null)
+    public function testFromPairs($expected, $list)
     {
         $_list  = new ArrayCollection($list);
         $result = P::fromPairs($_list);
@@ -283,7 +283,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getFromPairsData
      */
-    public function testFromPairsSimple($expected, $list = null)
+    public function testFromPairsSimple($expected, $list)
     {
         $_list  = new ArrayContainer($list);
         $result = P::fromPairs($_list);
@@ -800,7 +800,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getToPairsData
      */
-    public function testToPairs($expected, $map = null)
+    public function testToPairs($expected, $map)
     {
         $_map   = new ArrayCollection($map);
         $result = P::toPairs($_map);
@@ -811,7 +811,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getToPairsData
      */
-    public function testToPairsSimple($expected, $map = null)
+    public function testToPairsSimple($expected, $map)
     {
         $_map   = new ArrayContainer($map);
         $result = P::toPairs($_map);

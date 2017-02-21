@@ -643,7 +643,7 @@ Wraps the given function and returns a new function for which the order of the f
 
 fromPairs
 ---------
-``array|Collection P::fromPairs(array|\Traversable|Collection $list = null)``
+``array|Collection P::fromPairs(array|\Traversable|Collection $list)``
 
 Creates a new map from a list of key-value pairs.
 
@@ -1500,7 +1500,7 @@ Calls the provided function the specified number of times and returns the result
 
 toPairs
 -------
-``array|Collection P::toPairs(array|\Traversable|Collection $map = null)``
+``array|Collection P::toPairs(array|\Traversable|Collection $map)``
 
 Creates a new list of key-value pairs from a map.
 

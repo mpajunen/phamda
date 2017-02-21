@@ -1022,7 +1022,7 @@ class Phamda
      */
     public static function fromPairs($list = null)
     {
-        return static::curry1(function ($list = null) {
+        return static::curry1(function ($list) {
             if (method_exists($list, 'fromPairs')) {
                 return $list->fromPairs();
             }
@@ -2329,7 +2329,7 @@ class Phamda
      */
     public static function toPairs($map = null)
     {
-        return static::curry1(function ($map = null) {
+        return static::curry1(function ($map) {
             if (method_exists($map, 'toPairs')) {
                 return $map->toPairs();
             }

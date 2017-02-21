@@ -697,7 +697,7 @@ class InnerFunctions
      *
      * @return array|Collection
      */
-    public static function fromPairs($list = null)
+    public static function fromPairs($list)
     {
         if (method_exists($list, 'fromPairs')) {
             return $list->fromPairs();
@@ -1557,7 +1557,7 @@ class InnerFunctions
      *
      * @return array|Collection
      */
-    public static function toPairs($map = null)
+    public static function toPairs($map)
     {
         if (method_exists($map, 'toPairs')) {
             return $map->toPairs();

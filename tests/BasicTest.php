@@ -458,7 +458,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getFromPairsData
      */
-    public function testFromPairs($expected, $list = null)
+    public function testFromPairs($expected, $list)
     {
         $this->assertSame($expected, P::fromPairs($list), 'fromPairs produces correct results.');
         foreach ($this->getCurriedResults(P::fromPairs(), $list) as $result) {
@@ -1089,7 +1089,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getToPairsData
      */
-    public function testToPairs($expected, $map = null)
+    public function testToPairs($expected, $map)
     {
         $this->assertSame($expected, P::toPairs($map), 'toPairs produces correct results.');
         foreach ($this->getCurriedResults(P::toPairs(), $map) as $result) {
