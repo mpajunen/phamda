@@ -361,6 +361,8 @@ dec
 ---
 ``int|float P::dec(int|float $number)``
 
+Deprecated since version 0.7, to be removed in 0.8. Use ``add(-1)`` instead.
+
 Decrements the given number.
 
 .. code-block:: php
@@ -748,6 +750,8 @@ Returns a string formed by combining a list of strings using the given glue stri
 inc
 ---
 ``int|float P::inc(int|float $number)``
+
+Deprecated since version 0.7, to be removed in 0.8. Use ``add(1)`` instead.
 
 Increments the given number.
 

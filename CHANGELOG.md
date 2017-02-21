@@ -7,6 +7,9 @@
 ### Changed
 - Some functions now enforce their parameter types more strictly.
 
+### Deprecated
+- `P::dec`, `P::inc`
+
 ### Removed
 - PHP 5.6 support
 

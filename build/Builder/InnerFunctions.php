@@ -391,6 +391,8 @@ class InnerFunctions
      * @param int|float $number
      *
      * @return int|float
+     *
+     * @deprecated Since version 0.7, to be removed in 0.8. Use `add(-1)` instead.
      */
     public static function dec($number)
     {
@@ -805,6 +807,8 @@ class InnerFunctions
      * @param int|float $number
      *
      * @return int|float
+     *
+     * @deprecated Since version 0.7, to be removed in 0.8. Use `add(1)` instead.
      */
     public static function inc($number)
     {
