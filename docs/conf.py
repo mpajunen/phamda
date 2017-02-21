@@ -19,6 +19,7 @@ import shlex
 
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
+from datetime import datetime
 
 lexers['php'] = PhpLexer(startinline=True, linenos=1)
 primary_domain = 'php'
@@ -54,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Phamda'
-copyright = '2015, Mikael Pajunen'
+copyright = '2015 - ' + str(datetime.utcnow().year) + ', Mikael Pajunen'
 author = 'Mikael Pajunen'
 
 # The version info for the project you're documenting, acts as replacement for
