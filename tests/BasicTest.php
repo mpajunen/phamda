@@ -127,7 +127,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getAssocData
      */
-    public function testAssoc($expected, $property, $value, $object)
+    public function testAssoc($expected, string $property, $value, $object)
     {
         $this->assertSame($expected, P::assoc($property, $value, $object), 'assoc produces correct results.');
         foreach ($this->getCurriedResults(P::assoc(), $property, $value, $object) as $result) {
@@ -173,7 +173,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getCastData
      */
-    public function testCast($expected, $type, $value)
+    public function testCast($expected, string $type, $value)
     {
         $this->assertSame($expected, P::cast($type, $value), 'cast produces correct results.');
         foreach ($this->getCurriedResults(P::cast(), $type, $value) as $result) {
@@ -205,7 +205,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getConcatData
      */
-    public function testConcat($expected, $a, $b)
+    public function testConcat($expected, string $a, string $b)
     {
         $this->assertSame($expected, P::concat($a, $b), 'concat produces correct results.');
         foreach ($this->getCurriedResults(P::concat(), $a, $b) as $result) {
@@ -238,7 +238,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getCurryNData
      */
-    public function testCurryN($expected, $length, callable $function, ...$initialArguments)
+    public function testCurryN($expected, int $length, callable $function, ...$initialArguments)
     {
         $this->assertSame($expected, P::curryN($length, $function, ...$initialArguments), 'curryN produces correct results.');
         foreach ($this->getCurriedResults(P::curryN(), $length, $function) as $result) {
@@ -327,7 +327,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getExplodeData
      */
-    public function testExplode($expected, $delimiter, $string)
+    public function testExplode($expected, string $delimiter, string $string)
     {
         $this->assertSame($expected, P::explode($delimiter, $string), 'explode produces correct results.');
         foreach ($this->getCurriedResults(P::explode(), $delimiter, $string) as $result) {
@@ -525,7 +525,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getImplodeData
      */
-    public function testImplode($expected, $glue, $strings)
+    public function testImplode($expected, string $glue, array $strings)
     {
         $this->assertSame($expected, P::implode($glue, $strings), 'implode produces correct results.');
         foreach ($this->getCurriedResults(P::implode(), $glue, $strings) as $result) {
@@ -558,7 +558,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getInvokerData
      */
-    public function testInvoker($expected, $arity, $method, array $initialArguments, ...$arguments)
+    public function testInvoker($expected, int $arity, string $method, array $initialArguments, ...$arguments)
     {
         $main0 = P::invoker($arity, $method, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'invoker produces correct results.');
@@ -581,7 +581,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getIsInstanceData
      */
-    public function testIsInstance($expected, $class, $object)
+    public function testIsInstance($expected, string $class, $object)
     {
         $this->assertSame($expected, P::isInstance($class, $object), 'isInstance produces correct results.');
         foreach ($this->getCurriedResults(P::isInstance(), $class, $object) as $result) {
@@ -691,7 +691,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getModuloData
      */
-    public function testModulo($expected, $x, $y)
+    public function testModulo($expected, int $x, int $y)
     {
         $this->assertSame($expected, P::modulo($x, $y), 'modulo produces correct results.');
         foreach ($this->getCurriedResults(P::modulo(), $x, $y) as $result) {
@@ -713,7 +713,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getNAryData
      */
-    public function testNAry($expected, $arity, callable $function, ...$arguments)
+    public function testNAry($expected, int $arity, callable $function, ...$arguments)
     {
         $main0 = P::nAry($arity, $function);
         $this->assertSame($expected, $main0(...$arguments), 'nAry produces correct results.');
@@ -771,7 +771,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getPartialNData
      */
-    public function testPartialN($expected, $arity, callable $function, array $initialArguments, ...$arguments)
+    public function testPartialN($expected, int $arity, callable $function, array $initialArguments, ...$arguments)
     {
         $main0 = P::partialN($arity, $function, ...$initialArguments);
         $this->assertSame($expected, $main0(...$arguments), 'partialN produces correct results.');
@@ -847,7 +847,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getPluckData
      */
-    public function testPluck($expected, $name, $collection)
+    public function testPluck($expected, string $name, $collection)
     {
         $this->assertSame($expected, P::pluck($name, $collection), 'pluck produces correct results.');
         foreach ($this->getCurriedResults(P::pluck(), $name, $collection) as $result) {
@@ -880,7 +880,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getPropData
      */
-    public function testProp($expected, $name, $object)
+    public function testProp($expected, string $name, $object)
     {
         $this->assertSame($expected, P::prop($name, $object), 'prop produces correct results.');
         foreach ($this->getCurriedResults(P::prop(), $name, $object) as $result) {
@@ -891,7 +891,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getPropEqData
      */
-    public function testPropEq($expected, $name, $value, $object)
+    public function testPropEq($expected, string $name, $value, $object)
     {
         $this->assertSame($expected, P::propEq($name, $value, $object), 'propEq produces correct results.');
         foreach ($this->getCurriedResults(P::propEq(), $name, $value, $object) as $result) {
@@ -946,7 +946,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getSliceData
      */
-    public function testSlice($expected, $start, $end, $collection)
+    public function testSlice($expected, int $start, int $end, $collection)
     {
         $this->assertSame($expected, P::slice($start, $end, $collection), 'slice produces correct results.');
         foreach ($this->getCurriedResults(P::slice(), $start, $end, $collection) as $result) {
@@ -979,7 +979,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getStringIndexOfData
      */
-    public function testStringIndexOf($expected, $substring, $string)
+    public function testStringIndexOf($expected, string $substring, string $string)
     {
         $this->assertSame($expected, P::stringIndexOf($substring, $string), 'stringIndexOf produces correct results.');
         foreach ($this->getCurriedResults(P::stringIndexOf(), $substring, $string) as $result) {
@@ -990,7 +990,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getStringLastIndexOfData
      */
-    public function testStringLastIndexOf($expected, $substring, $string)
+    public function testStringLastIndexOf($expected, string $substring, string $string)
     {
         $this->assertSame($expected, P::stringLastIndexOf($substring, $string), 'stringLastIndexOf produces correct results.');
         foreach ($this->getCurriedResults(P::stringLastIndexOf(), $substring, $string) as $result) {
@@ -1001,7 +1001,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getSubstringData
      */
-    public function testSubstring($expected, $start, $end, $string)
+    public function testSubstring($expected, int $start, int $end, string $string)
     {
         $this->assertSame($expected, P::substring($start, $end, $string), 'substring produces correct results.');
         foreach ($this->getCurriedResults(P::substring(), $start, $end, $string) as $result) {
@@ -1012,7 +1012,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getSubstringFromData
      */
-    public function testSubstringFrom($expected, $start, $string)
+    public function testSubstringFrom($expected, int $start, string $string)
     {
         $this->assertSame($expected, P::substringFrom($start, $string), 'substringFrom produces correct results.');
         foreach ($this->getCurriedResults(P::substringFrom(), $start, $string) as $result) {
@@ -1023,7 +1023,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getSubstringToData
      */
-    public function testSubstringTo($expected, $end, $string)
+    public function testSubstringTo($expected, int $end, string $string)
     {
         $this->assertSame($expected, P::substringTo($end, $string), 'substringTo produces correct results.');
         foreach ($this->getCurriedResults(P::substringTo(), $end, $string) as $result) {
@@ -1078,7 +1078,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getTimesData
      */
-    public function testTimes($expected, callable $function, $count)
+    public function testTimes($expected, callable $function, int $count)
     {
         $this->assertSame($expected, P::times($function, $count), 'times produces correct results.');
         foreach ($this->getCurriedResults(P::times(), $function, $count) as $result) {

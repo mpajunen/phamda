@@ -4,6 +4,9 @@
 ### Added
 - PHP 7.1 test coverage
 
+### Changed
+- Some functions now enforce their parameter types more strictly.
+
 ### Removed
 - PHP 5.6 support
 

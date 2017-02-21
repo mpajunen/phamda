@@ -36,7 +36,7 @@ class InnerFunctions
      *
      * @return Placeholder
      */
-    public static function _()
+    public static function _(): Placeholder
     {
         return static::$placeholder ?: static::$placeholder = new Placeholder();
     }
@@ -62,7 +62,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function all(callable $predicate, $collection)
+    public static function all(callable $predicate, $collection): bool
     {
         foreach ($collection as $item) {
             if (! $predicate($item)) {
@@ -80,7 +80,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function allPass(array $predicates)
+    public static function allPass(array $predicates): callable
     {
         return function (...$arguments) use ($predicates) {
             foreach ($predicates as $predicate) {
@@ -100,7 +100,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function always($value)
+    public static function always($value): callable
     {
         return function () use ($value) {
             return $value;
@@ -115,7 +115,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function any(callable $predicate, $collection)
+    public static function any(callable $predicate, $collection): bool
     {
         foreach ($collection as $item) {
             if ($predicate($item)) {
@@ -133,7 +133,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function anyPass(array $predicates)
+    public static function anyPass(array $predicates): callable
     {
         return function (...$arguments) use ($predicates) {
             foreach ($predicates as $predicate) {
@@ -196,7 +196,7 @@ class InnerFunctions
      *
      * @return array|object
      */
-    public static function assoc($property, $value, $object)
+    public static function assoc(string $property, $value, $object)
     {
         return static::_assoc($property, $value, $object);
     }
@@ -222,7 +222,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function binary(callable $function)
+    public static function binary(callable $function): callable
     {
         return function ($a, $b) use ($function) {
             return $function($a, $b);
@@ -237,7 +237,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function both(callable $a, callable $b)
+    public static function both(callable $a, callable $b): callable
     {
         return function (...$arguments) use ($a, $b) {
             return $a(...$arguments) && $b(...$arguments);
@@ -252,7 +252,7 @@ class InnerFunctions
      *
      * @return mixed
      */
-    public static function cast($type, $value)
+    public static function cast(string $type, $value)
     {
         settype($value, $type);
 
@@ -278,7 +278,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function comparator(callable $predicate)
+    public static function comparator(callable $predicate): callable
     {
         return function ($x, $y) use ($predicate) {
             return $predicate($x, $y) ? -1 : ($predicate($y, $x) ? 1 : 0);
@@ -292,7 +292,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function compose(...$functions)
+    public static function compose(...$functions): callable
     {
         return Phamda::pipe(...array_reverse($functions));
     }
@@ -305,7 +305,7 @@ class InnerFunctions
      *
      * @return string
      */
-    public static function concat($a, $b)
+    public static function concat(string $a, string $b): string
     {
         return $a . $b;
     }
@@ -318,7 +318,7 @@ class InnerFunctions
      *
      * @return object
      */
-    public static function construct($class, ...$initialArguments)
+    public static function construct(string $class, ...$initialArguments)
     {
         return Phamda::constructN(static::getConstructorArity($class), $class, ...$initialArguments);
     }
@@ -332,7 +332,7 @@ class InnerFunctions
      *
      * @return object
      */
-    public static function constructN($arity, $class, ...$initialArguments)
+    public static function constructN(int $arity, string $class, ...$initialArguments)
     {
         return static::_curryN($arity, function (...$arguments) use ($class) {
             return new $class(...array_merge($arguments));
@@ -347,7 +347,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function contains($value, $collection)
+    public static function contains($value, $collection): bool
     {
         foreach ($collection as $item) {
             if ($item === $value) {
@@ -380,7 +380,7 @@ class InnerFunctions
      *
      * @return callable|mixed
      */
-    public static function curryN($length, callable $function, ...$initialArguments)
+    public static function curryN(int $length, callable $function, ...$initialArguments)
     {
         return static::_curryN($length, $function, ...$initialArguments);
     }
@@ -450,7 +450,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function either(callable $a, callable $b)
+    public static function either(callable $a, callable $b): callable
     {
         return function (...$arguments) use ($a, $b) {
             return $a(...$arguments) || $b(...$arguments);
@@ -465,7 +465,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function eq($x, $y)
+    public static function eq($x, $y): bool
     {
         return $x === $y;
     }
@@ -509,7 +509,7 @@ class InnerFunctions
      *
      * @return string[]
      */
-    public static function explode($delimiter, $string)
+    public static function explode(string $delimiter, string $string): array
     {
         return $delimiter === '' ? str_split($string) : explode($delimiter, $string);
     }
@@ -519,7 +519,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function false()
+    public static function false(): callable
     {
         return function () {
             return false;
@@ -647,7 +647,7 @@ class InnerFunctions
      *
      * @return array
      */
-    public static function flatMap(callable $function, array $list)
+    public static function flatMap(callable $function, array $list): array
     {
         return static::_flatten(static::_map($function, $list), false);
     }
@@ -659,7 +659,7 @@ class InnerFunctions
      *
      * @return array
      */
-    public static function flatten(array $list)
+    public static function flatten(array $list): array
     {
         return static::_flatten($list, true);
     }
@@ -671,7 +671,7 @@ class InnerFunctions
      *
      * @return array
      */
-    public static function flattenLevel(array $list)
+    public static function flattenLevel(array $list): array
     {
         return static::_flatten($list, false);
     }
@@ -683,7 +683,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function flip(callable $function)
+    public static function flip(callable $function): callable
     {
         return function ($a, $b, ...$arguments) use ($function) {
             return $function($b, $a, ...$arguments);
@@ -740,7 +740,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function gt($x, $y)
+    public static function gt($x, $y): bool
     {
         return $x > $y;
     }
@@ -753,7 +753,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function gte($x, $y)
+    public static function gte($x, $y): bool
     {
         return $x >= $y;
     }
@@ -779,7 +779,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function ifElse(callable $condition, callable $onTrue, callable $onFalse)
+    public static function ifElse(callable $condition, callable $onTrue, callable $onFalse): callable
     {
         return function (...$arguments) use ($condition, $onTrue, $onFalse) {
             return $condition(...$arguments) ? $onTrue(...$arguments) : $onFalse(...$arguments);
@@ -794,7 +794,7 @@ class InnerFunctions
      *
      * @return string
      */
-    public static function implode($glue, $strings)
+    public static function implode(string $glue, array $strings): string
     {
         return implode($glue, $strings);
     }
@@ -839,7 +839,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function invoker($arity, $method, ...$initialArguments)
+    public static function invoker(int $arity, string $method, ...$initialArguments): callable
     {
         $remainingCount = $arity - count($initialArguments) + 1;
 
@@ -857,7 +857,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function isEmpty($collection)
+    public static function isEmpty($collection): bool
     {
         if (is_array($collection)) {
             return empty($collection);
@@ -880,7 +880,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function isInstance($class, $object)
+    public static function isInstance(string $class, $object): bool
     {
         return $object instanceof $class;
     }
@@ -915,7 +915,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function lt($x, $y)
+    public static function lt($x, $y): bool
     {
         return $x < $y;
     }
@@ -928,7 +928,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function lte($x, $y)
+    public static function lte($x, $y): bool
     {
         return $x <= $y;
     }
@@ -981,7 +981,7 @@ class InnerFunctions
      *
      * @return array
      */
-    public static function merge(array $a, array $b)
+    public static function merge(array $a, array $b): array
     {
         foreach ($b as $item) {
             $a[] = $item;
@@ -1023,7 +1023,7 @@ class InnerFunctions
      *
      * @return int
      */
-    public static function modulo($x, $y)
+    public static function modulo(int $x, int $y): int
     {
         return $x % $y;
     }
@@ -1049,7 +1049,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function nAry($arity, callable $function)
+    public static function nAry(int $arity, callable $function): callable
     {
         return function (...$arguments) use ($arity, $function) {
             return $function(...array_slice($arguments, 0, $arity));
@@ -1076,7 +1076,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function none(callable $predicate, $collection)
+    public static function none(callable $predicate, $collection): bool
     {
         return ! Phamda::any($predicate, $collection);
     }
@@ -1088,7 +1088,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function not(callable $predicate)
+    public static function not(callable $predicate): callable
     {
         return function (...$arguments) use ($predicate) {
             return ! $predicate(...$arguments);
@@ -1103,7 +1103,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function partial(callable $function, ...$initialArguments)
+    public static function partial(callable $function, ...$initialArguments): callable
     {
         return static::_partialN(static::getArity($function), $function, ...$initialArguments);
     }
@@ -1117,7 +1117,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function partialN($arity, callable $function, ...$initialArguments)
+    public static function partialN(int $arity, callable $function, ...$initialArguments): callable
     {
         return static::_partialN($arity, $function, ...$initialArguments);
     }
@@ -1169,7 +1169,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function pathEq(array $path, $value, $object)
+    public static function pathEq(array $path, $value, $object): bool
     {
         return Phamda::path($path, $object) === $value;
     }
@@ -1182,7 +1182,7 @@ class InnerFunctions
      *
      * @return array
      */
-    public static function pick(array $names, array $item)
+    public static function pick(array $names, array $item): array
     {
         $new = [];
         foreach ($names as $name) {
@@ -1202,7 +1202,7 @@ class InnerFunctions
      *
      * @return array
      */
-    public static function pickAll(array $names, array $item)
+    public static function pickAll(array $names, array $item): array
     {
         $new = [];
         foreach ($names as $name) {
@@ -1219,7 +1219,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function pipe(...$functions)
+    public static function pipe(...$functions): callable
     {
         if (count($functions) < 2) {
             throw InvalidFunctionCompositionException::create();
@@ -1243,7 +1243,7 @@ class InnerFunctions
      *
      * @return array|Collection
      */
-    public static function pluck($name, $collection)
+    public static function pluck(string $name, $collection)
     {
         return static::_map(Phamda::prop($name), $collection);
     }
@@ -1294,7 +1294,7 @@ class InnerFunctions
      *
      * @return mixed
      */
-    public static function prop($name, $object)
+    public static function prop(string $name, $object)
     {
         return static::_prop($name, $object);
     }
@@ -1308,7 +1308,7 @@ class InnerFunctions
      *
      * @return bool
      */
-    public static function propEq($name, $value, $object)
+    public static function propEq(string $name, $value, $object): bool
     {
         return static::_prop($name, $object) === $value;
     }
@@ -1381,7 +1381,7 @@ class InnerFunctions
      *
      * @return array|Collection
      */
-    public static function slice($start, $end, $collection)
+    public static function slice(int $start, int $end, $collection)
     {
         return static::_slice($start, $end, $collection);
     }
@@ -1427,7 +1427,7 @@ class InnerFunctions
      *
      * @return int|false
      */
-    public static function stringIndexOf($substring, $string)
+    public static function stringIndexOf(string $substring, string $string)
     {
         return strpos($string, $substring);
     }
@@ -1440,7 +1440,7 @@ class InnerFunctions
      *
      * @return int|false
      */
-    public static function stringLastIndexOf($substring, $string)
+    public static function stringLastIndexOf(string $substring, string $string)
     {
         return strrpos($string, $substring);
     }
@@ -1454,7 +1454,7 @@ class InnerFunctions
      *
      * @return string
      */
-    public static function substring($start, $end, $string)
+    public static function substring(int $start, int $end, string $string): string
     {
         return substr($string, $start, $end >= 0 ? $end - $start : $end);
     }
@@ -1467,7 +1467,7 @@ class InnerFunctions
      *
      * @return string
      */
-    public static function substringFrom($start, $string)
+    public static function substringFrom(int $start, string $string): string
     {
         return substr($string, $start);
     }
@@ -1480,7 +1480,7 @@ class InnerFunctions
      *
      * @return string
      */
-    public static function substringTo($end, $string)
+    public static function substringTo(int $end, string $string): string
     {
         return substr($string, 0, $end);
     }
@@ -1545,7 +1545,7 @@ class InnerFunctions
      *
      * @return array
      */
-    public static function times(callable $function, $count)
+    public static function times(callable $function, int $count): array
     {
         return static::_map($function, range(0, $count - 1));
     }
@@ -1576,7 +1576,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function true()
+    public static function true(): callable
     {
         return function () {
             return true;
@@ -1590,7 +1590,7 @@ class InnerFunctions
      *
      * @return callable
      */
-    public static function unary(callable $function)
+    public static function unary(callable $function): callable
     {
         return function ($a) use ($function) {
             return $function($a);

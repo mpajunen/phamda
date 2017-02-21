@@ -536,7 +536,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getPluckData
      */
-    public function testPluck($expected, $name, $collection)
+    public function testPluck($expected, string $name, $collection)
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::pluck($name, $_collection);
@@ -547,7 +547,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getPluckData
      */
-    public function testPluckSimple($expected, $name, $collection)
+    public function testPluckSimple($expected, string $name, $collection)
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::pluck($name, $_collection);
@@ -690,7 +690,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getSliceData
      */
-    public function testSlice($expected, $start, $end, $collection)
+    public function testSlice($expected, int $start, int $end, $collection)
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::slice($start, $end, $_collection);
@@ -701,7 +701,7 @@ class CollectionTest extends TestCase
     /**
      * @dataProvider getSliceData
      */
-    public function testSliceSimple($expected, $start, $end, $collection)
+    public function testSliceSimple($expected, int $start, int $end, $collection)
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::slice($start, $end, $_collection);

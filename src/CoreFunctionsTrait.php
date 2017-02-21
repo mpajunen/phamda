@@ -20,7 +20,7 @@ trait CoreFunctionsTrait
 {
     private static $placeholder;
 
-    protected static function getArity(callable $function)
+    protected static function getArity(callable $function): int
     {
         if (is_string($function) || $function instanceof \Closure) {
             $reflection = new \ReflectionFunction($function);
@@ -36,7 +36,7 @@ trait CoreFunctionsTrait
         return $reflection->getNumberOfRequiredParameters();
     }
 
-    protected static function getConstructorArity($class)
+    protected static function getConstructorArity(string $class): int
     {
         return (new \ReflectionClass($class))
             ->getConstructor()
@@ -85,7 +85,7 @@ trait CoreFunctionsTrait
         return $result;
     }
 
-    protected static function _assoc($property, $value, $object)
+    protected static function _assoc(string $property, $value, $object)
     {
         if (is_object($object)) {
             $object            = clone $object;
@@ -115,7 +115,7 @@ trait CoreFunctionsTrait
         return $object;
     }
 
-    protected static function _curryN($length, callable $function, ...$initialArguments)
+    protected static function _curryN(int $length, callable $function, ...$initialArguments)
     {
         return count($initialArguments) >= $length && (self::$placeholder === null || ! in_array(self::$placeholder, $initialArguments, true))
             ? $function(...$initialArguments)
@@ -152,7 +152,7 @@ trait CoreFunctionsTrait
      *
      * @return array
      */
-    protected static function _flatten(array $list, $recursive)
+    protected static function _flatten(array $list, bool $recursive): array
     {
         $result = [];
         foreach ($list as $item) {
@@ -193,7 +193,7 @@ trait CoreFunctionsTrait
      *
      * @return callable
      */
-    protected static function _partialN($arity, callable $function, ...$initialArguments)
+    protected static function _partialN(int $arity, callable $function, ...$initialArguments): callable
     {
         $remainingCount = $arity - count($initialArguments);
         $partial        = function (...$arguments) use ($function, $initialArguments) {
@@ -209,7 +209,7 @@ trait CoreFunctionsTrait
      *
      * @return mixed
      */
-    protected static function _prop($name, $object)
+    protected static function _prop(string $name, $object)
     {
         return is_array($object) || $object instanceof \ArrayAccess ? $object[$name] : $object->$name;
     }
@@ -248,12 +248,12 @@ trait CoreFunctionsTrait
 
     /**
      * @param int                           $start
-     * @param int                           $end
+     * @param int|null                      $end
      * @param array|\Traversable|Collection $collection
      *
      * @return array|Collection
      */
-    protected static function _slice($start, $end, $collection)
+    protected static function _slice(int $start, int $end = null, $collection)
     {
         if (is_array($collection)) {
             return array_slice($collection, $start, $end !== null && $end >= 0 ? $end - $start : $end);
@@ -324,7 +324,7 @@ trait CoreFunctionsTrait
             };
     }
 
-    protected static function testSpecificationPart($name, $part, $object)
+    protected static function testSpecificationPart(string $name, $part, $object)
     {
         $value = Phamda::prop($name, $object);
 
@@ -333,7 +333,7 @@ trait CoreFunctionsTrait
             : $value === $part;
     }
 
-    private static function getCollectionItems($collection)
+    private static function getCollectionItems($collection): array
     {
         $items = [];
         foreach ($collection as $key => $item) {

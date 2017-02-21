@@ -270,7 +270,7 @@ class Phamda
      */
     public static function assoc($property = null, $value = null, $object = null)
     {
-        return static::curry3(function ($property, $value, $object) {
+        return static::curry3(function (string $property, $value, $object) {
             return static::_assoc($property, $value, $object);
         }, func_get_args());
     }
@@ -359,7 +359,7 @@ class Phamda
      */
     public static function cast($type = null, $value = null)
     {
-        return static::curry2(function ($type, $value) {
+        return static::curry2(function (string $type, $value) {
             settype($value, $type);
 
             return $value;
@@ -444,7 +444,7 @@ class Phamda
      */
     public static function concat($a = null, $b = null)
     {
-        return static::curry2(function ($a, $b) {
+        return static::curry2(function (string $a, string $b) {
             return $a . $b;
         }, func_get_args());
     }
@@ -464,7 +464,7 @@ class Phamda
      */
     public static function construct($class = null, ...$initialArguments)
     {
-        return static::curry1(function ($class, ...$initialArguments) {
+        return static::curry1(function (string $class, ...$initialArguments) {
             return Phamda::constructN(static::getConstructorArity($class), $class, ...$initialArguments);
         }, func_get_args());
     }
@@ -485,7 +485,7 @@ class Phamda
      */
     public static function constructN($arity = null, $class = null, ...$initialArguments)
     {
-        return static::curry2(function ($arity, $class, ...$initialArguments) {
+        return static::curry2(function (int $arity, string $class, ...$initialArguments) {
             return static::_curryN($arity, function (...$arguments) use ($class) {
                 return new $class(...array_merge($arguments));
             }, ...$initialArguments);
@@ -558,7 +558,7 @@ class Phamda
      */
     public static function curryN($length = null, $function = null, ...$initialArguments)
     {
-        return static::curry2(function ($length, callable $function, ...$initialArguments) {
+        return static::curry2(function (int $length, callable $function, ...$initialArguments) {
             return static::_curryN($length, $function, ...$initialArguments);
         }, func_get_args());
     }
@@ -749,7 +749,7 @@ class Phamda
      */
     public static function explode($delimiter = null, $string = null)
     {
-        return static::curry2(function ($delimiter, $string) {
+        return static::curry2(function (string $delimiter, string $string) {
             return $delimiter === '' ? str_split($string) : explode($delimiter, $string);
         }, func_get_args());
     }
@@ -1166,7 +1166,7 @@ class Phamda
      */
     public static function implode($glue = null, $strings = null)
     {
-        return static::curry2(function ($glue, $strings) {
+        return static::curry2(function (string $glue, array $strings) {
             return implode($glue, $strings);
         }, func_get_args());
     }
@@ -1233,7 +1233,7 @@ class Phamda
      */
     public static function invoker($arity = null, $method = null, ...$initialArguments)
     {
-        return static::curry2(function ($arity, $method, ...$initialArguments) {
+        return static::curry2(function (int $arity, string $method, ...$initialArguments) {
             $remainingCount = $arity - count($initialArguments) + 1;
 
             return static::_curryN($remainingCount, function (...$arguments) use ($method, $initialArguments) {
@@ -1290,7 +1290,7 @@ class Phamda
      */
     public static function isInstance($class = null, $object = null)
     {
-        return static::curry2(function ($class, $object) {
+        return static::curry2(function (string $class, $object) {
             return $object instanceof $class;
         }, func_get_args());
     }
@@ -1514,7 +1514,7 @@ class Phamda
      */
     public static function modulo($x = null, $y = null)
     {
-        return static::curry2(function ($x, $y) {
+        return static::curry2(function (int $x, int $y) {
             return $x % $y;
         }, func_get_args());
     }
@@ -1557,7 +1557,7 @@ class Phamda
      */
     public static function nAry($arity = null, $function = null)
     {
-        return static::curry2(function ($arity, callable $function) {
+        return static::curry2(function (int $arity, callable $function) {
             return function (...$arguments) use ($arity, $function) {
                 return $function(...array_slice($arguments, 0, $arity));
             };
@@ -1669,7 +1669,7 @@ class Phamda
      */
     public static function partialN($arity = null, $function = null, ...$initialArguments)
     {
-        return static::curry2(function ($arity, callable $function, ...$initialArguments) {
+        return static::curry2(function (int $arity, callable $function, ...$initialArguments) {
             return static::_partialN($arity, $function, ...$initialArguments);
         }, func_get_args());
     }
@@ -1851,7 +1851,7 @@ class Phamda
      */
     public static function pluck($name = null, $collection = null)
     {
-        return static::curry2(function ($name, $collection) {
+        return static::curry2(function (string $name, $collection) {
             return static::_map(Phamda::prop($name), $collection);
         }, func_get_args());
     }
@@ -1924,7 +1924,7 @@ class Phamda
      */
     public static function prop($name = null, $object = null)
     {
-        return static::curry2(function ($name, $object) {
+        return static::curry2(function (string $name, $object) {
             return static::_prop($name, $object);
         }, func_get_args());
     }
@@ -1945,7 +1945,7 @@ class Phamda
      */
     public static function propEq($name = null, $value = null, $object = null)
     {
-        return static::curry3(function ($name, $value, $object) {
+        return static::curry3(function (string $name, $value, $object) {
             return static::_prop($name, $object) === $value;
         }, func_get_args());
     }
@@ -2055,7 +2055,7 @@ class Phamda
      */
     public static function slice($start = null, $end = null, $collection = null)
     {
-        return static::curry3(function ($start, $end, $collection) {
+        return static::curry3(function (int $start, int $end, $collection) {
             return static::_slice($start, $end, $collection);
         }, func_get_args());
     }
@@ -2124,7 +2124,7 @@ class Phamda
      */
     public static function stringIndexOf($substring = null, $string = null)
     {
-        return static::curry2(function ($substring, $string) {
+        return static::curry2(function (string $substring, string $string) {
             return strpos($string, $substring);
         }, func_get_args());
     }
@@ -2145,7 +2145,7 @@ class Phamda
      */
     public static function stringLastIndexOf($substring = null, $string = null)
     {
-        return static::curry2(function ($substring, $string) {
+        return static::curry2(function (string $substring, string $string) {
             return strrpos($string, $substring);
         }, func_get_args());
     }
@@ -2167,7 +2167,7 @@ class Phamda
      */
     public static function substring($start = null, $end = null, $string = null)
     {
-        return static::curry3(function ($start, $end, $string) {
+        return static::curry3(function (int $start, int $end, string $string) {
             return substr($string, $start, $end >= 0 ? $end - $start : $end);
         }, func_get_args());
     }
@@ -2188,7 +2188,7 @@ class Phamda
      */
     public static function substringFrom($start = null, $string = null)
     {
-        return static::curry2(function ($start, $string) {
+        return static::curry2(function (int $start, string $string) {
             return substr($string, $start);
         }, func_get_args());
     }
@@ -2209,7 +2209,7 @@ class Phamda
      */
     public static function substringTo($end = null, $string = null)
     {
-        return static::curry2(function ($end, $string) {
+        return static::curry2(function (int $end, string $string) {
             return substr($string, 0, $end);
         }, func_get_args());
     }
@@ -2310,7 +2310,7 @@ class Phamda
      */
     public static function times($function = null, $count = null)
     {
-        return static::curry2(function (callable $function, $count) {
+        return static::curry2(function (callable $function, int $count) {
             return static::_map($function, range(0, $count - 1));
         }, func_get_args());
     }
