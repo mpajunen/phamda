@@ -50,23 +50,6 @@ class ExampleTest extends TestCase
         $this->assertSame(42, $result);
     }
 
-    public function testPlaceholderExample()
-    {
-        $_           = P::_();
-        $subtractTen = P::subtract($_, 10);
-        $result      = $subtractTen(22); // => 12
-
-        $this->assertSame(12, $result);
-    }
-
-    public function testNativePlaceholderExample()
-    {
-        $slashCount = P::curry('substr_count', P::_(), '/');
-        $result     = $slashCount('ab/c/de//f/'); // => 5
-
-        $this->assertSame(5, $result);
-    }
-
     public function testProductList()
     {
         $products = [
@@ -80,12 +63,12 @@ class ExampleTest extends TestCase
             ['category' => 'KCF', 'price' => 581.85, 'weight' => 31.9, 'number' => 48160],
         ];
 
-        $formatPrice = P::curry('number_format', P::_(), 2);
+        $formatPrice = P::curry(P::flip('number_format'))(2);
         $process     = P::pipe(
             P::filter(// Only include products that...
                 P::pipe(
                     P::prop('weight'), // ... weigh...
-                    P::lt(P::_(), 50.0) // ... less than 50.0.
+                    P::gt(50.0) // ... less than 50.0.
                 )
             ),
             P::map(// For each product...

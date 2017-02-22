@@ -11,6 +11,8 @@ _
 -
 ``Placeholder P::_()``
 
+Deprecated since version 0.7, to be removed in 0.8. Use ``flip`` or custom closures instead.
+
 Returns a placeholder to be used with curried functions.
 
 .. code-block:: php

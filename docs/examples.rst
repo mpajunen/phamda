@@ -49,26 +49,6 @@ argument functions and returns a new function. Calling this new function applies
     // Equivalent to calling $double($addFive(16));
 
 
-Placeholders
-------------
-
-Phamda also supports **placeholder arguments**. A placeholder can be created by calling the `_` (underscore) function.
-A placeholder can be used with any curried function, for example:
-
-.. code-block:: php
-
-    $_           = P::_();
-    $subtractTen = P::subtract($_, 10);
-    $result      = $subtractTen(22); // => 12
-
-Placeholders also work with manually curried functions:
-
-.. code-block:: php
-
-    $slashCount = P::curry('substr_count', P::_(), '/');
-    $result     = $slashCount('ab/c/de//f/'); // => 5
-
-
 Pipelines
 ---------
 

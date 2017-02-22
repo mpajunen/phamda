@@ -8,6 +8,7 @@
 - Some functions now enforce their parameter types more strictly.
 
 ### Deprecated
+- Placeholder arguments
 - `P::dec`, `P::inc`
 
 ### Removed

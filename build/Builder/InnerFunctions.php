@@ -35,6 +35,8 @@ class InnerFunctions
      * Returns a placeholder to be used with curried functions.
      *
      * @return Placeholder
+     *
+     * @deprecated Since version 0.7, to be removed in 0.8. Use `flip` or custom closures instead.
      */
     public static function _(): Placeholder
     {
