@@ -14,7 +14,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.1",
-        "nikic/php-parser": "^1.4",
+        "nikic/php-parser": "^3.0",
         "phpunit/phpunit": "^6.0"
     },
     "autoload": {

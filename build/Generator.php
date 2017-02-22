@@ -19,9 +19,8 @@ use Phamda\CodeGen\Builder\Tests\BasicTestBuilder;
 use Phamda\CodeGen\Builder\Tests\CollectionTestBuilder;
 use Phamda\CodeGen\Functions\FunctionCollection;
 use Phamda\Tests\FunctionExampleTest;
-use PhpParser\Lexer;
 use PhpParser\Node;
-use PhpParser\Parser;
+use PhpParser\ParserFactory;
 
 class Generator
 {
@@ -66,7 +65,7 @@ class Generator
 
     private function parseFile($file)
     {
-        return (new Parser(new Lexer\Emulative()))->parse(file_get_contents($file));
+        return (new ParserFactory())->create(ParserFactory::ONLY_PHP7)->parse(file_get_contents($file));
     }
 
     private function getPhpFileComment()

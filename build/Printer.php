@@ -16,9 +16,9 @@ use PhpParser\PrettyPrinter\Standard;
 
 class Printer extends Standard
 {
-    public function pExpr_Array(Expr\Array_ $node)
+    public function __construct(array $options = [])
     {
-        return '[' . $this->pCommaSeparated($node->items) . ']';
+        parent::__construct(['shortArraySyntax' => true]);
     }
 
     public function pExpr_Closure(Expr\Closure $node)

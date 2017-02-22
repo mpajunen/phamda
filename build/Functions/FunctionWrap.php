@@ -175,7 +175,7 @@ class FunctionWrap
         if ($return instanceof Expr\Closure) {
             return $return->params;
         } elseif ($return instanceof Expr\StaticCall) {
-            if ($return->class->parts === ['Phamda']) {
+            if ($return->class->getFirst() === 'Phamda') {
                 /** @var static $function */
                 $function = $getFunction($return->name);
 
