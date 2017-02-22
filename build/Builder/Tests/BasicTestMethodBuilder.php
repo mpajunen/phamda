@@ -20,7 +20,6 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\String_;
-use PhpParser\Node\Stmt;
 
 class BasicTestMethodBuilder extends AbstractMethodBuilder
 {
@@ -67,56 +66,35 @@ EOT;
 
     protected function createStatements()
     {
-        return array_merge($this->createResultTestStatements(), $this->createCurryTestStatements());
+        return array_merge(
+            [$this->createResultTestStatement()],
+            $this->source->isCurried() ? $this->createCurryTestStatements() : []
+        );
     }
 
-    private function createResultTestStatements()
+    private function createResultTestStatement()
     {
-        $statements     = [];
-        $function       = null;
-        $argumentSource = $this->source->params;
-
-        if ($this->source->returnsCallable()) {
-            $call           = $this->createFunctionCall($argumentSource, $function);
-            $function       = new Expr\Variable('main0');
-            $statements[]   = new Expr\Assign($function, $call);
-            $argumentSource = $this->source->getInnerFunctionParams();
-        }
-
-        $statements[] = $this->createAssert($this->createFunctionCall($argumentSource, $function), true);
-
-        return $statements;
+        return $this->createAssert($this->createChainedCall([$this->source->params]), true);
     }
 
     private function createCurryTestStatements()
     {
-        if (count($this->source->params) === 0 || ! $this->source->isCurried()) {
-            return [];
-        }
+        $getStatement = function ($index) {
+            $toArray = function ($value) {
+                return [$value];
+            };
 
-        $result    = new Expr\Variable('result');
-        $arguments = $this->source->params;
+            $mainArguments = array_merge(
+                [array_slice($this->source->params, 0, $index)],
+                array_map($toArray, array_slice($this->source->params, $index))
+            );
 
-        if ($this->source->returnsCallable()) {
-            $resultExpr = $this->createFunctionCall($this->source->getInnerFunctionParams(), $result);
-        } elseif ($this->source->isVariadic()) {
-            $resultExpr = $this->createFunctionCall(array_slice($this->source->params, -1), $result);
-            $arguments  = array_slice($this->source->params, 0, -1);
-        } else {
-            $resultExpr = $result;
-        }
+            return $this->createAssert($this->createChainedCall($mainArguments), false);
+        };
 
-        $foreach = new Stmt\Foreach_(
-            new Expr\MethodCall(new Expr\Variable('this'), 'getCurriedResults', array_merge(
-                [$this->createFunctionCall([])],
-                $this->createArguments($arguments)
-            )),
-            $result
-        );
+        $startIndices = range(0, count($this->source->params) - 1);
 
-        $foreach->stmts = [$this->createAssert($resultExpr, false)];
-
-        return [$foreach];
+        return array_map($getStatement, $startIndices);
     }
 
     private function createAssert(Expr $call, $isDirectCall)
@@ -128,7 +106,17 @@ EOT;
         ]);
     }
 
-    private function createFunctionCall(array $argumentSource, Expr\Variable $function = null)
+    private function createChainedCall(array $mainArguments)
+    {
+        $allArguments = array_merge(
+            $mainArguments,
+            $this->source->returnsCallable() ? [$this->source->getInnerFunctionParams()] : []
+        );
+
+        return array_reduce($allArguments, [$this, 'createFunctionCall']);
+    }
+
+    private function createFunctionCall($function, array $argumentSource)
     {
         $arguments = $this->createArguments($argumentSource);
 

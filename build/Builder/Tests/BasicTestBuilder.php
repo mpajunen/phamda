@@ -48,7 +48,6 @@ class BasicTestBuilder implements BuilderInterface
             ->extend('TestCase')
             ->addStmt(new TraitUse([
                 new Name('BasicProvidersTrait'),
-                new Name('CurryTestTrait'),
             ]))
             ->addStmts($this->createClassMethods());
     }
