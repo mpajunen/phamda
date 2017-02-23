@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ObjectTest extends TestCase
 {
-    use BasicProvidersTrait, CurryTestTrait;
+    use BasicProvidersTrait;
 
     /**
      * @dataProvider getAssocData
@@ -61,21 +61,29 @@ class ObjectTest extends TestCase
         $clone    = P::clone_($original);
 
         $this->assertNotSame($original, $clone);
-        $this->assertSame(Test1::class, get_class($clone));
+        $this->assertInstanceOf(Test1::class, $clone);
 
         $curried  = P::clone_();
         $newClone = $curried($original);
 
         $this->assertNotSame($original, $newClone);
-        $this->assertSame(Test1::class, get_class($newClone));
+        $this->assertInstanceOf(Test1::class, $newClone);
     }
 
     /**
      * @dataProvider getConstructData
      */
-    public function testConstruct($expected, $class, ...$arguments)
+    public function testConstruct($expected, $class, $a, $b, ...$arguments)
     {
-        foreach ($this->getCurriedResults(P::construct($class), ...$arguments) as $result) {
+        $results = [
+            P::construct($class, $a, $b, ...$arguments),
+            P::construct()($class, $a, $b, ...$arguments),
+            P::construct($class)($a, $b, ...$arguments),
+            P::construct($class)($a)($b, ...$arguments),
+            P::construct($class)($a)($b)(...$arguments),
+        ];
+
+        foreach ($results as $result) {
             $this->checkConstructResult($expected, $class, $result);
         }
     }
@@ -83,9 +91,19 @@ class ObjectTest extends TestCase
     /**
      * @dataProvider getConstructNData
      */
-    public function testConstructN($expected, $arity, $class, ...$arguments)
+    public function testConstructN($expected, $arity, $class, $a, $b, ...$arguments)
     {
-        foreach ($this->getCurriedResults(P::constructN($arity, $class), ...$arguments) as $result) {
+        $results = [
+            P::constructN($arity, $class, $a, $b, ...$arguments),
+            P::constructN()($arity, $class, $a, $b, ...$arguments),
+            P::constructN($arity)($class, $a, $b, ...$arguments),
+            P::constructN($arity)($class)($a, $b, ...$arguments),
+            P::constructN($arity, $class, $a)($b, ...$arguments),
+            P::constructN($arity, $class)($a, $b, ...$arguments),
+            P::constructN($arity, $class)($a)($b, ...$arguments),
+        ];
+
+        foreach ($results as $result) {
             $this->checkConstructResult($expected, $class, $result);
         }
     }
