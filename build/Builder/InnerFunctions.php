@@ -859,22 +859,16 @@ class InnerFunctions
     /**
      * Returns `true` if a collection has no elements, `false` otherwise.
      *
-     * @param array|\Traversable|Collection $collection
+     * @param array|\Countable|Collection $collection
      *
      * @return bool
      */
     public static function isEmpty($collection): bool
     {
-        if (is_array($collection)) {
-            return empty($collection);
-        } elseif (method_exists($collection, 'isEmpty')) {
+        if (method_exists($collection, 'isEmpty')) {
             return $collection->isEmpty();
         } else {
-            foreach ($collection as $item) {
-                return false;
-            }
-
-            return true;
+            return count($collection) === 0;
         }
     }
 

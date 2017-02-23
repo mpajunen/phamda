@@ -5,6 +5,7 @@
 - PHP 7.1 test coverage
 
 ### Changed
+- `P::isEmpty` now expects that the collection is `\Countable` (or implements `isEmpty` method or is an array).
 - Some functions now enforce their parameter types more strictly.
 
 ### Deprecated

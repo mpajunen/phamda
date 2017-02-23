@@ -796,7 +796,7 @@ Returns a function that calls the specified method of a given object.
 
 isEmpty
 -------
-``bool P::isEmpty(array|\Traversable|Collection $collection)``
+``bool P::isEmpty(array|\Countable|Collection $collection)``
 
 Returns ``true`` if a collection has no elements, ``false`` otherwise.
 

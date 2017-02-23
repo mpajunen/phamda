@@ -1259,23 +1259,17 @@ class Phamda
      * P::isEmpty([]); // => true
      * ```
      *
-     * @param array|\Traversable|Collection $collection
+     * @param array|\Countable|Collection $collection
      *
      * @return callable|bool
      */
     public static function isEmpty($collection = null)
     {
         return static::curry1(function ($collection) {
-            if (is_array($collection)) {
-                return empty($collection);
-            } elseif (method_exists($collection, 'isEmpty')) {
+            if (method_exists($collection, 'isEmpty')) {
                 return $collection->isEmpty();
             } else {
-                foreach ($collection as $item) {
-                    return false;
-                }
-
-                return true;
+                return count($collection) === 0;
             }
         }, func_get_args());
     }
