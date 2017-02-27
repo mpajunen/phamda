@@ -798,7 +798,7 @@ class Phamda
     }
 
     /**
-     * Returns the first item of a collection for which the given predicate matches, or null if no match is found.
+     * Returns the first item of a collection for which the given predicate matches, or `null` if no match is found.
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
@@ -824,7 +824,7 @@ class Phamda
     }
 
     /**
-     * Returns the index of the first item of a collection for which the given predicate matches, or null if no match is found.
+     * Returns the index of the first item of a collection for which the given predicate matches, or `null` if no match is found.
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
@@ -850,7 +850,7 @@ class Phamda
     }
 
     /**
-     * Returns the last item of a collection for which the given predicate matches, or null if no match is found.
+     * Returns the last item of a collection for which the given predicate matches, or `null` if no match is found.
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };
@@ -876,7 +876,7 @@ class Phamda
     }
 
     /**
-     * Returns the index of the last item of a collection for which the given predicate matches, or null if no match is found.
+     * Returns the index of the last item of a collection for which the given predicate matches, or `null` if no match is found.
      *
      * ```php
      * $isPositive = function ($x) { return $x > 0; };

@@ -520,7 +520,7 @@ find
 ----
 ``mixed|null P::find(callable $predicate, array|\Traversable $collection)``
 
-Returns the first item of a collection for which the given predicate matches, or null if no match is found.
+Returns the first item of a collection for which the given predicate matches, or ``null`` if no match is found.
 
 .. code-block:: php
 
@@ -534,7 +534,7 @@ findIndex
 ---------
 ``int|string|null P::findIndex(callable $predicate, array|\Traversable $collection)``
 
-Returns the index of the first item of a collection for which the given predicate matches, or null if no match is found.
+Returns the index of the first item of a collection for which the given predicate matches, or ``null`` if no match is found.
 
 .. code-block:: php
 
@@ -548,7 +548,7 @@ findLast
 --------
 ``mixed|null P::findLast(callable $predicate, array|\Traversable $collection)``
 
-Returns the last item of a collection for which the given predicate matches, or null if no match is found.
+Returns the last item of a collection for which the given predicate matches, or ``null`` if no match is found.
 
 .. code-block:: php
 
@@ -562,7 +562,7 @@ findLastIndex
 -------------
 ``int|string|null P::findLastIndex(callable $predicate, array|\Traversable $collection)``
 
-Returns the index of the last item of a collection for which the given predicate matches, or null if no match is found.
+Returns the index of the last item of a collection for which the given predicate matches, or ``null`` if no match is found.
 
 .. code-block:: php
 
