@@ -13,6 +13,8 @@ namespace Phamda\CodeGen\Builder;
 
 use Phamda\CodeGen\Functions\FunctionCollection;
 use Phamda\CodeGen\Functions\FunctionWrap;
+use Phamda\Collection\Collection;
+use Phamda\Exception\InvalidFunctionCompositionException;
 use Phamda\Phamda;
 use PhpParser\BuilderFactory;
 use PhpParser\Node\Name;
@@ -36,8 +38,8 @@ class PhamdaBuilder implements BuilderInterface
     public function build()
     {
         return $this->factory->namespace('Phamda')
-            ->addStmt(new Use_([new UseUse(new Name('Phamda\Collection\Collection'))]))
-            ->addStmt(new Use_([new UseUse(new Name('Phamda\Exception\InvalidFunctionCompositionException'))]))
+            ->addStmt(new Use_([new UseUse(new Name(Collection::class))]))
+            ->addStmt(new Use_([new UseUse(new Name(InvalidFunctionCompositionException::class))]))
             ->addStmt($this->createClass())
             ->getNode();
     }

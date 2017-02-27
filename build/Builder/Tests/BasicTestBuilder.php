@@ -20,6 +20,7 @@ use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\TraitUse;
 use PhpParser\Node\Stmt\Use_;
 use PhpParser\Node\Stmt\UseUse;
+use PHPUnit\Framework\TestCase;
 
 class BasicTestBuilder implements BuilderInterface
 {
@@ -35,8 +36,8 @@ class BasicTestBuilder implements BuilderInterface
         $factory = new BuilderFactory();
 
         return $factory->namespace('Phamda\Tests')
-            ->addStmt(new Use_([new UseUse(new Name('Phamda\Phamda'), new Name('P'))]))
-            ->addStmt(new Use_([new UseUse(new Name('PHPUnit\Framework\TestCase'))]))
+            ->addStmt(new Use_([new UseUse(new Name(Phamda::class), new Name('P'))]))
+            ->addStmt(new Use_([new UseUse(new Name(TestCase::class))]))
             ->addStmt($this->createClass($factory))
             ->getNode();
     }

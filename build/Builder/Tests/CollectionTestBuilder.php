@@ -14,11 +14,15 @@ namespace Phamda\CodeGen\Builder\Tests;
 use Phamda\CodeGen\Builder\BuilderInterface;
 use Phamda\CodeGen\Builder\GeneratedClassComment;
 use Phamda\CodeGen\Functions\FunctionCollection;
+use Phamda\Phamda;
+use Phamda\Tests\Fixtures\ArrayCollection;
+use Phamda\Tests\Fixtures\ArrayContainer;
 use PhpParser\BuilderFactory;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\TraitUse;
 use PhpParser\Node\Stmt\Use_;
 use PhpParser\Node\Stmt\UseUse;
+use PHPUnit\Framework\TestCase;
 
 class CollectionTestBuilder implements BuilderInterface
 {
@@ -34,10 +38,10 @@ class CollectionTestBuilder implements BuilderInterface
         $factory = new BuilderFactory();
 
         return $factory->namespace('Phamda\Tests')
-            ->addStmt($this->createUse('Phamda\Phamda', new Name('P')))
-            ->addStmt($this->createUse('Phamda\Tests\Fixtures\ArrayCollection'))
-            ->addStmt($this->createUse('Phamda\Tests\Fixtures\ArrayContainer'))
-            ->addStmt($this->createUse('PHPUnit\Framework\TestCase'))
+            ->addStmt($this->createUse(Phamda::class, new Name('P')))
+            ->addStmt($this->createUse(ArrayCollection::class))
+            ->addStmt($this->createUse(ArrayContainer::class))
+            ->addStmt($this->createUse(TestCase::class))
             ->addStmt($this->createClass($factory))
             ->getNode();
     }
