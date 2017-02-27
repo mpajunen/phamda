@@ -326,7 +326,7 @@ trait CoreFunctionsTrait
 
     protected static function testSpecificationPart(string $name, $part, $object)
     {
-        $value = Phamda::prop($name, $object);
+        $value = self::_prop($name, $object);
 
         return is_callable($part)
             ? $part($value, $object)

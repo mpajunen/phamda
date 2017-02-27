@@ -64,7 +64,7 @@ class FunctionCollection implements \Countable
             $name,
             $this->innerFunctions[$name],
             $getFunction,
-            isset($this->exampleStatements[$name]) ? $this->exampleStatements[$name] : []
+            $this->exampleStatements[$name] ?? []
         );
 
         return $function;

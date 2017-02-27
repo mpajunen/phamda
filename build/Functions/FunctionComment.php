@@ -40,9 +40,9 @@ class FunctionComment
         $return         = Phamda::findIndex(Phamda::curry($hasSubstring, '@return'), $rows);
         $deprecation    = Phamda::findIndex(Phamda::curry($hasSubstring, '@deprecated'), $rows);
 
-        $this->summary     = Phamda::slice(0, ($firstParameter ? $firstParameter : $return) - 1, $rows);
+        $this->summary     = Phamda::slice(0, ($firstParameter ?: $return) - 1, $rows);
         $this->parameters  = Phamda::slice($firstParameter ?: 0, $return - 1, $rows);
         $this->return      = $rows[$return];
-        $this->deprecation = isset($deprecation) ? $rows[$deprecation] : null;
+        $this->deprecation = $rows[$deprecation] ?? null;
     }
 }

@@ -1065,7 +1065,7 @@ class InnerFunctions
      */
     public static function negate($x)
     {
-        return Phamda::multiply($x, -1);
+        return $x * -1;
     }
 
     /**
@@ -1206,7 +1206,7 @@ class InnerFunctions
     {
         $new = [];
         foreach ($names as $name) {
-            $new[$name] = isset($item[$name]) ? $item[$name] : null;
+            $new[$name] = $item[$name] ?? null;
         }
 
         return $new;
@@ -1410,10 +1410,7 @@ class InnerFunctions
     public static function sortBy(callable $function, $collection)
     {
         $comparator = function ($x, $y) use ($function) {
-            $xKey = $function($x);
-            $yKey = $function($y);
-
-            return $xKey < $yKey ? -1 : ($xKey > $yKey ? 1 : 0);
+            return $function($x) <=> $function($y);
         };
 
         return static::_sort($comparator, $collection);
