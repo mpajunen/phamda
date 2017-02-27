@@ -576,12 +576,12 @@ first
 -----
 ``mixed P::first(array|\Traversable|Collection $collection)``
 
-Returns the first item of a collection, or false if the collection is empty.
+Returns the first item of a collection, or ``null`` if the collection is empty.
 
 .. code-block:: php
 
     P::first([5, 8, 9, 13]); // => 5
-    P::first([]); // => false
+    P::first([]); // => null
 
 
 .. _flatMap:
@@ -767,14 +767,14 @@ Increments the given number.
 
 indexOf
 -------
-``int|string|false P::indexOf(mixed $item, array|\Traversable $collection)``
+``int|string|null P::indexOf(mixed $item, array|\Traversable $collection)``
 
-Returns the index of the given item in a collection, or ``false`` if the item is not found.
+Returns the index of the given item in a collection, or ``null`` if the item is not found.
 
 .. code-block:: php
 
     P::indexOf(16, [1, 6, 44, 16, 52]); // => 3
-    P::indexOf(15, [1, 6, 44, 16, 52]); // => false
+    P::indexOf(15, [1, 6, 44, 16, 52]); // => null
 
 
 .. _invoker:
@@ -828,12 +828,12 @@ last
 ----
 ``mixed P::last(array|\Traversable|Collection $collection)``
 
-Returns the last item of a collection, or false if the collection is empty.
+Returns the last item of a collection, or ``null`` if the collection is empty.
 
 .. code-block:: php
 
     P::last([5, 8, 9, 13]); // => 13
-    P::last([]); // => false
+    P::last([]); // => null
 
 
 .. _lt:
@@ -1360,30 +1360,30 @@ Returns a new collection sorted by comparing the values provided by calling the 
 
 stringIndexOf
 -------------
-``int|false P::stringIndexOf(string $substring, string $string)``
+``int|null P::stringIndexOf(string $substring, string $string)``
 
-Returns the first index of a substring in a string, or ``false`` if the substring is not found.
+Returns the first index of a substring in a string, or ``null`` if the substring is not found.
 
 .. code-block:: php
 
     P::stringIndexOf('def', 'abcdefdef'); // => 3
     P::stringIndexOf('a', 'abcdefgh'); // => 0
-    P::stringIndexOf('ghi', 'abcdefgh'); // => false
+    P::stringIndexOf('ghi', 'abcdefgh'); // => null
 
 
 .. _stringLastIndexOf:
 
 stringLastIndexOf
 -----------------
-``int|false P::stringLastIndexOf(string $substring, string $string)``
+``int|null P::stringLastIndexOf(string $substring, string $string)``
 
-Returns the last index of a substring in a string, or ``false`` if the substring is not found.
+Returns the last index of a substring in a string, or ``null`` if the substring is not found.
 
 .. code-block:: php
 
     P::stringLastIndexOf('def', 'abcdefdef'); // => 6
     P::stringLastIndexOf('a', 'abcdefgh'); // => 0
-    P::stringLastIndexOf('ghi', 'abcdefgh'); // => false
+    P::stringLastIndexOf('ghi', 'abcdefgh'); // => null
 
 
 .. _substring:

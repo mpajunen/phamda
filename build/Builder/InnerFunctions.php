@@ -622,7 +622,7 @@ class InnerFunctions
     }
 
     /**
-     * Returns the first item of a collection, or false if the collection is empty.
+     * Returns the first item of a collection, or `null` if the collection is empty.
      *
      * @param array|\Traversable|Collection $collection
      *
@@ -631,7 +631,7 @@ class InnerFunctions
     public static function first($collection)
     {
         if (is_array($collection)) {
-            return reset($collection);
+            return empty($collection) ? null : reset($collection);
         } elseif (method_exists($collection, 'first')) {
             return $collection->first();
         } else {
@@ -639,7 +639,7 @@ class InnerFunctions
                 return $item;
             }
 
-            return false;
+            return null;
         }
     }
 
@@ -818,12 +818,12 @@ class InnerFunctions
     }
 
     /**
-     * Returns the index of the given item in a collection, or `false` if the item is not found.
+     * Returns the index of the given item in a collection, or `null` if the item is not found.
      *
      * @param mixed              $item
      * @param array|\Traversable $collection
      *
-     * @return int|string|false
+     * @return int|string|null
      */
     public static function indexOf($item, $collection)
     {
@@ -833,7 +833,7 @@ class InnerFunctions
             }
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -886,7 +886,7 @@ class InnerFunctions
     }
 
     /**
-     * Returns the last item of a collection, or false if the collection is empty.
+     * Returns the last item of a collection, or `null` if the collection is empty.
      *
      * @param array|\Traversable|Collection $collection
      *
@@ -895,7 +895,7 @@ class InnerFunctions
     public static function last($collection)
     {
         if (is_array($collection)) {
-            return end($collection);
+            return empty($collection) ? null : end($collection);
         } elseif (method_exists($collection, 'last')) {
             return $collection->last();
         } else {
@@ -903,7 +903,7 @@ class InnerFunctions
                 return $item;
             }
 
-            return false;
+            return null;
         }
     }
 
@@ -1417,29 +1417,33 @@ class InnerFunctions
     }
 
     /**
-     * Returns the first index of a substring in a string, or `false` if the substring is not found.
+     * Returns the first index of a substring in a string, or `null` if the substring is not found.
      *
      * @param string $substring
      * @param string $string
      *
-     * @return int|false
+     * @return int|null
      */
     public static function stringIndexOf(string $substring, string $string)
     {
-        return strpos($string, $substring);
+        $position = strpos($string, $substring);
+
+        return $position === false ? null : $position;
     }
 
     /**
-     * Returns the last index of a substring in a string, or `false` if the substring is not found.
+     * Returns the last index of a substring in a string, or `null` if the substring is not found.
      *
      * @param string $substring
      * @param string $string
      *
-     * @return int|false
+     * @return int|null
      */
     public static function stringLastIndexOf(string $substring, string $string)
     {
-        return strrpos($string, $substring);
+        $position = strrpos($string, $substring);
+
+        return $position === false ? null : $position;
     }
 
     /**

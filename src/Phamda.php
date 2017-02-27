@@ -902,11 +902,11 @@ class Phamda
     }
 
     /**
-     * Returns the first item of a collection, or false if the collection is empty.
+     * Returns the first item of a collection, or `null` if the collection is empty.
      *
      * ```php
      * P::first([5, 8, 9, 13]); // => 5
-     * P::first([]); // => false
+     * P::first([]); // => null
      * ```
      *
      * @param array|\Traversable|Collection $collection
@@ -917,7 +917,7 @@ class Phamda
     {
         return static::curry1(function ($collection) {
             if (is_array($collection)) {
-                return reset($collection);
+                return empty($collection) ? null : reset($collection);
             } elseif (method_exists($collection, 'first')) {
                 return $collection->first();
             } else {
@@ -925,7 +925,7 @@ class Phamda
                     return $item;
                 }
 
-                return false;
+                return null;
             }
         }, func_get_args());
     }
@@ -1197,17 +1197,17 @@ class Phamda
     }
 
     /**
-     * Returns the index of the given item in a collection, or `false` if the item is not found.
+     * Returns the index of the given item in a collection, or `null` if the item is not found.
      *
      * ```php
      * P::indexOf(16, [1, 6, 44, 16, 52]); // => 3
-     * P::indexOf(15, [1, 6, 44, 16, 52]); // => false
+     * P::indexOf(15, [1, 6, 44, 16, 52]); // => null
      * ```
      *
      * @param mixed              $item
      * @param array|\Traversable $collection
      *
-     * @return callable|int|string|false
+     * @return callable|int|string|null
      */
     public static function indexOf($item = null, $collection = null)
     {
@@ -1218,7 +1218,7 @@ class Phamda
                 }
             }
 
-            return false;
+            return null;
         }, func_get_args());
     }
 
@@ -1296,11 +1296,11 @@ class Phamda
     }
 
     /**
-     * Returns the last item of a collection, or false if the collection is empty.
+     * Returns the last item of a collection, or `null` if the collection is empty.
      *
      * ```php
      * P::last([5, 8, 9, 13]); // => 13
-     * P::last([]); // => false
+     * P::last([]); // => null
      * ```
      *
      * @param array|\Traversable|Collection $collection
@@ -1311,7 +1311,7 @@ class Phamda
     {
         return static::curry1(function ($collection) {
             if (is_array($collection)) {
-                return end($collection);
+                return empty($collection) ? null : end($collection);
             } elseif (method_exists($collection, 'last')) {
                 return $collection->last();
             } else {
@@ -1319,7 +1319,7 @@ class Phamda
                     return $item;
                 }
 
-                return false;
+                return null;
             }
         }, func_get_args());
     }
@@ -2106,44 +2106,48 @@ class Phamda
     }
 
     /**
-     * Returns the first index of a substring in a string, or `false` if the substring is not found.
+     * Returns the first index of a substring in a string, or `null` if the substring is not found.
      *
      * ```php
      * P::stringIndexOf('def', 'abcdefdef'); // => 3
      * P::stringIndexOf('a', 'abcdefgh'); // => 0
-     * P::stringIndexOf('ghi', 'abcdefgh'); // => false
+     * P::stringIndexOf('ghi', 'abcdefgh'); // => null
      * ```
      *
      * @param string $substring
      * @param string $string
      *
-     * @return callable|int|false
+     * @return callable|int|null
      */
     public static function stringIndexOf($substring = null, $string = null)
     {
         return static::curry2(function (string $substring, string $string) {
-            return strpos($string, $substring);
+            $position = strpos($string, $substring);
+
+            return $position === false ? null : $position;
         }, func_get_args());
     }
 
     /**
-     * Returns the last index of a substring in a string, or `false` if the substring is not found.
+     * Returns the last index of a substring in a string, or `null` if the substring is not found.
      *
      * ```php
      * P::stringLastIndexOf('def', 'abcdefdef'); // => 6
      * P::stringLastIndexOf('a', 'abcdefgh'); // => 0
-     * P::stringLastIndexOf('ghi', 'abcdefgh'); // => false
+     * P::stringLastIndexOf('ghi', 'abcdefgh'); // => null
      * ```
      *
      * @param string $substring
      * @param string $string
      *
-     * @return callable|int|false
+     * @return callable|int|null
      */
     public static function stringLastIndexOf($substring = null, $string = null)
     {
         return static::curry2(function (string $substring, string $string) {
-            return strrpos($string, $substring);
+            $position = strrpos($string, $substring);
+
+            return $position === false ? null : $position;
         }, func_get_args());
     }
 

@@ -5,6 +5,9 @@
 - PHP 7.1 test coverage
 
 ### Changed
+- `P::first` and `P::last` now return `null` instead of `false` if the collection is empty.
+- `P::indexOf` now returns `null` instead of `false` if the item is not found.
+- `P::stringIndexOf` and `P::stringLastIndexOf` now return `null` instead of `false` if the substring is not found.
 - `P::isEmpty` now expects that the collection is `\Countable` (or implements `isEmpty` method or is an array).
 - Some functions now enforce their parameter types more strictly.
 

@@ -61,7 +61,7 @@ class ArrayCollection extends ArrayContainer implements Collection
      */
     public function first()
     {
-        return reset($this->values);
+        return empty($this->values) ? null : reset($this->values);
     }
 
     /**
@@ -117,7 +117,7 @@ class ArrayCollection extends ArrayContainer implements Collection
      */
     public function last()
     {
-        return end($this->values);
+        return empty($this->values) ? null : end($this->values);
     }
 
     /**

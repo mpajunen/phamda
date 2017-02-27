@@ -418,7 +418,7 @@ trait BasicProvidersTrait
 
         return [
             [5, [5, 8, 9, 13]],
-            [false, []],
+            [null, []],
             [$a, [$a, $b, $c]],
         ];
     }
@@ -532,9 +532,9 @@ trait BasicProvidersTrait
 
         return [
             [3, 16, [1, 6, 44, 16, 52]],
-            [false, 15, [1, 6, 44, 16, 52]],
+            [null, 15, [1, 6, 44, 16, 52]],
             ['a', $a, ['a' => $a, 'b' => $b, 'c' => $c]],
-            [false, 15, []],
+            [null, 15, []],
         ];
     }
 
@@ -587,7 +587,7 @@ trait BasicProvidersTrait
         return [
             [13, [5, 8, 9, 13]],
             [$c, [$a, $b, $c]],
-            [false, []],
+            [null, []],
         ];
     }
 
@@ -970,9 +970,9 @@ trait BasicProvidersTrait
         return [
             [3, 'def', 'abcdefdef'],
             [0, 'a', 'abcdefgh'],
-            [false, 'ghi', 'abcdefgh'],
-            [false, 'xyz', 'abcdefgh'],
-            [false, 'cba', 'abcdefgh'],
+            [null, 'ghi', 'abcdefgh'],
+            [null, 'xyz', 'abcdefgh'],
+            [null, 'cba', 'abcdefgh'],
         ];
     }
 
@@ -981,9 +981,9 @@ trait BasicProvidersTrait
         return [
             [6, 'def', 'abcdefdef'],
             [0, 'a', 'abcdefgh'],
-            [false, 'ghi', 'abcdefgh'],
-            [false, 'xyz', 'abcdefgh'],
-            [false, 'cba', 'abcdefgh'],
+            [null, 'ghi', 'abcdefgh'],
+            [null, 'xyz', 'abcdefgh'],
+            [null, 'cba', 'abcdefgh'],
         ];
     }
 
