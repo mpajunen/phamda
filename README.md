@@ -1,6 +1,6 @@
 # Phamda
 
-Phamda is a functional programming library for PHP, heavily inspired by the Javascript library
+Phamda is an auto-curried function library for PHP, heavily inspired by the Javascript library
 [Ramda](http://ramdajs.com/). PHP 7.0+ or HHVM is required.
 
 
@@ -22,7 +22,7 @@ These examples highlight the major features of Phamda. Basic usage examples can 
 
 ### Currying
 
-Nearly all of the functions use automatic partial application or **currying**. This means that you can call the
+Nearly all of the functions use automatic partial application or **currying**. For example you can call the
 `filter` function with only the predicate callback and get a new function:
 
 ```php

@@ -1,7 +1,7 @@
 {
     "name": "phamda/phamda",
-    "description": "Functional programming with automatically curried functions",
-    "keywords": ["functional", "curry"],
+    "description": "Auto-curried function library",
+    "keywords": ["compose", "curry", "functional"],
     "license": "MIT",
     "authors": [
         {
