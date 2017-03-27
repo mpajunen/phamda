@@ -79,4 +79,24 @@ class PartialTest extends TestCase
         $result = $curried4(5);
         $this->assertSame(15, $result);
     }
+
+    /**
+     * @dataProvider getTwistData
+     */
+    public function testTwist($expected, callable $function, array $arguments)
+    {
+        $a = array_shift($arguments);
+
+        $this->assertSame($expected, P::twist($function)($a)(...$arguments), 'twist returns a curried function.');
+    }
+
+    /**
+     * @dataProvider getTwistNData
+     */
+    public function testTwistN($expected, int $arity, callable $function, array $arguments)
+    {
+        $a = array_shift($arguments);
+
+        $this->assertSame($expected, P::twistN($arity, $function)($a)(...$arguments), 'twistN returns a curried function.');
+    }
 }

@@ -383,6 +383,23 @@ class FunctionExampleTest extends TestCase
         $this->assertSame(true, $true());
     }
 
+    public function testTwist()
+    {
+        $concat = function ($a, $b, $c) { return $a . $b . $c; };
+        $this->assertSame('foobarbaz', P::twist($concat)('bar')('baz')('foo'));
+        $format = P::twist('number_format');
+        $this->assertSame('15 329,00', $format(2, ',', ' ', 15329));
+    }
+
+    public function testTwistN()
+    {
+        $concat = function ($a = '', $b = '', $c = '') { return $a . $b . $c; };
+        $this->assertSame('bazbar', P::twistN(2, $concat)('bar')('baz'));
+        $this->assertSame('foobarbaz', P::twistN(2, $concat)('bar')('baz', 'foo'));
+        $format = P::twistN(4, 'number_format')(2, ',', ' ');
+        $this->assertSame('15 329,00', $format(15329));
+    }
+
     public function testUnapply()
     {
         $concat = function (array $strings) { return implode(' ', $strings); };

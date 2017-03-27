@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- `P::twist`, `P::twistN`
 
 ### Changed
 - `P::flip` now returns a curried function.

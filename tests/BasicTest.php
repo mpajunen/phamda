@@ -958,6 +958,25 @@ class BasicTest extends TestCase
     }
 
     /**
+     * @dataProvider getTwistData
+     */
+    public function testTwist($expected, callable $function, array $arguments)
+    {
+        $this->assertSame($expected, P::twist($function)(...$arguments), 'twist produces correct results.');
+        $this->assertSame($expected, P::twist()($function)(...$arguments), 'twist is curried correctly.');
+    }
+
+    /**
+     * @dataProvider getTwistNData
+     */
+    public function testTwistN($expected, int $arity, callable $function, array $arguments)
+    {
+        $this->assertSame($expected, P::twistN($arity, $function)(...$arguments), 'twistN produces correct results.');
+        $this->assertSame($expected, P::twistN()($arity)($function)(...$arguments), 'twistN is curried correctly.');
+        $this->assertSame($expected, P::twistN($arity)($function)(...$arguments), 'twistN is curried correctly.');
+    }
+
+    /**
      * @dataProvider getUnaryData
      */
     public function testUnary($expected, callable $function, $a)

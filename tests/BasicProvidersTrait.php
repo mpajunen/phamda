@@ -1052,6 +1052,25 @@ trait BasicProvidersTrait
         ];
     }
 
+    public function getTwistData()
+    {
+        $concat3 = function ($a, $b, $c) { return $a . ' ' . $b . ' ' . $c; };
+
+        return [
+            ['1 2 3', $concat3, ['2', '3', '1']],
+        ];
+    }
+
+    public function getTwistNData()
+    {
+        $concat3 = function ($a = '', $b = '', $c = '') { return $a . ' ' . $b . ' ' . $c; };
+
+        return [
+            ['1 2 3', 3, $concat3, ['2', '3', '1']],
+            ['1 2 3', 2, $concat3, ['2', '3', '1']],
+        ];
+    }
+
     public function getUnaryData()
     {
         $add2 = function ($a = 0, $b = 0) { return $a + $b; };

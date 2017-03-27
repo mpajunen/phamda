@@ -1547,6 +1547,41 @@ class InnerFunctions
     }
 
     /**
+     * Returns a new function where the original first parameter is the last one, the second parameter is the first and so on.
+     *
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function twist(callable $function): callable
+    {
+        $arity = static::getArity($function);
+
+        return static::_curryN($arity, function (...$arguments) use ($function) {
+            $first = array_pop($arguments);
+
+            return $function($first, ...$arguments);
+        });
+    }
+
+    /**
+     * Returns a new function of the specified arity where the original first parameter is the last one, the second parameter is the first and so on.
+     *
+     * @param int      $arity
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function twistN(int $arity, callable $function): callable
+    {
+        return static::_curryN($arity, function (...$arguments) use ($function) {
+            $first = array_pop($arguments);
+
+            return $function($first, ...$arguments);
+        });
+    }
+
+    /**
      * Wraps the given function in a function that accepts exactly one parameter.
      *
      * @param callable $function

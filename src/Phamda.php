@@ -2305,6 +2305,60 @@ class Phamda
     }
 
     /**
+     * Returns a new function where the original first parameter is the last one, the second parameter is the first and so on.
+     *
+     * ```php
+     * $concat = function ($a, $b, $c) { return $a . $b . $c; };
+     * P::twist($concat)('bar')('baz')('foo'); // => 'foobarbaz'
+     * $format = P::twist('number_format');
+     * $format(2, ',', ' ', 15329); // => '15 329,00'
+     * ```
+     *
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function twist(callable $function = null)
+    {
+        return static::curry1(function (callable $function): callable {
+            $arity = static::getArity($function);
+
+            return static::_curryN($arity, function (...$arguments) use ($function) {
+                $first = array_pop($arguments);
+
+                return $function($first, ...$arguments);
+            });
+        }, func_get_args());
+    }
+
+    /**
+     * Returns a new function of the specified arity where the original first parameter is the last one, the second parameter is the first and so on.
+     *
+     * ```php
+     * $concat = function ($a = '', $b = '', $c = '') { return $a . $b . $c; };
+     * P::twistN(2, $concat)('bar')('baz'); // => 'bazbar'
+     * P::twistN(2, $concat)('bar')('baz', 'foo'); // => 'foobarbaz'
+     * $format = P::twistN(4, 'number_format')(2, ',', ' ');
+     * $format(15329); // => '15 329,00'
+     * ```
+     *
+     * @param int      $arity
+     * @param callable $function
+     *
+     * @return callable
+     */
+    public static function twistN(int $arity = null, callable $function = null)
+    {
+        return static::curry2(function (int $arity, callable $function): callable {
+            return static::_curryN($arity, function (...$arguments) use ($function) {
+                $first = array_pop($arguments);
+
+                return $function($first, ...$arguments);
+            });
+        }, func_get_args());
+    }
+
+    /**
      * Wraps the given function in a function that accepts exactly one parameter.
      *
      * ```php

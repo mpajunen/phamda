@@ -1,7 +1,7 @@
 Phamda functions
 ================
 
-Currently included functions (103):
+Currently included functions (105):
 
 
 
@@ -1480,6 +1480,39 @@ Returns a function that always returns ``true``.
 
     $true = P::true();
     $true(); // => true
+
+
+.. _twist:
+
+twist
+-----
+``callable P::twist(callable $function)``
+
+Returns a new function where the original first parameter is the last one, the second parameter is the first and so on.
+
+.. code-block:: php
+
+    $concat = function ($a, $b, $c) { return $a . $b . $c; };
+    P::twist($concat)('bar')('baz')('foo'); // => 'foobarbaz'
+    $format = P::twist('number_format');
+    $format(2, ',', ' ', 15329); // => '15 329,00'
+
+
+.. _twistN:
+
+twistN
+------
+``callable P::twistN(int $arity, callable $function)``
+
+Returns a new function of the specified arity where the original first parameter is the last one, the second parameter is the first and so on.
+
+.. code-block:: php
+
+    $concat = function ($a = '', $b = '', $c = '') { return $a . $b . $c; };
+    P::twistN(2, $concat)('bar')('baz'); // => 'bazbar'
+    P::twistN(2, $concat)('bar')('baz', 'foo'); // => 'foobarbaz'
+    $format = P::twistN(4, 'number_format')(2, ',', ' ');
+    $format(15329); // => '15 329,00'
 
 
 .. _unary:
