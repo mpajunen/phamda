@@ -6,6 +6,7 @@
 - `P::flip` now returns a curried function.
 
 ### Removed
+- Placeholder arguments
 - `P::dec`, `P::inc`
 
 ## [0.7.0] - 2016-03-27

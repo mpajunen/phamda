@@ -24,12 +24,6 @@ use PHPUnit\Framework\TestCase;
  */
 class FunctionExampleTest extends TestCase
 {
-    public function test_()
-    {
-        $sub10 = P::subtract(P::_(), 10);
-        $this->assertSame(42, $sub10(52));
-    }
-
     public function testAll()
     {
         $isPositive = function ($x) { return $x > 0; };

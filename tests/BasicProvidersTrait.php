@@ -24,13 +24,6 @@ use Phamda\Tests\Fixtures\Test2;
  */
 trait BasicProvidersTrait
 {
-    public function get_Data()
-    {
-        return [
-            [P::_()],
-        ];
-    }
-
     public function getAddData()
     {
         return [

@@ -26,23 +26,6 @@ class Phamda
     use CoreFunctionsTrait;
 
     /**
-     * Returns a placeholder to be used with curried functions.
-     *
-     * ```php
-     * $sub10 = P::subtract(P::_(), 10);
-     * $sub10(52); // => 42
-     * ```
-     *
-     * @return Placeholder
-     *
-     * @deprecated Since version 0.7, to be removed in 0.8. Use `flip` or custom closures instead.
-     */
-    public static function _()
-    {
-        return static::$placeholder ?: (static::$placeholder = new Placeholder());
-    }
-
-    /**
      * Adds two numbers.
      *
      * ```php

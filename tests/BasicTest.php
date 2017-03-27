@@ -26,14 +26,6 @@ class BasicTest extends TestCase
     use BasicProvidersTrait;
 
     /**
-     * @dataProvider get_Data
-     */
-    public function test_($expected)
-    {
-        $this->assertSame($expected, P::_(), '_ produces correct results.');
-    }
-
-    /**
      * @dataProvider getAddData
      */
     public function testAdd($expected, $x, $y)

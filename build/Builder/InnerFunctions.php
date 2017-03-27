@@ -15,7 +15,6 @@ use Phamda\Collection\Collection;
 use Phamda\CoreFunctionsTrait;
 use Phamda\Exception\InvalidFunctionCompositionException;
 use Phamda\Phamda;
-use Phamda\Placeholder;
 
 /**
  * Inner function templates for the main functions.
@@ -30,18 +29,6 @@ use Phamda\Placeholder;
 class InnerFunctions
 {
     use CoreFunctionsTrait;
-
-    /**
-     * Returns a placeholder to be used with curried functions.
-     *
-     * @return Placeholder
-     *
-     * @deprecated Since version 0.7, to be removed in 0.8. Use `flip` or custom closures instead.
-     */
-    public static function _(): Placeholder
-    {
-        return static::$placeholder ?: static::$placeholder = new Placeholder();
-    }
 
     /**
      * Adds two numbers.

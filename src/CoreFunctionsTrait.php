@@ -18,8 +18,6 @@ use Phamda\Collection\Collection;
  */
 trait CoreFunctionsTrait
 {
-    private static $placeholder;
-
     protected static function getArity(callable $function): int
     {
         if (is_string($function) || $function instanceof \Closure) {
@@ -117,10 +115,10 @@ trait CoreFunctionsTrait
 
     protected static function _curryN(int $length, callable $function, ...$initialArguments)
     {
-        return count($initialArguments) >= $length && (self::$placeholder === null || ! in_array(self::$placeholder, $initialArguments, true))
+        return count($initialArguments) >= $length
             ? $function(...$initialArguments)
             : function (...$arguments) use ($length, $function, $initialArguments) {
-                return self::_curryN($length, $function, ...self::resolveArguments($arguments, $initialArguments));
+                return self::_curryN($length, $function, ...array_merge($initialArguments, $arguments));
             };
     }
 
@@ -308,19 +306,19 @@ trait CoreFunctionsTrait
 
     protected static function curry2(callable $original, array $initialArguments)
     {
-        return count($initialArguments) >= 2 && (self::$placeholder === null || ! in_array(self::$placeholder, $initialArguments, true))
+        return count($initialArguments) >= 2
             ? $original(...$initialArguments)
             : function (...$newArguments) use ($original, $initialArguments) {
-                return self::curry2($original, self::resolveArguments($newArguments, $initialArguments));
+                return self::curry2($original, array_merge($initialArguments, $newArguments));
             };
     }
 
     protected static function curry3(callable $original, array $initialArguments)
     {
-        return count($initialArguments) >= 3 && (self::$placeholder === null || ! in_array(self::$placeholder, $initialArguments, true))
+        return count($initialArguments) >= 3
             ? $original(...$initialArguments)
             : function (...$newArguments) use ($original, $initialArguments) {
-                return self::curry3($original, self::resolveArguments($newArguments, $initialArguments));
+                return self::curry3($original, array_merge($initialArguments, $newArguments));
             };
     }
 
@@ -341,20 +339,5 @@ trait CoreFunctionsTrait
         }
 
         return $items;
-    }
-
-    private static function resolveArguments(array $arguments, array $initialArguments)
-    {
-        foreach ($initialArguments as $key => $argument) {
-            if ($argument instanceof Placeholder) {
-                if ($arguments === []) {
-                    return $initialArguments;
-                }
-
-                $initialArguments[$key] = array_shift($arguments);
-            }
-        }
-
-        return array_merge($initialArguments, $arguments);
     }
 }
