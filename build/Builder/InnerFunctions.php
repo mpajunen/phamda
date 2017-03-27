@@ -689,9 +689,12 @@ class InnerFunctions
      */
     public static function flip(callable $function): callable
     {
-        return function ($a, $b, ...$arguments) use ($function) {
+        // The function can have fewer than 2 required parameters:
+        $arity = max(static::getArity($function), 2);
+
+        return static::_curryN($arity, function ($a, $b, ...$arguments) use ($function) {
             return $function($b, $a, ...$arguments);
-        };
+        });
     }
 
     /**

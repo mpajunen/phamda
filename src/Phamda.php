@@ -1006,9 +1006,12 @@ class Phamda
     public static function flip($function = null)
     {
         return static::curry1(function (callable $function) {
-            return function ($a, $b, ...$arguments) use ($function) {
+            // The function can have fewer than 2 required parameters:
+            $arity = max(static::getArity($function), 2);
+
+            return static::_curryN($arity, function ($a, $b, ...$arguments) use ($function) {
                 return $function($b, $a, ...$arguments);
-            };
+            });
         }, func_get_args());
     }
 

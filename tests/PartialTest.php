@@ -22,6 +22,14 @@ class PartialTest extends TestCase
     use BasicProvidersTrait;
 
     /**
+     * @dataProvider getFlipData
+     */
+    public function testFlip($expected, callable $function, $a, $b, ...$arguments)
+    {
+        $this->assertSame($expected, P::flip($function)($a)($b, ...$arguments), 'flip returns a curried function.');
+    }
+
+    /**
      * @dataProvider getPartialData
      */
     public function testPartial($expected, callable $function, array $initialArguments, ...$arguments)
