@@ -5,6 +5,9 @@
 ### Changed
 - `P::flip` now returns a curried function.
 
+### Removed
+- `P::dec`, `P::inc`
+
 ## [0.7.0] - 2016-03-27
 ### Added
 - PHP 7.1 test coverage

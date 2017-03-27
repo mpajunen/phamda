@@ -388,20 +388,6 @@ class InnerFunctions
     }
 
     /**
-     * Decrements the given number.
-     *
-     * @param int|float $number
-     *
-     * @return int|float
-     *
-     * @deprecated Since version 0.7, to be removed in 0.8. Use `add(-1)` instead.
-     */
-    public static function dec($number)
-    {
-        return Phamda::add(-1, $number);
-    }
-
-    /**
      * Returns the default argument if the value argument is `null`.
      *
      * @param mixed $default
@@ -804,20 +790,6 @@ class InnerFunctions
     public static function implode(string $glue, array $strings): string
     {
         return implode($glue, $strings);
-    }
-
-    /**
-     * Increments the given number.
-     *
-     * @param int|float $number
-     *
-     * @return int|float
-     *
-     * @deprecated Since version 0.7, to be removed in 0.8. Use `add(1)` instead.
-     */
-    public static function inc($number)
-    {
-        return Phamda::add(1, $number);
     }
 
     /**

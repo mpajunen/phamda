@@ -256,14 +256,6 @@ trait BasicProvidersTrait
         ];
     }
 
-    public function getDecData()
-    {
-        return [
-            [42, 43],
-            [-15, -14],
-        ];
-    }
-
     public function getDefaultToData()
     {
         return [
@@ -513,14 +505,6 @@ trait BasicProvidersTrait
             ['f/o/o', '/', ['f', 'o', 'o']],
             ['a.b.cd.', '.', ['a', 'b', 'cd', '']],
             ['', '.', ['']],
-        ];
-    }
-
-    public function getIncData()
-    {
-        return [
-            [42, 41],
-            [-15, -16],
         ];
     }
 

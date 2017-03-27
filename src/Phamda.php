@@ -566,27 +566,6 @@ class Phamda
     }
 
     /**
-     * Decrements the given number.
-     *
-     * ```php
-     * P::dec(43); // => 42
-     * P::dec(-14); // => -15
-     * ```
-     *
-     * @param int|float $number
-     *
-     * @return callable|int|float
-     *
-     * @deprecated Since version 0.7, to be removed in 0.8. Use `add(-1)` instead.
-     */
-    public static function dec($number = null)
-    {
-        return static::curry1(function ($number) {
-            return Phamda::add(-1, $number);
-        }, func_get_args());
-    }
-
-    /**
      * Returns the default argument if the value argument is `null`.
      *
      * ```php
@@ -1175,27 +1154,6 @@ class Phamda
     {
         return static::curry2(function (string $glue, array $strings) {
             return implode($glue, $strings);
-        }, func_get_args());
-    }
-
-    /**
-     * Increments the given number.
-     *
-     * ```php
-     * P::inc(41); // => 42
-     * P::inc(-16); // => -15
-     * ```
-     *
-     * @param int|float $number
-     *
-     * @return callable|int|float
-     *
-     * @deprecated Since version 0.7, to be removed in 0.8. Use `add(1)` instead.
-     */
-    public static function inc($number = null)
-    {
-        return static::curry1(function ($number) {
-            return Phamda::add(1, $number);
         }, func_get_args());
     }
 

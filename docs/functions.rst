@@ -1,7 +1,7 @@
 Phamda functions
 ================
 
-Currently included functions (106):
+Currently included functions (104):
 
 
 
@@ -355,22 +355,6 @@ Wraps the given function to a function of specified arity that returns a new fun
     $addTen(10, 3); // => 23
     $addTwenty = $addTen(10);
     $addTwenty(5); // => 25
-
-
-.. _dec:
-
-dec
----
-``int|float P::dec(int|float $number)``
-
-Deprecated since version 0.7, to be removed in 0.8. Use ``add(-1)`` instead.
-
-Decrements the given number.
-
-.. code-block:: php
-
-    P::dec(43); // => 42
-    P::dec(-14); // => -15
 
 
 .. _defaultTo:
@@ -745,22 +729,6 @@ Returns a string formed by combining a list of strings using the given glue stri
     P::implode('/', ['f', 'o', 'o']); // => 'f/o/o'
     P::implode('.', ['a', 'b', 'cd', '']); // => 'a.b.cd.'
     P::implode('.', ['']); // => ''
-
-
-.. _inc:
-
-inc
----
-``int|float P::inc(int|float $number)``
-
-Deprecated since version 0.7, to be removed in 0.8. Use ``add(1)`` instead.
-
-Increments the given number.
-
-.. code-block:: php
-
-    P::inc(41); // => 42
-    P::inc(-16); // => -15
 
 
 .. _indexOf:

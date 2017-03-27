@@ -220,15 +220,6 @@ class BasicTest extends TestCase
     }
 
     /**
-     * @dataProvider getDecData
-     */
-    public function testDec($expected, $number)
-    {
-        $this->assertSame($expected, P::dec($number), 'dec produces correct results.');
-        $this->assertSame($expected, P::dec()($number), 'dec is curried correctly.');
-    }
-
-    /**
      * @dataProvider getDefaultToData
      */
     public function testDefaultTo($expected, $default, $value)
@@ -469,15 +460,6 @@ class BasicTest extends TestCase
         $this->assertSame($expected, P::implode($glue, $strings), 'implode produces correct results.');
         $this->assertSame($expected, P::implode()($glue)($strings), 'implode is curried correctly.');
         $this->assertSame($expected, P::implode($glue)($strings), 'implode is curried correctly.');
-    }
-
-    /**
-     * @dataProvider getIncData
-     */
-    public function testInc($expected, $number)
-    {
-        $this->assertSame($expected, P::inc($number), 'inc produces correct results.');
-        $this->assertSame($expected, P::inc()($number), 'inc is curried correctly.');
     }
 
     /**
