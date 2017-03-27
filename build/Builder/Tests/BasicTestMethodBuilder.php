@@ -48,17 +48,17 @@ EOT;
     protected function createParams()
     {
         $convertVariadic = function (Param $param) {
-            if ($param->variadic && $this->source->getInnerFunctionParams() !== []) {
+            if ($param->variadic) {
                 $param->type     = 'array';
                 $param->variadic = false;
             }
         };
 
         $process = Phamda::pipe(
+            Phamda::flip(Phamda::merge())($this->source->getInnerFunctionParams()),
             Phamda::map(Phamda::clone_()),
             Phamda::each($convertVariadic),
-            Phamda::prepend($this->factory->param('expected')),
-            Phamda::merge(Phamda::_(), $this->source->getInnerFunctionParams())
+            Phamda::prepend($this->factory->param('expected'))
         );
 
         return $process($this->source->params);

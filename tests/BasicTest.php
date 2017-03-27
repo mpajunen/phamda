@@ -56,7 +56,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getAllPassData
      */
-    public function testAllPass($expected, array $predicates, ...$arguments)
+    public function testAllPass($expected, array $predicates, array $arguments)
     {
         $this->assertSame($expected, P::allPass($predicates)(...$arguments), 'allPass produces correct results.');
         $this->assertSame($expected, P::allPass()($predicates)(...$arguments), 'allPass is curried correctly.');
@@ -84,7 +84,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getAnyPassData
      */
-    public function testAnyPass($expected, array $predicates, ...$arguments)
+    public function testAnyPass($expected, array $predicates, array $arguments)
     {
         $this->assertSame($expected, P::anyPass($predicates)(...$arguments), 'anyPass produces correct results.');
         $this->assertSame($expected, P::anyPass()($predicates)(...$arguments), 'anyPass is curried correctly.');
@@ -144,7 +144,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getBothData
      */
-    public function testBoth($expected, callable $a, callable $b, ...$arguments)
+    public function testBoth($expected, callable $a, callable $b, array $arguments)
     {
         $this->assertSame($expected, P::both($a, $b)(...$arguments), 'both produces correct results.');
         $this->assertSame($expected, P::both()($a)($b)(...$arguments), 'both is curried correctly.');
@@ -173,7 +173,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getComposeData
      */
-    public function testCompose($expected, array $functions, ...$arguments)
+    public function testCompose($expected, array $functions, array $arguments)
     {
         $this->assertSame($expected, P::compose(...$functions)(...$arguments), 'compose produces correct results.');
     }
@@ -201,7 +201,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getCurryData
      */
-    public function testCurry($expected, callable $function, ...$initialArguments)
+    public function testCurry($expected, callable $function, array $initialArguments)
     {
         $this->assertSame($expected, P::curry($function, ...$initialArguments), 'curry produces correct results.');
         $this->assertSame($expected, P::curry()($function)(...$initialArguments), 'curry is curried correctly.');
@@ -211,7 +211,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getCurryNData
      */
-    public function testCurryN($expected, int $length, callable $function, ...$initialArguments)
+    public function testCurryN($expected, int $length, callable $function, array $initialArguments)
     {
         $this->assertSame($expected, P::curryN($length, $function, ...$initialArguments), 'curryN produces correct results.');
         $this->assertSame($expected, P::curryN()($length)($function)(...$initialArguments), 'curryN is curried correctly.');
@@ -261,7 +261,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getEitherData
      */
-    public function testEither($expected, callable $a, callable $b, ...$arguments)
+    public function testEither($expected, callable $a, callable $b, array $arguments)
     {
         $this->assertSame($expected, P::either($a, $b)(...$arguments), 'either produces correct results.');
         $this->assertSame($expected, P::either()($a)($b)(...$arguments), 'either is curried correctly.');
@@ -396,7 +396,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getFlipData
      */
-    public function testFlip($expected, callable $function, $a, $b, ...$arguments)
+    public function testFlip($expected, callable $function, $a, $b, array $arguments)
     {
         $this->assertSame($expected, P::flip($function)($a, $b, ...$arguments), 'flip produces correct results.');
         $this->assertSame($expected, P::flip()($function)($a, $b, ...$arguments), 'flip is curried correctly.');
@@ -453,7 +453,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getIfElseData
      */
-    public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, ...$arguments)
+    public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, array $arguments)
     {
         $this->assertSame($expected, P::ifElse($condition, $onTrue, $onFalse)(...$arguments), 'ifElse produces correct results.');
         $this->assertSame($expected, P::ifElse()($condition)($onTrue)($onFalse)(...$arguments), 'ifElse is curried correctly.');
@@ -493,7 +493,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getInvokerData
      */
-    public function testInvoker($expected, int $arity, string $method, array $initialArguments, ...$arguments)
+    public function testInvoker($expected, int $arity, string $method, array $initialArguments, array $arguments)
     {
         $this->assertSame($expected, P::invoker($arity, $method, ...$initialArguments)(...$arguments), 'invoker produces correct results.');
         $this->assertSame($expected, P::invoker()($arity)($method)(...$initialArguments)(...$arguments), 'invoker is curried correctly.');
@@ -630,7 +630,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getNAryData
      */
-    public function testNAry($expected, int $arity, callable $function, ...$arguments)
+    public function testNAry($expected, int $arity, callable $function, array $arguments)
     {
         $this->assertSame($expected, P::nAry($arity, $function)(...$arguments), 'nAry produces correct results.');
         $this->assertSame($expected, P::nAry()($arity)($function)(...$arguments), 'nAry is curried correctly.');
@@ -659,7 +659,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getNotData
      */
-    public function testNot($expected, callable $predicate, ...$arguments)
+    public function testNot($expected, callable $predicate, array $arguments)
     {
         $this->assertSame($expected, P::not($predicate)(...$arguments), 'not produces correct results.');
         $this->assertSame($expected, P::not()($predicate)(...$arguments), 'not is curried correctly.');
@@ -668,7 +668,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getPartialData
      */
-    public function testPartial($expected, callable $function, array $initialArguments, ...$arguments)
+    public function testPartial($expected, callable $function, array $initialArguments, array $arguments)
     {
         $this->assertSame($expected, P::partial($function, ...$initialArguments)(...$arguments), 'partial produces correct results.');
         $this->assertSame($expected, P::partial()($function)(...$initialArguments)(...$arguments), 'partial is curried correctly.');
@@ -678,7 +678,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getPartialNData
      */
-    public function testPartialN($expected, int $arity, callable $function, array $initialArguments, ...$arguments)
+    public function testPartialN($expected, int $arity, callable $function, array $initialArguments, array $arguments)
     {
         $this->assertSame($expected, P::partialN($arity, $function, ...$initialArguments)(...$arguments), 'partialN produces correct results.');
         $this->assertSame($expected, P::partialN()($arity)($function)(...$initialArguments)(...$arguments), 'partialN is curried correctly.');
@@ -740,7 +740,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getPipeData
      */
-    public function testPipe($expected, array $functions, ...$arguments)
+    public function testPipe($expected, array $functions, array $arguments)
     {
         $this->assertSame($expected, P::pipe(...$functions)(...$arguments), 'pipe produces correct results.');
     }
@@ -995,7 +995,7 @@ class BasicTest extends TestCase
     /**
      * @dataProvider getUnapplyData
      */
-    public function testUnapply($expected, callable $function, ...$arguments)
+    public function testUnapply($expected, callable $function, array $arguments)
     {
         $this->assertSame($expected, P::unapply($function, ...$arguments), 'unapply produces correct results.');
         $this->assertSame($expected, P::unapply()($function)(...$arguments), 'unapply is curried correctly.');

@@ -24,7 +24,7 @@ class PartialTest extends TestCase
     /**
      * @dataProvider getFlipData
      */
-    public function testFlip($expected, callable $function, $a, $b, ...$arguments)
+    public function testFlip($expected, callable $function, $a, $b, array $arguments)
     {
         $this->assertSame($expected, P::flip($function)($a)($b, ...$arguments), 'flip returns a curried function.');
     }
@@ -32,7 +32,7 @@ class PartialTest extends TestCase
     /**
      * @dataProvider getPartialData
      */
-    public function testPartial($expected, callable $function, array $initialArguments, ...$arguments)
+    public function testPartial($expected, callable $function, array $initialArguments, array $arguments)
     {
         $partial = P::partial($function, ...array_merge($initialArguments, $arguments));
         $this->assertSame($expected, $partial(), 'partial returns a function even if all arguments have been given.');
@@ -41,7 +41,7 @@ class PartialTest extends TestCase
     /**
      * @dataProvider getPartialNData
      */
-    public function testPartialN($expected, $arity, callable $function, array $initialArguments, ...$arguments)
+    public function testPartialN($expected, $arity, callable $function, array $initialArguments, array $arguments)
     {
         $partial = P::partialN($arity, $function, ...array_merge($initialArguments, $arguments));
         $this->assertSame($expected, $partial(), 'partialN returns a function even if all arguments have been given.');

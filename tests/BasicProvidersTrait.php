@@ -56,10 +56,10 @@ trait BasicProvidersTrait
         $isSumPositive = function ($x, $y) { return ($x + $y) > 0; };
 
         return [
-            [true, [$isSumEven, $isSumPositive], 15, 27],
-            [false, [$isSumEven, $isSumPositive], 15, -25],
-            [false, [$isSumEven, $isSumPositive], 15, 8],
-            [false, [$isSumEven, $isSumPositive], -3, -4],
+            [true, [$isSumEven, $isSumPositive], [15, 27]],
+            [false, [$isSumEven, $isSumPositive], [15, -25]],
+            [false, [$isSumEven, $isSumPositive], [15, 8]],
+            [false, [$isSumEven, $isSumPositive], [-3, -4]],
         ];
     }
 
@@ -92,10 +92,10 @@ trait BasicProvidersTrait
         $isSumPositive = function ($x, $y) { return ($x + $y) > 0; };
 
         return [
-            [true, [$isSumEven, $isSumPositive], 15, 27],
-            [true, [$isSumEven, $isSumPositive], 15, -25],
-            [true, [$isSumEven, $isSumPositive], 15, 8],
-            [false, [$isSumEven, $isSumPositive], -3, -4],
+            [true, [$isSumEven, $isSumPositive], [15, 27]],
+            [true, [$isSumEven, $isSumPositive], [15, -25]],
+            [true, [$isSumEven, $isSumPositive], [15, 8]],
+            [false, [$isSumEven, $isSumPositive], [-3, -4]],
         ];
     }
 
@@ -149,13 +149,13 @@ trait BasicProvidersTrait
         $equal = function ($a, $b) { return $a === $b; };
 
         return [
-            [true, $true, $true],
-            [false, $true, $false],
-            [false, $false, $true],
-            [false, $false, $false],
-            [true, $equal, $true, 2, 2],
-            [false, $equal, $true, 2, 1],
-            [false, $equal, $equal, 2, 1],
+            [true, $true, $true, []],
+            [false, $true, $false, []],
+            [false, $false, $true, []],
+            [false, $false, $false, []],
+            [true, $equal, $true, [2, 2]],
+            [false, $equal, $true, [2, 1]],
+            [false, $equal, $equal, [2, 1]],
         ];
     }
 
@@ -185,9 +185,9 @@ trait BasicProvidersTrait
         $sum    = function ($x, $y) { return $x + $y; };
 
         return [
-            [256, [$square, $square], 4],
-            [64, [$square, $sum], 3, 5],
-            [2401, [$square, $square, $sum], 5, 2],
+            [256, [$square, $square], [4]],
+            [64, [$square, $sum], [3, 5]],
+            [2401, [$square, $square, $sum], [5, 2]],
         ];
     }
 
@@ -233,12 +233,12 @@ trait BasicProvidersTrait
         $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
 
         return [
-            [1234, $sum, 1000, 200, 30, 4],
-            [1234, $sum, 1000, 200, 30, 4, 5],
-            [true, P::eq(), 5, 5],
-            [false, P::eq(), 5, 7],
-            [true, [P::class, 'eq'], 5, 5],
-            [42, new Adder(), 23, 19],
+            [1234, $sum, [1000, 200, 30, 4]],
+            [1234, $sum, [1000, 200, 30, 4, 5]],
+            [true, P::eq(), [5, 5]],
+            [false, P::eq(), [5, 7]],
+            [true, [P::class, 'eq'], [5, 5]],
+            [42, new Adder(), [23, 19]],
         ];
     }
 
@@ -247,12 +247,12 @@ trait BasicProvidersTrait
         $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
 
         return [
-            [1234, 4, $sum, 1000, 200, 30, 4],
-            [1234, 4, $sum, 1000, 200, 30, 4, 5],
-            [true, 2, P::eq(), 5, 5],
-            [false, 2, P::eq(), 5, 7],
-            [true, 2, [P::class, 'eq'], 5, 5],
-            [42, 2, new Adder(), 23, 19],
+            [1234, 4, $sum, [1000, 200, 30, 4]],
+            [1234, 4, $sum, [1000, 200, 30, 4, 5]],
+            [true, 2, P::eq(), [5, 5]],
+            [false, 2, P::eq(), [5, 7]],
+            [true, 2, [P::class, 'eq'], [5, 5]],
+            [42, 2, new Adder(), [23, 19]],
         ];
     }
 
@@ -299,13 +299,13 @@ trait BasicProvidersTrait
         $equal = function ($a, $b) { return $a === $b; };
 
         return [
-            [true, $true, $true],
-            [true, $true, $false],
-            [true, $false, $true],
-            [false, $false, $false],
-            [true, $equal, $true, 2, 2],
-            [true, $equal, $true, 2, 1],
-            [false, $equal, $equal, 2, 1],
+            [true, $true, $true, []],
+            [true, $true, $false, []],
+            [true, $false, $true, []],
+            [false, $false, $false, []],
+            [true, $equal, $true, [2, 2]],
+            [true, $equal, $true, [2, 1]],
+            [false, $equal, $equal, [2, 1]],
         ];
     }
 
@@ -455,8 +455,8 @@ trait BasicProvidersTrait
         };
 
         return [
-            [-22, $subMany, 42, 20],
-            [-36, $subMany, 42, 20, 6, 8],
+            [-22, $subMany, 42, 20, []],
+            [-36, $subMany, 42, 20, [6, 8]],
         ];
     }
 
@@ -502,8 +502,8 @@ trait BasicProvidersTrait
     public function getIfElseData()
     {
         return [
-            [42, P::lt(0), P::add(27), P::add(3), 15],
-            [0, P::lt(0), P::add(27), P::add(3), -3],
+            [42, P::lt(0), P::add(27), P::add(3), [15]],
+            [0, P::lt(0), P::add(27), P::add(3), [-3]],
         ];
     }
 
@@ -555,9 +555,9 @@ trait BasicProvidersTrait
         $calculator = new Calculator();
 
         return [
-            [42, 2, 'addTwo', [], 15, 27, $calculator],
-            [42, 2, 'addTwo', [15, 27], $calculator],
-            [65, 4, 'addMany', [15, 27], 1, 5, 8, 9, $calculator],
+            [42, 2, 'addTwo', [], [15, 27, $calculator]],
+            [42, 2, 'addTwo', [15, 27], [$calculator]],
+            [65, 4, 'addMany', [15, 27], [1, 5, 8, 9, $calculator]],
         ];
     }
 
@@ -697,9 +697,9 @@ trait BasicProvidersTrait
         $add3 = function ($a = 0, $b = 0, $c = 0) { return $a + $b + $c; };
 
         return [
-            [42, 2, $add3, 27, 15, 33],
-            [27, 1, $add3, 27, 15, 33],
-            [0, 0, $add3, 27, 15, 33],
+            [42, 2, $add3, [27, 15, 33]],
+            [27, 1, $add3, [27, 15, 33]],
+            [0, 0, $add3, [27, 15, 33]],
         ];
     }
 
@@ -728,8 +728,8 @@ trait BasicProvidersTrait
         $equal = function ($a, $b) { return $a === $b; };
 
         return [
-            [false, $equal, 1, 1],
-            [true, $equal, 1, 2],
+            [false, $equal, [1, 1]],
+            [true, $equal, [1, 2]],
         ];
     }
 
@@ -738,8 +738,8 @@ trait BasicProvidersTrait
         $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
 
         return [
-            [42, $sum, [], 23, 18, 29, -28],
-            [42, $sum, [29, -28], 23, 18, 15],
+            [42, $sum, [], [23, 18, 29, -28]],
+            [42, $sum, [29, -28], [23, 18, 15]],
         ];
     }
 
@@ -748,8 +748,8 @@ trait BasicProvidersTrait
         $sum = function ($a, $b, $c, $d) { return $a + $b + $c + $d; };
 
         return [
-            [42, 4, $sum, [], 23, 18, 29, -28],
-            [42, 4, $sum, [29, -28], 23, 18, 15],
+            [42, 4, $sum, [], [23, 18, 29, -28]],
+            [42, 4, $sum, [29, -28], [23, 18, 15]],
         ];
     }
 
@@ -815,8 +815,8 @@ trait BasicProvidersTrait
         $triple = function ($x) { return 3 * $x; };
 
         return [
-            [300, [$sum, $square, $triple], 2, 8],
-            [675, [$triple, $square, $triple], 5],
+            [300, [$sum, $square, $triple], [2, 8]],
+            [675, [$triple, $square, $triple], [5]],
         ];
     }
 
@@ -1087,8 +1087,8 @@ trait BasicProvidersTrait
     public function getUnapplyData()
     {
         return [
-            [42, 'max', 13, -3, 42, 3],
-            [[1, 2, 3], 'array_merge', 1, 2, 3],
+            [42, 'max', [13, -3, 42, 3]],
+            [[1, 2, 3], 'array_merge', [1, 2, 3]],
         ];
     }
 
