@@ -63,7 +63,7 @@ class ExampleTest extends TestCase
             ['category' => 'KCF', 'price' => 581.85, 'weight' => 31.9, 'number' => 48160],
         ];
 
-        $formatPrice = P::curry(P::flip('number_format'))(2);
+        $formatPrice = P::flip('number_format')(2);
         $process     = P::pipe(
             P::filter(// Only include products that...
                 P::pipe(
