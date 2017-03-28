@@ -73,6 +73,7 @@ class FunctionWrap
     {
         return new Expr\Closure([
             'params' => $this->source->params,
+            'returnType' => $this->source->returnType,
             'stmts' => $this->source->stmts,
         ]);
     }
