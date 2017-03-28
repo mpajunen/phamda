@@ -44,7 +44,6 @@ class MethodBuilder extends AbstractMethodBuilder
 
         $process = Phamda::pipe(
             Phamda::map(Phamda::clone_()),
-            Phamda::each(Phamda::curry($setProp, 'type', null)),
             Phamda::each(Phamda::ifElse(
                 Phamda::propEq('variadic', false),
                 Phamda::curry($setProp, 'default', new Expr\ConstFetch(new Name('null'))),

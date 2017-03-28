@@ -4,6 +4,7 @@
 
 ### Changed
 - `P::flip` now returns a curried function.
+- Function parameters with unambiguous types now have type declarations.
 
 ### Removed
 - Placeholder arguments
