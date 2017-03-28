@@ -217,7 +217,7 @@ class Phamda
     }
 
     /**
-     * Calls the `function` using the values of the given `arguments` list as positional arguments.
+     * Calls the function using the values of the given arguments list as positional parameters.
      *
      * Effectively creates an unary function from a variadic function.
      *
@@ -330,7 +330,7 @@ class Phamda
     }
 
     /**
-     * Return the given `value` cast to the given `type`.
+     * Returns the given value cast to the given type.
      *
      * ```php
      * P::cast('string', 3); // => '3'
@@ -415,7 +415,7 @@ class Phamda
     }
 
     /**
-     * Returns a string concatenated of `a` and `b`.
+     * Returns a concatenated string.
      *
      * ```php
      * P::concat('ab', 'cd'); // => 'abcd'
@@ -549,7 +549,7 @@ class Phamda
     }
 
     /**
-     * Returns the default argument if the value argument is `null`.
+     * Returns the value parameter, or the default parameter if the value parameter is `null`.
      *
      * ```php
      * P::defaultTo(22, 15); // => 15
@@ -644,7 +644,7 @@ class Phamda
     }
 
     /**
-     * Return true when the arguments are strictly equal.
+     * Return true when the parameters are strictly equal.
      *
      * ```php
      * P::eq('a', 'a'); // => true
@@ -665,7 +665,7 @@ class Phamda
     }
 
     /**
-     * Returns a new object or array containing all the fields of the original `object`, using given `transformations`.
+     * Returns a new object or array containing all the fields of the original object, using given transformations.
      *
      * ```php
      * $object = ['foo' => 'bar', 'fiz' => 'buz'];
@@ -893,7 +893,7 @@ class Phamda
     }
 
     /**
-     * Returns a list containing the flattened items created by applying the `function` to each item of the `list`.
+     * Returns a list containing the flattened items created by applying the function to each item of the list.
      *
      * ```php
      * $split = P::unary('str_split');
@@ -915,7 +915,7 @@ class Phamda
     }
 
     /**
-     * Returns an array that contains all the items on the `list`, with all arrays flattened.
+     * Returns an array that contains all the items on the list, with all arrays flattened.
      *
      * ```php
      * P::flatten([1, [2, 3], [4]]); // => [1, 2, 3, 4]
@@ -934,7 +934,7 @@ class Phamda
     }
 
     /**
-     * Returns an array that contains all the items on the `list`, with arrays on the first nesting level flattened.
+     * Returns an array that contains all the items on the list, with arrays on the first nesting level flattened.
      *
      * ```php
      * P::flattenLevel([1, [2, 3], [4]]); // => [1, 2, 3, 4]
@@ -1096,7 +1096,7 @@ class Phamda
     }
 
     /**
-     * Returns a function that applies either the `onTrue` or the `onFalse` function, depending on the result of the `condition` predicate.
+     * Returns a function that applies either the onTrue or the onFalse function, depending on the result of the condition predicate.
      *
      * ```php
      * $addOrSub = P::ifElse(P::lt(0), P::add(-10), P::add(10));
@@ -1377,7 +1377,7 @@ class Phamda
     }
 
     /**
-     * Returns an array that contains all the values in arrays `a` and `b`.
+     * Returns an array with all the items of the parameter arrays.
      *
      * ```php
      * P::merge([1, 2], [3, 4, 5]); // => [1, 2, 3, 4, 5]
@@ -1443,7 +1443,7 @@ class Phamda
     }
 
     /**
-     * Divides two integers and returns the modulo.
+     * Returns the modulo of two integers.
      *
      * ```php
      * P::modulo(15, 6); // => 3
@@ -1983,7 +1983,7 @@ class Phamda
     }
 
     /**
-     * Returns a new collection, containing the items of the original from index `start` (inclusive) to index `end` (exclusive).
+     * Returns a new collection, containing the items of the original from start (inclusive) to end (exclusive).
      *
      * ```php
      * P::slice(2, 6, [1, 2, 3, 4, 5, 6, 7, 8, 9]); // => [3, 4, 5, 6]
@@ -2327,7 +2327,7 @@ class Phamda
     }
 
     /**
-     * Calls the `function` using the given `arguments` as a single array list argument.
+     * Calls the function using the given arguments as a single array list parameter.
      *
      * Effectively creates an variadic function from a unary function.
      *

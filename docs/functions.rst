@@ -120,7 +120,7 @@ apply
 -----
 ``mixed P::apply(callable $function, array $arguments)``
 
-Calls the ``function`` using the values of the given ``arguments`` list as positional arguments.
+Calls the function using the values of the given arguments list as positional parameters.
 
 Effectively creates an unary function from a variadic function.
 
@@ -198,7 +198,7 @@ cast
 ----
 ``mixed P::cast(string $type, mixed $value)``
 
-Return the given ``value`` cast to the given ``type``.
+Returns the given value cast to the given type.
 
 .. code-block:: php
 
@@ -259,7 +259,7 @@ concat
 ------
 ``string P::concat(string $a, string $b)``
 
-Returns a string concatenated of ``a`` and ``b``.
+Returns a concatenated string.
 
 .. code-block:: php
 
@@ -347,7 +347,7 @@ defaultTo
 ---------
 ``mixed P::defaultTo(mixed $default, mixed $value)``
 
-Returns the default argument if the value argument is ``null``.
+Returns the value parameter, or the default parameter if the value parameter is ``null``.
 
 .. code-block:: php
 
@@ -412,7 +412,7 @@ eq
 --
 ``bool P::eq(mixed $x, mixed $y)``
 
-Return true when the arguments are strictly equal.
+Return true when the parameters are strictly equal.
 
 .. code-block:: php
 
@@ -427,7 +427,7 @@ evolve
 ------
 ``array|object P::evolve(callable[] $transformations, array|object|\ArrayAccess $object)``
 
-Returns a new object or array containing all the fields of the original ``object``, using given ``transformations``.
+Returns a new object or array containing all the fields of the original object, using given transformations.
 
 .. code-block:: php
 
@@ -558,7 +558,7 @@ flatMap
 -------
 ``array P::flatMap(callable $function, array $list)``
 
-Returns a list containing the flattened items created by applying the ``function`` to each item of the ``list``.
+Returns a list containing the flattened items created by applying the function to each item of the list.
 
 .. code-block:: php
 
@@ -574,7 +574,7 @@ flatten
 -------
 ``array P::flatten(array $list)``
 
-Returns an array that contains all the items on the ``list``, with all arrays flattened.
+Returns an array that contains all the items on the list, with all arrays flattened.
 
 .. code-block:: php
 
@@ -588,7 +588,7 @@ flattenLevel
 ------------
 ``array P::flattenLevel(array $list)``
 
-Returns an array that contains all the items on the ``list``, with arrays on the first nesting level flattened.
+Returns an array that contains all the items on the list, with arrays on the first nesting level flattened.
 
 .. code-block:: php
 
@@ -691,7 +691,7 @@ ifElse
 ------
 ``callable P::ifElse(callable $condition, callable $onTrue, callable $onFalse)``
 
-Returns a function that applies either the ``onTrue`` or the ``onFalse`` function, depending on the result of the ``condition`` predicate.
+Returns a function that applies either the onTrue or the onFalse function, depending on the result of the condition predicate.
 
 .. code-block:: php
 
@@ -873,7 +873,7 @@ merge
 -----
 ``array P::merge(array $a, array $b)``
 
-Returns an array that contains all the values in arrays ``a`` and ``b``.
+Returns an array with all the items of the parameter arrays.
 
 .. code-block:: php
 
@@ -918,7 +918,7 @@ modulo
 ------
 ``int P::modulo(int $x, int $y)``
 
-Divides two integers and returns the modulo.
+Returns the modulo of two integers.
 
 .. code-block:: php
 
@@ -1270,7 +1270,7 @@ slice
 -----
 ``array|Collection P::slice(int $start, int $end, array|\Traversable|Collection $collection)``
 
-Returns a new collection, containing the items of the original from index ``start`` (inclusive) to index ``end`` (exclusive).
+Returns a new collection, containing the items of the original from start (inclusive) to end (exclusive).
 
 .. code-block:: php
 
@@ -1503,7 +1503,7 @@ unapply
 -------
 ``mixed P::unapply(callable $function, mixed ...$arguments)``
 
-Calls the ``function`` using the given ``arguments`` as a single array list argument.
+Calls the function using the given arguments as a single array list parameter.
 
 Effectively creates an variadic function from a unary function.
 
