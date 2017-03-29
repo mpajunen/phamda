@@ -26,7 +26,7 @@ class ExampleTest extends TestCase
         $getPositives = P::filter($isPositive);
         $result       = $getPositives($list); // => [5, 7, 19, 2]
 
-        $this->assertSame([5, 7, 3 => 19, 5 => 2], $result);
+        self::assertSame([5, 7, 3 => 19, 5 => 2], $result);
     }
 
     public function testCurriedNativeExample()
@@ -35,8 +35,8 @@ class ExampleTest extends TestCase
         $dayResult  = $replaceBad('bad day'); // => 'good day'
         $notResult  = $replaceBad('not bad'); // => 'not good'
 
-        $this->assertSame('good day', $dayResult);
-        $this->assertSame('not good', $notResult);
+        self::assertSame('good day', $dayResult);
+        self::assertSame('not good', $notResult);
     }
 
     public function testComposeExample()
@@ -47,7 +47,7 @@ class ExampleTest extends TestCase
         $result           = $addFiveAndDouble(16); // => 42
         // Equivalent to calling $double($addFive(16));
 
-        $this->assertSame(42, $result);
+        self::assertSame(42, $result);
     }
 
     public function testProductList()
@@ -94,6 +94,6 @@ class ExampleTest extends TestCase
             ['number' => 89634, 'category' => 'AWK', 'price' => '341.92'],
         ];
 
-        $this->assertSame($expected, $result);
+        self::assertSame($expected, $result);
     }
 }

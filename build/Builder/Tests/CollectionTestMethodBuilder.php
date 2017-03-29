@@ -74,7 +74,7 @@ class CollectionTestMethodBuilder extends BasicTestMethodBuilder
 
     private function createResultAssert()
     {
-        return new Expr\MethodCall(new Expr\Variable('this'), 'assertSame', [
+        return new Expr\StaticCall(new Name('self'), 'assertSame', [
             new Expr\Variable('expected'),
             $this->createResultComparison(),
             new String_(sprintf('%s works for%s collection objects.', $this->source->getName(), $this->simple ? ' simple' : '')),
@@ -83,7 +83,7 @@ class CollectionTestMethodBuilder extends BasicTestMethodBuilder
 
     private function createImmutabilityAssert()
     {
-        return new Expr\MethodCall(new Expr\Variable('this'), 'assertSame', [
+        return new Expr\StaticCall(new Name('self'), 'assertSame', [
             new Expr\Variable($this->source->getCollectionArgumentName()),
             new Expr\MethodCall(new Expr\Variable('_' . $this->source->getCollectionArgumentName()), 'toArray'),
             new String_(sprintf('%s does not modify original collection values.', $this->source->getName())),
@@ -99,7 +99,7 @@ class CollectionTestMethodBuilder extends BasicTestMethodBuilder
         } else {
             $helperMethod = $this->source->hasReturnType('Collection[]') ? 'getCollectionGroupArray' : 'getCollectionArray';
 
-            $result = new Expr\MethodCall(new Expr\Variable('this'), $helperMethod, [$result]);
+            $result = new Expr\StaticCall(new Name('self'), $helperMethod, [$result]);
         }
 
         return $result;

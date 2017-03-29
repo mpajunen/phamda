@@ -15,7 +15,7 @@ use Phamda\CodeGen\Functions\FunctionWrap;
 use Phamda\CodeGen\Printer;
 use Phamda\Phamda;
 use PhpParser\Node\Expr\Assign;
-use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Expr\Variable;
 
 class CommentExampleBuilder
@@ -111,7 +111,7 @@ class CommentExampleBuilder
     {
         $statements = [];
         foreach ($this->source->getExampleStatements() as $statement) {
-            if ($statement instanceof MethodCall && $statement->name === 'assertSame') {
+            if ($statement instanceof StaticCall && $statement->name === 'assertSame') {
                 $statements[] = $statement->args[1]->value;
                 $statements[] = new Assign(new Variable('placeholder'), $statement->args[0]->value);
             } else {

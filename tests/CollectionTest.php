@@ -34,8 +34,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::all($predicate, $_collection);
-        $this->assertSame($expected, $result, 'all works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'all does not modify original collection values.');
+        self::assertSame($expected, $result, 'all works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'all does not modify original collection values.');
     }
 
     /**
@@ -45,8 +45,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::all($predicate, $_collection);
-        $this->assertSame($expected, $result, 'all works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'all does not modify original collection values.');
+        self::assertSame($expected, $result, 'all works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'all does not modify original collection values.');
     }
 
     /**
@@ -56,8 +56,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::any($predicate, $_collection);
-        $this->assertSame($expected, $result, 'any works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'any does not modify original collection values.');
+        self::assertSame($expected, $result, 'any works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'any does not modify original collection values.');
     }
 
     /**
@@ -67,8 +67,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::any($predicate, $_collection);
-        $this->assertSame($expected, $result, 'any works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'any does not modify original collection values.');
+        self::assertSame($expected, $result, 'any works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'any does not modify original collection values.');
     }
 
     /**
@@ -78,8 +78,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::append($item, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'append works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'append does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'append works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'append does not modify original collection values.');
     }
 
     /**
@@ -89,8 +89,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::append($item, $_collection);
-        $this->assertSame($expected, $result, 'append works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'append does not modify original collection values.');
+        self::assertSame($expected, $result, 'append works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'append does not modify original collection values.');
     }
 
     /**
@@ -100,8 +100,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::contains($value, $_collection);
-        $this->assertSame($expected, $result, 'contains works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'contains does not modify original collection values.');
+        self::assertSame($expected, $result, 'contains works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'contains does not modify original collection values.');
     }
 
     /**
@@ -111,8 +111,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::contains($value, $_collection);
-        $this->assertSame($expected, $result, 'contains works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'contains does not modify original collection values.');
+        self::assertSame($expected, $result, 'contains works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'contains does not modify original collection values.');
     }
 
     /**
@@ -122,8 +122,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::each($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'each works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'each does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'each works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'each does not modify original collection values.');
     }
 
     /**
@@ -133,8 +133,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::each($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'each works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'each does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'each works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'each does not modify original collection values.');
     }
 
     /**
@@ -144,8 +144,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::filter($predicate, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'filter works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'filter does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'filter works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'filter does not modify original collection values.');
     }
 
     /**
@@ -155,8 +155,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::filter($predicate, $_collection);
-        $this->assertSame($expected, $result, 'filter works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'filter does not modify original collection values.');
+        self::assertSame($expected, $result, 'filter works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'filter does not modify original collection values.');
     }
 
     /**
@@ -166,8 +166,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::find($predicate, $_collection);
-        $this->assertSame($expected, $result, 'find works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'find does not modify original collection values.');
+        self::assertSame($expected, $result, 'find works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'find does not modify original collection values.');
     }
 
     /**
@@ -177,8 +177,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::find($predicate, $_collection);
-        $this->assertSame($expected, $result, 'find works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'find does not modify original collection values.');
+        self::assertSame($expected, $result, 'find works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'find does not modify original collection values.');
     }
 
     /**
@@ -188,8 +188,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::findIndex($predicate, $_collection);
-        $this->assertSame($expected, $result, 'findIndex works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'findIndex does not modify original collection values.');
+        self::assertSame($expected, $result, 'findIndex works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'findIndex does not modify original collection values.');
     }
 
     /**
@@ -199,8 +199,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::findIndex($predicate, $_collection);
-        $this->assertSame($expected, $result, 'findIndex works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'findIndex does not modify original collection values.');
+        self::assertSame($expected, $result, 'findIndex works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'findIndex does not modify original collection values.');
     }
 
     /**
@@ -210,8 +210,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::findLast($predicate, $_collection);
-        $this->assertSame($expected, $result, 'findLast works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'findLast does not modify original collection values.');
+        self::assertSame($expected, $result, 'findLast works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'findLast does not modify original collection values.');
     }
 
     /**
@@ -221,8 +221,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::findLast($predicate, $_collection);
-        $this->assertSame($expected, $result, 'findLast works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'findLast does not modify original collection values.');
+        self::assertSame($expected, $result, 'findLast works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'findLast does not modify original collection values.');
     }
 
     /**
@@ -232,8 +232,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::findLastIndex($predicate, $_collection);
-        $this->assertSame($expected, $result, 'findLastIndex works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'findLastIndex does not modify original collection values.');
+        self::assertSame($expected, $result, 'findLastIndex works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'findLastIndex does not modify original collection values.');
     }
 
     /**
@@ -243,8 +243,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::findLastIndex($predicate, $_collection);
-        $this->assertSame($expected, $result, 'findLastIndex works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'findLastIndex does not modify original collection values.');
+        self::assertSame($expected, $result, 'findLastIndex works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'findLastIndex does not modify original collection values.');
     }
 
     /**
@@ -254,8 +254,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::first($_collection);
-        $this->assertSame($expected, $result, 'first works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'first does not modify original collection values.');
+        self::assertSame($expected, $result, 'first works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'first does not modify original collection values.');
     }
 
     /**
@@ -265,8 +265,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::first($_collection);
-        $this->assertSame($expected, $result, 'first works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'first does not modify original collection values.');
+        self::assertSame($expected, $result, 'first works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'first does not modify original collection values.');
     }
 
     /**
@@ -276,8 +276,8 @@ class CollectionTest extends TestCase
     {
         $_list  = new ArrayCollection($list);
         $result = P::fromPairs($_list);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'fromPairs works for collection objects.');
-        $this->assertSame($list, $_list->toArray(), 'fromPairs does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'fromPairs works for collection objects.');
+        self::assertSame($list, $_list->toArray(), 'fromPairs does not modify original collection values.');
     }
 
     /**
@@ -287,8 +287,8 @@ class CollectionTest extends TestCase
     {
         $_list  = new ArrayContainer($list);
         $result = P::fromPairs($_list);
-        $this->assertSame($expected, $result, 'fromPairs works for simple collection objects.');
-        $this->assertSame($list, $_list->toArray(), 'fromPairs does not modify original collection values.');
+        self::assertSame($expected, $result, 'fromPairs works for simple collection objects.');
+        self::assertSame($list, $_list->toArray(), 'fromPairs does not modify original collection values.');
     }
 
     /**
@@ -298,8 +298,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::groupBy($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionGroupArray($result), 'groupBy works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'groupBy does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionGroupArray($result), 'groupBy works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'groupBy does not modify original collection values.');
     }
 
     /**
@@ -309,8 +309,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::groupBy($function, $_collection);
-        $this->assertSame($expected, $result, 'groupBy works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'groupBy does not modify original collection values.');
+        self::assertSame($expected, $result, 'groupBy works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'groupBy does not modify original collection values.');
     }
 
     /**
@@ -320,8 +320,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::indexOf($item, $_collection);
-        $this->assertSame($expected, $result, 'indexOf works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'indexOf does not modify original collection values.');
+        self::assertSame($expected, $result, 'indexOf works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'indexOf does not modify original collection values.');
     }
 
     /**
@@ -331,8 +331,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::indexOf($item, $_collection);
-        $this->assertSame($expected, $result, 'indexOf works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'indexOf does not modify original collection values.');
+        self::assertSame($expected, $result, 'indexOf works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'indexOf does not modify original collection values.');
     }
 
     /**
@@ -342,8 +342,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::isEmpty($_collection);
-        $this->assertSame($expected, $result, 'isEmpty works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'isEmpty does not modify original collection values.');
+        self::assertSame($expected, $result, 'isEmpty works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'isEmpty does not modify original collection values.');
     }
 
     /**
@@ -353,8 +353,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::isEmpty($_collection);
-        $this->assertSame($expected, $result, 'isEmpty works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'isEmpty does not modify original collection values.');
+        self::assertSame($expected, $result, 'isEmpty works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'isEmpty does not modify original collection values.');
     }
 
     /**
@@ -364,8 +364,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::last($_collection);
-        $this->assertSame($expected, $result, 'last works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'last does not modify original collection values.');
+        self::assertSame($expected, $result, 'last works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'last does not modify original collection values.');
     }
 
     /**
@@ -375,8 +375,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::last($_collection);
-        $this->assertSame($expected, $result, 'last works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'last does not modify original collection values.');
+        self::assertSame($expected, $result, 'last works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'last does not modify original collection values.');
     }
 
     /**
@@ -386,8 +386,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::map($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'map works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'map does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'map works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'map does not modify original collection values.');
     }
 
     /**
@@ -397,8 +397,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::map($function, $_collection);
-        $this->assertSame($expected, $result, 'map works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'map does not modify original collection values.');
+        self::assertSame($expected, $result, 'map works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'map does not modify original collection values.');
     }
 
     /**
@@ -408,8 +408,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::max($_collection);
-        $this->assertSame($expected, $result, 'max works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'max does not modify original collection values.');
+        self::assertSame($expected, $result, 'max works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'max does not modify original collection values.');
     }
 
     /**
@@ -419,8 +419,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::max($_collection);
-        $this->assertSame($expected, $result, 'max works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'max does not modify original collection values.');
+        self::assertSame($expected, $result, 'max works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'max does not modify original collection values.');
     }
 
     /**
@@ -430,8 +430,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::maxBy($getValue, $_collection);
-        $this->assertSame($expected, $result, 'maxBy works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'maxBy does not modify original collection values.');
+        self::assertSame($expected, $result, 'maxBy works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'maxBy does not modify original collection values.');
     }
 
     /**
@@ -441,8 +441,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::maxBy($getValue, $_collection);
-        $this->assertSame($expected, $result, 'maxBy works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'maxBy does not modify original collection values.');
+        self::assertSame($expected, $result, 'maxBy works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'maxBy does not modify original collection values.');
     }
 
     /**
@@ -452,8 +452,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::min($_collection);
-        $this->assertSame($expected, $result, 'min works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'min does not modify original collection values.');
+        self::assertSame($expected, $result, 'min works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'min does not modify original collection values.');
     }
 
     /**
@@ -463,8 +463,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::min($_collection);
-        $this->assertSame($expected, $result, 'min works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'min does not modify original collection values.');
+        self::assertSame($expected, $result, 'min works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'min does not modify original collection values.');
     }
 
     /**
@@ -474,8 +474,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::minBy($getValue, $_collection);
-        $this->assertSame($expected, $result, 'minBy works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'minBy does not modify original collection values.');
+        self::assertSame($expected, $result, 'minBy works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'minBy does not modify original collection values.');
     }
 
     /**
@@ -485,8 +485,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::minBy($getValue, $_collection);
-        $this->assertSame($expected, $result, 'minBy works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'minBy does not modify original collection values.');
+        self::assertSame($expected, $result, 'minBy works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'minBy does not modify original collection values.');
     }
 
     /**
@@ -496,8 +496,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::none($predicate, $_collection);
-        $this->assertSame($expected, $result, 'none works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'none does not modify original collection values.');
+        self::assertSame($expected, $result, 'none works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'none does not modify original collection values.');
     }
 
     /**
@@ -507,8 +507,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::none($predicate, $_collection);
-        $this->assertSame($expected, $result, 'none works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'none does not modify original collection values.');
+        self::assertSame($expected, $result, 'none works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'none does not modify original collection values.');
     }
 
     /**
@@ -518,8 +518,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::partition($predicate, $_collection);
-        $this->assertSame($expected, $this->getCollectionGroupArray($result), 'partition works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'partition does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionGroupArray($result), 'partition works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'partition does not modify original collection values.');
     }
 
     /**
@@ -529,8 +529,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::partition($predicate, $_collection);
-        $this->assertSame($expected, $result, 'partition works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'partition does not modify original collection values.');
+        self::assertSame($expected, $result, 'partition works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'partition does not modify original collection values.');
     }
 
     /**
@@ -540,8 +540,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::pluck($name, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'pluck works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'pluck does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'pluck works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'pluck does not modify original collection values.');
     }
 
     /**
@@ -551,8 +551,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::pluck($name, $_collection);
-        $this->assertSame($expected, $result, 'pluck works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'pluck does not modify original collection values.');
+        self::assertSame($expected, $result, 'pluck works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'pluck does not modify original collection values.');
     }
 
     /**
@@ -562,8 +562,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::prepend($item, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'prepend works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'prepend does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'prepend works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'prepend does not modify original collection values.');
     }
 
     /**
@@ -573,8 +573,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::prepend($item, $_collection);
-        $this->assertSame($expected, $result, 'prepend works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'prepend does not modify original collection values.');
+        self::assertSame($expected, $result, 'prepend works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'prepend does not modify original collection values.');
     }
 
     /**
@@ -584,8 +584,8 @@ class CollectionTest extends TestCase
     {
         $_values = new ArrayCollection($values);
         $result  = P::product($_values);
-        $this->assertSame($expected, $result, 'product works for collection objects.');
-        $this->assertSame($values, $_values->toArray(), 'product does not modify original collection values.');
+        self::assertSame($expected, $result, 'product works for collection objects.');
+        self::assertSame($values, $_values->toArray(), 'product does not modify original collection values.');
     }
 
     /**
@@ -595,8 +595,8 @@ class CollectionTest extends TestCase
     {
         $_values = new ArrayContainer($values);
         $result  = P::product($_values);
-        $this->assertSame($expected, $result, 'product works for simple collection objects.');
-        $this->assertSame($values, $_values->toArray(), 'product does not modify original collection values.');
+        self::assertSame($expected, $result, 'product works for simple collection objects.');
+        self::assertSame($values, $_values->toArray(), 'product does not modify original collection values.');
     }
 
     /**
@@ -606,8 +606,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::reduce($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduce works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduce does not modify original collection values.');
+        self::assertSame($expected, $result, 'reduce works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reduce does not modify original collection values.');
     }
 
     /**
@@ -617,8 +617,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::reduce($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduce works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduce does not modify original collection values.');
+        self::assertSame($expected, $result, 'reduce works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reduce does not modify original collection values.');
     }
 
     /**
@@ -628,8 +628,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::reduceRight($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduceRight works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduceRight does not modify original collection values.');
+        self::assertSame($expected, $result, 'reduceRight works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reduceRight does not modify original collection values.');
     }
 
     /**
@@ -639,8 +639,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::reduceRight($function, $initial, $_collection);
-        $this->assertSame($expected, $result, 'reduceRight works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reduceRight does not modify original collection values.');
+        self::assertSame($expected, $result, 'reduceRight works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reduceRight does not modify original collection values.');
     }
 
     /**
@@ -650,8 +650,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::reject($predicate, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'reject works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reject does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'reject works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reject does not modify original collection values.');
     }
 
     /**
@@ -661,8 +661,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::reject($predicate, $_collection);
-        $this->assertSame($expected, $result, 'reject works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reject does not modify original collection values.');
+        self::assertSame($expected, $result, 'reject works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reject does not modify original collection values.');
     }
 
     /**
@@ -672,8 +672,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::reverse($_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'reverse works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reverse does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'reverse works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reverse does not modify original collection values.');
     }
 
     /**
@@ -683,8 +683,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::reverse($_collection);
-        $this->assertSame($expected, $result, 'reverse works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'reverse does not modify original collection values.');
+        self::assertSame($expected, $result, 'reverse works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'reverse does not modify original collection values.');
     }
 
     /**
@@ -694,8 +694,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::slice($start, $end, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'slice works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'slice does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'slice works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'slice does not modify original collection values.');
     }
 
     /**
@@ -705,8 +705,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::slice($start, $end, $_collection);
-        $this->assertSame($expected, $result, 'slice works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'slice does not modify original collection values.');
+        self::assertSame($expected, $result, 'slice works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'slice does not modify original collection values.');
     }
 
     /**
@@ -716,8 +716,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::sort($comparator, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'sort works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'sort does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'sort works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'sort does not modify original collection values.');
     }
 
     /**
@@ -727,8 +727,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::sort($comparator, $_collection);
-        $this->assertSame($expected, $result, 'sort works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'sort does not modify original collection values.');
+        self::assertSame($expected, $result, 'sort works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'sort does not modify original collection values.');
     }
 
     /**
@@ -738,8 +738,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::sortBy($function, $_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'sortBy works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'sortBy does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'sortBy works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'sortBy does not modify original collection values.');
     }
 
     /**
@@ -749,8 +749,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::sortBy($function, $_collection);
-        $this->assertSame($expected, $result, 'sortBy works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'sortBy does not modify original collection values.');
+        self::assertSame($expected, $result, 'sortBy works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'sortBy does not modify original collection values.');
     }
 
     /**
@@ -760,8 +760,8 @@ class CollectionTest extends TestCase
     {
         $_values = new ArrayCollection($values);
         $result  = P::sum($_values);
-        $this->assertSame($expected, $result, 'sum works for collection objects.');
-        $this->assertSame($values, $_values->toArray(), 'sum does not modify original collection values.');
+        self::assertSame($expected, $result, 'sum works for collection objects.');
+        self::assertSame($values, $_values->toArray(), 'sum does not modify original collection values.');
     }
 
     /**
@@ -771,8 +771,8 @@ class CollectionTest extends TestCase
     {
         $_values = new ArrayContainer($values);
         $result  = P::sum($_values);
-        $this->assertSame($expected, $result, 'sum works for simple collection objects.');
-        $this->assertSame($values, $_values->toArray(), 'sum does not modify original collection values.');
+        self::assertSame($expected, $result, 'sum works for simple collection objects.');
+        self::assertSame($values, $_values->toArray(), 'sum does not modify original collection values.');
     }
 
     /**
@@ -782,8 +782,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayCollection($collection);
         $result      = P::tail($_collection);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'tail works for collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'tail does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'tail works for collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'tail does not modify original collection values.');
     }
 
     /**
@@ -793,8 +793,8 @@ class CollectionTest extends TestCase
     {
         $_collection = new ArrayContainer($collection);
         $result      = P::tail($_collection);
-        $this->assertSame($expected, $result, 'tail works for simple collection objects.');
-        $this->assertSame($collection, $_collection->toArray(), 'tail does not modify original collection values.');
+        self::assertSame($expected, $result, 'tail works for simple collection objects.');
+        self::assertSame($collection, $_collection->toArray(), 'tail does not modify original collection values.');
     }
 
     /**
@@ -804,8 +804,8 @@ class CollectionTest extends TestCase
     {
         $_map   = new ArrayCollection($map);
         $result = P::toPairs($_map);
-        $this->assertSame($expected, $this->getCollectionArray($result), 'toPairs works for collection objects.');
-        $this->assertSame($map, $_map->toArray(), 'toPairs does not modify original collection values.');
+        self::assertSame($expected, self::getCollectionArray($result), 'toPairs works for collection objects.');
+        self::assertSame($map, $_map->toArray(), 'toPairs does not modify original collection values.');
     }
 
     /**
@@ -815,7 +815,7 @@ class CollectionTest extends TestCase
     {
         $_map   = new ArrayContainer($map);
         $result = P::toPairs($_map);
-        $this->assertSame($expected, $result, 'toPairs works for simple collection objects.');
-        $this->assertSame($map, $_map->toArray(), 'toPairs does not modify original collection values.');
+        self::assertSame($expected, $result, 'toPairs works for simple collection objects.');
+        self::assertSame($map, $_map->toArray(), 'toPairs does not modify original collection values.');
     }
 }

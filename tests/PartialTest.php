@@ -26,7 +26,7 @@ class PartialTest extends TestCase
      */
     public function testFlip($expected, callable $function, $a, $b, array $arguments)
     {
-        $this->assertSame($expected, P::flip($function)($a)($b, ...$arguments), 'flip returns a curried function.');
+        self::assertSame($expected, P::flip($function)($a)($b, ...$arguments), 'flip returns a curried function.');
     }
 
     /**
@@ -35,7 +35,7 @@ class PartialTest extends TestCase
     public function testPartial($expected, callable $function, array $initialArguments, array $arguments)
     {
         $partial = P::partial($function, ...array_merge($initialArguments, $arguments));
-        $this->assertSame($expected, $partial(), 'partial returns a function even if all arguments have been given.');
+        self::assertSame($expected, $partial(), 'partial returns a function even if all arguments have been given.');
     }
 
     /**
@@ -44,7 +44,7 @@ class PartialTest extends TestCase
     public function testPartialN($expected, $arity, callable $function, array $initialArguments, array $arguments)
     {
         $partial = P::partialN($arity, $function, ...array_merge($initialArguments, $arguments));
-        $this->assertSame($expected, $partial(), 'partialN returns a function even if all arguments have been given.');
+        self::assertSame($expected, $partial(), 'partialN returns a function even if all arguments have been given.');
     }
 
     /**
@@ -53,13 +53,13 @@ class PartialTest extends TestCase
     public function testReduceRecurry($expected, callable $function, $initial, array $collection)
     {
         $curried0 = P::reduce();
-        $this->assertInstanceOf('\Closure', $curried0);
+        self::assertInstanceOf('\Closure', $curried0);
         $curried1 = $curried0($function);
-        $this->assertInstanceOf('\Closure', $curried1);
+        self::assertInstanceOf('\Closure', $curried1);
         $curried2 = $curried1($initial);
-        $this->assertInstanceOf('\Closure', $curried2);
+        self::assertInstanceOf('\Closure', $curried2);
         $result = $curried2($collection);
-        $this->assertSame($expected, $result);
+        self::assertSame($expected, $result);
     }
 
     public function testRecurryN()
@@ -69,15 +69,15 @@ class PartialTest extends TestCase
         });
 
         $curried1 = $curried(1);
-        $this->assertInstanceOf('\Closure', $curried1);
+        self::assertInstanceOf('\Closure', $curried1);
         $curried2 = $curried1(2);
-        $this->assertInstanceOf('\Closure', $curried2);
+        self::assertInstanceOf('\Closure', $curried2);
         $curried3 = $curried2(3);
-        $this->assertInstanceOf('\Closure', $curried3);
+        self::assertInstanceOf('\Closure', $curried3);
         $curried4 = $curried3(4);
-        $this->assertInstanceOf('\Closure', $curried4);
+        self::assertInstanceOf('\Closure', $curried4);
         $result = $curried4(5);
-        $this->assertSame(15, $result);
+        self::assertSame(15, $result);
     }
 
     /**
@@ -87,7 +87,7 @@ class PartialTest extends TestCase
     {
         $a = array_shift($arguments);
 
-        $this->assertSame($expected, P::twist($function)($a)(...$arguments), 'twist returns a curried function.');
+        self::assertSame($expected, P::twist($function)($a)(...$arguments), 'twist returns a curried function.');
     }
 
     /**
@@ -97,6 +97,6 @@ class PartialTest extends TestCase
     {
         $a = array_shift($arguments);
 
-        $this->assertSame($expected, P::twistN($arity, $function)($a)(...$arguments), 'twistN returns a curried function.');
+        self::assertSame($expected, P::twistN($arity, $function)($a)(...$arguments), 'twistN returns a curried function.');
     }
 }

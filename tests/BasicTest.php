@@ -30,9 +30,9 @@ class BasicTest extends TestCase
      */
     public function testAdd($expected, $x, $y)
     {
-        $this->assertSame($expected, P::add($x, $y), 'add produces correct results.');
-        $this->assertSame($expected, P::add()($x)($y), 'add is curried correctly.');
-        $this->assertSame($expected, P::add($x)($y), 'add is curried correctly.');
+        self::assertSame($expected, P::add($x, $y), 'add produces correct results.');
+        self::assertSame($expected, P::add()($x)($y), 'add is curried correctly.');
+        self::assertSame($expected, P::add($x)($y), 'add is curried correctly.');
     }
 
     /**
@@ -40,9 +40,9 @@ class BasicTest extends TestCase
      */
     public function testAll($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::all($predicate, $collection), 'all produces correct results.');
-        $this->assertSame($expected, P::all()($predicate)($collection), 'all is curried correctly.');
-        $this->assertSame($expected, P::all($predicate)($collection), 'all is curried correctly.');
+        self::assertSame($expected, P::all($predicate, $collection), 'all produces correct results.');
+        self::assertSame($expected, P::all()($predicate)($collection), 'all is curried correctly.');
+        self::assertSame($expected, P::all($predicate)($collection), 'all is curried correctly.');
     }
 
     /**
@@ -50,8 +50,8 @@ class BasicTest extends TestCase
      */
     public function testAllPass($expected, array $predicates, array $arguments)
     {
-        $this->assertSame($expected, P::allPass($predicates)(...$arguments), 'allPass produces correct results.');
-        $this->assertSame($expected, P::allPass()($predicates)(...$arguments), 'allPass is curried correctly.');
+        self::assertSame($expected, P::allPass($predicates)(...$arguments), 'allPass produces correct results.');
+        self::assertSame($expected, P::allPass()($predicates)(...$arguments), 'allPass is curried correctly.');
     }
 
     /**
@@ -59,8 +59,8 @@ class BasicTest extends TestCase
      */
     public function testAlways($expected, $value)
     {
-        $this->assertSame($expected, P::always($value)(), 'always produces correct results.');
-        $this->assertSame($expected, P::always()($value)(), 'always is curried correctly.');
+        self::assertSame($expected, P::always($value)(), 'always produces correct results.');
+        self::assertSame($expected, P::always()($value)(), 'always is curried correctly.');
     }
 
     /**
@@ -68,9 +68,9 @@ class BasicTest extends TestCase
      */
     public function testAny($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::any($predicate, $collection), 'any produces correct results.');
-        $this->assertSame($expected, P::any()($predicate)($collection), 'any is curried correctly.');
-        $this->assertSame($expected, P::any($predicate)($collection), 'any is curried correctly.');
+        self::assertSame($expected, P::any($predicate, $collection), 'any produces correct results.');
+        self::assertSame($expected, P::any()($predicate)($collection), 'any is curried correctly.');
+        self::assertSame($expected, P::any($predicate)($collection), 'any is curried correctly.');
     }
 
     /**
@@ -78,8 +78,8 @@ class BasicTest extends TestCase
      */
     public function testAnyPass($expected, array $predicates, array $arguments)
     {
-        $this->assertSame($expected, P::anyPass($predicates)(...$arguments), 'anyPass produces correct results.');
-        $this->assertSame($expected, P::anyPass()($predicates)(...$arguments), 'anyPass is curried correctly.');
+        self::assertSame($expected, P::anyPass($predicates)(...$arguments), 'anyPass produces correct results.');
+        self::assertSame($expected, P::anyPass()($predicates)(...$arguments), 'anyPass is curried correctly.');
     }
 
     /**
@@ -87,9 +87,9 @@ class BasicTest extends TestCase
      */
     public function testAppend($expected, $item, $collection)
     {
-        $this->assertSame($expected, P::append($item, $collection), 'append produces correct results.');
-        $this->assertSame($expected, P::append()($item)($collection), 'append is curried correctly.');
-        $this->assertSame($expected, P::append($item)($collection), 'append is curried correctly.');
+        self::assertSame($expected, P::append($item, $collection), 'append produces correct results.');
+        self::assertSame($expected, P::append()($item)($collection), 'append is curried correctly.');
+        self::assertSame($expected, P::append($item)($collection), 'append is curried correctly.');
     }
 
     /**
@@ -97,9 +97,9 @@ class BasicTest extends TestCase
      */
     public function testApply($expected, callable $function, array $arguments)
     {
-        $this->assertSame($expected, P::apply($function, $arguments), 'apply produces correct results.');
-        $this->assertSame($expected, P::apply()($function)($arguments), 'apply is curried correctly.');
-        $this->assertSame($expected, P::apply($function)($arguments), 'apply is curried correctly.');
+        self::assertSame($expected, P::apply($function, $arguments), 'apply produces correct results.');
+        self::assertSame($expected, P::apply()($function)($arguments), 'apply is curried correctly.');
+        self::assertSame($expected, P::apply($function)($arguments), 'apply is curried correctly.');
     }
 
     /**
@@ -107,10 +107,10 @@ class BasicTest extends TestCase
      */
     public function testAssoc($expected, string $property, $value, $object)
     {
-        $this->assertSame($expected, P::assoc($property, $value, $object), 'assoc produces correct results.');
-        $this->assertSame($expected, P::assoc()($property)($value)($object), 'assoc is curried correctly.');
-        $this->assertSame($expected, P::assoc($property)($value)($object), 'assoc is curried correctly.');
-        $this->assertSame($expected, P::assoc($property, $value)($object), 'assoc is curried correctly.');
+        self::assertSame($expected, P::assoc($property, $value, $object), 'assoc produces correct results.');
+        self::assertSame($expected, P::assoc()($property)($value)($object), 'assoc is curried correctly.');
+        self::assertSame($expected, P::assoc($property)($value)($object), 'assoc is curried correctly.');
+        self::assertSame($expected, P::assoc($property, $value)($object), 'assoc is curried correctly.');
     }
 
     /**
@@ -118,10 +118,10 @@ class BasicTest extends TestCase
      */
     public function testAssocPath($expected, array $path, $value, $object)
     {
-        $this->assertSame($expected, P::assocPath($path, $value, $object), 'assocPath produces correct results.');
-        $this->assertSame($expected, P::assocPath()($path)($value)($object), 'assocPath is curried correctly.');
-        $this->assertSame($expected, P::assocPath($path)($value)($object), 'assocPath is curried correctly.');
-        $this->assertSame($expected, P::assocPath($path, $value)($object), 'assocPath is curried correctly.');
+        self::assertSame($expected, P::assocPath($path, $value, $object), 'assocPath produces correct results.');
+        self::assertSame($expected, P::assocPath()($path)($value)($object), 'assocPath is curried correctly.');
+        self::assertSame($expected, P::assocPath($path)($value)($object), 'assocPath is curried correctly.');
+        self::assertSame($expected, P::assocPath($path, $value)($object), 'assocPath is curried correctly.');
     }
 
     /**
@@ -129,8 +129,8 @@ class BasicTest extends TestCase
      */
     public function testBinary($expected, callable $function, $a, $b)
     {
-        $this->assertSame($expected, P::binary($function)($a, $b), 'binary produces correct results.');
-        $this->assertSame($expected, P::binary()($function)($a, $b), 'binary is curried correctly.');
+        self::assertSame($expected, P::binary($function)($a, $b), 'binary produces correct results.');
+        self::assertSame($expected, P::binary()($function)($a, $b), 'binary is curried correctly.');
     }
 
     /**
@@ -138,9 +138,9 @@ class BasicTest extends TestCase
      */
     public function testBoth($expected, callable $a, callable $b, array $arguments)
     {
-        $this->assertSame($expected, P::both($a, $b)(...$arguments), 'both produces correct results.');
-        $this->assertSame($expected, P::both()($a)($b)(...$arguments), 'both is curried correctly.');
-        $this->assertSame($expected, P::both($a)($b)(...$arguments), 'both is curried correctly.');
+        self::assertSame($expected, P::both($a, $b)(...$arguments), 'both produces correct results.');
+        self::assertSame($expected, P::both()($a)($b)(...$arguments), 'both is curried correctly.');
+        self::assertSame($expected, P::both($a)($b)(...$arguments), 'both is curried correctly.');
     }
 
     /**
@@ -148,9 +148,9 @@ class BasicTest extends TestCase
      */
     public function testCast($expected, string $type, $value)
     {
-        $this->assertSame($expected, P::cast($type, $value), 'cast produces correct results.');
-        $this->assertSame($expected, P::cast()($type)($value), 'cast is curried correctly.');
-        $this->assertSame($expected, P::cast($type)($value), 'cast is curried correctly.');
+        self::assertSame($expected, P::cast($type, $value), 'cast produces correct results.');
+        self::assertSame($expected, P::cast()($type)($value), 'cast is curried correctly.');
+        self::assertSame($expected, P::cast($type)($value), 'cast is curried correctly.');
     }
 
     /**
@@ -158,8 +158,8 @@ class BasicTest extends TestCase
      */
     public function testComparator($expected, callable $predicate, $x, $y)
     {
-        $this->assertSame($expected, P::comparator($predicate)($x, $y), 'comparator produces correct results.');
-        $this->assertSame($expected, P::comparator()($predicate)($x, $y), 'comparator is curried correctly.');
+        self::assertSame($expected, P::comparator($predicate)($x, $y), 'comparator produces correct results.');
+        self::assertSame($expected, P::comparator()($predicate)($x, $y), 'comparator is curried correctly.');
     }
 
     /**
@@ -167,7 +167,7 @@ class BasicTest extends TestCase
      */
     public function testCompose($expected, array $functions, array $arguments)
     {
-        $this->assertSame($expected, P::compose(...$functions)(...$arguments), 'compose produces correct results.');
+        self::assertSame($expected, P::compose(...$functions)(...$arguments), 'compose produces correct results.');
     }
 
     /**
@@ -175,9 +175,9 @@ class BasicTest extends TestCase
      */
     public function testConcat($expected, string $a, string $b)
     {
-        $this->assertSame($expected, P::concat($a, $b), 'concat produces correct results.');
-        $this->assertSame($expected, P::concat()($a)($b), 'concat is curried correctly.');
-        $this->assertSame($expected, P::concat($a)($b), 'concat is curried correctly.');
+        self::assertSame($expected, P::concat($a, $b), 'concat produces correct results.');
+        self::assertSame($expected, P::concat()($a)($b), 'concat is curried correctly.');
+        self::assertSame($expected, P::concat($a)($b), 'concat is curried correctly.');
     }
 
     /**
@@ -185,9 +185,9 @@ class BasicTest extends TestCase
      */
     public function testContains($expected, $value, $collection)
     {
-        $this->assertSame($expected, P::contains($value, $collection), 'contains produces correct results.');
-        $this->assertSame($expected, P::contains()($value)($collection), 'contains is curried correctly.');
-        $this->assertSame($expected, P::contains($value)($collection), 'contains is curried correctly.');
+        self::assertSame($expected, P::contains($value, $collection), 'contains produces correct results.');
+        self::assertSame($expected, P::contains()($value)($collection), 'contains is curried correctly.');
+        self::assertSame($expected, P::contains($value)($collection), 'contains is curried correctly.');
     }
 
     /**
@@ -195,9 +195,9 @@ class BasicTest extends TestCase
      */
     public function testCurry($expected, callable $function, array $initialArguments)
     {
-        $this->assertSame($expected, P::curry($function, ...$initialArguments), 'curry produces correct results.');
-        $this->assertSame($expected, P::curry()($function)(...$initialArguments), 'curry is curried correctly.');
-        $this->assertSame($expected, P::curry($function)(...$initialArguments), 'curry is curried correctly.');
+        self::assertSame($expected, P::curry($function, ...$initialArguments), 'curry produces correct results.');
+        self::assertSame($expected, P::curry()($function)(...$initialArguments), 'curry is curried correctly.');
+        self::assertSame($expected, P::curry($function)(...$initialArguments), 'curry is curried correctly.');
     }
 
     /**
@@ -205,10 +205,10 @@ class BasicTest extends TestCase
      */
     public function testCurryN($expected, int $length, callable $function, array $initialArguments)
     {
-        $this->assertSame($expected, P::curryN($length, $function, ...$initialArguments), 'curryN produces correct results.');
-        $this->assertSame($expected, P::curryN()($length)($function)(...$initialArguments), 'curryN is curried correctly.');
-        $this->assertSame($expected, P::curryN($length)($function)(...$initialArguments), 'curryN is curried correctly.');
-        $this->assertSame($expected, P::curryN($length, $function)(...$initialArguments), 'curryN is curried correctly.');
+        self::assertSame($expected, P::curryN($length, $function, ...$initialArguments), 'curryN produces correct results.');
+        self::assertSame($expected, P::curryN()($length)($function)(...$initialArguments), 'curryN is curried correctly.');
+        self::assertSame($expected, P::curryN($length)($function)(...$initialArguments), 'curryN is curried correctly.');
+        self::assertSame($expected, P::curryN($length, $function)(...$initialArguments), 'curryN is curried correctly.');
     }
 
     /**
@@ -216,9 +216,9 @@ class BasicTest extends TestCase
      */
     public function testDefaultTo($expected, $default, $value)
     {
-        $this->assertSame($expected, P::defaultTo($default, $value), 'defaultTo produces correct results.');
-        $this->assertSame($expected, P::defaultTo()($default)($value), 'defaultTo is curried correctly.');
-        $this->assertSame($expected, P::defaultTo($default)($value), 'defaultTo is curried correctly.');
+        self::assertSame($expected, P::defaultTo($default, $value), 'defaultTo produces correct results.');
+        self::assertSame($expected, P::defaultTo()($default)($value), 'defaultTo is curried correctly.');
+        self::assertSame($expected, P::defaultTo($default)($value), 'defaultTo is curried correctly.');
     }
 
     /**
@@ -226,9 +226,9 @@ class BasicTest extends TestCase
      */
     public function testDivide($expected, $x, $y)
     {
-        $this->assertSame($expected, P::divide($x, $y), 'divide produces correct results.');
-        $this->assertSame($expected, P::divide()($x)($y), 'divide is curried correctly.');
-        $this->assertSame($expected, P::divide($x)($y), 'divide is curried correctly.');
+        self::assertSame($expected, P::divide($x, $y), 'divide produces correct results.');
+        self::assertSame($expected, P::divide()($x)($y), 'divide is curried correctly.');
+        self::assertSame($expected, P::divide($x)($y), 'divide is curried correctly.');
     }
 
     /**
@@ -236,9 +236,9 @@ class BasicTest extends TestCase
      */
     public function testEach($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, P::each($function, $collection), 'each produces correct results.');
-        $this->assertSame($expected, P::each()($function)($collection), 'each is curried correctly.');
-        $this->assertSame($expected, P::each($function)($collection), 'each is curried correctly.');
+        self::assertSame($expected, P::each($function, $collection), 'each produces correct results.');
+        self::assertSame($expected, P::each()($function)($collection), 'each is curried correctly.');
+        self::assertSame($expected, P::each($function)($collection), 'each is curried correctly.');
     }
 
     /**
@@ -246,9 +246,9 @@ class BasicTest extends TestCase
      */
     public function testEither($expected, callable $a, callable $b, array $arguments)
     {
-        $this->assertSame($expected, P::either($a, $b)(...$arguments), 'either produces correct results.');
-        $this->assertSame($expected, P::either()($a)($b)(...$arguments), 'either is curried correctly.');
-        $this->assertSame($expected, P::either($a)($b)(...$arguments), 'either is curried correctly.');
+        self::assertSame($expected, P::either($a, $b)(...$arguments), 'either produces correct results.');
+        self::assertSame($expected, P::either()($a)($b)(...$arguments), 'either is curried correctly.');
+        self::assertSame($expected, P::either($a)($b)(...$arguments), 'either is curried correctly.');
     }
 
     /**
@@ -256,9 +256,9 @@ class BasicTest extends TestCase
      */
     public function testEq($expected, $x, $y)
     {
-        $this->assertSame($expected, P::eq($x, $y), 'eq produces correct results.');
-        $this->assertSame($expected, P::eq()($x)($y), 'eq is curried correctly.');
-        $this->assertSame($expected, P::eq($x)($y), 'eq is curried correctly.');
+        self::assertSame($expected, P::eq($x, $y), 'eq produces correct results.');
+        self::assertSame($expected, P::eq()($x)($y), 'eq is curried correctly.');
+        self::assertSame($expected, P::eq($x)($y), 'eq is curried correctly.');
     }
 
     /**
@@ -266,9 +266,9 @@ class BasicTest extends TestCase
      */
     public function testEvolve($expected, array $transformations, $object)
     {
-        $this->assertSame($expected, P::evolve($transformations, $object), 'evolve produces correct results.');
-        $this->assertSame($expected, P::evolve()($transformations)($object), 'evolve is curried correctly.');
-        $this->assertSame($expected, P::evolve($transformations)($object), 'evolve is curried correctly.');
+        self::assertSame($expected, P::evolve($transformations, $object), 'evolve produces correct results.');
+        self::assertSame($expected, P::evolve()($transformations)($object), 'evolve is curried correctly.');
+        self::assertSame($expected, P::evolve($transformations)($object), 'evolve is curried correctly.');
     }
 
     /**
@@ -276,9 +276,9 @@ class BasicTest extends TestCase
      */
     public function testExplode($expected, string $delimiter, string $string)
     {
-        $this->assertSame($expected, P::explode($delimiter, $string), 'explode produces correct results.');
-        $this->assertSame($expected, P::explode()($delimiter)($string), 'explode is curried correctly.');
-        $this->assertSame($expected, P::explode($delimiter)($string), 'explode is curried correctly.');
+        self::assertSame($expected, P::explode($delimiter, $string), 'explode produces correct results.');
+        self::assertSame($expected, P::explode()($delimiter)($string), 'explode is curried correctly.');
+        self::assertSame($expected, P::explode($delimiter)($string), 'explode is curried correctly.');
     }
 
     /**
@@ -286,7 +286,7 @@ class BasicTest extends TestCase
      */
     public function testFalse($expected)
     {
-        $this->assertSame($expected, P::false()(), 'false produces correct results.');
+        self::assertSame($expected, P::false()(), 'false produces correct results.');
     }
 
     /**
@@ -294,9 +294,9 @@ class BasicTest extends TestCase
      */
     public function testFilter($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::filter($predicate, $collection), 'filter produces correct results.');
-        $this->assertSame($expected, P::filter()($predicate)($collection), 'filter is curried correctly.');
-        $this->assertSame($expected, P::filter($predicate)($collection), 'filter is curried correctly.');
+        self::assertSame($expected, P::filter($predicate, $collection), 'filter produces correct results.');
+        self::assertSame($expected, P::filter()($predicate)($collection), 'filter is curried correctly.');
+        self::assertSame($expected, P::filter($predicate)($collection), 'filter is curried correctly.');
     }
 
     /**
@@ -304,9 +304,9 @@ class BasicTest extends TestCase
      */
     public function testFind($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::find($predicate, $collection), 'find produces correct results.');
-        $this->assertSame($expected, P::find()($predicate)($collection), 'find is curried correctly.');
-        $this->assertSame($expected, P::find($predicate)($collection), 'find is curried correctly.');
+        self::assertSame($expected, P::find($predicate, $collection), 'find produces correct results.');
+        self::assertSame($expected, P::find()($predicate)($collection), 'find is curried correctly.');
+        self::assertSame($expected, P::find($predicate)($collection), 'find is curried correctly.');
     }
 
     /**
@@ -314,9 +314,9 @@ class BasicTest extends TestCase
      */
     public function testFindIndex($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::findIndex($predicate, $collection), 'findIndex produces correct results.');
-        $this->assertSame($expected, P::findIndex()($predicate)($collection), 'findIndex is curried correctly.');
-        $this->assertSame($expected, P::findIndex($predicate)($collection), 'findIndex is curried correctly.');
+        self::assertSame($expected, P::findIndex($predicate, $collection), 'findIndex produces correct results.');
+        self::assertSame($expected, P::findIndex()($predicate)($collection), 'findIndex is curried correctly.');
+        self::assertSame($expected, P::findIndex($predicate)($collection), 'findIndex is curried correctly.');
     }
 
     /**
@@ -324,9 +324,9 @@ class BasicTest extends TestCase
      */
     public function testFindLast($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::findLast($predicate, $collection), 'findLast produces correct results.');
-        $this->assertSame($expected, P::findLast()($predicate)($collection), 'findLast is curried correctly.');
-        $this->assertSame($expected, P::findLast($predicate)($collection), 'findLast is curried correctly.');
+        self::assertSame($expected, P::findLast($predicate, $collection), 'findLast produces correct results.');
+        self::assertSame($expected, P::findLast()($predicate)($collection), 'findLast is curried correctly.');
+        self::assertSame($expected, P::findLast($predicate)($collection), 'findLast is curried correctly.');
     }
 
     /**
@@ -334,9 +334,9 @@ class BasicTest extends TestCase
      */
     public function testFindLastIndex($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::findLastIndex($predicate, $collection), 'findLastIndex produces correct results.');
-        $this->assertSame($expected, P::findLastIndex()($predicate)($collection), 'findLastIndex is curried correctly.');
-        $this->assertSame($expected, P::findLastIndex($predicate)($collection), 'findLastIndex is curried correctly.');
+        self::assertSame($expected, P::findLastIndex($predicate, $collection), 'findLastIndex produces correct results.');
+        self::assertSame($expected, P::findLastIndex()($predicate)($collection), 'findLastIndex is curried correctly.');
+        self::assertSame($expected, P::findLastIndex($predicate)($collection), 'findLastIndex is curried correctly.');
     }
 
     /**
@@ -344,8 +344,8 @@ class BasicTest extends TestCase
      */
     public function testFirst($expected, $collection)
     {
-        $this->assertSame($expected, P::first($collection), 'first produces correct results.');
-        $this->assertSame($expected, P::first()($collection), 'first is curried correctly.');
+        self::assertSame($expected, P::first($collection), 'first produces correct results.');
+        self::assertSame($expected, P::first()($collection), 'first is curried correctly.');
     }
 
     /**
@@ -353,9 +353,9 @@ class BasicTest extends TestCase
      */
     public function testFlatMap($expected, callable $function, array $list)
     {
-        $this->assertSame($expected, P::flatMap($function, $list), 'flatMap produces correct results.');
-        $this->assertSame($expected, P::flatMap()($function)($list), 'flatMap is curried correctly.');
-        $this->assertSame($expected, P::flatMap($function)($list), 'flatMap is curried correctly.');
+        self::assertSame($expected, P::flatMap($function, $list), 'flatMap produces correct results.');
+        self::assertSame($expected, P::flatMap()($function)($list), 'flatMap is curried correctly.');
+        self::assertSame($expected, P::flatMap($function)($list), 'flatMap is curried correctly.');
     }
 
     /**
@@ -363,8 +363,8 @@ class BasicTest extends TestCase
      */
     public function testFlatten($expected, array $list)
     {
-        $this->assertSame($expected, P::flatten($list), 'flatten produces correct results.');
-        $this->assertSame($expected, P::flatten()($list), 'flatten is curried correctly.');
+        self::assertSame($expected, P::flatten($list), 'flatten produces correct results.');
+        self::assertSame($expected, P::flatten()($list), 'flatten is curried correctly.');
     }
 
     /**
@@ -372,8 +372,8 @@ class BasicTest extends TestCase
      */
     public function testFlattenLevel($expected, array $list)
     {
-        $this->assertSame($expected, P::flattenLevel($list), 'flattenLevel produces correct results.');
-        $this->assertSame($expected, P::flattenLevel()($list), 'flattenLevel is curried correctly.');
+        self::assertSame($expected, P::flattenLevel($list), 'flattenLevel produces correct results.');
+        self::assertSame($expected, P::flattenLevel()($list), 'flattenLevel is curried correctly.');
     }
 
     /**
@@ -381,8 +381,8 @@ class BasicTest extends TestCase
      */
     public function testFlip($expected, callable $function, $a, $b, array $arguments)
     {
-        $this->assertSame($expected, P::flip($function)($a, $b, ...$arguments), 'flip produces correct results.');
-        $this->assertSame($expected, P::flip()($function)($a, $b, ...$arguments), 'flip is curried correctly.');
+        self::assertSame($expected, P::flip($function)($a, $b, ...$arguments), 'flip produces correct results.');
+        self::assertSame($expected, P::flip()($function)($a, $b, ...$arguments), 'flip is curried correctly.');
     }
 
     /**
@@ -390,8 +390,8 @@ class BasicTest extends TestCase
      */
     public function testFromPairs($expected, $list)
     {
-        $this->assertSame($expected, P::fromPairs($list), 'fromPairs produces correct results.');
-        $this->assertSame($expected, P::fromPairs()($list), 'fromPairs is curried correctly.');
+        self::assertSame($expected, P::fromPairs($list), 'fromPairs produces correct results.');
+        self::assertSame($expected, P::fromPairs()($list), 'fromPairs is curried correctly.');
     }
 
     /**
@@ -399,9 +399,9 @@ class BasicTest extends TestCase
      */
     public function testGroupBy($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, P::groupBy($function, $collection), 'groupBy produces correct results.');
-        $this->assertSame($expected, P::groupBy()($function)($collection), 'groupBy is curried correctly.');
-        $this->assertSame($expected, P::groupBy($function)($collection), 'groupBy is curried correctly.');
+        self::assertSame($expected, P::groupBy($function, $collection), 'groupBy produces correct results.');
+        self::assertSame($expected, P::groupBy()($function)($collection), 'groupBy is curried correctly.');
+        self::assertSame($expected, P::groupBy($function)($collection), 'groupBy is curried correctly.');
     }
 
     /**
@@ -409,9 +409,9 @@ class BasicTest extends TestCase
      */
     public function testGt($expected, $x, $y)
     {
-        $this->assertSame($expected, P::gt($x, $y), 'gt produces correct results.');
-        $this->assertSame($expected, P::gt()($x)($y), 'gt is curried correctly.');
-        $this->assertSame($expected, P::gt($x)($y), 'gt is curried correctly.');
+        self::assertSame($expected, P::gt($x, $y), 'gt produces correct results.');
+        self::assertSame($expected, P::gt()($x)($y), 'gt is curried correctly.');
+        self::assertSame($expected, P::gt($x)($y), 'gt is curried correctly.');
     }
 
     /**
@@ -419,9 +419,9 @@ class BasicTest extends TestCase
      */
     public function testGte($expected, $x, $y)
     {
-        $this->assertSame($expected, P::gte($x, $y), 'gte produces correct results.');
-        $this->assertSame($expected, P::gte()($x)($y), 'gte is curried correctly.');
-        $this->assertSame($expected, P::gte($x)($y), 'gte is curried correctly.');
+        self::assertSame($expected, P::gte($x, $y), 'gte produces correct results.');
+        self::assertSame($expected, P::gte()($x)($y), 'gte is curried correctly.');
+        self::assertSame($expected, P::gte($x)($y), 'gte is curried correctly.');
     }
 
     /**
@@ -429,8 +429,8 @@ class BasicTest extends TestCase
      */
     public function testIdentity($expected, $x)
     {
-        $this->assertSame($expected, P::identity($x), 'identity produces correct results.');
-        $this->assertSame($expected, P::identity()($x), 'identity is curried correctly.');
+        self::assertSame($expected, P::identity($x), 'identity produces correct results.');
+        self::assertSame($expected, P::identity()($x), 'identity is curried correctly.');
     }
 
     /**
@@ -438,10 +438,10 @@ class BasicTest extends TestCase
      */
     public function testIfElse($expected, callable $condition, callable $onTrue, callable $onFalse, array $arguments)
     {
-        $this->assertSame($expected, P::ifElse($condition, $onTrue, $onFalse)(...$arguments), 'ifElse produces correct results.');
-        $this->assertSame($expected, P::ifElse()($condition)($onTrue)($onFalse)(...$arguments), 'ifElse is curried correctly.');
-        $this->assertSame($expected, P::ifElse($condition)($onTrue)($onFalse)(...$arguments), 'ifElse is curried correctly.');
-        $this->assertSame($expected, P::ifElse($condition, $onTrue)($onFalse)(...$arguments), 'ifElse is curried correctly.');
+        self::assertSame($expected, P::ifElse($condition, $onTrue, $onFalse)(...$arguments), 'ifElse produces correct results.');
+        self::assertSame($expected, P::ifElse()($condition)($onTrue)($onFalse)(...$arguments), 'ifElse is curried correctly.');
+        self::assertSame($expected, P::ifElse($condition)($onTrue)($onFalse)(...$arguments), 'ifElse is curried correctly.');
+        self::assertSame($expected, P::ifElse($condition, $onTrue)($onFalse)(...$arguments), 'ifElse is curried correctly.');
     }
 
     /**
@@ -449,9 +449,9 @@ class BasicTest extends TestCase
      */
     public function testImplode($expected, string $glue, array $strings)
     {
-        $this->assertSame($expected, P::implode($glue, $strings), 'implode produces correct results.');
-        $this->assertSame($expected, P::implode()($glue)($strings), 'implode is curried correctly.');
-        $this->assertSame($expected, P::implode($glue)($strings), 'implode is curried correctly.');
+        self::assertSame($expected, P::implode($glue, $strings), 'implode produces correct results.');
+        self::assertSame($expected, P::implode()($glue)($strings), 'implode is curried correctly.');
+        self::assertSame($expected, P::implode($glue)($strings), 'implode is curried correctly.');
     }
 
     /**
@@ -459,9 +459,9 @@ class BasicTest extends TestCase
      */
     public function testIndexOf($expected, $item, $collection)
     {
-        $this->assertSame($expected, P::indexOf($item, $collection), 'indexOf produces correct results.');
-        $this->assertSame($expected, P::indexOf()($item)($collection), 'indexOf is curried correctly.');
-        $this->assertSame($expected, P::indexOf($item)($collection), 'indexOf is curried correctly.');
+        self::assertSame($expected, P::indexOf($item, $collection), 'indexOf produces correct results.');
+        self::assertSame($expected, P::indexOf()($item)($collection), 'indexOf is curried correctly.');
+        self::assertSame($expected, P::indexOf($item)($collection), 'indexOf is curried correctly.');
     }
 
     /**
@@ -469,10 +469,10 @@ class BasicTest extends TestCase
      */
     public function testInvoker($expected, int $arity, string $method, array $initialArguments, array $arguments)
     {
-        $this->assertSame($expected, P::invoker($arity, $method, ...$initialArguments)(...$arguments), 'invoker produces correct results.');
-        $this->assertSame($expected, P::invoker()($arity)($method)(...$initialArguments)(...$arguments), 'invoker is curried correctly.');
-        $this->assertSame($expected, P::invoker($arity)($method)(...$initialArguments)(...$arguments), 'invoker is curried correctly.');
-        $this->assertSame($expected, P::invoker($arity, $method)(...$initialArguments)(...$arguments), 'invoker is curried correctly.');
+        self::assertSame($expected, P::invoker($arity, $method, ...$initialArguments)(...$arguments), 'invoker produces correct results.');
+        self::assertSame($expected, P::invoker()($arity)($method)(...$initialArguments)(...$arguments), 'invoker is curried correctly.');
+        self::assertSame($expected, P::invoker($arity)($method)(...$initialArguments)(...$arguments), 'invoker is curried correctly.');
+        self::assertSame($expected, P::invoker($arity, $method)(...$initialArguments)(...$arguments), 'invoker is curried correctly.');
     }
 
     /**
@@ -480,8 +480,8 @@ class BasicTest extends TestCase
      */
     public function testIsEmpty($expected, $collection)
     {
-        $this->assertSame($expected, P::isEmpty($collection), 'isEmpty produces correct results.');
-        $this->assertSame($expected, P::isEmpty()($collection), 'isEmpty is curried correctly.');
+        self::assertSame($expected, P::isEmpty($collection), 'isEmpty produces correct results.');
+        self::assertSame($expected, P::isEmpty()($collection), 'isEmpty is curried correctly.');
     }
 
     /**
@@ -489,9 +489,9 @@ class BasicTest extends TestCase
      */
     public function testIsInstance($expected, string $class, $object)
     {
-        $this->assertSame($expected, P::isInstance($class, $object), 'isInstance produces correct results.');
-        $this->assertSame($expected, P::isInstance()($class)($object), 'isInstance is curried correctly.');
-        $this->assertSame($expected, P::isInstance($class)($object), 'isInstance is curried correctly.');
+        self::assertSame($expected, P::isInstance($class, $object), 'isInstance produces correct results.');
+        self::assertSame($expected, P::isInstance()($class)($object), 'isInstance is curried correctly.');
+        self::assertSame($expected, P::isInstance($class)($object), 'isInstance is curried correctly.');
     }
 
     /**
@@ -499,8 +499,8 @@ class BasicTest extends TestCase
      */
     public function testLast($expected, $collection)
     {
-        $this->assertSame($expected, P::last($collection), 'last produces correct results.');
-        $this->assertSame($expected, P::last()($collection), 'last is curried correctly.');
+        self::assertSame($expected, P::last($collection), 'last produces correct results.');
+        self::assertSame($expected, P::last()($collection), 'last is curried correctly.');
     }
 
     /**
@@ -508,9 +508,9 @@ class BasicTest extends TestCase
      */
     public function testLt($expected, $x, $y)
     {
-        $this->assertSame($expected, P::lt($x, $y), 'lt produces correct results.');
-        $this->assertSame($expected, P::lt()($x)($y), 'lt is curried correctly.');
-        $this->assertSame($expected, P::lt($x)($y), 'lt is curried correctly.');
+        self::assertSame($expected, P::lt($x, $y), 'lt produces correct results.');
+        self::assertSame($expected, P::lt()($x)($y), 'lt is curried correctly.');
+        self::assertSame($expected, P::lt($x)($y), 'lt is curried correctly.');
     }
 
     /**
@@ -518,9 +518,9 @@ class BasicTest extends TestCase
      */
     public function testLte($expected, $x, $y)
     {
-        $this->assertSame($expected, P::lte($x, $y), 'lte produces correct results.');
-        $this->assertSame($expected, P::lte()($x)($y), 'lte is curried correctly.');
-        $this->assertSame($expected, P::lte($x)($y), 'lte is curried correctly.');
+        self::assertSame($expected, P::lte($x, $y), 'lte produces correct results.');
+        self::assertSame($expected, P::lte()($x)($y), 'lte is curried correctly.');
+        self::assertSame($expected, P::lte($x)($y), 'lte is curried correctly.');
     }
 
     /**
@@ -528,9 +528,9 @@ class BasicTest extends TestCase
      */
     public function testMap($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, P::map($function, $collection), 'map produces correct results.');
-        $this->assertSame($expected, P::map()($function)($collection), 'map is curried correctly.');
-        $this->assertSame($expected, P::map($function)($collection), 'map is curried correctly.');
+        self::assertSame($expected, P::map($function, $collection), 'map produces correct results.');
+        self::assertSame($expected, P::map()($function)($collection), 'map is curried correctly.');
+        self::assertSame($expected, P::map($function)($collection), 'map is curried correctly.');
     }
 
     /**
@@ -538,8 +538,8 @@ class BasicTest extends TestCase
      */
     public function testMax($expected, $collection)
     {
-        $this->assertSame($expected, P::max($collection), 'max produces correct results.');
-        $this->assertSame($expected, P::max()($collection), 'max is curried correctly.');
+        self::assertSame($expected, P::max($collection), 'max produces correct results.');
+        self::assertSame($expected, P::max()($collection), 'max is curried correctly.');
     }
 
     /**
@@ -547,9 +547,9 @@ class BasicTest extends TestCase
      */
     public function testMaxBy($expected, callable $getValue, $collection)
     {
-        $this->assertSame($expected, P::maxBy($getValue, $collection), 'maxBy produces correct results.');
-        $this->assertSame($expected, P::maxBy()($getValue)($collection), 'maxBy is curried correctly.');
-        $this->assertSame($expected, P::maxBy($getValue)($collection), 'maxBy is curried correctly.');
+        self::assertSame($expected, P::maxBy($getValue, $collection), 'maxBy produces correct results.');
+        self::assertSame($expected, P::maxBy()($getValue)($collection), 'maxBy is curried correctly.');
+        self::assertSame($expected, P::maxBy($getValue)($collection), 'maxBy is curried correctly.');
     }
 
     /**
@@ -557,9 +557,9 @@ class BasicTest extends TestCase
      */
     public function testMerge($expected, array $a, array $b)
     {
-        $this->assertSame($expected, P::merge($a, $b), 'merge produces correct results.');
-        $this->assertSame($expected, P::merge()($a)($b), 'merge is curried correctly.');
-        $this->assertSame($expected, P::merge($a)($b), 'merge is curried correctly.');
+        self::assertSame($expected, P::merge($a, $b), 'merge produces correct results.');
+        self::assertSame($expected, P::merge()($a)($b), 'merge is curried correctly.');
+        self::assertSame($expected, P::merge($a)($b), 'merge is curried correctly.');
     }
 
     /**
@@ -567,8 +567,8 @@ class BasicTest extends TestCase
      */
     public function testMin($expected, $collection)
     {
-        $this->assertSame($expected, P::min($collection), 'min produces correct results.');
-        $this->assertSame($expected, P::min()($collection), 'min is curried correctly.');
+        self::assertSame($expected, P::min($collection), 'min produces correct results.');
+        self::assertSame($expected, P::min()($collection), 'min is curried correctly.');
     }
 
     /**
@@ -576,9 +576,9 @@ class BasicTest extends TestCase
      */
     public function testMinBy($expected, callable $getValue, $collection)
     {
-        $this->assertSame($expected, P::minBy($getValue, $collection), 'minBy produces correct results.');
-        $this->assertSame($expected, P::minBy()($getValue)($collection), 'minBy is curried correctly.');
-        $this->assertSame($expected, P::minBy($getValue)($collection), 'minBy is curried correctly.');
+        self::assertSame($expected, P::minBy($getValue, $collection), 'minBy produces correct results.');
+        self::assertSame($expected, P::minBy()($getValue)($collection), 'minBy is curried correctly.');
+        self::assertSame($expected, P::minBy($getValue)($collection), 'minBy is curried correctly.');
     }
 
     /**
@@ -586,9 +586,9 @@ class BasicTest extends TestCase
      */
     public function testModulo($expected, int $x, int $y)
     {
-        $this->assertSame($expected, P::modulo($x, $y), 'modulo produces correct results.');
-        $this->assertSame($expected, P::modulo()($x)($y), 'modulo is curried correctly.');
-        $this->assertSame($expected, P::modulo($x)($y), 'modulo is curried correctly.');
+        self::assertSame($expected, P::modulo($x, $y), 'modulo produces correct results.');
+        self::assertSame($expected, P::modulo()($x)($y), 'modulo is curried correctly.');
+        self::assertSame($expected, P::modulo($x)($y), 'modulo is curried correctly.');
     }
 
     /**
@@ -596,9 +596,9 @@ class BasicTest extends TestCase
      */
     public function testMultiply($expected, $x, $y)
     {
-        $this->assertSame($expected, P::multiply($x, $y), 'multiply produces correct results.');
-        $this->assertSame($expected, P::multiply()($x)($y), 'multiply is curried correctly.');
-        $this->assertSame($expected, P::multiply($x)($y), 'multiply is curried correctly.');
+        self::assertSame($expected, P::multiply($x, $y), 'multiply produces correct results.');
+        self::assertSame($expected, P::multiply()($x)($y), 'multiply is curried correctly.');
+        self::assertSame($expected, P::multiply($x)($y), 'multiply is curried correctly.');
     }
 
     /**
@@ -606,9 +606,9 @@ class BasicTest extends TestCase
      */
     public function testNAry($expected, int $arity, callable $function, array $arguments)
     {
-        $this->assertSame($expected, P::nAry($arity, $function)(...$arguments), 'nAry produces correct results.');
-        $this->assertSame($expected, P::nAry()($arity)($function)(...$arguments), 'nAry is curried correctly.');
-        $this->assertSame($expected, P::nAry($arity)($function)(...$arguments), 'nAry is curried correctly.');
+        self::assertSame($expected, P::nAry($arity, $function)(...$arguments), 'nAry produces correct results.');
+        self::assertSame($expected, P::nAry()($arity)($function)(...$arguments), 'nAry is curried correctly.');
+        self::assertSame($expected, P::nAry($arity)($function)(...$arguments), 'nAry is curried correctly.');
     }
 
     /**
@@ -616,8 +616,8 @@ class BasicTest extends TestCase
      */
     public function testNegate($expected, $x)
     {
-        $this->assertSame($expected, P::negate($x), 'negate produces correct results.');
-        $this->assertSame($expected, P::negate()($x), 'negate is curried correctly.');
+        self::assertSame($expected, P::negate($x), 'negate produces correct results.');
+        self::assertSame($expected, P::negate()($x), 'negate is curried correctly.');
     }
 
     /**
@@ -625,9 +625,9 @@ class BasicTest extends TestCase
      */
     public function testNone($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::none($predicate, $collection), 'none produces correct results.');
-        $this->assertSame($expected, P::none()($predicate)($collection), 'none is curried correctly.');
-        $this->assertSame($expected, P::none($predicate)($collection), 'none is curried correctly.');
+        self::assertSame($expected, P::none($predicate, $collection), 'none produces correct results.');
+        self::assertSame($expected, P::none()($predicate)($collection), 'none is curried correctly.');
+        self::assertSame($expected, P::none($predicate)($collection), 'none is curried correctly.');
     }
 
     /**
@@ -635,8 +635,8 @@ class BasicTest extends TestCase
      */
     public function testNot($expected, callable $predicate, array $arguments)
     {
-        $this->assertSame($expected, P::not($predicate)(...$arguments), 'not produces correct results.');
-        $this->assertSame($expected, P::not()($predicate)(...$arguments), 'not is curried correctly.');
+        self::assertSame($expected, P::not($predicate)(...$arguments), 'not produces correct results.');
+        self::assertSame($expected, P::not()($predicate)(...$arguments), 'not is curried correctly.');
     }
 
     /**
@@ -644,9 +644,9 @@ class BasicTest extends TestCase
      */
     public function testPartial($expected, callable $function, array $initialArguments, array $arguments)
     {
-        $this->assertSame($expected, P::partial($function, ...$initialArguments)(...$arguments), 'partial produces correct results.');
-        $this->assertSame($expected, P::partial()($function)(...$initialArguments)(...$arguments), 'partial is curried correctly.');
-        $this->assertSame($expected, P::partial($function)(...$initialArguments)(...$arguments), 'partial is curried correctly.');
+        self::assertSame($expected, P::partial($function, ...$initialArguments)(...$arguments), 'partial produces correct results.');
+        self::assertSame($expected, P::partial()($function)(...$initialArguments)(...$arguments), 'partial is curried correctly.');
+        self::assertSame($expected, P::partial($function)(...$initialArguments)(...$arguments), 'partial is curried correctly.');
     }
 
     /**
@@ -654,10 +654,10 @@ class BasicTest extends TestCase
      */
     public function testPartialN($expected, int $arity, callable $function, array $initialArguments, array $arguments)
     {
-        $this->assertSame($expected, P::partialN($arity, $function, ...$initialArguments)(...$arguments), 'partialN produces correct results.');
-        $this->assertSame($expected, P::partialN()($arity)($function)(...$initialArguments)(...$arguments), 'partialN is curried correctly.');
-        $this->assertSame($expected, P::partialN($arity)($function)(...$initialArguments)(...$arguments), 'partialN is curried correctly.');
-        $this->assertSame($expected, P::partialN($arity, $function)(...$initialArguments)(...$arguments), 'partialN is curried correctly.');
+        self::assertSame($expected, P::partialN($arity, $function, ...$initialArguments)(...$arguments), 'partialN produces correct results.');
+        self::assertSame($expected, P::partialN()($arity)($function)(...$initialArguments)(...$arguments), 'partialN is curried correctly.');
+        self::assertSame($expected, P::partialN($arity)($function)(...$initialArguments)(...$arguments), 'partialN is curried correctly.');
+        self::assertSame($expected, P::partialN($arity, $function)(...$initialArguments)(...$arguments), 'partialN is curried correctly.');
     }
 
     /**
@@ -665,9 +665,9 @@ class BasicTest extends TestCase
      */
     public function testPartition($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::partition($predicate, $collection), 'partition produces correct results.');
-        $this->assertSame($expected, P::partition()($predicate)($collection), 'partition is curried correctly.');
-        $this->assertSame($expected, P::partition($predicate)($collection), 'partition is curried correctly.');
+        self::assertSame($expected, P::partition($predicate, $collection), 'partition produces correct results.');
+        self::assertSame($expected, P::partition()($predicate)($collection), 'partition is curried correctly.');
+        self::assertSame($expected, P::partition($predicate)($collection), 'partition is curried correctly.');
     }
 
     /**
@@ -675,9 +675,9 @@ class BasicTest extends TestCase
      */
     public function testPath($expected, array $path, $object)
     {
-        $this->assertSame($expected, P::path($path, $object), 'path produces correct results.');
-        $this->assertSame($expected, P::path()($path)($object), 'path is curried correctly.');
-        $this->assertSame($expected, P::path($path)($object), 'path is curried correctly.');
+        self::assertSame($expected, P::path($path, $object), 'path produces correct results.');
+        self::assertSame($expected, P::path()($path)($object), 'path is curried correctly.');
+        self::assertSame($expected, P::path($path)($object), 'path is curried correctly.');
     }
 
     /**
@@ -685,10 +685,10 @@ class BasicTest extends TestCase
      */
     public function testPathEq($expected, array $path, $value, $object)
     {
-        $this->assertSame($expected, P::pathEq($path, $value, $object), 'pathEq produces correct results.');
-        $this->assertSame($expected, P::pathEq()($path)($value)($object), 'pathEq is curried correctly.');
-        $this->assertSame($expected, P::pathEq($path)($value)($object), 'pathEq is curried correctly.');
-        $this->assertSame($expected, P::pathEq($path, $value)($object), 'pathEq is curried correctly.');
+        self::assertSame($expected, P::pathEq($path, $value, $object), 'pathEq produces correct results.');
+        self::assertSame($expected, P::pathEq()($path)($value)($object), 'pathEq is curried correctly.');
+        self::assertSame($expected, P::pathEq($path)($value)($object), 'pathEq is curried correctly.');
+        self::assertSame($expected, P::pathEq($path, $value)($object), 'pathEq is curried correctly.');
     }
 
     /**
@@ -696,9 +696,9 @@ class BasicTest extends TestCase
      */
     public function testPick($expected, array $names, array $item)
     {
-        $this->assertSame($expected, P::pick($names, $item), 'pick produces correct results.');
-        $this->assertSame($expected, P::pick()($names)($item), 'pick is curried correctly.');
-        $this->assertSame($expected, P::pick($names)($item), 'pick is curried correctly.');
+        self::assertSame($expected, P::pick($names, $item), 'pick produces correct results.');
+        self::assertSame($expected, P::pick()($names)($item), 'pick is curried correctly.');
+        self::assertSame($expected, P::pick($names)($item), 'pick is curried correctly.');
     }
 
     /**
@@ -706,9 +706,9 @@ class BasicTest extends TestCase
      */
     public function testPickAll($expected, array $names, array $item)
     {
-        $this->assertSame($expected, P::pickAll($names, $item), 'pickAll produces correct results.');
-        $this->assertSame($expected, P::pickAll()($names)($item), 'pickAll is curried correctly.');
-        $this->assertSame($expected, P::pickAll($names)($item), 'pickAll is curried correctly.');
+        self::assertSame($expected, P::pickAll($names, $item), 'pickAll produces correct results.');
+        self::assertSame($expected, P::pickAll()($names)($item), 'pickAll is curried correctly.');
+        self::assertSame($expected, P::pickAll($names)($item), 'pickAll is curried correctly.');
     }
 
     /**
@@ -716,7 +716,7 @@ class BasicTest extends TestCase
      */
     public function testPipe($expected, array $functions, array $arguments)
     {
-        $this->assertSame($expected, P::pipe(...$functions)(...$arguments), 'pipe produces correct results.');
+        self::assertSame($expected, P::pipe(...$functions)(...$arguments), 'pipe produces correct results.');
     }
 
     /**
@@ -724,9 +724,9 @@ class BasicTest extends TestCase
      */
     public function testPluck($expected, string $name, $collection)
     {
-        $this->assertSame($expected, P::pluck($name, $collection), 'pluck produces correct results.');
-        $this->assertSame($expected, P::pluck()($name)($collection), 'pluck is curried correctly.');
-        $this->assertSame($expected, P::pluck($name)($collection), 'pluck is curried correctly.');
+        self::assertSame($expected, P::pluck($name, $collection), 'pluck produces correct results.');
+        self::assertSame($expected, P::pluck()($name)($collection), 'pluck is curried correctly.');
+        self::assertSame($expected, P::pluck($name)($collection), 'pluck is curried correctly.');
     }
 
     /**
@@ -734,9 +734,9 @@ class BasicTest extends TestCase
      */
     public function testPrepend($expected, $item, $collection)
     {
-        $this->assertSame($expected, P::prepend($item, $collection), 'prepend produces correct results.');
-        $this->assertSame($expected, P::prepend()($item)($collection), 'prepend is curried correctly.');
-        $this->assertSame($expected, P::prepend($item)($collection), 'prepend is curried correctly.');
+        self::assertSame($expected, P::prepend($item, $collection), 'prepend produces correct results.');
+        self::assertSame($expected, P::prepend()($item)($collection), 'prepend is curried correctly.');
+        self::assertSame($expected, P::prepend($item)($collection), 'prepend is curried correctly.');
     }
 
     /**
@@ -744,8 +744,8 @@ class BasicTest extends TestCase
      */
     public function testProduct($expected, $values)
     {
-        $this->assertSame($expected, P::product($values), 'product produces correct results.');
-        $this->assertSame($expected, P::product()($values), 'product is curried correctly.');
+        self::assertSame($expected, P::product($values), 'product produces correct results.');
+        self::assertSame($expected, P::product()($values), 'product is curried correctly.');
     }
 
     /**
@@ -753,9 +753,9 @@ class BasicTest extends TestCase
      */
     public function testProp($expected, string $name, $object)
     {
-        $this->assertSame($expected, P::prop($name, $object), 'prop produces correct results.');
-        $this->assertSame($expected, P::prop()($name)($object), 'prop is curried correctly.');
-        $this->assertSame($expected, P::prop($name)($object), 'prop is curried correctly.');
+        self::assertSame($expected, P::prop($name, $object), 'prop produces correct results.');
+        self::assertSame($expected, P::prop()($name)($object), 'prop is curried correctly.');
+        self::assertSame($expected, P::prop($name)($object), 'prop is curried correctly.');
     }
 
     /**
@@ -763,10 +763,10 @@ class BasicTest extends TestCase
      */
     public function testPropEq($expected, string $name, $value, $object)
     {
-        $this->assertSame($expected, P::propEq($name, $value, $object), 'propEq produces correct results.');
-        $this->assertSame($expected, P::propEq()($name)($value)($object), 'propEq is curried correctly.');
-        $this->assertSame($expected, P::propEq($name)($value)($object), 'propEq is curried correctly.');
-        $this->assertSame($expected, P::propEq($name, $value)($object), 'propEq is curried correctly.');
+        self::assertSame($expected, P::propEq($name, $value, $object), 'propEq produces correct results.');
+        self::assertSame($expected, P::propEq()($name)($value)($object), 'propEq is curried correctly.');
+        self::assertSame($expected, P::propEq($name)($value)($object), 'propEq is curried correctly.');
+        self::assertSame($expected, P::propEq($name, $value)($object), 'propEq is curried correctly.');
     }
 
     /**
@@ -774,10 +774,10 @@ class BasicTest extends TestCase
      */
     public function testReduce($expected, callable $function, $initial, $collection)
     {
-        $this->assertSame($expected, P::reduce($function, $initial, $collection), 'reduce produces correct results.');
-        $this->assertSame($expected, P::reduce()($function)($initial)($collection), 'reduce is curried correctly.');
-        $this->assertSame($expected, P::reduce($function)($initial)($collection), 'reduce is curried correctly.');
-        $this->assertSame($expected, P::reduce($function, $initial)($collection), 'reduce is curried correctly.');
+        self::assertSame($expected, P::reduce($function, $initial, $collection), 'reduce produces correct results.');
+        self::assertSame($expected, P::reduce()($function)($initial)($collection), 'reduce is curried correctly.');
+        self::assertSame($expected, P::reduce($function)($initial)($collection), 'reduce is curried correctly.');
+        self::assertSame($expected, P::reduce($function, $initial)($collection), 'reduce is curried correctly.');
     }
 
     /**
@@ -785,10 +785,10 @@ class BasicTest extends TestCase
      */
     public function testReduceRight($expected, callable $function, $initial, $collection)
     {
-        $this->assertSame($expected, P::reduceRight($function, $initial, $collection), 'reduceRight produces correct results.');
-        $this->assertSame($expected, P::reduceRight()($function)($initial)($collection), 'reduceRight is curried correctly.');
-        $this->assertSame($expected, P::reduceRight($function)($initial)($collection), 'reduceRight is curried correctly.');
-        $this->assertSame($expected, P::reduceRight($function, $initial)($collection), 'reduceRight is curried correctly.');
+        self::assertSame($expected, P::reduceRight($function, $initial, $collection), 'reduceRight produces correct results.');
+        self::assertSame($expected, P::reduceRight()($function)($initial)($collection), 'reduceRight is curried correctly.');
+        self::assertSame($expected, P::reduceRight($function)($initial)($collection), 'reduceRight is curried correctly.');
+        self::assertSame($expected, P::reduceRight($function, $initial)($collection), 'reduceRight is curried correctly.');
     }
 
     /**
@@ -796,9 +796,9 @@ class BasicTest extends TestCase
      */
     public function testReject($expected, callable $predicate, $collection)
     {
-        $this->assertSame($expected, P::reject($predicate, $collection), 'reject produces correct results.');
-        $this->assertSame($expected, P::reject()($predicate)($collection), 'reject is curried correctly.');
-        $this->assertSame($expected, P::reject($predicate)($collection), 'reject is curried correctly.');
+        self::assertSame($expected, P::reject($predicate, $collection), 'reject produces correct results.');
+        self::assertSame($expected, P::reject()($predicate)($collection), 'reject is curried correctly.');
+        self::assertSame($expected, P::reject($predicate)($collection), 'reject is curried correctly.');
     }
 
     /**
@@ -806,8 +806,8 @@ class BasicTest extends TestCase
      */
     public function testReverse($expected, $collection)
     {
-        $this->assertSame($expected, P::reverse($collection), 'reverse produces correct results.');
-        $this->assertSame($expected, P::reverse()($collection), 'reverse is curried correctly.');
+        self::assertSame($expected, P::reverse($collection), 'reverse produces correct results.');
+        self::assertSame($expected, P::reverse()($collection), 'reverse is curried correctly.');
     }
 
     /**
@@ -815,10 +815,10 @@ class BasicTest extends TestCase
      */
     public function testSlice($expected, int $start, int $end, $collection)
     {
-        $this->assertSame($expected, P::slice($start, $end, $collection), 'slice produces correct results.');
-        $this->assertSame($expected, P::slice()($start)($end)($collection), 'slice is curried correctly.');
-        $this->assertSame($expected, P::slice($start)($end)($collection), 'slice is curried correctly.');
-        $this->assertSame($expected, P::slice($start, $end)($collection), 'slice is curried correctly.');
+        self::assertSame($expected, P::slice($start, $end, $collection), 'slice produces correct results.');
+        self::assertSame($expected, P::slice()($start)($end)($collection), 'slice is curried correctly.');
+        self::assertSame($expected, P::slice($start)($end)($collection), 'slice is curried correctly.');
+        self::assertSame($expected, P::slice($start, $end)($collection), 'slice is curried correctly.');
     }
 
     /**
@@ -826,9 +826,9 @@ class BasicTest extends TestCase
      */
     public function testSort($expected, callable $comparator, $collection)
     {
-        $this->assertSame($expected, P::sort($comparator, $collection), 'sort produces correct results.');
-        $this->assertSame($expected, P::sort()($comparator)($collection), 'sort is curried correctly.');
-        $this->assertSame($expected, P::sort($comparator)($collection), 'sort is curried correctly.');
+        self::assertSame($expected, P::sort($comparator, $collection), 'sort produces correct results.');
+        self::assertSame($expected, P::sort()($comparator)($collection), 'sort is curried correctly.');
+        self::assertSame($expected, P::sort($comparator)($collection), 'sort is curried correctly.');
     }
 
     /**
@@ -836,9 +836,9 @@ class BasicTest extends TestCase
      */
     public function testSortBy($expected, callable $function, $collection)
     {
-        $this->assertSame($expected, P::sortBy($function, $collection), 'sortBy produces correct results.');
-        $this->assertSame($expected, P::sortBy()($function)($collection), 'sortBy is curried correctly.');
-        $this->assertSame($expected, P::sortBy($function)($collection), 'sortBy is curried correctly.');
+        self::assertSame($expected, P::sortBy($function, $collection), 'sortBy produces correct results.');
+        self::assertSame($expected, P::sortBy()($function)($collection), 'sortBy is curried correctly.');
+        self::assertSame($expected, P::sortBy($function)($collection), 'sortBy is curried correctly.');
     }
 
     /**
@@ -846,9 +846,9 @@ class BasicTest extends TestCase
      */
     public function testStringIndexOf($expected, string $substring, string $string)
     {
-        $this->assertSame($expected, P::stringIndexOf($substring, $string), 'stringIndexOf produces correct results.');
-        $this->assertSame($expected, P::stringIndexOf()($substring)($string), 'stringIndexOf is curried correctly.');
-        $this->assertSame($expected, P::stringIndexOf($substring)($string), 'stringIndexOf is curried correctly.');
+        self::assertSame($expected, P::stringIndexOf($substring, $string), 'stringIndexOf produces correct results.');
+        self::assertSame($expected, P::stringIndexOf()($substring)($string), 'stringIndexOf is curried correctly.');
+        self::assertSame($expected, P::stringIndexOf($substring)($string), 'stringIndexOf is curried correctly.');
     }
 
     /**
@@ -856,9 +856,9 @@ class BasicTest extends TestCase
      */
     public function testStringLastIndexOf($expected, string $substring, string $string)
     {
-        $this->assertSame($expected, P::stringLastIndexOf($substring, $string), 'stringLastIndexOf produces correct results.');
-        $this->assertSame($expected, P::stringLastIndexOf()($substring)($string), 'stringLastIndexOf is curried correctly.');
-        $this->assertSame($expected, P::stringLastIndexOf($substring)($string), 'stringLastIndexOf is curried correctly.');
+        self::assertSame($expected, P::stringLastIndexOf($substring, $string), 'stringLastIndexOf produces correct results.');
+        self::assertSame($expected, P::stringLastIndexOf()($substring)($string), 'stringLastIndexOf is curried correctly.');
+        self::assertSame($expected, P::stringLastIndexOf($substring)($string), 'stringLastIndexOf is curried correctly.');
     }
 
     /**
@@ -866,10 +866,10 @@ class BasicTest extends TestCase
      */
     public function testSubstring($expected, int $start, int $end, string $string)
     {
-        $this->assertSame($expected, P::substring($start, $end, $string), 'substring produces correct results.');
-        $this->assertSame($expected, P::substring()($start)($end)($string), 'substring is curried correctly.');
-        $this->assertSame($expected, P::substring($start)($end)($string), 'substring is curried correctly.');
-        $this->assertSame($expected, P::substring($start, $end)($string), 'substring is curried correctly.');
+        self::assertSame($expected, P::substring($start, $end, $string), 'substring produces correct results.');
+        self::assertSame($expected, P::substring()($start)($end)($string), 'substring is curried correctly.');
+        self::assertSame($expected, P::substring($start)($end)($string), 'substring is curried correctly.');
+        self::assertSame($expected, P::substring($start, $end)($string), 'substring is curried correctly.');
     }
 
     /**
@@ -877,9 +877,9 @@ class BasicTest extends TestCase
      */
     public function testSubstringFrom($expected, int $start, string $string)
     {
-        $this->assertSame($expected, P::substringFrom($start, $string), 'substringFrom produces correct results.');
-        $this->assertSame($expected, P::substringFrom()($start)($string), 'substringFrom is curried correctly.');
-        $this->assertSame($expected, P::substringFrom($start)($string), 'substringFrom is curried correctly.');
+        self::assertSame($expected, P::substringFrom($start, $string), 'substringFrom produces correct results.');
+        self::assertSame($expected, P::substringFrom()($start)($string), 'substringFrom is curried correctly.');
+        self::assertSame($expected, P::substringFrom($start)($string), 'substringFrom is curried correctly.');
     }
 
     /**
@@ -887,9 +887,9 @@ class BasicTest extends TestCase
      */
     public function testSubstringTo($expected, int $end, string $string)
     {
-        $this->assertSame($expected, P::substringTo($end, $string), 'substringTo produces correct results.');
-        $this->assertSame($expected, P::substringTo()($end)($string), 'substringTo is curried correctly.');
-        $this->assertSame($expected, P::substringTo($end)($string), 'substringTo is curried correctly.');
+        self::assertSame($expected, P::substringTo($end, $string), 'substringTo produces correct results.');
+        self::assertSame($expected, P::substringTo()($end)($string), 'substringTo is curried correctly.');
+        self::assertSame($expected, P::substringTo($end)($string), 'substringTo is curried correctly.');
     }
 
     /**
@@ -897,9 +897,9 @@ class BasicTest extends TestCase
      */
     public function testSubtract($expected, $x, $y)
     {
-        $this->assertSame($expected, P::subtract($x, $y), 'subtract produces correct results.');
-        $this->assertSame($expected, P::subtract()($x)($y), 'subtract is curried correctly.');
-        $this->assertSame($expected, P::subtract($x)($y), 'subtract is curried correctly.');
+        self::assertSame($expected, P::subtract($x, $y), 'subtract produces correct results.');
+        self::assertSame($expected, P::subtract()($x)($y), 'subtract is curried correctly.');
+        self::assertSame($expected, P::subtract($x)($y), 'subtract is curried correctly.');
     }
 
     /**
@@ -907,8 +907,8 @@ class BasicTest extends TestCase
      */
     public function testSum($expected, $values)
     {
-        $this->assertSame($expected, P::sum($values), 'sum produces correct results.');
-        $this->assertSame($expected, P::sum()($values), 'sum is curried correctly.');
+        self::assertSame($expected, P::sum($values), 'sum produces correct results.');
+        self::assertSame($expected, P::sum()($values), 'sum is curried correctly.');
     }
 
     /**
@@ -916,8 +916,8 @@ class BasicTest extends TestCase
      */
     public function testTail($expected, $collection)
     {
-        $this->assertSame($expected, P::tail($collection), 'tail produces correct results.');
-        $this->assertSame($expected, P::tail()($collection), 'tail is curried correctly.');
+        self::assertSame($expected, P::tail($collection), 'tail produces correct results.');
+        self::assertSame($expected, P::tail()($collection), 'tail is curried correctly.');
     }
 
     /**
@@ -925,9 +925,9 @@ class BasicTest extends TestCase
      */
     public function testTap($expected, callable $function, $object)
     {
-        $this->assertSame($expected, P::tap($function, $object), 'tap produces correct results.');
-        $this->assertSame($expected, P::tap()($function)($object), 'tap is curried correctly.');
-        $this->assertSame($expected, P::tap($function)($object), 'tap is curried correctly.');
+        self::assertSame($expected, P::tap($function, $object), 'tap produces correct results.');
+        self::assertSame($expected, P::tap()($function)($object), 'tap is curried correctly.');
+        self::assertSame($expected, P::tap($function)($object), 'tap is curried correctly.');
     }
 
     /**
@@ -935,9 +935,9 @@ class BasicTest extends TestCase
      */
     public function testTimes($expected, callable $function, int $count)
     {
-        $this->assertSame($expected, P::times($function, $count), 'times produces correct results.');
-        $this->assertSame($expected, P::times()($function)($count), 'times is curried correctly.');
-        $this->assertSame($expected, P::times($function)($count), 'times is curried correctly.');
+        self::assertSame($expected, P::times($function, $count), 'times produces correct results.');
+        self::assertSame($expected, P::times()($function)($count), 'times is curried correctly.');
+        self::assertSame($expected, P::times($function)($count), 'times is curried correctly.');
     }
 
     /**
@@ -945,8 +945,8 @@ class BasicTest extends TestCase
      */
     public function testToPairs($expected, $map)
     {
-        $this->assertSame($expected, P::toPairs($map), 'toPairs produces correct results.');
-        $this->assertSame($expected, P::toPairs()($map), 'toPairs is curried correctly.');
+        self::assertSame($expected, P::toPairs($map), 'toPairs produces correct results.');
+        self::assertSame($expected, P::toPairs()($map), 'toPairs is curried correctly.');
     }
 
     /**
@@ -954,7 +954,7 @@ class BasicTest extends TestCase
      */
     public function testTrue($expected)
     {
-        $this->assertSame($expected, P::true()(), 'true produces correct results.');
+        self::assertSame($expected, P::true()(), 'true produces correct results.');
     }
 
     /**
@@ -962,8 +962,8 @@ class BasicTest extends TestCase
      */
     public function testTwist($expected, callable $function, array $arguments)
     {
-        $this->assertSame($expected, P::twist($function)(...$arguments), 'twist produces correct results.');
-        $this->assertSame($expected, P::twist()($function)(...$arguments), 'twist is curried correctly.');
+        self::assertSame($expected, P::twist($function)(...$arguments), 'twist produces correct results.');
+        self::assertSame($expected, P::twist()($function)(...$arguments), 'twist is curried correctly.');
     }
 
     /**
@@ -971,9 +971,9 @@ class BasicTest extends TestCase
      */
     public function testTwistN($expected, int $arity, callable $function, array $arguments)
     {
-        $this->assertSame($expected, P::twistN($arity, $function)(...$arguments), 'twistN produces correct results.');
-        $this->assertSame($expected, P::twistN()($arity)($function)(...$arguments), 'twistN is curried correctly.');
-        $this->assertSame($expected, P::twistN($arity)($function)(...$arguments), 'twistN is curried correctly.');
+        self::assertSame($expected, P::twistN($arity, $function)(...$arguments), 'twistN produces correct results.');
+        self::assertSame($expected, P::twistN()($arity)($function)(...$arguments), 'twistN is curried correctly.');
+        self::assertSame($expected, P::twistN($arity)($function)(...$arguments), 'twistN is curried correctly.');
     }
 
     /**
@@ -981,8 +981,8 @@ class BasicTest extends TestCase
      */
     public function testUnary($expected, callable $function, $a)
     {
-        $this->assertSame($expected, P::unary($function)($a), 'unary produces correct results.');
-        $this->assertSame($expected, P::unary()($function)($a), 'unary is curried correctly.');
+        self::assertSame($expected, P::unary($function)($a), 'unary produces correct results.');
+        self::assertSame($expected, P::unary()($function)($a), 'unary is curried correctly.');
     }
 
     /**
@@ -990,9 +990,9 @@ class BasicTest extends TestCase
      */
     public function testUnapply($expected, callable $function, array $arguments)
     {
-        $this->assertSame($expected, P::unapply($function, ...$arguments), 'unapply produces correct results.');
-        $this->assertSame($expected, P::unapply()($function)(...$arguments), 'unapply is curried correctly.');
-        $this->assertSame($expected, P::unapply($function)(...$arguments), 'unapply is curried correctly.');
+        self::assertSame($expected, P::unapply($function, ...$arguments), 'unapply produces correct results.');
+        self::assertSame($expected, P::unapply()($function)(...$arguments), 'unapply is curried correctly.');
+        self::assertSame($expected, P::unapply($function)(...$arguments), 'unapply is curried correctly.');
     }
 
     /**
@@ -1000,9 +1000,9 @@ class BasicTest extends TestCase
      */
     public function testWhere($expected, array $specification, $object)
     {
-        $this->assertSame($expected, P::where($specification, $object), 'where produces correct results.');
-        $this->assertSame($expected, P::where()($specification)($object), 'where is curried correctly.');
-        $this->assertSame($expected, P::where($specification)($object), 'where is curried correctly.');
+        self::assertSame($expected, P::where($specification, $object), 'where produces correct results.');
+        self::assertSame($expected, P::where()($specification)($object), 'where is curried correctly.');
+        self::assertSame($expected, P::where($specification)($object), 'where is curried correctly.');
     }
 
     /**
@@ -1010,9 +1010,9 @@ class BasicTest extends TestCase
      */
     public function testZip($expected, array $a, array $b)
     {
-        $this->assertSame($expected, P::zip($a, $b), 'zip produces correct results.');
-        $this->assertSame($expected, P::zip()($a)($b), 'zip is curried correctly.');
-        $this->assertSame($expected, P::zip($a)($b), 'zip is curried correctly.');
+        self::assertSame($expected, P::zip($a, $b), 'zip produces correct results.');
+        self::assertSame($expected, P::zip()($a)($b), 'zip is curried correctly.');
+        self::assertSame($expected, P::zip($a)($b), 'zip is curried correctly.');
     }
 
     /**
@@ -1020,9 +1020,9 @@ class BasicTest extends TestCase
      */
     public function testZipWith($expected, callable $function, array $a, array $b)
     {
-        $this->assertSame($expected, P::zipWith($function, $a, $b), 'zipWith produces correct results.');
-        $this->assertSame($expected, P::zipWith()($function)($a)($b), 'zipWith is curried correctly.');
-        $this->assertSame($expected, P::zipWith($function)($a)($b), 'zipWith is curried correctly.');
-        $this->assertSame($expected, P::zipWith($function, $a)($b), 'zipWith is curried correctly.');
+        self::assertSame($expected, P::zipWith($function, $a, $b), 'zipWith produces correct results.');
+        self::assertSame($expected, P::zipWith()($function)($a)($b), 'zipWith is curried correctly.');
+        self::assertSame($expected, P::zipWith($function)($a)($b), 'zipWith is curried correctly.');
+        self::assertSame($expected, P::zipWith($function, $a)($b), 'zipWith is curried correctly.');
     }
 }

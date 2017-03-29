@@ -31,8 +31,8 @@ class ObjectTest extends TestCase
         $realObject = (object) $object;
         $result     = P::assoc($property, $value, $realObject);
 
-        $this->assertNotSame($realObject, $result);
-        $this->assertSame($expected, (array) $result);
+        self::assertNotSame($realObject, $result);
+        self::assertSame($expected, (array) $result);
     }
 
     /**
@@ -43,16 +43,16 @@ class ObjectTest extends TestCase
         $realObject = (object) $object;
         $result     = P::assocPath($path, $value, $realObject);
 
-        $this->assertNotSame($realObject, $result);
-        $this->assertSame($expected, (array) $result);
+        self::assertNotSame($realObject, $result);
+        self::assertSame($expected, (array) $result);
     }
 
     public function testCast()
     {
         $object = (object) ['foo', 'bar'];
 
-        $this->assertSame(['foo', 'bar'], P::cast('array', $object));
-        $this->assertInstanceOf(\stdClass::class, $object);
+        self::assertSame(['foo', 'bar'], P::cast('array', $object));
+        self::assertInstanceOf(\stdClass::class, $object);
     }
 
     public function testClone()
@@ -60,14 +60,14 @@ class ObjectTest extends TestCase
         $original = new Test1();
         $clone    = P::clone_($original);
 
-        $this->assertNotSame($original, $clone);
-        $this->assertInstanceOf(Test1::class, $clone);
+        self::assertNotSame($original, $clone);
+        self::assertInstanceOf(Test1::class, $clone);
 
         $curried  = P::clone_();
         $newClone = $curried($original);
 
-        $this->assertNotSame($original, $newClone);
-        $this->assertInstanceOf(Test1::class, $newClone);
+        self::assertNotSame($original, $newClone);
+        self::assertInstanceOf(Test1::class, $newClone);
     }
 
     /**
@@ -84,7 +84,7 @@ class ObjectTest extends TestCase
         ];
 
         foreach ($results as $result) {
-            $this->checkConstructResult($expected, $class, $result);
+            self::checkConstructResult($expected, $class, $result);
         }
     }
 
@@ -104,7 +104,7 @@ class ObjectTest extends TestCase
         ];
 
         foreach ($results as $result) {
-            $this->checkConstructResult($expected, $class, $result);
+            self::checkConstructResult($expected, $class, $result);
         }
     }
 
@@ -116,8 +116,8 @@ class ObjectTest extends TestCase
         $realObject = (object) $object;
         $result     = P::evolve($transformations, $realObject);
 
-        $this->assertNotSame($realObject, $result);
-        $this->assertSame($expected, (array) $result);
+        self::assertNotSame($realObject, $result);
+        self::assertSame($expected, (array) $result);
     }
 
     public function testTap()
@@ -126,17 +126,17 @@ class ObjectTest extends TestCase
         $addFive = function ($object) { $object->value += 5; };
 
         P::tap($addFive, $counter);
-        $this->assertSame(5, $counter->value);
+        self::assertSame(5, $counter->value);
 
         $addTap = P::tap($addFive);
         $addTap($counter);
         $addTap($counter);
-        $this->assertSame(15, $counter->value);
+        self::assertSame(15, $counter->value);
     }
 
-    private function checkConstructResult($expectedString, $expectedClass, $result)
+    private static function checkConstructResult($expectedString, $expectedClass, $result)
     {
-        $this->assertInstanceOf($expectedClass, $result);
-        $this->assertSame($expectedString, (string) $result);
+        self::assertInstanceOf($expectedClass, $result);
+        self::assertSame($expectedString, (string) $result);
     }
 }

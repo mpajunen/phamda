@@ -99,7 +99,7 @@ EOT;
 
     private function createAssert(Expr $call, $isDirectCall)
     {
-        return new Expr\MethodCall(new Expr\Variable('this'), 'assertSame', [
+        return new Expr\StaticCall(new Name('self'), 'assertSame', [
             new Expr\Variable('expected'),
             $call,
             new String_(sprintf($isDirectCall ? '%s produces correct results.' : '%s is curried correctly.', $this->source->getName())),

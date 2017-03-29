@@ -24,13 +24,13 @@ trait CollectionTestTrait
      *
      * @return array
      */
-    protected function getCollectionArray($collection)
+    protected static function getCollectionArray($collection)
     {
         return $collection->toArray();
     }
 
-    protected function getCollectionGroupArray(array $collections)
+    protected static function getCollectionGroupArray(array $collections)
     {
-        return array_map([$this, 'getCollectionArray'], $collections);
+        return array_map([static::class, 'getCollectionArray'], $collections);
     }
 }
