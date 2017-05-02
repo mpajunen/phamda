@@ -18,7 +18,8 @@ Nearly all of the functions use automatic partial application or **currying**. T
     $isPositive   = function ($x) { return $x > 0; };
     $list         = [5, 7, -3, 19, 0, 2];
     $getPositives = P::filter($isPositive);
-    $result       = $getPositives($list); // => [5, 7, 19, 2]
+
+    $getPositives($list) === [5, 7, 19, 2];
 
 The final result is the same as using two arguments directly. Of course this new function could now be used to filter
 other lists as well.
@@ -29,8 +30,9 @@ takes a function and initial parameters and returns a new function:
 .. code-block:: php
 
     $replaceBad = P::curry('str_replace', 'bad', 'good');
-    $dayResult  = $replaceBad('bad day'); // => 'good day'
-    $notResult  = $replaceBad('not bad'); // => 'not good'
+
+    $replaceBad('bad day') === 'good day';
+    $replaceBad('not bad') === 'not good';
 
 
 Composition
@@ -45,7 +47,9 @@ argument functions and returns a new function. Calling this new function applies
     $double           = function ($x) { return $x * 2; };
     $addFive          = function ($x) { return $x + 5; };
     $addFiveAndDouble = P::compose($double, $addFive);
-    $result           = $addFiveAndDouble(16); // => 42
+
+    $addFiveAndDouble(16) === 42;
+
     // Equivalent to calling $double($addFive(16));
 
 
@@ -90,13 +94,10 @@ functions are applied in reverse order:
         )
     );
 
-    $result = $process($products);
-    /* =>
-    [
+    $process($products) === [
         ['number' => 38718, 'category' => 'ETW', 'price' => '271.80'],
         ['number' => 46289, 'category' => 'XPA', 'price' => '650.31'],
         ['number' => 48160, 'category' => 'KCF', 'price' => '581.85'],
         ['number' => 59391, 'category' => 'NVG', 'price' => '366.64'],
         ['number' => 89634, 'category' => 'AWK', 'price' => '341.92'],
-    ]
-    */
+    ];

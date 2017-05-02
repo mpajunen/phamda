@@ -46,8 +46,9 @@ class CommentExampleBuilder
         $process = Phamda::pipe(
             Phamda::curry(
                 'str_replace',
-                ["\n\$placeholder =", "\n    ", "\n}"],
-                [' // =>', ' ', ' }']),
+                [";\n\$placeholder =", "\n    ", "\n}"],
+                [' ===', ' ', ' }']
+            ),
             Phamda::explode("\n"),
             Phamda::map(function ($row) { return strpos($row, '//') !== false ? substr($row, 0, -1) : $row; })
         );
@@ -91,7 +92,7 @@ class CommentExampleBuilder
             }
         };
 
-        return sprintf('P::%s(%s); // => %s',
+        return sprintf('P::%s(%s) === %s;',
             $this->source->getName(),
             implode(', ', array_map($print, $parameters)),
             $print($expected)
