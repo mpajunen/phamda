@@ -12,7 +12,7 @@
 - Placeholder arguments
 - `P::dec`, `P::inc`
 
-## [0.7.0] - 2016-03-27
+## [0.7.0] - 2017-03-27
 ### Added
 - PHP 7.1 test coverage
 
