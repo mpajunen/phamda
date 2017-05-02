@@ -69,12 +69,12 @@ functions are applied in reverse order:
         ['category' => 'KCF', 'price' => 581.85, 'weight' => 31.9, 'number' => 48160],
     ];
 
-    $formatPrice = P::curry('number_format', P::_(), 2);
+    $formatPrice = P::flip('number_format')(2);
     $process     = P::pipe(
         P::filter( // Only include products that...
             P::pipe(
                 P::prop('weight'), // ... weigh...
-                P::lt(P::_(), 50.0) // ... less than 50.0.
+                P::gt(50.0) // ... less than 50.0.
             )
         ),
         P::map( // For each product...
