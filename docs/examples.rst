@@ -63,6 +63,37 @@ argument functions are applied in reverse order:
     $doubleAndAddFive(16) === 37;
 
 
+Parameter order
+---------------
+
+When using functional techniques it's usually most convenient if data is the last parameter. Often native PHP and
+library functions do not follow for this pattern. Phamda includes some tools to make it easier to use these functions
+functionally. The simplest is :ref:`flip`, it switches the order of the first two parameters:
+
+.. code-block:: php
+
+    $pow   = function ($a, $b) { return $a ** $b; };
+    $powOf = P::flip($pow);
+
+    $pow(2, 8) === 256;
+    $powOf(2, 8) === 64;
+
+
+:ref:`twist` is somewhat more complicated and will return a new function where the original first parameter is now last:
+
+.. code-block:: php
+
+    $redact = P::twist('substr_replace')('REDACTED', 5);
+
+    $redact('foobarbaz') === 'foobaREDACTED';
+
+
+Using :ref:`twist` may not work well with variadic functions. This is where :ref:`twistN` can be useful. It requires an
+additional parameter to set the location of the replaced parameter.
+
+All of these functions return curried functions.
+
+
 Pipelines
 ---------
 

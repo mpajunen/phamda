@@ -49,6 +49,22 @@ class ExampleTest extends TestCase
         self::assertSame(37, $doubleAndAddFive(16));
     }
 
+    public function testFlipExample()
+    {
+        $pow   = function ($a, $b) { return $a ** $b; };
+        $powOf = P::flip($pow);
+
+        self::assertSame(256, $pow(2, 8));
+        self::assertSame(64, $powOf(2, 8));
+    }
+
+    public function testTwistExample()
+    {
+        $redact = P::twist('substr_replace')('REDACTED', 5);
+
+        self::assertSame('foobaREDACTED', $redact('foobarbaz'));
+    }
+
     public function testProductList()
     {
         $products = [
