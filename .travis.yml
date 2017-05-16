@@ -1,8 +1,12 @@
 language: php
+sudo: required
+dist: trusty
+group: edge
 
 php:
     - 7.0
     - 7.1
+    - nightly
     - hhvm
 
 matrix:
