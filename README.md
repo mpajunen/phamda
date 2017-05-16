@@ -32,7 +32,7 @@ $isPositive   = function ($x) { return $x > 0; };
 $list         = [5, 7, -3, 19, 0, 2];
 $getPositives = P::filter($isPositive);
 
-$getPositives($list) === [5, 7, 19, 2];
+$getPositives($list) === [5, 7, 3 => 19, 5 => 2];
 ```
 
 The final result is the same as using two arguments directly. Of course this new function could now be used to filter
@@ -52,8 +52,8 @@ $replaceBad('not bad') === 'not good';
 ### Composition
 
 Phamda functions are **composable**. The basic functions can be used to create new, more complex functions. There are
-also several functions to help with function composition. For example the `compose` function that takes multiple
-argument functions and returns a new function. Calling this new function applies the argument functions in succession:
+also several functions to help with function composition. For example the `compose` function takes multiple argument
+functions and returns a new function. Calling this new function applies the argument functions in succession:
 
 ```php
 $double           = function ($x) { return $x * 2; };
@@ -65,12 +65,20 @@ $addFiveAndDouble(16) === 42;
 // Equivalent to calling $double($addFive(16));
 ```
 
+Often the `pipe` function is a more natural way to compose functions. It is similar to `compose`, but the argument
+functions are applied in reverse order:
+
+```php
+$doubleAndAddFive = P::pipe($double, $addFive);
+
+$doubleAndAddFive(16) === 37;
+```
+
 
 ### Pipelines
 
 Combining these techniques allows the building of function pipelines. In this example they are applied to processing a
-list of badly formatted product data using the `pipe` function. It's similar to `compose` but the argument
-functions are applied in reverse order:
+list of badly formatted product data:
 
 ```php
 $products = [

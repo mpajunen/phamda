@@ -19,7 +19,7 @@ Nearly all of the functions use automatic partial application or **currying**. T
     $list         = [5, 7, -3, 19, 0, 2];
     $getPositives = P::filter($isPositive);
 
-    $getPositives($list) === [5, 7, 19, 2];
+    $getPositives($list) === [5, 7, 3 => 19, 5 => 2];
 
 The final result is the same as using two arguments directly. Of course this new function could now be used to filter
 other lists as well.
@@ -39,7 +39,7 @@ Composition
 -----------
 
 Phamda functions are **composable**. The basic functions can be used to create new, more complex functions. There are
-also several functions to help with function composition. For example the :ref:`compose` function that takes multiple
+also several functions to help with function composition. For example the :ref:`compose` function takes multiple
 argument functions and returns a new function. Calling this new function applies the argument functions in succession:
 
 .. code-block:: php
@@ -53,12 +53,21 @@ argument functions and returns a new function. Calling this new function applies
     // Equivalent to calling $double($addFive(16));
 
 
+Often the :ref:`pipe` function is a more natural way to compose functions. It is similar to :ref:`compose`, but the
+argument functions are applied in reverse order:
+
+.. code-block:: php
+
+    $doubleAndAddFive = P::pipe($double, $addFive);
+
+    $doubleAndAddFive(16) === 37;
+
+
 Pipelines
 ---------
 
 Combining these techniques allows the building of function pipelines. In this example they are applied to processing a
-list of badly formatted product data using the :ref:`pipe` function. It's similar to :ref:`compose` but the argument
-functions are applied in reverse order:
+list of badly formatted product data:
 
 .. code-block:: php
 

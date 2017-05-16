@@ -24,19 +24,16 @@ class ExampleTest extends TestCase
         $isPositive   = function ($x) { return $x > 0; };
         $list         = [5, 7, -3, 19, 0, 2];
         $getPositives = P::filter($isPositive);
-        $result       = $getPositives($list); // => [5, 7, 19, 2]
 
-        self::assertSame([5, 7, 3 => 19, 5 => 2], $result);
+        self::assertSame([5, 7, 3 => 19, 5 => 2], $getPositives($list));
     }
 
     public function testCurriedNativeExample()
     {
         $replaceBad = P::curry('str_replace', 'bad', 'good');
-        $dayResult  = $replaceBad('bad day'); // => 'good day'
-        $notResult  = $replaceBad('not bad'); // => 'not good'
 
-        self::assertSame('good day', $dayResult);
-        self::assertSame('not good', $notResult);
+        self::assertSame('good day', $replaceBad('bad day'));
+        self::assertSame('not good', $replaceBad('not bad'));
     }
 
     public function testComposeExample()
@@ -44,10 +41,12 @@ class ExampleTest extends TestCase
         $double           = function ($x) { return $x * 2; };
         $addFive          = function ($x) { return $x + 5; };
         $addFiveAndDouble = P::compose($double, $addFive);
-        $result           = $addFiveAndDouble(16); // => 42
-        // Equivalent to calling $double($addFive(16));
 
-        self::assertSame(42, $result);
+        self::assertSame(42, $addFiveAndDouble(16));
+
+        $doubleAndAddFive = P::pipe($double, $addFive);
+
+        self::assertSame(37, $doubleAndAddFive(16));
     }
 
     public function testProductList()
@@ -72,8 +71,7 @@ class ExampleTest extends TestCase
                 )
             ),
             P::map(// For each product...
-                P::pipe(
-                    // ... drop the weight field and fix field order:
+                P::pipe(// ... drop the weight field and fix field order:
                     P::pick(['number', 'category', 'price']),
                     // ... and format the price:
                     P::evolve(['price' => $formatPrice])
@@ -84,8 +82,6 @@ class ExampleTest extends TestCase
             )
         );
 
-        $result = $process($products);
-
         $expected = [
             ['number' => 38718, 'category' => 'ETW', 'price' => '271.80'],
             ['number' => 46289, 'category' => 'XPA', 'price' => '650.31'],
@@ -94,6 +90,6 @@ class ExampleTest extends TestCase
             ['number' => 89634, 'category' => 'AWK', 'price' => '341.92'],
         ];
 
-        self::assertSame($expected, $result);
+        self::assertSame($expected, $process($products));
     }
 }
