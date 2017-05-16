@@ -75,8 +75,7 @@ $doubleAndAddFive(16) === 37;
 ```
 
 
-Parameter order
----------------
+### Parameter order
 
 When using functional techniques it's usually most convenient if data is the last parameter. Often native PHP and
 library functions do not follow for this pattern. Phamda includes some tools to make it easier to use these functions
