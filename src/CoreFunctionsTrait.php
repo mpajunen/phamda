@@ -130,7 +130,7 @@ trait CoreFunctionsTrait
      */
     protected static function _filter(callable $predicate, $collection)
     {
-        if (method_exists($collection, 'filter')) {
+        if (! is_array($collection) && method_exists($collection, 'filter')) {
             return $collection->filter($predicate);
         }
 
@@ -172,7 +172,7 @@ trait CoreFunctionsTrait
      */
     protected static function _map(callable $function, $collection)
     {
-        if (method_exists($collection, 'map')) {
+        if (! is_array($collection) && method_exists($collection, 'map')) {
             return $collection->map($function);
         }
 
@@ -235,7 +235,7 @@ trait CoreFunctionsTrait
      */
     protected static function _reverse($collection)
     {
-        if (method_exists($collection, 'reverse')) {
+        if (! is_array($collection) && method_exists($collection, 'reverse')) {
             return $collection->reverse();
         }
 
@@ -283,7 +283,7 @@ trait CoreFunctionsTrait
      */
     protected static function _sort(callable $comparator, $collection)
     {
-        if (method_exists($collection, 'sort')) {
+        if (! is_array($collection) && method_exists($collection, 'sort')) {
             return $collection->sort($comparator);
         } elseif (! is_array($collection)) {
             $items = [];
