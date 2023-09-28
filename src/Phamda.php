@@ -992,7 +992,7 @@ class Phamda
     public static function fromPairs($list = null)
     {
         return static::curry1(function ($list) {
-            if (method_exists($list, 'fromPairs')) {
+            if (! is_array($list) && method_exists($list, 'fromPairs')) {
                 return $list->fromPairs();
             }
             $map = [];
@@ -1021,7 +1021,7 @@ class Phamda
     public static function groupBy(callable $function = null, $collection = null)
     {
         return static::curry2(function (callable $function, $collection) {
-            if (method_exists($collection, 'groupBy')) {
+            if (! is_array($collection) && method_exists($collection, 'groupBy')) {
                 return $collection->groupBy($function);
             }
 
@@ -1210,7 +1210,7 @@ class Phamda
     public static function isEmpty($collection = null)
     {
         return static::curry1(function ($collection): bool {
-            if (method_exists($collection, 'isEmpty')) {
+            if (! is_array($collection) && method_exists($collection, 'isEmpty')) {
                 return $collection->isEmpty();
             } else {
                 return count($collection) === 0;
@@ -1634,7 +1634,7 @@ class Phamda
     public static function partition(callable $predicate = null, $collection = null)
     {
         return static::curry2(function (callable $predicate, $collection) {
-            if (method_exists($collection, 'partition')) {
+            if (! is_array($collection) && method_exists($collection, 'partition')) {
                 return $collection->partition($predicate);
             }
 
@@ -2275,7 +2275,7 @@ class Phamda
     public static function toPairs($map = null)
     {
         return static::curry1(function ($map) {
-            if (method_exists($map, 'toPairs')) {
+            if (! is_array($map) && method_exists($map, 'toPairs')) {
                 return $map->toPairs();
             }
             $list = [];
